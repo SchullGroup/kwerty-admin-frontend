@@ -9,6 +9,7 @@ $text-font-stack: Inter, Helvetica, Arial, sans-serif !default;
 /// Colors
 /// @type Color
 $black: #000 !default;
+$white: #FFF;
 $primary-purple: #900F7B !default;
 $dark-purple: #6B0B5B !default;
 $error: #E1331B !default;
@@ -19,6 +20,7 @@ $grey-dark: #999999 !default;
 
 $colors: (
   black: $black,
+  white: $white,
   primary-purple: $primary-purple,
   dark-purple: $dark-purple,
   error: $error,
