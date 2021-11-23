@@ -1,0 +1,19 @@
+.card {
+  width: 63.8rem;
+  padding: 5.6rem 3.6rem;
+  background: #ffffff;
+
+  &.rounded {
+    border-radius: 1.6rem;
+  }
+}
+
+.card {
+  &__heading {
+    margin-bottom: 5.2rem;
+  }
+
+  &.mb-shorter &__heading {
+    margin-bottom: 4rem;
+  }
+}
