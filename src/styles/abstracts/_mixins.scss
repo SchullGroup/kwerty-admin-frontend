@@ -1,0 +1,62 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+/// Make a context based selector a little more friendly
+/// @author Hugo Giraudel
+/// @param {String} $context
+@mixin when-inside($context) {
+  #{$context} & {
+    @content;
+  }
+}
+
+
+/*
+ * Generates classes for a grid of columns, prefixed by size.
+ * The result will be .col-[size] E.g. .col-12
+ *
+ * @param {int}		$grid-columns	Amount of columns
+ */
+@mixin grid-generator($grid-columns) {
+	@for $i from 1 through $grid-columns {
+		.col{
+      &-#{$i} {
+        grid-column: span $i;
+      }
+      @each $name, $breakpoint in $breakpoints {
+        @include mq($breakpoint) {
+          &-#{$name}-#{$i} {
+            grid-column: span $i;
+          }
+        }
+      }
+    }
+	}
+}
+
+@mixin color-modifiers($attribute) {
+  @each $name, $color in $colors {
+    &-#{$name} {
+      #{$attribute}: $color;
+    }
+  }
+}

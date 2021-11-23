@@ -1,0 +1,108 @@
+
+/**
+ * Main content containers
+ * 1. Make the container full-width with a maximum width
+ * 2. Center it in the viewport
+ * 3. Leave some space on the edges, especially valuable on small screens
+ */
+.container {
+  max-width: $max-width; /* 1 */
+  margin-left: auto; /* 2 */
+  margin-right: auto; /* 2 */
+  padding-left: 2rem; /* 3 */
+  padding-right: 2rem; /* 3 */
+  width: 100%; /* 1 */
+  position: relative;
+  box-sizing: border-box;
+}
+
+@for $i from 0 through 10 {
+  .p {
+    &-#{$i} {
+      padding: #{$i}rem !important;
+    }
+    &y-#{$i},
+    &t-#{$i} {
+      padding-top: #{$i}rem;
+    }
+    &y-#{$i},
+    &b-#{$i} {
+      padding-bottom: #{$i}rem;
+    }
+    &x-#{$i},
+    &l-#{$i} {
+      padding-left: #{$i}rem;
+    }
+    &x-#{$i},
+    &r-#{$i} {
+      padding-right: #{$i}rem;
+    }
+  }
+  .m {
+    &-#{$i} {
+      margin: #{$i}rem;
+    }
+    &y-#{$i},
+    &t-#{$i} {
+      margin-top: #{$i}rem;
+    }
+    &y-#{$i},
+    &b-#{$i} {
+      margin-bottom: #{$i}rem;
+    }
+    &x-#{$i},
+    &l-#{$i} {
+      margin-left: #{$i}rem;
+    }
+    &x-#{$i},
+    &r-#{$i} {
+      margin-right: #{$i}rem;
+    }
+  }
+}
+.m-auto {
+  margin: auto;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.mr-auto {
+  margin-right: auto;
+}
+.mt-auto {
+  margin-top: auto;
+}
+.mb-auto {
+  margin-bottom: auto;
+}
+
+.text-bold {
+  font-weight: 600;
+}
+.text-light {
+  font-weight: 300;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.text {
+  @include color-modifiers('color');
+}
+.text-underline {
+  text-decoration: underline;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
