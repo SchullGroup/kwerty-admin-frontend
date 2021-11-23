@@ -1,5 +1,5 @@
 export default {
-  name: 'ICard',
+  name: 'KCard',
   props: {
     heading: {
       type: String,

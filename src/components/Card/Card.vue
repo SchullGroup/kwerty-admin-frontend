@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import ICard from './Card';
+import KCard from './Card';
 
-export default ICard;
+export default KCard;
 </script>
 
 <style src="./Card.scss" lang="scss" scoped></style>
