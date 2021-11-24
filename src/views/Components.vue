@@ -72,11 +72,12 @@
 <script>
 import KButton from '@/components/Button/Button.vue';
 import ICard from '../components/Card/Card.vue';
+
 export default {
   name: 'component',
   components: {
     KButton,
-    ICard 
+    ICard,
   },
 };
 </script>
