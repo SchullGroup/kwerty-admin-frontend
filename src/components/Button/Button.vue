@@ -3,10 +3,10 @@
     :class="[
       'btn',
       {
-       [`btn--${variant}`]: type,
+       [`btn--${variant}`]: variant,
        [`btn--${size}`]: size,
        ['btn--negative']: negative,
-       'btn--sec--negative': negative && (type === 'secondary' || type === 'tertiary'),
+       'btn--sec--negative': negative && (variant === 'secondary' || variant === 'tertiary'),
      }
     ]"
     @click="handleClick"
