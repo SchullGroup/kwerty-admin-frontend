@@ -1,7 +1,7 @@
 export default {
   name: 'KCheckbox',
   props: {
-    type: {
+    fill: {
       type: String,
       default: '',
     },
@@ -11,7 +11,11 @@ export default {
     },
     label: {
       type: String,
-      default: 'Label',
+      default: '',
+    },
+    value: {
+      type: null,
+      default: '',
     },
   },
 };

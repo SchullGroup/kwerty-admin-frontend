@@ -1,6 +1,17 @@
 <template>
   <div class="wrapper">
-    <input type="checkbox" :name="name" id="checkbox" class="checkbox__input" />
+    <input
+      type="checkbox"
+      :name="name"
+      :value="value"
+      :id="name"
+      :class="[
+        'checkbox__input',
+        {
+          [`checkbox__input--${fill}`]: fill,
+        },
+      ]"
+    />
     <label :for="name" class="checkbox__label">{{ label }}</label>
   </div>
 </template>

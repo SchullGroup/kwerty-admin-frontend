@@ -11,7 +11,7 @@ describe('Button Component', () => {
   it('renders the correct type of button', () => {
     const wrapper = shallowMount(KButton, {
       propsData: {
-        type: 'secondary',
+        variant: 'secondary',
       },
     });
     expect(wrapper.classes()).toContain('btn--secondary');

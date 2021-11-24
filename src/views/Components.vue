@@ -29,7 +29,17 @@
       <k-button :disabled="true" variant="link">Link button disabled</k-button>
     </div>
     <k-button size="full" variant="tertiary">Tertiary button</k-button>
-    <k-checkbox />
+    <br />
+    <br />
+    <h2>Checkbox</h2>
+    <div class="content">
+      <k-checkbox value="new label" name="label" label="new-label" />
+      <k-checkbox value="another label" name="another label" label="another-label" fill="fill" />
+    </div>
+    <h2>Toggle button</h2>
+    <div class="content">
+      <k-toggle />
+    </div>
     <section class="cards">
       <section>
         <h2>Card <span class="small">Default</span></h2>
@@ -84,6 +94,7 @@ import {
   KCheckbox,
   KCard,
   KPagination,
+  KToggle,
 } from '@/components';
 
 export default {
@@ -93,11 +104,13 @@ export default {
     KCheckbox,
     KCard,
     KPagination,
+    KToggle,
   },
   data: () => ({
     page: 1,
     totalItems: 243,
     itemsOnPage: 20,
+    label: [],
   }),
   computed: {
     currentPageEnd() {
