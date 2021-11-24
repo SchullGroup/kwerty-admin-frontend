@@ -10,26 +10,6 @@
     </div>
     <h2>secondary button</h2>
     <div class="content">
-      <k-button type="secondary">Secondary button</k-button>
-      <k-button type="secondary">Secondary button hover</k-button>
-      <k-button :disabled="true" type="secondary">Secondary button disabled</k-button>
-      <k-button :negative="true" type="secondary">Secondary button negative</k-button>
-    </div>
-    <h2>Tertiary button</h2>
-    <div class="content">
-      <k-button type="tertiary">Tertiary button</k-button>
-      <k-button type="tertiary">Tertiary button hover</k-button>
-      <k-button :disabled="true" type="tertiary">Tertiary button disabled</k-button>
-      <k-button :negative="true" type="tertiary">Tertiary button negative</k-button>
-    </div>
-    <h2>Link button</h2>
-    <div class="content">
-      <k-button type="link">Link button</k-button>
-      <k-button type="link">Link button hover</k-button>
-      <k-button :disabled="true" type="link">Link button disabled</k-button>
-    </div>
-      <k-button size="full" type="tertiary">Tertiary button</k-button>
-    <div class="content">
       <k-button variant="secondary">Secondary button</k-button>
       <k-button variant="secondary">Secondary button hover</k-button>
       <k-button :disabled="true" variant="secondary">Secondary button disabled</k-button>
@@ -48,8 +28,8 @@
       <k-button variant="link">Link button hover</k-button>
       <k-button :disabled="true" variant="link">Link button disabled</k-button>
     </div>
-      <k-button size="full" variant="tertiary">Tertiary button</k-button>
-      <k-checkbox />
+    <k-button size="full" variant="tertiary">Tertiary button</k-button>
+    <k-checkbox />
     <section class="cards">
       <section>
         <h2>Card <span class="small">Default</span></h2>
@@ -100,14 +80,20 @@
 </template>
 
 <script>
-import { KButton, KCheckbox, KCard, KPagination } from '@/components';
+import {
+  KButton,
+  KCheckbox,
+  KCard,
+  KPagination,
+} from '@/components';
 
 export default {
   name: 'Components',
   components: {
     KButton,
     KCheckbox,
-    KCard, KPagination
+    KCard,
+    KPagination,
   },
   data: () => ({
     page: 1,
@@ -136,18 +122,17 @@ export default {
       this.page = this.page !== 1 ? this.page - 1 : this.page;
     },
   },
-
 };
 </script>
 
 <style lang="scss" scoped>
 .container {
   padding: 3.6rem;
-  .content{
-   display: grid;
-   grid-template-columns:1fr 1fr 1fr 1fr ;
-   grid-gap: 1rem;
-   margin: 2rem 0;
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    margin: 2rem 0;
   }
   width: 90%;
   max-width: 1200px;

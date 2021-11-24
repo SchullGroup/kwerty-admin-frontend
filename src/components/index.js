@@ -7,5 +7,5 @@ export {
   KButton,
   KCheckbox,
   KPagination,
-  KCard
-}
+  KCard,
+};
