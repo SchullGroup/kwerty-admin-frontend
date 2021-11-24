@@ -8,7 +8,11 @@ describe('Button Component', () => {
     expect(wrapper.findAll('button').length).toEqual(1);
     expect(wrapper.attributes().class).toContain('btn');
   });
+<<<<<<< HEAD
   it('renders the correct variant of button', () => {
+=======
+  it('renders the correct type of button', () => {
+>>>>>>> 3d2bbca (added input component)
     const wrapper = shallowMount(KButton, {
       propsData: {
         variant: 'secondary',
