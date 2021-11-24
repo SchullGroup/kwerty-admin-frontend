@@ -1,5 +1,5 @@
 <template>
-  <div :class="['card', ...variants.map((variant) => `card--${variant}`)]">
+  <div :class="['card', ...(variants ? variants.map((variant) => `card--${variant}`) : [])]">
     <h2 class="card__heading">
       {{ heading }}
     </h2>
