@@ -65,7 +65,6 @@
         </k-card>
       </section>
     </section>
-
     <div class="pagination">
       <h2>Pagination</h2>
       <k-pagination
