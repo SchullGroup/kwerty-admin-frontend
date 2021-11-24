@@ -3,7 +3,7 @@
     :class="[
       'btn',
       {
-       [`btn--${type}`]: type,
+       [`btn--${variant}`]: type,
        [`btn--${size}`]: size,
        ['btn--negative']: negative,
        'btn--sec--negative': negative && (type === 'secondary' || type === 'tertiary'),

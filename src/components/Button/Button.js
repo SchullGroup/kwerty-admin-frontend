@@ -2,7 +2,7 @@ export default {
   name: 'KButton',
   components: {},
   props: {
-    type: {
+    variant: {
       type: String,
       default: '',
     },
