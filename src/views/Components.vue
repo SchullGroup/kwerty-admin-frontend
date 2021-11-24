@@ -12,15 +12,23 @@
     <div class="content">
       <k-button variant="secondary">Secondary button</k-button>
       <k-button variant="secondary">Secondary button hover</k-button>
-      <k-button :disabled="true" variant="secondary">Secondary button disabled</k-button>
-      <k-button :negative="true" variant="secondary">Secondary button negative</k-button>
+      <k-button :disabled="true" variant="secondary"
+        >Secondary button disabled</k-button
+      >
+      <k-button :negative="true" variant="secondary"
+        >Secondary button negative</k-button
+      >
     </div>
     <h2>Tertiary button</h2>
     <div class="content">
       <k-button variant="tertiary">Tertiary button</k-button>
       <k-button variant="tertiary">Tertiary button hover</k-button>
-      <k-button :disabled="true" variant="tertiary">Tertiary button disabled</k-button>
-      <k-button :negative="true" variant="tertiary">Tertiary button negative</k-button>
+      <k-button :disabled="true" variant="tertiary"
+        >Tertiary button disabled</k-button
+      >
+      <k-button :negative="true" variant="tertiary"
+        >Tertiary button negative</k-button
+      >
     </div>
     <h2>Link button</h2>
     <div class="content">
@@ -28,16 +36,16 @@
       <k-button variant="link">Link button hover</k-button>
       <k-button :disabled="true" variant="link">Link button disabled</k-button>
     </div>
-      <k-button size="full" variant="tertiary">Tertiary button</k-button>
+    <k-button size="full" variant="tertiary">Tertiary button</k-button>
     <section class="cards">
       <section>
         <h2>Card <span class="small">Default</span></h2>
         <k-card heading="Role">
           <h3>Super Admin</h3>
           <p>
-            This is just a test description to understand how this design would really look like in
-            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-            is done.
+            This is just a test description to understand how this design would
+            really look like in real life. I’m hoping it gets to three lines or
+            else I’m going to keep typing until it is done.
           </p>
         </k-card>
       </section>
@@ -46,9 +54,9 @@
         <k-card :variants="['rounded']" heading="Role">
           <h3>Super Admin</h3>
           <p>
-            This is just a test description to understand how this design would really look like in
-            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-            is done.
+            This is just a test description to understand how this design would
+            really look like in real life. I’m hoping it gets to three lines or
+            else I’m going to keep typing until it is done.
           </p>
         </k-card>
       </section>
@@ -57,9 +65,9 @@
         <k-card :variants="['mb-shorter']" heading="Role">
           <h3>Super Admin</h3>
           <p>
-            This is just a test description to understand how this design would really look like in
-            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-            is done.
+            This is just a test description to understand how this design would
+            really look like in real life. I’m hoping it gets to three lines or
+            else I’m going to keep typing until it is done.
           </p>
         </k-card>
       </section>
@@ -75,21 +83,76 @@
         @goToPrev="prevPage"
       ></k-pagination>
     </div>
+
+    <div class="inputs">
+      <section>
+        <h2>Text Input</h2>
+        <k-input label="Name"></k-input>
+      </section>
+      <section>
+        <h2>Text Input <span class="small">Filled</span></h2>
+        <k-input label="Title" v-model="title"></k-input>
+      </section>
+      <section>
+        <h2>Text Input <span class="small">Disabled</span></h2>
+        <k-input label="Title" v-model="title" :disabled="true"></k-input>
+      </section>
+      <section>
+        <h2>Email Input <span class="small">Error</span></h2>
+        <k-input
+          label="Title"
+          type="email"
+          v-model="badEmail"
+          :error="true"
+        ></k-input>
+      </section>
+      <section>
+        <h2>Password Input </h2>
+        <k-input label="Password" type="password" v-model="password" variant="password"></k-input>
+      </section>
+      <section>
+        <h2>Select Input <span class='small'>Custom</span></h2>
+        <k-input label="Color" type="select" v-model="color2" variant="custom">
+          <option value="crimson" class='option'>Crimson</option>
+          <option value="orange" class='option'>Orange</option>
+          <option value="indigo" class='option'>Indigo</option>
+        </k-input>
+      </section>
+      <section>
+        <h2>Select Input <span class='small'>Native</span></h2>
+        <k-input label="Color" type="select" v-model="color" variant="native">
+          <option value="red">Red</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+        </k-input>
+      </section>
+
+    </div>
   </div>
 </template>
 
 <script>
-import KCard from '@/components/Card/Card.vue';
-import KPagination from '@/components/Pagination/Pagination.vue';
-import KButton from '@/components/Button/Button.vue';
+import {
+  KCard, KPagination, KButton, KInput,
+} from '@/components';
 
 export default {
   name: 'Components',
-  components: { KCard, KPagination, KButton },
+  components: {
+    KCard,
+    KPagination,
+    KButton,
+    KInput,
+  },
   data: () => ({
     page: 1,
     totalItems: 243,
     itemsOnPage: 20,
+    title: 'Filler text',
+    badEmail: 'thisisnotacorrectemail',
+    password: 'some complex password!212@334',
+    color: '',
+    color2: '',
   }),
   computed: {
     currentPageEnd() {
@@ -119,15 +182,19 @@ export default {
 <style lang="scss" scoped>
 .container {
   padding: 3.6rem;
-  .content{
-   display: grid;
-   grid-template-columns:1fr 1fr 1fr 1fr ;
-   grid-gap: 1rem;
-   margin: 2rem 0;
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    margin: 2rem 0;
   }
   width: 90%;
   max-width: 1200px;
   margin: auto;
+}
+
+.inputs {
+  max-width: 56.8rem;
 }
 
 .cards {

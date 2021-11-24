@@ -1,22 +1,22 @@
-import {  shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { KButton } from '@/components';
 
 describe('Button Component', () => {
-  it('renders a button',  () => {
+  it('renders a button', () => {
     const wrapper = shallowMount(KButton);
     expect(wrapper.vm.$options.name).toMatch('KButton');
     expect(wrapper.findAll('button').length).toEqual(1);
     expect(wrapper.attributes().class).toContain('btn');
-  })
+  });
   it('renders the correct type of button', () => {
     const wrapper = shallowMount(KButton, {
       propsData: {
-        type: 'secondary',
+        variant: 'secondary',
       },
     });
     expect(wrapper.classes()).toContain('btn--secondary');
     expect(wrapper.classes('btn--full')).toBe(false);
-  })
+  });
   it('renders the correct width of button', () => {
     const wrapper = shallowMount(KButton, {
       propsData: {
