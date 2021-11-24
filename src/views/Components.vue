@@ -29,17 +29,54 @@
       <k-button :disabled="true" type="link">Link button disabled</k-button>
     </div>
       <k-button size="full" type="tertiary">Tertiary button</k-button>
-
+    <section class="cards">
+      <section>
+        <h2>Card <span class='small'>Default</span></h2>
+        <i-card heading="Role">
+          <h3>Super Admin</h3>
+          <p>
+            This is just a test description to understand how this design would really look like in
+            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
+            is done.
+          </p>
+        </i-card>
+      </section>
+      <section>
+        <h2>Card <span class='small'>Variant: 'rounded'</span></h2>
+        <i-card :variants="['rounded']" heading="Role">
+          <h3>Super Admin</h3>
+          <p>
+            This is just a test description to understand how this design would really look like in
+            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
+            is done.
+          </p>
+        </i-card>
+      </section>
+      <section>
+        <h2>
+          Card <span class='small'>Variant: 'mb-shorter'</span>
+        </h2>
+        <i-card :variants="['mb-shorter']" heading="Role">
+          <h3>Super Admin</h3>
+          <p>
+            This is just a test description to understand how this design would really look like in
+            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
+            is done.
+          </p>
+        </i-card>
+      </section>
+    </section>
   </div>
 </template>
 
 <script>
 import KButton from '@/components/Button/Button.vue';
-
+import ICard from '../components/Card/Card.vue';
 export default {
   name: 'component',
   components: {
     KButton,
+    ICard 
   },
 };
 </script>
@@ -53,5 +90,37 @@ export default {
    grid-gap: 1rem;
    margin: 2rem 0;
   }
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.cards {
+  background: $grey-light;
+  padding: 6.4rem;
+}
+
+h2 {
+  margin-bottom: 1.6rem;
+}
+
+.small {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #aaaaaa;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+h3 {
+  margin-bottom: 1.6rem;
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+section {
+  margin: 5rem auto;
 }
 </style>
