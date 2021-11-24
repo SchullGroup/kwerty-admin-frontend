@@ -1,0 +1,15 @@
+.wrapper {
+  .checkbox__input {
+    width: 1.8rem;
+    height: 1.8rem;
+    background: $white;
+    border: 0.1rem solid $grey;
+    border-radius: 0.2rem;
+  }
+  .checkbox__label {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.85);
+  }
+}

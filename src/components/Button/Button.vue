@@ -24,4 +24,4 @@ import KButton from './Button';
 export default KButton;
 </script>
 
-<style lang="scss" src="./Button.scss"></style>
+<style lang="scss" src="./Button.scss" scoped></style>

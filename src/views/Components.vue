@@ -29,17 +29,20 @@
       <k-button :disabled="true" type="link">Link button disabled</k-button>
     </div>
       <k-button size="full" type="tertiary">Tertiary button</k-button>
-
+    <div class="content">
+      <k-checkbox />
+    </div>
   </div>
 </template>
 
 <script>
-import KButton from '@/components/Button/Button.vue';
+import { KButton, KCheckbox } from '@/components';
 
 export default {
   name: 'component',
   components: {
     KButton,
+    KCheckbox,
   },
 };
 </script>
