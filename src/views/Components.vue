@@ -30,20 +30,113 @@
     </div>
       <k-button size="full" type="tertiary">Tertiary button</k-button>
     <div class="content">
+      <k-button variant="secondary">Secondary button</k-button>
+      <k-button variant="secondary">Secondary button hover</k-button>
+      <k-button :disabled="true" variant="secondary">Secondary button disabled</k-button>
+      <k-button :negative="true" variant="secondary">Secondary button negative</k-button>
+    </div>
+    <h2>Tertiary button</h2>
+    <div class="content">
+      <k-button variant="tertiary">Tertiary button</k-button>
+      <k-button variant="tertiary">Tertiary button hover</k-button>
+      <k-button :disabled="true" variant="tertiary">Tertiary button disabled</k-button>
+      <k-button :negative="true" variant="tertiary">Tertiary button negative</k-button>
+    </div>
+    <h2>Link button</h2>
+    <div class="content">
+      <k-button variant="link">Link button</k-button>
+      <k-button variant="link">Link button hover</k-button>
+      <k-button :disabled="true" variant="link">Link button disabled</k-button>
+    </div>
+      <k-button size="full" variant="tertiary">Tertiary button</k-button>
       <k-checkbox />
+    <section class="cards">
+      <section>
+        <h2>Card <span class="small">Default</span></h2>
+        <k-card heading="Role">
+          <h3>Super Admin</h3>
+          <p>
+            This is just a test description to understand how this design would really look like in
+            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
+            is done.
+          </p>
+        </k-card>
+      </section>
+      <section>
+        <h2>Card <span class="small">Variant: 'rounded'</span></h2>
+        <k-card :variants="['rounded']" heading="Role">
+          <h3>Super Admin</h3>
+          <p>
+            This is just a test description to understand how this design would really look like in
+            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
+            is done.
+          </p>
+        </k-card>
+      </section>
+      <section>
+        <h2>Card <span class="small">Variant: 'mb-shorter'</span></h2>
+        <k-card :variants="['mb-shorter']" heading="Role">
+          <h3>Super Admin</h3>
+          <p>
+            This is just a test description to understand how this design would really look like in
+            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
+            is done.
+          </p>
+        </k-card>
+      </section>
+    </section>
+
+    <div class="pagination">
+      <h2>Pagination</h2>
+      <k-pagination
+        :currentPageStart="currentPageStart"
+        :currentPageEnd="currentPageEnd"
+        :totalItems="totalItems"
+        @goToNext="nextPage"
+        @goToPrev="prevPage"
+      ></k-pagination>
     </div>
   </div>
 </template>
 
 <script>
-import { KButton, KCheckbox } from '@/components';
+import { KButton, KCheckbox, KCard, KPagination } from '@/components';
 
 export default {
-  name: 'component',
+  name: 'Components',
   components: {
     KButton,
     KCheckbox,
+    KCard, KPagination
   },
+  data: () => ({
+    page: 1,
+    totalItems: 243,
+    itemsOnPage: 20,
+  }),
+  computed: {
+    currentPageEnd() {
+      const { totalItems, itemsOnPage } = this;
+      const nextEnd = (this.page - 1) * itemsOnPage + itemsOnPage;
+      return totalItems < nextEnd ? totalItems : nextEnd;
+    },
+    currentPageStart() {
+      const { itemsOnPage } = this;
+      return (this.page - 1) * itemsOnPage + 1;
+    },
+  },
+  methods: {
+    nextPage() {
+      const { itemsOnPage } = this;
+      if (this.page * itemsOnPage < this.totalItems) {
+        this.page += 1;
+      }
+    },
+    prevPage() {
+      this.page = this.page !== 1 ? this.page - 1 : this.page;
+    },
+  },
+
 };
 </script>
 
@@ -56,5 +149,37 @@ export default {
    grid-gap: 1rem;
    margin: 2rem 0;
   }
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.cards {
+  background: $grey-light;
+  padding: 6.4rem;
+}
+
+h2 {
+  margin-bottom: 1.6rem;
+}
+
+.small {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #aaaaaa;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+h3 {
+  margin-bottom: 1.6rem;
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+section {
+  margin: 5rem auto;
 }
 </style>
