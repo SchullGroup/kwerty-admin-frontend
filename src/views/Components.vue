@@ -1,91 +1,99 @@
 <template>
-  <div class="container">
-    <h2>Components</h2>
-    <h2>primary button</h2>
-    <div class="content">
-      <k-button>Primary Button</k-button>
-      <k-button>Primary button hover</k-button>
-      <k-button :disabled="true">Primary button disabled</k-button>
-      <k-button :negative="true">Primary button negative</k-button>
-    </div>
-    <h2>secondary button</h2>
-    <div class="content">
-      <k-button variant="secondary">Secondary button</k-button>
-      <k-button variant="secondary">Secondary button hover</k-button>
-      <k-button :disabled="true" variant="secondary">Secondary button disabled</k-button>
-      <k-button :negative="true" variant="secondary">Secondary button negative</k-button>
-    </div>
-    <h2>Tertiary button</h2>
-    <div class="content">
-      <k-button variant="tertiary">Tertiary button</k-button>
-      <k-button variant="tertiary">Tertiary button hover</k-button>
-      <k-button :disabled="true" variant="tertiary">Tertiary button disabled</k-button>
-      <k-button :negative="true" variant="tertiary">Tertiary button negative</k-button>
-    </div>
-    <h2>Link button</h2>
-    <div class="content">
-      <k-button variant="link">Link button</k-button>
-      <k-button variant="link">Link button hover</k-button>
-      <k-button :disabled="true" variant="link">Link button disabled</k-button>
-    </div>
-      <k-button size="full" variant="tertiary">Tertiary button</k-button>
-    <section class="cards">
-      <section>
-        <h2>Card <span class="small">Default</span></h2>
-        <k-card heading="Role">
-          <h3>Super Admin</h3>
-          <p>
-            This is just a test description to understand how this design would really look like in
-            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-            is done.
-          </p>
-        </k-card>
+  <k-dashboard-layout>
+    <div class="container">
+      <h2>Components</h2>
+      <h2>primary button</h2>
+      <div class="content">
+        <k-button>Primary Button</k-button>
+        <k-button>Primary button hover</k-button>
+        <k-button :disabled="true">Primary button disabled</k-button>
+        <k-button :negative="true">Primary button negative</k-button>
+      </div>
+      <h2>secondary button</h2>
+      <div class="content">
+        <k-button variant="secondary">Secondary button</k-button>
+        <k-button variant="secondary">Secondary button hover</k-button>
+        <k-button :disabled="true" variant="secondary">Secondary button disabled</k-button>
+        <k-button :negative="true" variant="secondary">Secondary button negative</k-button>
+      </div>
+      <h2>Tertiary button</h2>
+      <div class="content">
+        <k-button variant="tertiary">Tertiary button</k-button>
+        <k-button variant="tertiary">Tertiary button hover</k-button>
+        <k-button :disabled="true" variant="tertiary">Tertiary button disabled</k-button>
+        <k-button :negative="true" variant="tertiary">Tertiary button negative</k-button>
+      </div>
+      <h2>Link button</h2>
+      <div class="content">
+        <k-button variant="link">Link button</k-button>
+        <k-button variant="link">Link button hover</k-button>
+        <k-button :disabled="true" variant="link">Link button disabled</k-button>
+      </div>
+        <k-button size="full" variant="tertiary">Tertiary button</k-button>
+      <section class="cards">
+        <section>
+          <h2>Card <span class="small">Default</span></h2>
+          <k-card heading="Role">
+            <h3>Super Admin</h3>
+            <p>
+              This is just a test description to understand how this
+               design would really look like in
+              real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
+              is done.
+            </p>
+          </k-card>
+        </section>
+        <section>
+          <h2>Card <span class="small">Variant: 'rounded'</span></h2>
+          <k-card :variants="['rounded']" heading="Role">
+            <h3>Super Admin</h3>
+            <p>
+              This is just a test description to understand how this desi
+              gn would really look like in
+              real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
+              is done.
+            </p>
+          </k-card>
+        </section>
+        <section>
+          <h2>Card <span class="small">Variant: 'mb-shorter'</span></h2>
+          <k-card :variants="['mb-shorter']" heading="Role">
+            <h3>Super Admin</h3>
+            <p>
+              This is just a test description to understand how this d
+              esign would really look like in
+              real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
+              is done.
+            </p>
+          </k-card>
+        </section>
       </section>
-      <section>
-        <h2>Card <span class="small">Variant: 'rounded'</span></h2>
-        <k-card :variants="['rounded']" heading="Role">
-          <h3>Super Admin</h3>
-          <p>
-            This is just a test description to understand how this design would really look like in
-            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-            is done.
-          </p>
-        </k-card>
-      </section>
-      <section>
-        <h2>Card <span class="small">Variant: 'mb-shorter'</span></h2>
-        <k-card :variants="['mb-shorter']" heading="Role">
-          <h3>Super Admin</h3>
-          <p>
-            This is just a test description to understand how this design would really look like in
-            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-            is done.
-          </p>
-        </k-card>
-      </section>
-    </section>
 
-    <div class="pagination">
-      <h2>Pagination</h2>
-      <k-pagination
-        :currentPageStart="currentPageStart"
-        :currentPageEnd="currentPageEnd"
-        :totalItems="totalItems"
-        @goToNext="nextPage"
-        @goToPrev="prevPage"
-      ></k-pagination>
+      <div class="pagination">
+        <h2>Pagination</h2>
+        <k-pagination
+          :currentPageStart="currentPageStart"
+          :currentPageEnd="currentPageEnd"
+          :totalItems="totalItems"
+          @goToNext="nextPage"
+          @goToPrev="prevPage"
+        ></k-pagination>
+      </div>
     </div>
-  </div>
+  </k-dashboard-layout>
 </template>
 
 <script>
 import KCard from '@/components/Card/Card.vue';
 import KPagination from '@/components/Pagination/Pagination.vue';
 import KButton from '@/components/Button/Button.vue';
+import KDashboardLayout from '@/components/DashboardLayout/DashboardLayout.vue';
 
 export default {
   name: 'Components',
-  components: { KCard, KPagination, KButton },
+  components: {
+    KCard, KPagination, KButton, KDashboardLayout,
+  },
   data: () => ({
     page: 1,
     totalItems: 243,
