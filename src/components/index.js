@@ -5,9 +5,5 @@ import KInput from './Input/Input.vue';
 import KDashboardLayout from './DashboardLayout/DashboardLayout.vue';
 
 export {
-  KButton,
-  KCard,
-  KPagination,
-  KDashboardLayout,
-  KInput,
+  KButton, KCard, KPagination, KDashboardLayout, KInput,
 };

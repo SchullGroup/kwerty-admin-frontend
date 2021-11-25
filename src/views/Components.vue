@@ -113,7 +113,6 @@
             <option value="indigo" class="option">Indigo</option>
           </k-input>
         </section>
-
       </div>
     </div>
 </k-dashboard-layout>
