@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <input
+      v-model="innerValue"
       type="checkbox"
       :name="name"
       :value="value"

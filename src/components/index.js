@@ -3,6 +3,7 @@ import KCheckbox from './Checkbox/Checkbox.vue';
 import KPagination from './Pagination/Pagination.vue';
 import KCard from './Card/Card.vue';
 import KToggle from './Toggle/Toggle.vue';
+import KRadio from './Radio/Radio.vue';
 
 export {
   KButton,
@@ -10,4 +11,5 @@ export {
   KPagination,
   KCard,
   KToggle,
+  KRadio,
 };

@@ -9,11 +9,15 @@ describe('Checkbox Component', () => {
         fill: 'fill',
         name: 'some name',
         label: 'label',
-        value: 'value',
+        value: ['value'],
+        checkedValue: ['firstVal', 'secondVal', 'testVal'],
       },
     });
   });
   it('renders the checkbox component', async () => {
+    await wrapper.setData({
+      innerValue: 'value',
+    });
     expect(wrapper.vm.$options.name).toMatch('KCheckbox');
     expect(wrapper.attributes().class).toContain('wrapper');
     expect(wrapper.findAll('input').length).toEqual(1);

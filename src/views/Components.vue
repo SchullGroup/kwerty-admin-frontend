@@ -33,12 +33,26 @@
     <br />
     <h2>Checkbox</h2>
     <div class="content">
-      <k-checkbox value="new label" name="label" label="new-label" />
-      <k-checkbox value="another label" name="another label" label="another-label" fill="fill" />
+      <k-checkbox v-model="label" value="new label" name="label1" label="new label" />
+      <k-checkbox
+        v-model="label"
+        value="another label"
+        name="label2"
+        label="another label"
+        fill="fill"
+      />
+      <k-checkbox v-model="label" value="selected" name="label3" label="new label" />
+      <k-checkbox v-model="label" value="last label" name="label4" label="last label" />
     </div>
     <h2>Toggle button</h2>
     <div class="content">
       <k-toggle />
+    </div>
+    <h2>Radio</h2>
+    <div class="content">
+      <k-radio v-model="checked" name="country" label="Nigeria" value="Nigeria" id="nigeria" />
+      <k-radio v-model="checked" name="country"  label="Ghana" value="Ghana" id="ghana" />
+      <span>{{ checked }}</span>
     </div>
     <section class="cards">
       <section>
@@ -95,6 +109,7 @@ import {
   KCard,
   KPagination,
   KToggle,
+  KRadio,
 } from '@/components';
 
 export default {
@@ -105,12 +120,14 @@ export default {
     KCard,
     KPagination,
     KToggle,
+    KRadio,
   },
   data: () => ({
     page: 1,
     totalItems: 243,
     itemsOnPage: 20,
     label: [],
+    checked: '',
   }),
   computed: {
     currentPageEnd() {
@@ -140,12 +157,14 @@ export default {
 <style lang="scss" scoped>
 .container {
   padding: 3.6rem;
+
   .content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 1rem;
     margin: 2rem 0;
   }
+
   width: 90%;
   max-width: 1200px;
   margin: auto;
