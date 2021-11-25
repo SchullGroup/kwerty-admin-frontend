@@ -6,7 +6,7 @@ describe('Pagination Component', () => {
 
   beforeAll(() => {
     wrapper = shallowMount(IPagination, {
-      propsData: { currentPageStart: 1, currentPageEnd: 20, totalItems: 248 },
+      propsData: { page: 1, maxItemsOnPage: 20, totalItems: 248 },
     });
   });
 
@@ -22,5 +22,10 @@ describe('Pagination Component', () => {
 
     expect(wrapper.emitted()).toHaveProperty('goToPrev');
     expect(wrapper.emitted()).toHaveProperty('goToNext');
+  });
+
+  it('should use total items as end on last page', async () => {
+    await wrapper.setProps({ page: 13 });
+    expect(wrapper.text()).toContain('241-248 out of 248');
   });
 });
