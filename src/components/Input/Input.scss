@@ -1,3 +1,7 @@
+.input__wrapper {
+  width: 100%;
+}
+
 .input {
   position: relative;
   width: 100%;
@@ -39,6 +43,7 @@
 .input {
   & > input,
   & > select {
+    box-sizing: border-box;
     height: 100%;
     width: 100%;
     padding: 0 3.2rem;
@@ -70,6 +75,7 @@
       transform: translateY(-50%);
       transition: 0.15s ease-out;
       color: $grey-dark;
+      pointer-events: none;
       user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none;
@@ -82,6 +88,7 @@
       line-height: 1.2rem;
       font-weight: 400;
       color: $black;
+      pointer-events: auto;
     }
   }
 

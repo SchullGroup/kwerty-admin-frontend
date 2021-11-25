@@ -3,8 +3,8 @@
     <div
       :class="[
         'input',
-        'input--with-label',
         {
+          'input--with-label': label,
           'input--error': error,
           'input--disabled': disabled,
           'input--select': type === 'select',

@@ -2,10 +2,11 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Components from '../views/Components.vue';
+import ActivityHome from '../views/Activity/Activity.vue';
 
 Vue.use(VueRouter);
 
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'Home',
@@ -15,6 +16,11 @@ const routes = [
     path: '/components',
     name: 'Components',
     component: Components,
+  },
+  {
+    path: '/activities/:type',
+    name: 'Activities',
+    component: ActivityHome,
   },
 ];
 
