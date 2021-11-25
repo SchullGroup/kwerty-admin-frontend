@@ -93,8 +93,8 @@
       <div class="pagination">
         <h2>Pagination</h2>
         <k-pagination
-          :currentPageStart="currentPageStart"
-          :currentPageEnd="currentPageEnd"
+          :page="page"
+          :maxItemsOnPage="20"
           :totalItems="totalItems"
           @goToNext="nextPage"
           @goToPrev="prevPage"
@@ -123,7 +123,7 @@
           ></k-input>
         </section>
         <section>
-          <h2>Password Input</h2>
+          <h2>Password Input </h2>
           <k-input label="Password" type="password" v-model="password" variant="password"></k-input>
         </section>
         <section>
@@ -136,7 +136,7 @@
         </section>
       </div>
     </div>
-  </k-dashboard-layout>
+</k-dashboard-layout>
 </template>
 
 <script>
@@ -175,17 +175,6 @@ export default {
     color: '',
     color2: '',
   }),
-  computed: {
-    currentPageEnd() {
-      const { totalItems, itemsOnPage } = this;
-      const nextEnd = (this.page - 1) * itemsOnPage + itemsOnPage;
-      return totalItems < nextEnd ? totalItems : nextEnd;
-    },
-    currentPageStart() {
-      const { itemsOnPage } = this;
-      return (this.page - 1) * itemsOnPage + 1;
-    },
-  },
   methods: {
     nextPage() {
       const { itemsOnPage } = this;
