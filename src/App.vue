@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
+    <k-toast />
   </div>
 </template>
 
 <script>
+import { KToast } from '@/components';
+
 export default {
   name: 'App',
+  components: {
+    KToast,
+  },
 };
 </script>
 

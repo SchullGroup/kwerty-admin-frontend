@@ -14,7 +14,7 @@
                 <ul class="navbar__dropdown">
                   <template v-for="childRoute in item.children">
                     <li class="navbar__dropdown__item" :key="childRoute.name">
-                      <router-link :href="href"  :to="childRoute.route">
+                      <router-link :to="childRoute.route">
                         {{childRoute.label}}
                       </router-link>
                     </li>

@@ -29,17 +29,41 @@
         <k-button variant="link">Link button hover</k-button>
         <k-button :disabled="true" variant="link">Link button disabled</k-button>
       </div>
-        <k-button size="full" variant="tertiary">Tertiary button</k-button>
+      <k-button size="full" variant="tertiary">Tertiary button</k-button>
+      <br />
+      <br />
+      <h2>Checkbox</h2>
+      <div class="content">
+        <k-checkbox v-model="label" value="new label" name="label1" label="new label" />
+        <k-checkbox
+          v-model="label"
+          value="another label"
+          name="label2"
+          label="another label"
+          fill="fill"
+        />
+        <k-checkbox v-model="label" value="selected" name="label3" label="new label" />
+        <k-checkbox v-model="label" value="last label" name="label4" label="last label" />
+      </div>
+      <h2>Toggle button</h2>
+      <div class="content">
+        <k-toggle />
+      </div>
+      <h2>Radio</h2>
+      <div class="content">
+        <k-radio v-model="checked" name="country" label="Nigeria" value="Nigeria" id="nigeria" />
+        <k-radio v-model="checked" name="country" label="Ghana" value="Ghana" id="ghana" />
+        <span>{{ checked }}</span>
+      </div>
       <section class="cards">
         <section>
           <h2>Card <span class="small">Default</span></h2>
           <k-card heading="Role">
             <h3>Super Admin</h3>
             <p>
-              This is just a test description to understand how this
-               design would really look like in
-              real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-              is done.
+              This is just a test description to understand how this design would really look like
+              in real life. I’m hoping it gets to three lines or else I’m going to keep typing until
+              it is done.
             </p>
           </k-card>
         </section>
@@ -48,10 +72,9 @@
           <k-card :variants="['rounded']" heading="Role">
             <h3>Super Admin</h3>
             <p>
-              This is just a test description to understand how this desi
-              gn would really look like in
-              real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-              is done.
+              This is just a test description to understand how this desi gn would really look like
+              in real life. I’m hoping it gets to three lines or else I’m going to keep typing until
+              it is done.
             </p>
           </k-card>
         </section>
@@ -60,10 +83,9 @@
           <k-card :variants="['mb-shorter']" heading="Role">
             <h3>Super Admin</h3>
             <p>
-              This is just a test description to understand how this d
-              esign would really look like in
-              real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-              is done.
+              This is just a test description to understand how this d esign would really look like
+              in real life. I’m hoping it gets to three lines or else I’m going to keep typing until
+              it is done.
             </p>
           </k-card>
         </section>
@@ -78,7 +100,6 @@
           @goToPrev="prevPage"
         ></k-pagination>
       </div>
-
       <div class="inputs">
         <section>
           <h2>Text Input</h2>
@@ -119,21 +140,35 @@
 </template>
 
 <script>
-import KCard from '@/components/Card/Card.vue';
-import KPagination from '@/components/Pagination/Pagination.vue';
-import KButton from '@/components/Button/Button.vue';
-import KDashboardLayout from '@/components/DashboardLayout/DashboardLayout.vue';
-import KInput from '@/components/Input/Input.vue';
+import {
+  KButton,
+  KCheckbox,
+  KCard,
+  KPagination,
+  KToggle,
+  KRadio,
+  KDashboardLayout,
+  KInput,
+} from '@/components';
 
 export default {
   name: 'Components',
   components: {
-    KCard, KPagination, KButton, KDashboardLayout, KInput,
+    KButton,
+    KCheckbox,
+    KCard,
+    KPagination,
+    KToggle,
+    KRadio,
+    KDashboardLayout,
+    KInput,
   },
   data: () => ({
     page: 1,
     totalItems: 243,
     itemsOnPage: 20,
+    label: [],
+    checked: '',
     title: 'Filler text',
     badEmail: 'thisisnotacorrectemail',
     password: 'some complex password!212@334',
@@ -151,6 +186,20 @@ export default {
       this.page = this.page !== 1 ? this.page - 1 : this.page;
     },
   },
+  mounted() {
+    this.$toast.show({
+      message: 'Your password has been reset. Please check your email for your new password.',
+    });
+    this.$toast.show({
+      message: 'Your password has been reset. Please check your email for your new password.',
+    });
+    this.$toast.show({
+      message: 'Your password has been reset. Please check your email for your new password.',
+    });
+    this.$toast.show({
+      message: 'Your password has been reset. Please check your email for your new password.',
+    });
+  },
 };
 </script>
 
@@ -163,6 +212,7 @@ export default {
     grid-gap: 1rem;
     margin: 2rem 0;
   }
+
   width: 90%;
   max-width: 1200px;
   margin: auto;

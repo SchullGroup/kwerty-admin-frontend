@@ -1,0 +1,74 @@
+.toast {
+  position: fixed;
+  z-index: 3000;
+  bottom: 5rem;
+  right: 3.6rem;
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 1.6rem 3.2rem;
+    border-radius: 0.8rem;
+    margin-bottom: 1rem;
+    background: $white;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slide-in 500ms forwards;
+    &.end {
+      animation: slide-out 500ms forwards;
+    }
+  }
+  &__message {
+    display: flex;
+    align-items: flex-start;
+    color: $black;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    max-width: 32rem;
+  }
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.9rem;
+    border-radius: 0.8rem;
+    box-shadow: 2px 2px 25px rgba(128, 128, 128, 0.15);
+    background: $white;
+    margin-right: 2.4rem;
+    height: 3.2rem;
+    width: 3.2rem;
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.list-enter-active {
+  animation: slide-in .5s;
+}
+.list-leave-active {
+  animation: slide-out .5s;
+}
