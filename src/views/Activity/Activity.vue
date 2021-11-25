@@ -8,8 +8,9 @@
       </div>
     </header>
     <table class="activity__data">
+      <caption class="hide-text">Activities Table</caption>
       <thead class="activity__data__header">
-        <th v-for="field in displayFields" :key="field" :class="field">{{ field }}</th>
+        <th v-for="field in displayFields" :key="field" :class="field" :id="field">{{ field }}</th>
       </thead>
       <tbody class="activity__data__body">
         <table-row
