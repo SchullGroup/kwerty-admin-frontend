@@ -162,6 +162,20 @@ export default {
       this.page = this.page !== 1 ? this.page - 1 : this.page;
     },
   },
+  mounted() {
+    this.$toast.show({
+      message: 'Your password has been reset. Please check your email for your new password.',
+    });
+    this.$toast.show({
+      message: 'Your password has been reset. Please check your email for your new password.',
+    });
+    this.$toast.show({
+      message: 'Your password has been reset. Please check your email for your new password.',
+    });
+    this.$toast.show({
+      message: 'Your password has been reset. Please check your email for your new password.',
+    });
+  },
 };
 </script>
 
