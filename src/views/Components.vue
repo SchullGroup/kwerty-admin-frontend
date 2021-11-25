@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <k-dashboard-layout>
     <div class="container">
       <h2>Components</h2>
@@ -69,82 +68,6 @@
           </k-card>
         </section>
       </section>
-=======
-  <div class="container">
-    <h2>Components</h2>
-    <h2>primary button</h2>
-    <div class="content">
-      <k-button>Primary Button</k-button>
-      <k-button>Primary button hover</k-button>
-      <k-button :disabled="true">Primary button disabled</k-button>
-      <k-button :negative="true">Primary button negative</k-button>
-    </div>
-    <h2>secondary button</h2>
-    <div class="content">
-      <k-button variant="secondary">Secondary button</k-button>
-      <k-button variant="secondary">Secondary button hover</k-button>
-      <k-button :disabled="true" variant="secondary"
-        >Secondary button disabled</k-button
-      >
-      <k-button :negative="true" variant="secondary"
-        >Secondary button negative</k-button
-      >
-    </div>
-    <h2>Tertiary button</h2>
-    <div class="content">
-      <k-button variant="tertiary">Tertiary button</k-button>
-      <k-button variant="tertiary">Tertiary button hover</k-button>
-      <k-button :disabled="true" variant="tertiary"
-        >Tertiary button disabled</k-button
-      >
-      <k-button :negative="true" variant="tertiary"
-        >Tertiary button negative</k-button
-      >
-    </div>
-    <h2>Link button</h2>
-    <div class="content">
-      <k-button variant="link">Link button</k-button>
-      <k-button variant="link">Link button hover</k-button>
-      <k-button :disabled="true" variant="link">Link button disabled</k-button>
-    </div>
-    <k-button size="full" variant="tertiary">Tertiary button</k-button>
-    <section class="cards">
-      <section>
-        <h2>Card <span class="small">Default</span></h2>
-        <k-card heading="Role">
-          <h3>Super Admin</h3>
-          <p>
-            This is just a test description to understand how this design would
-            really look like in real life. I’m hoping it gets to three lines or
-            else I’m going to keep typing until it is done.
-          </p>
-        </k-card>
-      </section>
-      <section>
-        <h2>Card <span class="small">Variant: 'rounded'</span></h2>
-        <k-card :variants="['rounded']" heading="Role">
-          <h3>Super Admin</h3>
-          <p>
-            This is just a test description to understand how this design would
-            really look like in real life. I’m hoping it gets to three lines or
-            else I’m going to keep typing until it is done.
-          </p>
-        </k-card>
-      </section>
-      <section>
-        <h2>Card <span class="small">Variant: 'mb-shorter'</span></h2>
-        <k-card :variants="['mb-shorter']" heading="Role">
-          <h3>Super Admin</h3>
-          <p>
-            This is just a test description to understand how this design would
-            really look like in real life. I’m hoping it gets to three lines or
-            else I’m going to keep typing until it is done.
-          </p>
-        </k-card>
-      </section>
-    </section>
->>>>>>> 3d2bbca (added input component)
-
       <div class="pagination">
         <h2>Pagination</h2>
         <k-pagination
@@ -155,9 +78,45 @@
           @goToPrev="prevPage"
         ></k-pagination>
       </div>
+
+      <div class="inputs">
+        <section>
+          <h2>Text Input</h2>
+          <k-input label="Name"></k-input>
+        </section>
+        <section>
+          <h2>Text Input <span class="small">Filled</span></h2>
+          <k-input label="Title" v-model="title"></k-input>
+        </section>
+        <section>
+          <h2>Text Input <span class="small">Disabled</span></h2>
+          <k-input label="Title" v-model="title" :disabled="true"></k-input>
+        </section>
+        <section>
+          <h2>Email Input <span class="small">Error</span></h2>
+          <k-input
+            label="Title"
+            type="email"
+            v-model="badEmail"
+            error="Your email address is not correct."
+          ></k-input>
+        </section>
+        <section>
+          <h2>Password Input </h2>
+          <k-input label="Password" type="password" v-model="password" variant="password"></k-input>
+        </section>
+        <section>
+          <h2>Select Input <span class="small">Custom</span></h2>
+          <k-input label="Color" type="select" v-model="color2" variant="custom">
+            <option value="crimson" class="option">Crimson</option>
+            <option value="orange" class="option">Orange</option>
+            <option value="indigo" class="option">Indigo</option>
+          </k-input>
+        </section>
+
+      </div>
     </div>
-<<<<<<< HEAD
-  </k-dashboard-layout>
+</k-dashboard-layout>
 </template>
 
 <script>
@@ -165,72 +124,12 @@ import KCard from '@/components/Card/Card.vue';
 import KPagination from '@/components/Pagination/Pagination.vue';
 import KButton from '@/components/Button/Button.vue';
 import KDashboardLayout from '@/components/DashboardLayout/DashboardLayout.vue';
-=======
-
-    <div class="inputs">
-      <section>
-        <h2>Text Input</h2>
-        <k-input label="Name"></k-input>
-      </section>
-      <section>
-        <h2>Text Input <span class="small">Filled</span></h2>
-        <k-input label="Title" v-model="title"></k-input>
-      </section>
-      <section>
-        <h2>Text Input <span class="small">Disabled</span></h2>
-        <k-input label="Title" v-model="title" :disabled="true"></k-input>
-      </section>
-      <section>
-        <h2>Email Input <span class="small">Error</span></h2>
-        <k-input
-          label="Title"
-          type="email"
-          v-model="badEmail"
-          :error="true"
-        ></k-input>
-      </section>
-      <section>
-        <h2>Password Input </h2>
-        <k-input label="Password" type="password" v-model="password" variant="password"></k-input>
-      </section>
-      <section>
-        <h2>Select Input <span class='small'>Custom</span></h2>
-        <k-input label="Color" type="select" v-model="color2" variant="custom">
-          <option value="crimson" class='option'>Crimson</option>
-          <option value="orange" class='option'>Orange</option>
-          <option value="indigo" class='option'>Indigo</option>
-        </k-input>
-      </section>
-      <section>
-        <h2>Select Input <span class='small'>Native</span></h2>
-        <k-input label="Color" type="select" v-model="color" variant="native">
-          <option value="red">Red</option>
-          <option value="blue">Blue</option>
-          <option value="green">Green</option>
-        </k-input>
-      </section>
-
-    </div>
-  </div>
-</template>
-
-<script>
-import {
-  KCard, KPagination, KButton, KInput,
-} from '@/components';
->>>>>>> 3d2bbca (added input component)
+import KInput from '@/components/Input/Input.vue';
 
 export default {
   name: 'Components',
   components: {
-<<<<<<< HEAD
-    KCard, KPagination, KButton, KDashboardLayout,
-=======
-    KCard,
-    KPagination,
-    KButton,
-    KInput,
->>>>>>> 3d2bbca (added input component)
+    KCard, KPagination, KButton, KDashboardLayout, KInput,
   },
   data: () => ({
     page: 1,

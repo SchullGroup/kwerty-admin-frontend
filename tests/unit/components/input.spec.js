@@ -14,14 +14,13 @@ describe('Input Component', () => {
     });
     mockEventObject = {
       target: { classList: { contains: () => true } },
-      stopPropagation: () => {},
     };
     mockProps = {
       type: 'password',
       variant: 'password',
       togglePasswordType: jest.fn(),
       toggleSelectOpen: jest.fn(),
-      isCustomSelect: false,
+      isSelect: false,
       isSelectOpen: false,
       overrideType: null,
       $refs: {
@@ -34,12 +33,6 @@ describe('Input Component', () => {
 
   it('should mount', () => {
     expect(wrapper.vm.$options.name).toMatch('KInput');
-  });
-
-  it('should update input element', async () => {
-    const inputElement = wrapper.find('input');
-    await inputElement.setValue('Hello World!');
-    expect(await inputElement.element.value).toContain('Hello World!');
   });
 
   it('should emit input event', async () => {
@@ -68,7 +61,7 @@ describe('Input Component', () => {
     expect(mockProps.overrideType).toBe('text');
 
     mockProps.variant = 'select';
-    mockProps.isCustomSelect = true;
+    mockProps.isSelect = true;
     KInput.methods.iconClicked.call(mockProps, mockEventObject);
     expect(mockProps.toggleSelectOpen).toBeCalled();
   });

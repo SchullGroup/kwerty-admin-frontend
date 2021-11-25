@@ -12,7 +12,7 @@
 
   &:focus-within,
   &:focus,
-  &.focused {
+  &.input--is-open {
     border: 1px solid $primary-purple;
   }
 
@@ -72,6 +72,8 @@
       color: $grey-dark;
       user-select: none;
       -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
     }
 
     input:not(:placeholder-shown) ~ label {
@@ -104,7 +106,6 @@
   }
 
   &.input--select {
-
     &.input--with-icon input {
       text-transform: capitalize;
     }
@@ -195,7 +196,7 @@
     select {
       background: transparent;
       border: none;
-      margin-left: -.4rem;
+      margin-left: -0.4rem;
       appearance: menulist;
 
       option {
@@ -205,9 +206,8 @@
   }
 
   &.input--select.input--has-value {
-
     select {
-      padding-top: .8rem;
+      padding-top: 0.8rem;
     }
 
     label {
@@ -218,4 +218,12 @@
       color: $black;
     }
   }
+}
+
+.error-message {
+  display: block;
+  margin: 1.6rem 0 0;
+  color: $error;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
 }

@@ -32,7 +32,7 @@ export default {
       type: Boolean,
     },
     error: {
-      type: Boolean,
+      type: String,
     },
     variant: {
       type: String,
@@ -77,21 +77,19 @@ export default {
           }
 
           clickTarget.click();
-        } catch (e) { console.log(e); }
+        } catch (e) { console.log(e.message); }
       };
     },
     closeOptionsHandler(e) {
       const { target, clientX: x, clientY: y } = e;
-      e.stopPropagation();
       this.isSelectOpen = false;
 
       // Click element covered by overlay
       setTimeout(this.clickElementBelow(target, x, y), 0);
     },
-    iconClicked(e) {
+    iconClicked() {
       if (this.variant === 'password') this.togglePasswordType();
-      else if (this.isCustomSelect && !this.isSelectOpen) {
-        e.stopPropagation();
+      else if (this.isSelect && !this.isSelectOpen) {
         this.toggleSelectOpen();
       }
     },
@@ -104,8 +102,8 @@ export default {
     isNativeSelect() {
       return this.type === 'select' && this.variant === 'native';
     },
-    isCustomSelect() {
-      return this.type === 'select' && this.variant === 'custom';
+    isSelect() {
+      return this.type === 'select';
     },
   },
   components: {

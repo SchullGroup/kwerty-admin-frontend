@@ -1,59 +1,62 @@
 <template>
-  <div
-    :class="[
-      'input',
-      'input--with-label',
-      {
-        'input--error': error,
-        'input--with-icon': variant === 'password' || isCustomSelect,
-        'input--disabled': disabled,
-        'input--select': type === 'select',
-        'input--select--native': isNativeSelect,
-        'input--has-value': type === 'select' && this.innerValue,
-      },
-    ]"
-    @click="isCustomSelect ? toggleSelectOpen() : null"
-  >
-    <input
-      v-if="!isNativeSelect"
-      :name="name"
-      :id="name"
-      :type="overrideType || type"
-      :value="innerValue"
-      :placeholder="label"
-      :disabled="disabled || type === 'select'"
-      @change="updateInput"
-    />
-    <label :for="name">{{ label }}</label>
-
-    <!-- Native Select   -->
-    <select id="name" v-if="isNativeSelect" :value="innerValue" @change="updateInput">
-      <option value="" selected hidden></option>
-      <slot></slot>
-    </select>
-
-    <!-- Input Icon   -->
-    <span
+  <div class="input__wrapper">
+    <div
       :class="[
-        'input__icon',
-        { 'input__icon--is-open': isSelectOpen, 'input__icon--click-through': isCustomSelect },
+        'input',
+        'input--with-label',
+        {
+          'input--error': error,
+          'input--disabled': disabled,
+          'input--select': type === 'select',
+          'input--with-icon': variant === 'password' || isSelect,
+          'input--is-open': isSelect && isSelectOpen,
+          'input--has-value': type === 'select' && this.innerValue,
+        },
       ]"
-      @click="iconClicked"
+      @click="isSelect ? toggleSelectOpen() : null"
     >
-      <template v-if="variant === 'password'">
-        <show-icon v-show="!passwordVisible"></show-icon>
-        <hide-icon v-show="passwordVisible"></hide-icon>
-      </template>
-      <dropdown-icon v-if="isCustomSelect"></dropdown-icon>
-    </span>
+      <input
+        v-if="!isNativeSelect"
+        :name="name"
+        :id="name"
+        :type="overrideType || type"
+        :value="innerValue"
+        :placeholder="label"
+        :disabled="disabled || type === 'select'"
+        @change="updateInput"
+      />
+      <label :for="name">{{ label }}</label>
 
-    <!-- Custom Select -->
-    <template v-if="isCustomSelect">
-      <div :class="['overlay', { 'is-hidden': !isSelectOpen }]" @click="closeOptionsHandler"></div>
-      <div :class="['options-list', { 'is-hidden': !isSelectOpen }]" ref="list">
-        <slot></slot>
-      </div>
-    </template>
+      <!-- Input Icon   -->
+      <span
+        :class="{
+          input__icon: true,
+          'input__icon--is-open': isSelectOpen,
+          'input__icon--click-through': isSelect,
+        }"
+        @click.stop="iconClicked"
+      >
+        <template v-if="variant === 'password'">
+          <show-icon v-show="!passwordVisible"></show-icon>
+          <hide-icon v-show="passwordVisible"></hide-icon>
+        </template>
+        <dropdown-icon v-if="isSelect"></dropdown-icon>
+      </span>
+
+      <!-- Select -->
+      <template v-if="isSelect">
+        <div
+          :class="['overlay', { 'is-hidden': !isSelectOpen }]"
+          @click.stop="closeOptionsHandler"
+        ></div>
+        <div :class="['options-list', { 'is-hidden': !isSelectOpen }]" ref="list">
+          <slot></slot>
+        </div>
+      </template>
+    </div>
+    <div class='error-message' v-if='error'>
+      {{this.error}}
+    </div>
   </div>
 </template>
 
