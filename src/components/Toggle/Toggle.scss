@@ -1,0 +1,33 @@
+.btn {
+  padding: 0.4rem 0.8rem;
+  border: 0.1rem solid $grey;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+}
+.wrapper {
+  .toggle {
+    &__off {
+      @extend .btn;
+      background: $grey;
+      color: $black;
+      border-top-left-radius: 0.4rem;
+      border-bottom-left-radius: 0.4rem;
+      &-active {
+        color: rgba(153, 153, 153, 0.85);
+        background: $grey-light;
+      }
+    }
+    &__on {
+      @extend .btn;
+      background: $grey-light;
+      color: rgba(153, 153, 153, 0.85);
+      border-top-right-radius: 0.4rem;
+      border-bottom-right-radius: 0.4rem;
+      &-active {
+        color: $white;
+        background: $primary-purple;
+      }
+    }
+  }
+}
