@@ -68,7 +68,6 @@
           </k-card>
         </section>
       </section>
-
       <div class="pagination">
         <h2>Pagination</h2>
         <k-pagination
@@ -79,8 +78,44 @@
           @goToPrev="prevPage"
         ></k-pagination>
       </div>
+
+      <div class="inputs">
+        <section>
+          <h2>Text Input</h2>
+          <k-input label="Name"></k-input>
+        </section>
+        <section>
+          <h2>Text Input <span class="small">Filled</span></h2>
+          <k-input label="Title" v-model="title"></k-input>
+        </section>
+        <section>
+          <h2>Text Input <span class="small">Disabled</span></h2>
+          <k-input label="Title" v-model="title" :disabled="true"></k-input>
+        </section>
+        <section>
+          <h2>Email Input <span class="small">Error</span></h2>
+          <k-input
+            label="Title"
+            type="email"
+            v-model="badEmail"
+            error="Your email address is not correct."
+          ></k-input>
+        </section>
+        <section>
+          <h2>Password Input </h2>
+          <k-input label="Password" type="password" v-model="password" variant="password"></k-input>
+        </section>
+        <section>
+          <h2>Select Input <span class="small">Custom</span></h2>
+          <k-input label="Color" type="select" v-model="color2" variant="custom">
+            <option value="crimson" class="option">Crimson</option>
+            <option value="orange" class="option">Orange</option>
+            <option value="indigo" class="option">Indigo</option>
+          </k-input>
+        </section>
+      </div>
     </div>
-  </k-dashboard-layout>
+</k-dashboard-layout>
 </template>
 
 <script>
@@ -88,16 +123,22 @@ import KCard from '@/components/Card/Card.vue';
 import KPagination from '@/components/Pagination/Pagination.vue';
 import KButton from '@/components/Button/Button.vue';
 import KDashboardLayout from '@/components/DashboardLayout/DashboardLayout.vue';
+import KInput from '@/components/Input/Input.vue';
 
 export default {
   name: 'Components',
   components: {
-    KCard, KPagination, KButton, KDashboardLayout,
+    KCard, KPagination, KButton, KDashboardLayout, KInput,
   },
   data: () => ({
     page: 1,
     totalItems: 243,
     itemsOnPage: 20,
+    title: 'Filler text',
+    badEmail: 'thisisnotacorrectemail',
+    password: 'some complex password!212@334',
+    color: '',
+    color2: '',
   }),
   computed: {
     currentPageEnd() {
@@ -127,15 +168,19 @@ export default {
 <style lang="scss" scoped>
 .container {
   padding: 3.6rem;
-  .content{
-   display: grid;
-   grid-template-columns:1fr 1fr 1fr 1fr ;
-   grid-gap: 1rem;
-   margin: 2rem 0;
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    margin: 2rem 0;
   }
   width: 90%;
   max-width: 1200px;
   margin: auto;
+}
+
+.inputs {
+  max-width: 56.8rem;
 }
 
 .cards {
