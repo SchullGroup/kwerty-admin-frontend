@@ -1,0 +1,107 @@
+.dashboard {
+  min-height: 100vh;
+  &__header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    position: sticky;
+    top: 0;
+    background: rgba($white, 0.8);
+    justify-content: space-between;
+    align-items: center;
+    z-index: 30000;
+    backdrop-filter: blur(1.5rem);
+    &:hover {
+      box-shadow: 0 2px 30px rgba($black, 0.05);
+    }
+    .logo {
+      height: 2.6rem;
+      margin-left: 3.6rem;
+    }
+    .navbar {
+      &__list,
+      &__dropdown {
+        display: flex;
+        list-style: none;
+        justify-content: space-between;
+      }
+      &__item {
+        padding: 2.3rem 0;
+        position: relative;
+        border-bottom: 1px solid transparent;
+        transition: border-color 200ms ease-in-out;
+        line-height: 1.7rem;
+        > a {
+          padding: 2.3rem 1.6rem;
+          position: relative;
+        }
+        &:hover {
+          border-color: $primary-purple;
+          .navbar__dropdown {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+      &__dropdown {
+        transition: opacity 300ms ease-in-out;
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        display: flex;
+        opacity: 0;
+        visibility: hidden;
+        flex-direction: column;
+        padding: 1.6rem;
+        border-radius: 0.8rem;
+        background: $white;
+        box-shadow: 2px 2px 30px rgba(128, 128, 128, 0.1);
+        width: 20rem;
+        &__item {
+          padding: 1.6rem;
+          border-radius: 0.8rem;
+          line-height: 1.7rem;
+          > a {
+            padding: 1.6rem 0;
+          }
+          &:hover {
+            background: $grey-light;
+          }
+        }
+      }
+    }
+    .user {
+      display: flex;
+      align-items: center;
+      padding: 1.2rem 3.6rem;
+      justify-self: flex-end;
+      &__avatar {
+        overflow: hidden;
+        border-radius: 50%;
+        width: 4rem;
+        height: 4rem;
+        margin-right: 0.8rem;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+      &__details {
+        p {
+          margin-bottom: 0.2rem;
+          font-size: 1rem;
+          line-height: 1.2rem;
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+  &__content {
+    width: 100%;
+    max-width: calc(144rem - 7.2rem);
+    padding: 3.6rem;
+    box-sizing: content-box;
+    margin: 0 auto;
+  }
+}
