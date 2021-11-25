@@ -212,7 +212,6 @@ export default {
     grid-gap: 1rem;
     margin: 2rem 0;
   }
-
   width: 90%;
   max-width: 1200px;
   margin: auto;
