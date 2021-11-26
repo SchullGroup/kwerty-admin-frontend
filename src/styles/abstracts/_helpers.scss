@@ -1,4 +1,3 @@
-
 /**
  * Main content containers
  * 1. Make the container full-width with a maximum width
@@ -105,4 +104,11 @@
 }
 .text-uppercase {
   text-transform: uppercase;
+}
+.form__items {
+  display: grid;
+  grid-row-gap: 2.4rem;
+  & > *:last-child {
+    margin-top: 0.8rem;
+  }
 }
