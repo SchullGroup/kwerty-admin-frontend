@@ -5,10 +5,12 @@ import Components from '../views/Components.vue';
 import Login from '../views/Auth/Login/Login.vue';
 import ResetPassword from '../views/Auth/ResetPassword/ResetPassword.vue';
 import CheckInbox from '../views/Auth/CheckInbox/CheckInbox.vue';
+import ActivityHome from '../views/Activity/Activity.vue';
+
 
 Vue.use(VueRouter);
 
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'Home',
@@ -33,6 +35,11 @@ const routes = [
     path: '/check-inbox',
     name: 'CheckInbox',
     component: CheckInbox,
+  },
+  {
+    path: '/activities/:type',
+    name: 'Activities',
+    component: ActivityHome,
   },
 ];
 
