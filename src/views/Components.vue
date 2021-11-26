@@ -123,7 +123,7 @@
           ></k-input>
         </section>
         <section>
-          <h2>Password Input </h2>
+          <h2>Password Input</h2>
           <k-input label="Password" type="password" v-model="password" variant="password"></k-input>
         </section>
         <section>
@@ -136,7 +136,7 @@
         </section>
       </div>
     </div>
-</k-dashboard-layout>
+  </k-dashboard-layout>
 </template>
 
 <script>

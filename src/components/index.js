@@ -7,6 +7,7 @@ import KPagination from './Pagination/Pagination.vue';
 import KInput from './Input/Input.vue';
 import KDashboardLayout from './DashboardLayout/DashboardLayout.vue';
 import KToast from './Toast/Toast.vue';
+import KAuth from './Auth/Auth.vue';
 
 export {
   KButton,
@@ -18,4 +19,5 @@ export {
   KInput,
   KToast,
   KDashboardLayout,
+  KAuth,
 };
