@@ -86,3 +86,9 @@ select {
 .no-scroll {
 	overflow: hidden;
 }
+.form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3.6rem;
+
+}

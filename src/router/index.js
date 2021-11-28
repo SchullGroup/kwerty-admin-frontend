@@ -6,6 +6,7 @@ import Login from '../views/Auth/Login/Login.vue';
 import ResetPassword from '../views/Auth/ResetPassword/ResetPassword.vue';
 import CheckInbox from '../views/Auth/CheckInbox/CheckInbox.vue';
 import ActivityHome from '../views/Activity/Activity.vue';
+import Settings from '../views/Settings/Settings.vue';
 
 
 Vue.use(VueRouter);
@@ -40,6 +41,11 @@ export const routes = [
     path: '/activities/:type',
     name: 'Activities',
     component: ActivityHome,
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings,
   },
 ];
 
