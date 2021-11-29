@@ -37,6 +37,9 @@ export default {
     variant: {
       type: String,
     },
+    optionsDisplay: {
+      type: Object,
+    },
   },
   methods: {
     updateInput(e) {
@@ -58,7 +61,7 @@ export default {
     },
     selectOption(e) {
       const { target } = e;
-      if (target.classList.contains('option')) {
+      if (target.classList.contains('option') || target.tagName === 'OPTION') {
         this.innerValue = target.value;
         this.$emit('input', target.value);
       }
@@ -99,11 +102,11 @@ export default {
       const { variant, overrideType } = this;
       return variant === 'password' && overrideType === 'text';
     },
-    isNativeSelect() {
-      return this.type === 'select' && this.variant === 'native';
-    },
     isSelect() {
       return this.type === 'select';
+    },
+    selectedOption() {
+      return this.optionsDisplay ? this.optionsDisplay[this.value] : null;
     },
   },
   components: {

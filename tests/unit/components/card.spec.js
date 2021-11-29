@@ -8,7 +8,7 @@ describe('Card Component', () => {
     wrapper = shallowMount(KCard, {
       propsData: {
         heading: 'Role',
-        variants: ['rounded'],
+        variant: 'in-modal',
       },
     });
   });
@@ -21,6 +21,6 @@ describe('Card Component', () => {
     expect(wrapper.text()).toContain('Role');
   });
   it('should convert variants to BEM classnames', () => {
-    expect(wrapper.attributes().class).toContain('card--rounded');
+    expect(wrapper.attributes().class).toContain('card--in-modal');
   });
 });
