@@ -14,15 +14,14 @@
   padding: 7.5vh 0;
   &__content {
     width: max-content;
-    margin: auto;
-    margin-bottom: 8rem;
+    margin: auto auto 8rem;
     display: grid;
     place-content: center;
     & > * {
       opacity: 0;
       transform: scale(.9);
-      transition: opacity 150ms 150ms ease-out,
-                  transform 150ms 150ms ease-out;
+      transition: opacity 150ms 100ms ease-out,
+      transform 150ms 100ms ease-out;
     }
   }
   &.isOpen {

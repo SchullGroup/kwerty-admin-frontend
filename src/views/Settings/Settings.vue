@@ -31,6 +31,7 @@
         </ul>
       </aside>
       <k-profile v-if="activeTab === 'profile'" />
+      <k-roles v-if="activeTab === 'roles'" />
       <k-manage v-if="activeTab === 'manage'" />
     </div>
   </k-dashboard-layout>

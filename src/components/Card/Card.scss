@@ -6,6 +6,10 @@
   &--in-modal {
     border-radius: 1.6rem;
   }
+
+  &--no-space-top {
+    padding-top: 0;
+  }
 }
 
 .card {
