@@ -13,7 +13,7 @@ describe('Input Component', () => {
       },
     });
     mockEventObject = {
-      target: { classList: { contains: () => true } },
+      target: { classList: { contains: () => true }, tagName: 'OPTION' },
     };
     mockProps = {
       type: 'password',
@@ -48,6 +48,8 @@ describe('Input Component', () => {
     expect(wrapper.vm.selectOption(mockEventObject));
     expect(wrapper.vm.closeOptionsHandler(mockEventObject));
     expect(wrapper.vm.iconClicked());
+    mockEventObject.target.classList.contains = () => false;
+    expect(wrapper.vm.selectOption(mockEventObject));
 
     KInput.methods.listenForSelect.call(mockProps);
     expect(mockProps.$refs.list.addEventListener).toBeCalled();

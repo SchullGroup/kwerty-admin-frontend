@@ -10,17 +10,17 @@
           'input--select': type === 'select',
           'input--with-icon': variant === 'password' || isSelect,
           'input--is-open': isSelect && isSelectOpen,
-          'input--has-value': type === 'select' && this.innerValue,
+          'input--has-value': type === 'select' && innerValue,
+          'as-dropdown': isSelect && variant === 'dropdown',
         },
       ]"
       @click="isSelect ? toggleSelectOpen() : null"
     >
       <input
-        v-if="!isNativeSelect"
         :name="name"
         :id="name"
         :type="overrideType || type"
-        :value="innerValue"
+        :value="isSelect && selectedOption ? selectedOption : innerValue"
         :placeholder="label"
         :disabled="disabled || type === 'select'"
         @change="updateInput"
@@ -50,12 +50,22 @@
           @click.stop="closeOptionsHandler"
         ></div>
         <div :class="['options-list', { 'is-hidden': !isSelectOpen }]" ref="list">
-          <slot></slot>
+          <template v-if="optionsDisplay">
+            <option
+              v-for="[value, display] in Object.entries(optionsDisplay)"
+              :key="value"
+              :value="value"
+              class="option"
+            >
+              {{ display }}
+            </option>
+          </template>
+          <slot v-else></slot>
         </div>
       </template>
     </div>
-    <div class='error-message' v-if='error'>
-      {{this.error}}
+    <div class="error-message" v-if="error">
+      {{ this.error }}
     </div>
   </div>
 </template>

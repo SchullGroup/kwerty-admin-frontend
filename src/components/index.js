@@ -7,6 +7,8 @@ import KPagination from './Pagination/Pagination.vue';
 import KInput from './Input/Input.vue';
 import KDashboardLayout from './DashboardLayout/DashboardLayout.vue';
 import KToast from './Toast/Toast.vue';
+import KDoughnutWrapper from './Charts/DoughnutWrapper.vue';
+import KLineWrapper from './Charts/LineWrapper.vue';
 import KAuth from './Auth/Auth.vue';
 
 export {
@@ -19,5 +21,7 @@ export {
   KInput,
   KToast,
   KDashboardLayout,
+  KDoughnutWrapper,
+  KLineWrapper,
   KAuth,
 };
