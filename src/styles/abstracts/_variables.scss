@@ -12,22 +12,26 @@ $black: #000 !default;
 $white: #FFF;
 $primary-purple: #900F7B !default;
 $dark-purple: #6B0B5B !default;
+$darker-purple: #3C0232 !default;
 $error: #E1331B !default;
 $error-light: #FDEBE9 !default;
 $grey-light: #F2F2F2 !default;
 $grey: #D9D9D9 !default;
 $grey-dark: #999999 !default;
+$grey-darker: #666666 !default;
 
 $colors: (
   black: $black,
   white: $white,
   primary-purple: $primary-purple,
   dark-purple: $dark-purple,
+  darker-purple: $darker-purple,
   error: $error,
   error-light: $error-light,
   grey-light: $grey-light,
   grey: $grey,
-  grey-dark: $grey-dark
+  grey-dark: $grey-dark,
+  grey-darker: $grey-darker
 );
 
 /// Container's maximum width

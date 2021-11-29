@@ -26,6 +26,7 @@
   padding: 0; /* 1 */
   text-indent: 101%;
   white-space: nowrap;
+  line-height: 0;
 }
 
 @for $i from 0 through 10 {

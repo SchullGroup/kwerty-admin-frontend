@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import DashboardOverview from '../views/Overview/Overview.vue';
 import Components from '../views/Components.vue';
 import ActivityHome from '../views/Activity/Activity.vue';
 
@@ -9,8 +9,8 @@ Vue.use(VueRouter);
 export const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Overview',
+    component: DashboardOverview,
   },
   {
     path: '/components',
