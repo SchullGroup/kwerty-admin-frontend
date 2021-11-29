@@ -14,8 +14,8 @@
 
   &__controls {
     display: grid;
-    grid: 1fr / max-content 36.6rem;
-    column-gap: 3.2rem;
+    grid: 1fr / max-content 36.6rem 18rem 10.9rem;
+    column-gap: 1.6rem;
   }
 
   /* ================================
@@ -25,23 +25,18 @@
     width: 100%;
     margin-top: 3.2rem;
   }
-
   &__data {
-    // BASE
     tr,
     thead,
     td,
     th {
       box-sizing: border-box;
     }
-
-    tr,
-    thead {
+    tr {
       display: grid;
-      grid: 4.8rem / 30rem minmax(40rem, auto) 6.6rem 30rem;
+      grid: 4.8rem / 40rem minmax(40rem, auto) 30rem;
       align-items: center;
     }
-
     td,
     th {
       width: 98%;
@@ -53,13 +48,23 @@
       text-overflow: ellipsis;
       overflow: hidden;
     }
-
+    th {
+      display: grid;
+      grid: 1fr / repeat(2, max-content);
+      column-gap: 0.8rem;
+      align-items: center;
+      font-weight: 600;
+      .caret {
+        display: inline-block;
+        border: 0.4rem solid transparent;
+        border-top-color: $black;
+        margin-top: .4rem;
+      }
+    }
     .timestamp {
       text-align: right;
       justify-content: end;
     }
-
-    // HEADER
     &__header {
       margin-bottom: 1.6rem;
       text-align: left;
@@ -68,22 +73,17 @@
       font-size: 1.2rem;
       line-height: 1.4rem;
     }
-
-    // BODY
     &__body {
       .value {
         display: inline;
         color: $primary-purple;
       }
-
       .name {
        color: rgba($black, 0.85);
-
         &.untitled {
           font-style: italic;
         }
       }
-
       .status {
         &.success {
           color: $primary-purple;

@@ -1,9 +1,8 @@
 .pagination {
-  width: 22rem;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid: 1fr / auto-flow max-content;
+  column-gap: .4rem;
   align-items: center;
-
   &__button {
     height: 2.4rem;
     background: transparent;
@@ -22,5 +21,6 @@
 
   &__info {
     margin: 0 1.6rem;
+    white-space: nowrap;
   }
 }

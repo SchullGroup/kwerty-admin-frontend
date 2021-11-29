@@ -9,6 +9,7 @@
         untitled: field === 'name' && activity[field] === 'Untitled User',
       }"
     >
+      <span class="initials" v-if="field === 'name'">{{initials(activity[field])}}</span>
       {{ activity[field] }}
       <span class="value" v-if="field === 'action'">&nbsp;{{ '\n' + activity['value'] }}</span>
     </td>
@@ -17,13 +18,21 @@
 
 <script>
 export default {
-  name: 'TableRow',
+  name: 'ActivityTableRow',
   props: {
     activity: {
       type: Object,
     },
     fields: {
       type: Array,
+    },
+  },
+  methods: {
+    initials(name) {
+      if (name === 'Untitled User') return '?';
+      let value = '';
+      name.split(' ').forEach((n) => { value += n[0]; });
+      return value;
     },
   },
 };
@@ -72,9 +81,20 @@ export default {
 
     .name {
       color: rgba($black, 0.85);
-
+      display: grid;
+      grid: 1fr / 3.4rem max-content;
+      column-gap: 1.6rem;
       &.untitled {
         font-style: italic;
+      }
+      .initials {
+        width: 3.4rem;
+        height: 3.4rem;
+        display: grid;
+        place-content: center;
+        background: rgba($primary-purple, 0.1);
+        color: $primary-purple;
+        border-radius: 50%;
       }
     }
 

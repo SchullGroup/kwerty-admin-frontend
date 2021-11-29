@@ -1,5 +1,8 @@
 <template>
-  <div class="pagination">
+  <div class='pagination'>
+    <button v-if="variant === 'many'" class="pagination__button" @click="firstPage">
+      <img :src="iconFirstPage" alt="" class="pagination__button__icon" />
+    </button>
     <button class="pagination__button" @click="prevPage">
       <img :src="iconBack" alt="" class="pagination__button__icon" />
     </button>
@@ -8,6 +11,9 @@
     </span>
     <button class="pagination__button" @click="nextPage">
       <img :src="iconNext" alt="" class="pagination__button__icon" />
+    </button>
+    <button v-if="variant === 'many'" class="pagination__button" @click="lastPage">
+      <img :src="iconLastPage" alt="" class="pagination__button__icon" />
     </button>
   </div>
 </template>

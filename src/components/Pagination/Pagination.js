@@ -1,3 +1,5 @@
+import iconFirstPage from '@/assets/iconFirstPage.svg';
+import iconLastPage from '@/assets/iconLastPage.svg';
 import iconBack from '@/assets/iconBack.svg';
 import iconNext from '@/assets/iconNext.svg';
 
@@ -6,6 +8,8 @@ export default {
   data: () => ({
     iconBack,
     iconNext,
+    iconFirstPage,
+    iconLastPage,
   }),
   props: {
     page: {
@@ -20,6 +24,9 @@ export default {
       type: Number,
       required: true,
     },
+    variant: {
+      type: String,
+    },
   },
   methods: {
     nextPage() {
@@ -27,6 +34,12 @@ export default {
     },
     prevPage() {
       this.$emit('goToPrev');
+    },
+    firstPage() {
+      this.$emit('goToFirst');
+    },
+    lastPage() {
+      this.$emit('goToLast');
     },
   },
   computed: {

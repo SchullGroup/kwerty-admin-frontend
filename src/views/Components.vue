@@ -91,6 +91,7 @@
         </section>
       </section>
       <div class="pagination">
+        <section>
         <h2>Pagination</h2>
         <k-pagination
           :page="page"
@@ -99,6 +100,18 @@
           @goToNext="nextPage"
           @goToPrev="prevPage"
         ></k-pagination>
+        </section>
+        <section>
+        <h2>Pagination <span class='small'>variant: many</span></h2>
+        <k-pagination
+          :page="page"
+          :maxItemsOnPage="20"
+          :totalItems="totalItems"
+          variant="many"
+          @goToNext="nextPage"
+          @goToPrev="prevPage"
+        ></k-pagination>
+        </section>
       </div>
       <div class="inputs">
         <section>
