@@ -72,7 +72,7 @@
           <k-card variant="in-modal" heading="Role">
             <h3>Super Admin</h3>
             <p>
-              This is just a test description to understand how this desi gn would really look like
+              This is just a test description to understand how this d esign would really look like
               in real life. I’m hoping it gets to three lines or else I’m going to keep typing until
               it is done.
             </p>
