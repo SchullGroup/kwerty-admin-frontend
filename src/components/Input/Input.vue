@@ -12,6 +12,7 @@
           'input--is-open': isSelect && isSelectOpen,
           'input--has-value': type === 'select' && innerValue,
           'as-dropdown': isSelect && variant === 'dropdown',
+          'with-display': !!this.optionsDisplay,
         },
       ]"
       @click="isSelect ? toggleSelectOpen() : null"

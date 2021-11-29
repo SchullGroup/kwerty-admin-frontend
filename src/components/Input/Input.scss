@@ -121,7 +121,7 @@
   }
 
   &.input--select {
-    &.input--with-icon input {
+    &.input--with-icon:not(.with-display) input {
       text-transform: capitalize;
     }
 
