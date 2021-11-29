@@ -68,8 +68,8 @@
           </k-card>
         </section>
         <section>
-          <h2>Card <span class="small">Variant: 'rounded'</span></h2>
-          <k-card :variants="['rounded']" heading="Role">
+          <h2>Card <span class="small">Variant: 'in-modal'</span></h2>
+          <k-card variant="in-modal" heading="Role">
             <h3>Super Admin</h3>
             <p>
               This is just a test description to understand how this desi gn would really look like
@@ -78,19 +78,9 @@
             </p>
           </k-card>
         </section>
-        <section>
-          <h2>Card <span class="small">Variant: 'mb-shorter'</span></h2>
-          <k-card :variants="['mb-shorter']" heading="Role">
-            <h3>Super Admin</h3>
-            <p>
-              This is just a test description to understand how this d esign would really look like
-              in real life. I’m hoping it gets to three lines or else I’m going to keep typing until
-              it is done.
-            </p>
-          </k-card>
-        </section>
       </section>
       <div class="pagination">
+        <section>
         <h2>Pagination</h2>
         <k-pagination
           :page="page"
@@ -99,6 +89,18 @@
           @goToNext="nextPage"
           @goToPrev="prevPage"
         ></k-pagination>
+        </section>
+        <section>
+        <h2>Pagination <span class='small'>variant: many</span></h2>
+        <k-pagination
+          :page="page"
+          :maxItemsOnPage="20"
+          :totalItems="totalItems"
+          variant="many"
+          @goToNext="nextPage"
+          @goToPrev="prevPage"
+        ></k-pagination>
+        </section>
       </div>
       <div class="inputs">
         <section>
@@ -135,6 +137,21 @@
           </k-input>
         </section>
       </div>
+      <div class='modal'>
+        <h2>Modal</h2>
+        <k-button @click='modalOpen = true'>Open Modal</k-button>
+        <k-modal :open='modalOpen'>
+          <k-card heading='Add Role' variant='in-modal'>
+            <k-input label='Title' v-model='roleTitle'></k-input>
+            <br>
+            <k-input label='Description' v-model='roleDescription'></k-input>
+            <br>
+            <div class='buttons' style='display: flex; justify-content: end'>
+              <k-button variant='link' @click='modalOpen = false'>Close</k-button>
+            </div>
+          </k-card>
+        </k-modal>
+      </div>
     </div>
   </k-dashboard-layout>
 </template>
@@ -149,11 +166,13 @@ import {
   KRadio,
   KDashboardLayout,
   KInput,
+  KModal,
 } from '@/components';
 
 export default {
   name: 'Components',
   components: {
+    KModal,
     KButton,
     KCheckbox,
     KCard,
@@ -174,6 +193,9 @@ export default {
     password: 'some complex password!212@334',
     color: '',
     color2: '',
+    modalOpen: true,
+    roleTitle: 'Data Consultant',
+    roleDescription: 'This is just a test description to understand how this design would really look',
   }),
   methods: {
     nextPage() {
@@ -212,7 +234,6 @@ export default {
     grid-gap: 1rem;
     margin: 2rem 0;
   }
-
   width: 90%;
   max-width: 1200px;
   margin: auto;

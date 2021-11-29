@@ -13,9 +13,9 @@
   border-radius: 0.8rem;
   background: transparent;
 
-  &:focus-within,
   &:focus,
-  &.input--is-open {
+  &:focus-within,
+  &.input--is-open:not(.as-dropdown) {
     border: 1px solid $primary-purple;
   }
 
@@ -25,7 +25,8 @@
   }
 
   &.input--with-icon {
-    grid: 1fr / auto 5.6rem;
+    box-sizing: border-box;
+    grid: 1fr / auto 4.8rem;
     padding-right: 0.4rem;
   }
 
@@ -53,8 +54,8 @@
   input:focus {
     border: none;
     outline: none;
-    font-size: 1.6rem;
-    line-height: 1.9rem;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
     background: none;
   }
 
@@ -62,9 +63,15 @@
     opacity: 0;
   }
 
+  &.as-dropdown {
+    input {
+      padding-right: 0;
+    }
+  }
+
   &.input--with-label {
     input:not(:placeholder-shown) {
-      padding-top: 1rem;
+      padding-top: 1.2rem;
     }
 
     label {
@@ -94,7 +101,9 @@
   &.input--with-icon > .input__icon {
     height: 90%;
     display: grid;
-    place-content: center;
+    //place-content: center;
+    align-items: center;
+    padding-left: .8rem;
     cursor: pointer;
 
     svg {
@@ -112,7 +121,7 @@
   }
 
   &.input--select {
-    &.input--with-icon input {
+    &.input--with-icon:not(.with-display) input {
       text-transform: capitalize;
     }
 
@@ -143,7 +152,7 @@
     .overlay {
       display: block;
       position: fixed;
-      z-index: 100;
+      z-index: $z-dropdown-overlay;
       top: 0;
       left: 0;
       width: 100vw;
@@ -161,8 +170,9 @@
     }
 
     .options-list {
+      box-sizing: border-box;
       position: absolute;
-      z-index: 150;
+      z-index: $z-dropdown-list;
       top: 76px;
       left: -1px;
       width: calc(100% + 2px);
@@ -181,7 +191,7 @@
         opacity: 0;
       }
 
-      .option {
+      option, .option {
         height: 4.8rem;
         display: flex;
         align-items: center;
@@ -190,6 +200,8 @@
         background: #fff;
         cursor: pointer;
         transition: background-color 200ms ease-out;
+        font-size: 1.2rem;
+        line-height: 1.4rem;
 
         &:hover {
           background: #f2f2f2;
@@ -225,7 +237,6 @@
     }
   }
 }
-
 .error-message {
   display: block;
   margin: 1.6rem 0 0;

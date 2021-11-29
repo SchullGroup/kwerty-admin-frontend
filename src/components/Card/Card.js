@@ -5,8 +5,13 @@ export default {
       type: String,
       required: true,
     },
-    variants: {
-      type: Array,
+    variant: {
+      type: String,
+    },
+  },
+  computed: {
+    inModal() {
+      return this.variant === 'in-modal';
     },
   },
 };

@@ -1,11 +1,14 @@
-import { KDashboardLayout, KPagination, KInput } from '@/components';
-import TableRow from './TableRow.vue';
-import dummyActivities from './dummyActivities';
+import {
+  KDashboardLayout, KPagination, KInput, KButton,
+} from '@/components';
+import ActivityTableRow from './TableRow.vue';
+import dummyActivity from './dummyActivity';
 
 export default {
   name: 'ActivityHome',
   components: {
-    TableRow,
+    KButton,
+    ActivityTableRow,
     KInput,
     KPagination,
     KDashboardLayout,
@@ -15,8 +18,18 @@ export default {
     page: 1,
     maxItemsOnPage: 20,
     totalItems: 18,
-    displayFields: ['name', 'action', 'status', 'timestamp'],
+    displayFields: ['name', 'action', 'timestamp'],
     activities: [],
+    duration: '>7days',
+    optionsDisplay: {
+      alltime: 'All time',
+      '>24hours': 'Last 24 hours',
+      '>7days': 'Last 7 days',
+      '>30days': 'Last 30 days',
+      '>3months': 'Last 3 months',
+      '>6months': 'Last 6 months',
+      lastyear: 'Last year',
+    },
   }),
   computed: {
     title() {
@@ -36,6 +49,6 @@ export default {
   },
   mounted() {
     this.setType();
-    this.activities = dummyActivities;
+    this.activities = dummyActivity;
   },
 };
