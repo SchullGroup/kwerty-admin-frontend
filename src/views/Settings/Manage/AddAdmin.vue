@@ -1,5 +1,5 @@
 <template>
-  <k-card variant='rounded' heading="Add new Admin">
+  <k-card variant="in-modal" heading="Add new Admin">
     <form class="form__items">
       <k-input label="Surname" />
       <k-input label="First Name" />
@@ -11,7 +11,7 @@
         <option value="Manager" class="option">Manager</option>
       </k-input>
       <div class="btn-wrapper">
-        <k-button variant="link">Cancel</k-button>
+        <k-button variant="link" @click="$emit('close')">Cancel</k-button>
         <k-button variant="secondary">Finish</k-button>
       </div>
     </form>
@@ -31,4 +31,9 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./AddAdmin.scss"></style>
+<style lang="scss" scoped>
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>

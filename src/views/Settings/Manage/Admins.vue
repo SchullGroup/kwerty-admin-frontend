@@ -1,8 +1,12 @@
 <template>
   <div class="admins">
-    <div v-for="admin in admins" :key="admin.name" class="admin__item">
+    <div
+      v-for="admin in admins"
+      :key="admin.name"
+      :class="['admin__item', [editAdmin ? 'showIcons' : '']]"
+    >
       <k-icons
-        @open="editAdmin = false"
+        @open="showEditAdminModal = true"
         v-show="editAdmin"
         :class="[editAdmin ? 'showIcons' : '']"
       />
@@ -13,24 +17,44 @@
       </div>
     </div>
     <div class="btn-container">
-      <k-button v-show="editAdmin" variant="link" class="add-new-admin-btn">Add new admin</k-button>
+      <k-button
+        @click="showAddAdminmodal = true"
+        v-show="editAdmin"
+        variant="link"
+        class="add-new-admin-btn"
+      >
+        Add new admin
+      </k-button>
       <k-button @click="toggleButtonText" variant="tertiary">{{ button.text }}</k-button>
     </div>
+    <k-modal v-if="showEditAdminModal" :open="showEditAdminModal">
+      <k-edit-admin @close="showEditAdminModal = false"></k-edit-admin>
+    </k-modal>
+    <k-modal v-if="showAddAdminmodal" :open="showAddAdminmodal">
+      <k-add-admin @close="showAddAdminmodal = false"></k-add-admin>
+    </k-modal>
   </div>
 </template>
 
 <script>
-import { KIcons, KButton } from '@/components';
+import { KIcons, KButton, KModal } from '@/components';
+import KEditAdmin from './EditAdmin.vue';
+import KAddAdmin from './AddAdmin.vue';
 
 export default {
   name: 'KAdmins',
   components: {
     KIcons,
     KButton,
+    KEditAdmin,
+    KModal,
+    KAddAdmin,
   },
   props: {},
   data: () => ({
     editAdmin: false,
+    showEditAdminModal: false,
+    showAddAdminmodal: false,
     button: {
       text: 'Edit Admin',
     },
@@ -68,10 +92,11 @@ export default {
   position: relative;
   .admin__item {
     display: grid;
-    grid-template-columns: 0.5fr 0.5fr 3fr;
+    grid-template-columns: 0fr 1fr 3fr;
     grid-column-gap: 2.4rem;
     max-width: 34rem;
     margin-bottom: 2.4rem;
+    transition: grid-template-columns 2s ease;
     .avatar-icon {
       width: 4rem;
       height: 4rem;
@@ -97,6 +122,7 @@ export default {
     align-items: center;
   }
   .showIcons {
+    grid-template-columns: 1fr 1fr 3fr;
   }
 
   // .showIcons {

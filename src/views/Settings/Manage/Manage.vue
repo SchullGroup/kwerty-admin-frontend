@@ -30,6 +30,7 @@ export default {
     page: 1,
     totalItems: 4,
     itemsOnPage: 20,
+    modalOpen: true,
   }),
 };
 </script>
