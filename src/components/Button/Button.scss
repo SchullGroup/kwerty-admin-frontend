@@ -13,6 +13,7 @@
   transition: all 300ms;
   justify-content: center;
   align-items: center;
+  position: relative;
   @include on-event {
     background-color: $dark-purple;
   }
@@ -41,16 +42,26 @@
       box-shadow: 0.2rem 0.2rem 1.5rem rgba(0, 0, 0, 0.1);
     }
   }
+  .slot {
+    border-bottom: 1px solid red;
+  }
   &--link {
     border: none;
     background-color: transparent;
     color: $black;
+    text-decoration-line: underline;
     @include on-event {
       border: inherit;
       background-color: inherit;
       color: inherit;
       font-size: 1.7rem;
-      text-decoration-line: underline;
+      // &::after {
+        // content: '';
+        // border: 0.1rem solid $black;
+        // width: 100%;
+        // position: absolute;
+        // top: 4.2rem;
+      // }
     }
     &:disabled {
       font-size: 1.6rem;

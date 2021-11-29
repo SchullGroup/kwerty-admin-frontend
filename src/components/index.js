@@ -8,6 +8,10 @@ import KInput from './Input/Input.vue';
 import KDashboardLayout from './DashboardLayout/DashboardLayout.vue';
 import KToast from './Toast/Toast.vue';
 import KAuth from './Auth/Auth.vue';
+import KEditAdmin from './ManageAdmin/EditAdmin/EditAdmin.vue';
+import KAddAdmin from './ManageAdmin/AddAdmin/AddAdmin.vue';
+import KIcons from './Icons/Icons.vue';
+import KAdmins from './ManageAdmin/Admins/Admins.vue';
 
 export {
   KButton,
@@ -20,4 +24,8 @@ export {
   KToast,
   KDashboardLayout,
   KAuth,
+  KEditAdmin,
+  KAddAdmin,
+  KIcons,
+  KAdmins,
 };

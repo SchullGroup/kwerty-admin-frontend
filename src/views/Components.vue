@@ -135,6 +135,18 @@
           </k-input>
         </section>
       </div>
+      <section>
+        <k-edit-admin></k-edit-admin>
+      </section>
+      <section>
+        <k-add-admin></k-add-admin>
+      </section>
+      <section>
+        <k-icons></k-icons>
+      </section>
+      <section>
+        <k-admins></k-admins>
+      </section>
     </div>
   </k-dashboard-layout>
 </template>
@@ -149,6 +161,10 @@ import {
   KRadio,
   KDashboardLayout,
   KInput,
+  KEditAdmin,
+  KAddAdmin,
+  KIcons,
+  KAdmins,
 } from '@/components';
 
 export default {
@@ -162,6 +178,10 @@ export default {
     KRadio,
     KDashboardLayout,
     KInput,
+    KEditAdmin,
+    KAddAdmin,
+    KIcons,
+    KAdmins,
   },
   data: () => ({
     page: 1,
