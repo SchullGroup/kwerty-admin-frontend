@@ -2,6 +2,7 @@
   <div class="icons">
     <div class="svg">
       <svg
+        @click="$emit('delete')"
         width="16"
         height="16"
         viewBox="0 0 16 16"
@@ -14,6 +15,7 @@
     </div>
     <div>
       <svg
+       @click="$emit('open')"
         width="16"
         height="16"
         viewBox="0 0 16 16"

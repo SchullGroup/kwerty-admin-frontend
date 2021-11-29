@@ -32,9 +32,10 @@
     background: $white;
     border: 0.1rem solid $grey;
     color: $black;
+    cursor: pointer;
     @include on-event {
       background-color: inherit;
-      border: none;
+      border: .1rem solid transparent;
       box-shadow: 0.2rem 0.2rem 1.5rem rgba(0, 0, 0, 0.1);
     }
     &:disabled {
@@ -54,8 +55,7 @@
       border: inherit;
       background-color: inherit;
       color: inherit;
-      font-size: 1.7rem;
-      text-decoration-line: underline;
+      transform: scale(1.1);
     }
     &:disabled {
       font-size: 1.6rem;

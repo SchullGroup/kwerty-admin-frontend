@@ -72,3 +72,9 @@
     }
   }
 }
+.manage {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  max-width: 56.6rem;
+  justify-content: space-between;
+}

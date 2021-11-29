@@ -1,5 +1,5 @@
 <template>
-  <k-card variant="['rounded']" heading="Add new Admin">
+  <k-card variant="['rounded']" heading="Edit Admin">
     <form class="form__items">
       <k-input label="Surname" />
       <k-input label="First Name" />
@@ -18,7 +18,22 @@
   </k-card>
 </template>
 
-<script src="./AddAdmin.js">
+<script>
+import { KCard, KInput, KButton } from '@/components';
+
+export default {
+  name: 'KEditAdmin',
+  components: {
+    KCard,
+    KInput,
+    KButton,
+  },
+};
 </script>
 
-<style lang="scss" src="./AddAdmin.scss"></style>
+<style lang="scss" scoped>
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>
