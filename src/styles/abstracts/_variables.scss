@@ -37,3 +37,8 @@ $colors: (
 /// Container's maximum width
 /// @type Length
 $max-width: 1400px !default;
+
+// z-index values
+$z-dropdown-overlay: 100;
+$z-dropdown-list: 150;
+$z-modal: 35000;

@@ -152,7 +152,7 @@
     .overlay {
       display: block;
       position: fixed;
-      z-index: 100;
+      z-index: $z-dropdown-overlay;
       top: 0;
       left: 0;
       width: 100vw;
@@ -172,7 +172,7 @@
     .options-list {
       box-sizing: border-box;
       position: absolute;
-      z-index: 150;
+      z-index: $z-dropdown-list;
       top: 76px;
       left: -1px;
       width: calc(100% + 2px);

@@ -2,6 +2,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import { routes } from '../../../src/router';
 import ActivityHome from '../../../src/views/Activity/Activity';
+import TableRow from '../../../src/views/Activity/TableRow.vue';
 
 describe('Activity Component', () => {
   let wrapper;
@@ -34,4 +35,6 @@ describe('Activity Component', () => {
     await ActivityHome.mounted.call(mockThis);
     expect(mockThis.activities.length).toBeTruthy();
   });
+
+  expect(TableRow.methods.initials('Ammiel Yawson')).toMatch('AY');
 });

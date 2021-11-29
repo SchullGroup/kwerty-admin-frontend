@@ -1,5 +1,7 @@
 <template>
-  <div :class="['card', ...(variants ? variants.map((variant) => `card--${variant}`) : [])]">
+  <div :class="['card', {
+    'card--in-modal': inModal,
+  }]">
     <h2 class="card__heading">
       {{ heading }}
     </h2>
