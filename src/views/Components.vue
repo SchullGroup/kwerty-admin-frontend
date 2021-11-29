@@ -81,25 +81,25 @@
       </section>
       <div class="pagination">
         <section>
-        <h2>Pagination</h2>
-        <k-pagination
-          :page="page"
-          :maxItemsOnPage="20"
-          :totalItems="totalItems"
-          @goToNext="nextPage"
-          @goToPrev="prevPage"
-        ></k-pagination>
+          <h2>Pagination</h2>
+          <k-pagination
+            :page="page"
+            :maxItemsOnPage="20"
+            :totalItems="totalItems"
+            @goToNext="nextPage"
+            @goToPrev="prevPage"
+          ></k-pagination>
         </section>
         <section>
-        <h2>Pagination <span class='small'>variant: many</span></h2>
-        <k-pagination
-          :page="page"
-          :maxItemsOnPage="20"
-          :totalItems="totalItems"
-          variant="many"
-          @goToNext="nextPage"
-          @goToPrev="prevPage"
-        ></k-pagination>
+          <h2>Pagination <span class="small">variant: many</span></h2>
+          <k-pagination
+            :page="page"
+            :maxItemsOnPage="20"
+            :totalItems="totalItems"
+            variant="many"
+            @goToNext="nextPage"
+            @goToPrev="prevPage"
+          ></k-pagination>
         </section>
       </div>
       <div class="inputs">
@@ -137,17 +137,20 @@
           </k-input>
         </section>
       </div>
-      <div class='modal'>
+      <section>
+        <k-icons></k-icons>
+      </section>
+      <div class="modal">
         <h2>Modal</h2>
-        <k-button @click='modalOpen = true'>Open Modal</k-button>
-        <k-modal :open='modalOpen'>
-          <k-card heading='Add Role' variant='in-modal'>
-            <k-input label='Title' v-model='roleTitle'></k-input>
-            <br>
-            <k-input label='Description' v-model='roleDescription'></k-input>
-            <br>
-            <div class='buttons' style='display: flex; justify-content: end'>
-              <k-button variant='link' @click='modalOpen = false'>Close</k-button>
+        <k-button @click="modalOpen = true">Open Modal</k-button>
+        <k-modal :open="modalOpen">
+          <k-card heading="Add Role" variant="in-modal">
+            <k-input label="Title" v-model="roleTitle"></k-input>
+            <br />
+            <k-input label="Description" v-model="roleDescription"></k-input>
+            <br />
+            <div class="buttons" style="display: flex; justify-content: end">
+              <k-button variant="link" @click="modalOpen = false">Close</k-button>
             </div>
           </k-card>
         </k-modal>
@@ -166,6 +169,7 @@ import {
   KRadio,
   KDashboardLayout,
   KInput,
+  KIcons,
   KModal,
 } from '@/components';
 
@@ -181,6 +185,7 @@ export default {
     KRadio,
     KDashboardLayout,
     KInput,
+    KIcons,
   },
   data: () => ({
     page: 1,
@@ -195,7 +200,8 @@ export default {
     color2: '',
     modalOpen: true,
     roleTitle: 'Data Consultant',
-    roleDescription: 'This is just a test description to understand how this design would really look',
+    roleDescription:
+      'This is just a test description to understand how this design would really look',
   }),
   methods: {
     nextPage() {

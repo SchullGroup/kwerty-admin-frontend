@@ -10,6 +10,7 @@ import KToast from './Toast/Toast.vue';
 import KDoughnutWrapper from './Charts/DoughnutWrapper.vue';
 import KLineWrapper from './Charts/LineWrapper.vue';
 import KAuth from './Auth/Auth.vue';
+import KIcons from './Icons/Icons.vue';
 import KModal from './Modal/Modal.vue';
 
 export {
@@ -25,5 +26,6 @@ export {
   KDoughnutWrapper,
   KLineWrapper,
   KAuth,
+  KIcons,
   KModal,
 };
