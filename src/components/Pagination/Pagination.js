@@ -8,11 +8,11 @@ export default {
     iconNext,
   }),
   props: {
-    currentPageStart: {
+    page: {
       type: Number,
       required: true,
     },
-    currentPageEnd: {
+    maxItemsOnPage: {
       type: Number,
       required: true,
     },
@@ -27,6 +27,17 @@ export default {
     },
     prevPage() {
       this.$emit('goToPrev');
+    },
+  },
+  computed: {
+    currentPageEnd() {
+      const { totalItems, maxItemsOnPage } = this;
+      const nextEnd = (this.page - 1) * maxItemsOnPage + maxItemsOnPage;
+      return totalItems < nextEnd ? totalItems : nextEnd;
+    },
+    currentPageStart() {
+      const { maxItemsOnPage } = this;
+      return (this.page - 1) * maxItemsOnPage + 1;
     },
   },
 };

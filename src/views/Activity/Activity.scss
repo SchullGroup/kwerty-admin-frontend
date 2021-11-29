@@ -1,0 +1,97 @@
+.activity {
+  /* ================================
+    ACTIVITY HEADER
+  ================================ */
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      text-transform: capitalize;
+    }
+  }
+
+  &__controls {
+    display: grid;
+    grid: 1fr / max-content 36.6rem;
+    column-gap: 3.2rem;
+  }
+
+  /* ================================
+    ACTIVITY DATA
+  ================================ */
+  &__data {
+    width: 100%;
+    margin-top: 3.2rem;
+  }
+
+  &__data {
+    // BASE
+    tr,
+    thead,
+    td,
+    th {
+      box-sizing: border-box;
+    }
+
+    tr,
+    thead {
+      display: grid;
+      grid: 4.8rem / 30rem minmax(40rem, auto) 6.6rem 30rem;
+      align-items: center;
+    }
+
+    td,
+    th {
+      width: 98%;
+      display: -webkit-box;
+      align-items: center;
+      white-space: nowrap;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .timestamp {
+      text-align: right;
+      justify-content: end;
+    }
+
+    // HEADER
+    &__header {
+      margin-bottom: 1.6rem;
+      text-align: left;
+      text-transform: capitalize;
+      font-weight: 600;
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+    }
+
+    // BODY
+    &__body {
+      .value {
+        display: inline;
+        color: $primary-purple;
+      }
+
+      .name {
+       color: rgba($black, 0.85);
+
+        &.untitled {
+          font-style: italic;
+        }
+      }
+
+      .status {
+        &.success {
+          color: $primary-purple;
+        }
+        &.failed {
+          color: $error;
+        }
+      }
+    }
+  }
+}
