@@ -3,6 +3,7 @@ export default {
   user: {
     firstName: 'Akomolafe',
     lastName: 'Oluwaseun',
+    email: 'test@email.com',
     role: 'Super Admin',
   },
 };

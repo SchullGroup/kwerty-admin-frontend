@@ -55,13 +55,7 @@
       background-color: inherit;
       color: inherit;
       font-size: 1.7rem;
-      // &::after {
-        // content: '';
-        // border: 0.1rem solid $black;
-        // width: 100%;
-        // position: absolute;
-        // top: 4.2rem;
-      // }
+      text-decoration-line: underline;
     }
     &:disabled {
       font-size: 1.6rem;
