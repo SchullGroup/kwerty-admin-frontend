@@ -65,16 +65,16 @@ export default {
     },
   },
   mounted() {
-    this.oldTitle = this.edit.title;
     if (this.edit) {
+      this.oldTitle = this.edit.title;
       this.formValue = { ...this.edit };
     } else {
       this.formValue = {};
     }
   },
   beforeUpdate() {
-    this.oldTitle = this.edit.title;
     if (this.edit) {
+      this.oldTitle = this.edit.title;
       this.formValue = { ...this.edit };
     } else {
       this.formValue = {};
