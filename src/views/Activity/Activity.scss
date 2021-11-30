@@ -95,3 +95,14 @@
     }
   }
 }
+.form {
+  display: grid;
+  grid: auto-flow max-content / 1fr;
+  row-gap: 2.4rem;
+}
+
+.input-row {
+  display: grid;
+  grid: 1fr / 1fr 1fr;
+  column-gap: 2rem;
+}

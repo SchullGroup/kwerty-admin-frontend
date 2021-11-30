@@ -1,30 +1,30 @@
 <template>
   <k-card :heading="edit ? 'Edit Role' : 'Add Role'" variant="in-modal">
-    <form ref="form" class="form">
+    <form ref="form" class="form__items">
       <k-input label="Title" name="title" v-model="formValue.title"></k-input>
       <k-input label="Description" name="description" v-model="formValue.description"></k-input>
-    </form>
-    <div class="permissions">
-      <div
-        class="permissions__group"
-        v-for="[label, permission] in Object.entries(permissionLabels)"
-        :key="permission.join('')"
-      >
-        <p class="permissions__group__name">{{ label }}</p>
-        <div class="check" v-for="check in permission" :key="check">
-          <k-checkbox
-            :label="check"
-            :value="check.split(' ')[0]"
-            :name="check.split(' ').join('-')"
-            v-model="permissions[label]"
-          ></k-checkbox>
+      <div class="permissions">
+        <div
+          class="permissions__group"
+          v-for="[label, permission] in Object.entries(permissionLabels)"
+          :key="permission.join('')"
+        >
+          <p class="permissions__group__name">{{ label }}</p>
+          <div class="check" v-for="check in permission" :key="check">
+            <k-checkbox
+              :label="check"
+              :value="check.split(' ')[0]"
+              :name="check.split(' ').join('-')"
+              v-model="permissions[label]"
+            ></k-checkbox>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="controls">
-      <k-button type="button" variant="link" @click="$emit('close')">Cancel</k-button>
-      <k-button type="button" variant="secondary" @click="$emit('close')"> Finish </k-button>
-    </div>
+      <div class="controls">
+        <k-button type="button" variant="link" @click="$emit('close')">Cancel</k-button>
+        <k-button type="button" variant="secondary" @click="$emit('close')"> Finish </k-button>
+      </div>
+    </form>
   </k-card>
 </template>
 
@@ -96,10 +96,11 @@ export default {
   column-gap: 1.6rem;
 }
 .permissions {
-  margin: 3.2rem 0 4rem;
+  margin: 3.2rem 0 0.8rem;
   display: grid;
   grid: auto-flow max-content / repeat(3, 1fr);
   row-gap: 5.6rem;
+  column-gap: 1.6rem;
   &__group {
     display: grid;
     grid: auto-flow max-content / 1fr;

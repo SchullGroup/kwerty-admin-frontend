@@ -1,5 +1,5 @@
 import {
-  KDashboardLayout, KPagination, KInput, KButton,
+  KDashboardLayout, KPagination, KInput, KButton, KModal, KCard,
 } from '@/components';
 import ActivityTableRow from './TableRow.vue';
 import dummyActivity from './dummyActivity';
@@ -7,6 +7,8 @@ import dummyActivity from './dummyActivity';
 export default {
   name: 'ActivityHome',
   components: {
+    KCard,
+    KModal,
     KButton,
     ActivityTableRow,
     KInput,
@@ -29,6 +31,14 @@ export default {
       '>3months': 'Last 3 months',
       '>6months': 'Last 6 months',
       lastyear: 'Last year',
+    },
+    modalOpen: false,
+    defaultFileType: 'csv',
+    defaultStartDate: '22-02-2021',
+    defaultEndDate: '24-02-21',
+    fileTypes: {
+      csv: 'CSV',
+      pdf: 'PDF',
     },
   }),
   computed: {
