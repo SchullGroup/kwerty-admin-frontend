@@ -45,6 +45,10 @@ export default {
     ],
   }),
   methods: {
+    addItem() {
+      this.role = null;
+      this.modalOpen = true;
+    },
     editItem(val) {
       this.role = val;
       this.modalOpen = true;

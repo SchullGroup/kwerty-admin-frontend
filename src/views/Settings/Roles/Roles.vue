@@ -23,7 +23,7 @@
         <div class="controls">
           <k-button variant="tertiary" @click="editing = true" v-if="!editing">Edit Roles</k-button>
           <template>
-            <k-button variant="link" v-if="editing">Add New Role</k-button>
+            <k-button variant="link" v-if="editing" @click='addItem'>Add New Role</k-button>
             <k-button variant="tertiary" @click="editing = false" v-if="editing">
               Save Changes
             </k-button>
