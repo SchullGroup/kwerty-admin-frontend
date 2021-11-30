@@ -41,6 +41,11 @@ export default {
       type: Object,
     },
   },
+  watch: {
+    value(val) {
+      this.innerValue = val;
+    },
+  },
   methods: {
     updateInput(e) {
       this.innerValue = e.target.value;

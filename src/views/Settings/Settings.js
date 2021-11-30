@@ -1,5 +1,6 @@
 import { KDashboardLayout } from '../../components';
 import KProfile from './Profile.vue';
+import KRoles from './Roles/Roles.vue';
 import KManage from './Manage/Manage.vue';
 
 export default {
@@ -7,6 +8,7 @@ export default {
   components: {
     KDashboardLayout,
     KProfile,
+    KRoles,
     KManage,
   },
   data: () => ({

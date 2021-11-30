@@ -7,4 +7,19 @@ describe('Modal Component', () => {
     mockProps.open = false;
     expect(KModal.computed.isOpen.call(mockProps)).toBeFalsy();
   });
+
+  it('should emit close when background clicked', async () => {
+    const mockThis = {
+      $emit: jest.fn(),
+    };
+    const mockArgs = {
+      target: {
+        classList: {
+          contains: () => true,
+        },
+      },
+    };
+    await KModal.methods.closeModal.call(mockThis, mockArgs);
+    expect(mockThis.$emit).toBeCalledWith('close');
+  });
 });

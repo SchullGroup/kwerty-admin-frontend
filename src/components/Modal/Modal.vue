@@ -1,9 +1,11 @@
 <template>
-  <div :class="['modal', { 'isOpen': isOpen }]">
-    <div class="modal__content">
-      <slot></slot>
+  <transition name='fade'>
+    <div class="modal" v-if='isOpen' @click.stop='closeModal'>
+      <div :class="['modal__content', {isOpen: isOpen}]">
+        <slot></slot>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
