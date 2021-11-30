@@ -109,6 +109,11 @@ export default {
       return this.optionsDisplay ? this.optionsDisplay[this.value] : null;
     },
   },
+  watch: {
+    value(val) {
+      this.innerValue = val;
+    },
+  },
   components: {
     ShowIcon,
     HideIcon,
