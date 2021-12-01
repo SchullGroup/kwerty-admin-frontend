@@ -72,7 +72,7 @@
           <k-card variant="in-modal" heading="Role">
             <h3>Super Admin</h3>
             <p>
-              This is just a test description to understand how this desi gn would really look like
+              This is just a test description to understand how this d esign would really look like
               in real life. I’m hoping it gets to three lines or else I’m going to keep typing until
               it is done.
             </p>
@@ -164,6 +164,18 @@
         @goToNext="nextPage"
         @goToPrev="prevPage"
       ></k-pagination>
+
+      <section class="table">
+        <h2>Table</h2>
+        <div class="selected">selected: {{ selected.length }}</div>
+        <div>{{ selected }}</div>
+        <k-table
+          :fields="tableFields"
+          :fields-display="tableFieldsDisplay"
+          :datalist="allTableData"
+          v-model="selected"
+        ></k-table>
+      </section>
     </div>
   </k-dashboard-layout>
 </template>
@@ -180,7 +192,9 @@ import {
   KInput,
   KIcons,
   KModal,
+  KTable,
 } from '@/components';
+import database from '@/utils/dummy-database';
 
 export default {
   name: 'Components',
@@ -195,6 +209,7 @@ export default {
     KDashboardLayout,
     KInput,
     KIcons,
+    KTable,
   },
   data: () => ({
     page: 1,
@@ -211,6 +226,16 @@ export default {
     roleTitle: 'Data Consultant',
     roleDescription:
       'This is just a test description to understand how this design would really look',
+    tableFields: ['indicator', 'country', 'startYear', 'endYear', 'lastModified'],
+    tableFieldsDisplay: {
+      indicator: 'Name of Indicator',
+      country: 'Country',
+      startYear: 'Start Year',
+      endYear: 'End Year',
+      lastModified: 'Last Modified',
+    },
+    allTableData: database.all,
+    selected: [],
   }),
   methods: {
     nextPage() {

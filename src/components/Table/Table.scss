@@ -1,0 +1,74 @@
+.table__data {
+  width: 100%;
+  tr,
+  thead,
+  td,
+  th {
+    box-sizing: border-box;
+  }
+  tr {
+    display: grid;
+    grid: 4.8rem / 50rem repeat(4, 1fr);
+    align-items: center;
+  }
+  td,
+  th {
+    width: 98%;
+    display: -webkit-box;
+    align-items: center;
+    white-space: nowrap;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  th {
+    display: grid;
+    grid: 1fr / repeat(2, max-content);
+    column-gap: 0.8rem;
+    align-items: center;
+    font-weight: 600;
+    .caret {
+      display: inline-block;
+      border: 0.4rem solid transparent;
+      border-top-color: $black;
+      margin-top: .4rem;
+    }
+  }
+  .timestamp, .lastModified  {
+    text-align: right;
+    justify-content: end;
+  }
+  .startYear, .endYear {
+    text-align: center;
+    justify-content: center;
+  }
+  &__header {
+    margin-bottom: 1.6rem;
+    text-align: left;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
+  &__body {
+    .value {
+      display: inline;
+      color: $primary-purple;
+    }
+    .name {
+      color: rgba($black, 0.85);
+      &.untitled {
+        font-style: italic;
+      }
+    }
+    .status {
+      &.success {
+        color: $primary-purple;
+      }
+      &.failed {
+        color: $error;
+      }
+    }
+  }
+}

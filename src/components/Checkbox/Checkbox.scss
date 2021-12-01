@@ -31,10 +31,10 @@
     &[type='checkbox']:checked::after {
       content: '';
       position: absolute;
-      top: 0.3rem;
-      right: 0.4rem;
+      top: 0.5rem;
+      right: 0.35rem;
       width: 0.96rem;
-      height: 0.76rem;
+      height: 0.56rem;
       border-left: 2px solid $white;
       border-bottom: 2px solid $white;
       -webkit-transform: translateY(-1.5px) rotate(-45deg);
@@ -69,7 +69,7 @@
     }
   }
   .checkbox__label {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     line-height: 1.6rem;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.85);

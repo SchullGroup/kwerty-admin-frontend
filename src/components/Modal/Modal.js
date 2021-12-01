@@ -15,4 +15,11 @@ export default {
       return this.open || false;
     },
   },
+  methods: {
+    closeModal(e) {
+      if (e.target.classList.contains('modal')) {
+        this.$emit('close');
+      }
+    },
+  },
 };

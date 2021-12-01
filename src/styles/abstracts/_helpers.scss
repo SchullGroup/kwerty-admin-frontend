@@ -126,3 +126,9 @@
     margin-top: 0.8rem;
   }
 }
+.modal-controls {
+  display: grid;
+  grid: 1fr / auto-flow max-content;
+  justify-content: end;
+  column-gap: 1.6rem;
+}

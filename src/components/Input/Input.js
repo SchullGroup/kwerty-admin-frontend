@@ -41,6 +41,11 @@ export default {
       type: Object,
     },
   },
+  watch: {
+    value(val) {
+      this.innerValue = val;
+    },
+  },
   methods: {
     updateInput(e) {
       this.innerValue = e.target.value;
@@ -107,11 +112,6 @@ export default {
     },
     selectedOption() {
       return this.optionsDisplay ? this.optionsDisplay[this.value] : null;
-    },
-  },
-  watch: {
-    value(val) {
-      this.innerValue = val;
     },
   },
   components: {

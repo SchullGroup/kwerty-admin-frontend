@@ -12,6 +12,7 @@ import KLineWrapper from './Charts/LineWrapper.vue';
 import KAuth from './Auth/Auth.vue';
 import KIcons from './Icons/Icons.vue';
 import KModal from './Modal/Modal.vue';
+import KTable from './Table/Table.vue';
 
 export {
   KButton,
@@ -28,4 +29,5 @@ export {
   KAuth,
   KIcons,
   KModal,
+  KTable,
 };
