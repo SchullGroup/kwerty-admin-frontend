@@ -155,6 +155,18 @@
           </k-card>
         </k-modal>
       </div>
+
+      <section class="table">
+        <h2>Table</h2>
+        <div class='selected'>selected: {{selected.length}}</div>
+        <div>{{selected}}</div>
+        <k-table
+          :fields="tableFields"
+          :fields-display="tableFieldsDisplay"
+          :datalist="allTableData"
+          v-model='selected'
+        ></k-table>
+      </section>
     </div>
   </k-dashboard-layout>
 </template>
@@ -171,7 +183,9 @@ import {
   KInput,
   KIcons,
   KModal,
+  KTable,
 } from '@/components';
+import database from '@/utils/dummy-database';
 
 export default {
   name: 'Components',
@@ -186,6 +200,7 @@ export default {
     KDashboardLayout,
     KInput,
     KIcons,
+    KTable,
   },
   data: () => ({
     page: 1,
@@ -202,6 +217,16 @@ export default {
     roleTitle: 'Data Consultant',
     roleDescription:
       'This is just a test description to understand how this design would really look',
+    tableFields: ['indicator', 'country', 'startYear', 'endYear', 'lastModified'],
+    tableFieldsDisplay: {
+      indicator: 'Name of Indicator',
+      country: 'Country',
+      startYear: 'Start Year',
+      endYear: 'End Year',
+      lastModified: 'Last Modified',
+    },
+    allTableData: database.all,
+    selected: [],
   }),
   methods: {
     nextPage() {

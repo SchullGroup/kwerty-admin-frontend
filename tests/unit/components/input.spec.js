@@ -84,4 +84,12 @@ describe('Input Component', () => {
     };
     wrapper.vm.clickElementBelow.call(mockProps, target, 0, 0)();
   });
+
+  it('should watch value and update innerValue', () => {
+    const mockThis = {
+      innerValue: null,
+    };
+    KInput.watch.value.call(mockThis, 'hello');
+    expect(mockThis.innerValue).toMatch('hello');
+  });
 });
