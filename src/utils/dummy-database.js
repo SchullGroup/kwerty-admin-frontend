@@ -98,5 +98,33 @@ export default {
       endYear: '2020',
       lastModified: '4:32 PM, 22-02-2021',
     },
+    {
+      indicator: 'Urban Population % of total Population 2',
+      country: 'Norway',
+      startYear: '1985',
+      endYear: '2020',
+      lastModified: '4:32 PM, 22-02-2021',
+    },
+    {
+      indicator: 'Marriages 2',
+      country: 'Italy',
+      startYear: '1985',
+      endYear: '2020',
+      lastModified: '4:32 PM, 22-02-2021',
+    },
+    {
+      indicator: 'Legal Separations 2',
+      country: 'Poland',
+      startYear: '1985',
+      endYear: '2020',
+      lastModified: '4:32 PM, 22-02-2021',
+    },
+    {
+      indicator: 'Death by Causes (System) 2',
+      country: 'Poland',
+      startYear: '1985',
+      endYear: '2020',
+      lastModified: '4:32 PM, 22-02-2021',
+    },
   ],
 };

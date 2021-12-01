@@ -1,11 +1,23 @@
-import { KDashboardLayout, KInput } from '@/components';
+import {
+  KDashboardLayout, KInput, KTable, KButton,
+} from '@/components';
+import AllData from './All.vue';
+import database from '@/utils/dummy-database';
 
 export default {
   name: 'ManageData',
-  components: { KInput, KDashboardLayout },
+  components: {
+    KButton,
+    AllData,
+    KInput,
+    KDashboardLayout,
+    KTable,
+  },
   data: () => ({
+    activeTab: 'all',
     category: 'all',
     indicator: 'all',
+    country: 'all',
     categories: {
       all: 'All Categories',
       agriculture: 'Agriculture',
@@ -30,5 +42,32 @@ export default {
       'Official Reserve Assets': 'Official Reserve Assets',
       'Public Finance Sector Revenue': 'Public Finance Sector Revenue',
     },
+    countries: {
+      all: 'All Countries',
+      germany: 'Germany',
+      france: 'France',
+      italy: 'Italy',
+      poland: 'Poland',
+      spain: 'Spain',
+      portugal: 'Portugal',
+      netherlands: 'Netherlands',
+      ireland: 'Ireland',
+      belgium: 'Belgium',
+    },
+    tableFields: ['indicator', 'country', 'startYear', 'endYear', 'lastModified'],
+    tableFieldsDisplay: {
+      indicator: 'Name of Indicator',
+      country: 'Country',
+      startYear: 'Start Year',
+      endYear: 'End Year',
+      lastModified: 'Last Modified',
+    },
+    allTableData: database.all,
+    selectedRows: [],
   }),
+  computed: {
+    selected() {
+      return this.selectedRows.length;
+    },
+  },
 };
