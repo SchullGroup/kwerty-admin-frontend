@@ -155,6 +155,15 @@
           </k-card>
         </k-modal>
       </div>
+      <k-pagination
+        :forTable="true"
+        :page="page"
+        :maxItemsOnPage="20"
+        :totalItems="totalItems"
+        variant="many"
+        @goToNext="nextPage"
+        @goToPrev="prevPage"
+      ></k-pagination>
     </div>
   </k-dashboard-layout>
 </template>

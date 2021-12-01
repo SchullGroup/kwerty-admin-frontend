@@ -1,5 +1,5 @@
 <template>
-  <div class='pagination'>
+  <div :class="['pagination',[ forTable ? 'pagination__table' : '']]">
     <button v-if="variant === 'many'" class="pagination__button" @click="firstPage">
       <img :src="iconFirstPage" alt="" class="pagination__button__icon" />
     </button>
