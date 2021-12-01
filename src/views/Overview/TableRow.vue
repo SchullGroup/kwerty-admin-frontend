@@ -44,22 +44,10 @@ thead {
   align-items: center;
 }
 
-//td,
-//th {
-//  width: 95%;
-//  display: -webkit-box;
-//  align-items: center;
-//  white-space: nowrap;
-//  -webkit-line-clamp: 1;
-//  -webkit-box-orient: vertical;
-//  text-overflow: ellipsis;
-//  overflow: hidden;
-//}
-
 tr {
-position: relative;
+  position: relative;
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     height: 1px;
@@ -73,6 +61,13 @@ position: relative;
 td {
   color: $grey-darker;
   font-weight: 400;
+  width: 80%;
+  word-break: break-all;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 
   &.status {
     text-align: center;
@@ -88,11 +83,10 @@ td {
 .timestamp {
   width: 100%;
   justify-content: end;
-  padding: 0
+  padding: 0;
 }
 
 .name {
-
   &.untitled {
     font-style: italic;
   }
