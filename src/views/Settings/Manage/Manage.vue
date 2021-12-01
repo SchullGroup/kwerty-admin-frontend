@@ -32,6 +32,10 @@ export default {
     itemsOnPage: 20,
     modalOpen: true,
   }),
+  methods: {
+    prevPage() {},
+    nextPage() {},
+  },
 };
 </script>
 

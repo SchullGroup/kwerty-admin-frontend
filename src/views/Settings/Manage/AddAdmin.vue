@@ -12,7 +12,7 @@
       </k-input>
       <div class="btn-wrapper">
         <k-button variant="link" @click="$emit('close')">Cancel</k-button>
-        <k-button variant="secondary">Finish</k-button>
+        <k-button variant="secondary"  @click="$emit('close')">Finish</k-button>
       </div>
     </form>
   </k-card>

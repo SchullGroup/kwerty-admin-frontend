@@ -17,9 +17,9 @@ const MENU_ITEMS = [
         permissions: ['Admin'],
       },
       {
-        name: 'manageFilters',
-        label: 'Manage Filters',
-        route: '/database/filters',
+        name: 'manageIndicators',
+        label: 'Manage Indicators',
+        route: '/database/indicators',
         permissions: ['Admin'],
       },
       {

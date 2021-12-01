@@ -7,6 +7,7 @@ import ResetPassword from '../views/Auth/ResetPassword/ResetPassword.vue';
 import CheckInbox from '../views/Auth/CheckInbox/CheckInbox.vue';
 import ActivityHome from '../views/Activity/Activity.vue';
 import Settings from '../views/Settings/Settings.vue';
+import Indicators from '../views/Database/Indicators/Indicators.vue';
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,11 @@ export const routes = [
     path: '/settings',
     name: 'Settings',
     component: Settings,
+  },
+  {
+    path: '/database/indicators',
+    name: 'Indicators',
+    component: Indicators,
   },
 ];
 

@@ -10,5 +10,6 @@ describe('Admins Component', () => {
     expect(wrapper.vm.$options.name).toMatch('KAdmins');
     expect(wrapper.attributes().class).toContain('admins');
     expect(wrapper.vm.toggleButtonText());
+    expect(wrapper.vm.handleEditAdmin({ showEditModal: true, currentAdmin: {} }));
   });
 });

@@ -27,6 +27,10 @@ export default {
     variant: {
       type: String,
     },
+    forTable: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     nextPage() {

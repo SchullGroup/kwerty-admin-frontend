@@ -1,5 +1,6 @@
 .btn {
   width: auto;
+  height: 6.4rem;
   color: $white;
   background-color: $primary-purple;
   border: none;
@@ -7,8 +8,10 @@
   font-size: 1.6rem;
   line-height: 1.9rem;
   font-weight: 600;
-  padding: 2.2rem 3.2rem;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 3.2rem;
   cursor: pointer;
   transition: all 300ms;
   justify-content: center;

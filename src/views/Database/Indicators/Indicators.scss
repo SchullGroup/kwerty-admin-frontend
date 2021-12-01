@@ -1,0 +1,20 @@
+.indicators {
+  overflow: auto;
+  &__header {
+    display: grid;
+    grid-template-columns: 36rem auto;
+    align-items: center;
+    position: sticky;
+    background-color: $white;
+    top: 0;
+    z-index: 3000;
+    &--content {
+      display: grid;
+      grid-template-columns: 2fr 1.1fr 1fr 1.1fr;
+      grid-column-gap: 1.6rem;
+    }
+  }
+  .table__container {
+    padding-top: 5rem;
+  }
+}

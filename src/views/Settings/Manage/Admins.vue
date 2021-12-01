@@ -1,18 +1,15 @@
 <template>
   <div class="admins">
-    <div
-      v-for="admin in admins"
-      :key="admin.name"
-      :class="['admin__item', [editAdmin ? 'showIcons' : '']]"
-    >
+    <div v-for="admin in admins" :key="admin.email" :class="['admin__item']">
       <k-icons
-        @open="showEditAdminModal = true"
+        @edit="handleEditAdmin(admin)"
+        @delete="showAddAdminmodal = true"
         v-show="editAdmin"
-        :class="[editAdmin ? 'showIcons' : '']"
+        :class="['icons']"
       />
       <img src="@/assets/avatar.png" alt="avatar" class="avatar-icon" />
       <div class="admin-text">
-        <p class="name">{{ admin.name }}</p>
+        <p class="name">{{ admin.firstName }} {{ admin.lastName }}</p>
         <p class="role">{{ admin.role }}</p>
       </div>
     </div>
@@ -27,8 +24,8 @@
       </k-button>
       <k-button @click="toggleButtonText" variant="tertiary">{{ button.text }}</k-button>
     </div>
-    <k-modal v-if="showEditAdminModal" :open="showEditAdminModal">
-      <k-edit-admin @close="showEditAdminModal = false"></k-edit-admin>
+    <k-modal v-if="showEditModal" :open="showEditModal">
+      <k-edit-admin @close="showEditModal = false" :currentadmin="currentAdmin"></k-edit-admin>
     </k-modal>
     <k-modal v-if="showAddAdminmodal" :open="showAddAdminmodal">
       <k-add-admin @close="showAddAdminmodal = false"></k-add-admin>
@@ -53,28 +50,37 @@ export default {
   props: {},
   data: () => ({
     editAdmin: false,
-    showEditAdminModal: false,
+    showEditModal: false,
     showAddAdminmodal: false,
+    currentAdmin: {},
     button: {
       text: 'Edit Admin',
     },
     show: false,
     admins: [
       {
-        name: 'Akomolafe Olamide',
+        firstName: 'Akomolafe',
+        lastName: 'Olamide',
         role: 'Admin',
+        email: 'AO@gmail.com',
       },
       {
-        name: 'Sonny Kyel',
+        firstName: 'Sonny',
+        lastName: 'Kyel',
         role: 'Guest',
+        email: 'SK@gmail.com',
       },
       {
-        name: 'Nnenna Ojiofor',
+        firstName: 'Nnenna',
+        lastName: 'Ojiofor',
         role: 'Guest',
+        email: 'NO@gmail.com',
       },
       {
-        name: 'Oluwaseun Morenike',
+        firstName: 'Oluwaseun',
+        lastName: 'Morenike',
         role: 'Admin',
+        email: 'OM@gmail.com',
       },
     ],
   }),
@@ -82,6 +88,14 @@ export default {
     toggleButtonText() {
       this.editAdmin = !this.editAdmin;
       this.button.text = this.editAdmin ? 'Save Changes' : 'Edit Admin';
+    },
+    handleEditAdmin(item) {
+      console.log(item);
+      if (item) {
+        this.showEditModal = true;
+        this.currentAdmin = item;
+      }
+      return this.currentAdmin;
     },
   },
 };
@@ -92,7 +106,7 @@ export default {
   position: relative;
   .admin__item {
     display: grid;
-    grid-template-columns: 0fr 1fr 3fr;
+    grid-template-columns: max-content max-content max-content;
     grid-column-gap: 2.4rem;
     max-width: 34rem;
     margin-bottom: 2.4rem;
@@ -121,19 +135,5 @@ export default {
     justify-content: flex-end;
     align-items: center;
   }
-  .showIcons {
-    grid-template-columns: 1fr 1fr 3fr;
-  }
-
-  // .showIcons {
-  //   transform: translateX(-30%);
-  //   -webkit-transform: translateX(-30%);
-  //   animation: slide-in 2s forwards;
-  // }
-  // @keyframes slide-in {
-  //   100% {
-  //     transform: translateX(0%);
-  //   }
-  // }
 }
 </style>

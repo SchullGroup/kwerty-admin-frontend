@@ -155,16 +155,25 @@
           </k-card>
         </k-modal>
       </div>
+      <k-pagination
+        :forTable="true"
+        :page="page"
+        :maxItemsOnPage="20"
+        :totalItems="totalItems"
+        variant="many"
+        @goToNext="nextPage"
+        @goToPrev="prevPage"
+      ></k-pagination>
 
       <section class="table">
         <h2>Table</h2>
-        <div class='selected'>selected: {{selected.length}}</div>
-        <div>{{selected}}</div>
+        <div class="selected">selected: {{ selected.length }}</div>
+        <div>{{ selected }}</div>
         <k-table
           :fields="tableFields"
           :fields-display="tableFieldsDisplay"
           :datalist="allTableData"
-          v-model='selected'
+          v-model="selected"
         ></k-table>
       </section>
     </div>
