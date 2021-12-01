@@ -8,6 +8,7 @@ import CheckInbox from '../views/Auth/CheckInbox/CheckInbox.vue';
 import ActivityHome from '../views/Activity/Activity.vue';
 import Settings from '../views/Settings/Settings.vue';
 import Indicators from '../views/Database/Indicators/Indicators.vue';
+import ManageData from '../views/Database/Manage/Manage.vue';
 
 Vue.use(VueRouter);
 
@@ -51,6 +52,11 @@ export const routes = [
     path: '/database/indicators',
     name: 'Indicators',
     component: Indicators,
+  },
+  {
+    path: '/database',
+    name: 'ManageData',
+    component: ManageData,
   },
 ];
 

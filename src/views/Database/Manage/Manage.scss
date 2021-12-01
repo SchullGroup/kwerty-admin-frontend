@@ -1,0 +1,17 @@
+.header {
+display: grid;
+  grid: 1fr / repeat(2, max-content);
+  justify-content: space-between;
+  align-items: center;
+  &__controls {
+    display: grid;
+    grid: 1fr / auto-flow max-content;
+    column-gap: 2.4rem;
+    .search {
+      width: 36rem;
+    }
+    .filter{
+      width: 20rem;
+    }
+  }
+}
