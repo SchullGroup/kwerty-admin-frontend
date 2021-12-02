@@ -40,6 +40,9 @@ export default {
     optionsDisplay: {
       type: Object,
     },
+    reactive: {
+      type: Boolean,
+    },
   },
   watch: {
     value(val) {

@@ -25,6 +25,7 @@
         :placeholder="label"
         :disabled="disabled || type === 'select'"
         @change="updateInput"
+        @keyup="reactive ? updateInput($event) : null"
       />
       <label :for="name">{{ label }}</label>
 

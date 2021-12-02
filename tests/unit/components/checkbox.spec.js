@@ -27,11 +27,17 @@ describe('Checkbox Component', () => {
       value: 'Ghana',
       checkedValue: ['Ghana', 'Nigeria', 'Togo'],
       innerValue: null,
+      checkValue: jest.fn(),
 
     };
     await KCheckbox.watch.innerValue.call(mockThis, null);
-    await KCheckbox.watch.value.call(mockThis, 'spade');
+    expect(mockThis.checkedValue.length).toEqual(3);
+
+    await KCheckbox.methods.checkValue.call(mockThis, ['Ghana', 'Nigeria', 'Togo']);
     expect(mockThis.checkedValue.length).toEqual(2);
-    expect(mockThis.innerValue).toMatch('spade');
+
+    mockThis.innerValue = true;
+    KCheckbox.watch.checkedValue.call(mockThis, []);
+    expect(mockThis.innerValue).toBeFalsy();
   });
 });

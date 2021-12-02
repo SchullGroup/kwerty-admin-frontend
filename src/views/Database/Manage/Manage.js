@@ -1,14 +1,15 @@
 import {
-  KDashboardLayout, KInput, KTable, KButton,
+  KDashboardLayout, KInput, KTable, KButton, KPagination, KModal, KCard,
 } from '@/components';
-import AllData from './All.vue';
 import database from '@/utils/dummy-database';
 
 export default {
   name: 'ManageData',
   components: {
+    KCard,
+    KModal,
+    KPagination,
     KButton,
-    AllData,
     KInput,
     KDashboardLayout,
     KTable,
@@ -64,10 +65,47 @@ export default {
     },
     allTableData: database.all,
     selectedRows: [],
+    modalOpen: false,
+    activeModal: 'unpublish',
+    entered: '',
+    actionDisplays: {
+      unpublish: 'Unpublish',
+      publish: 'Publish',
+      delete: 'Delete',
+      restore: 'Restore',
+      'clear your bin': 'Permanently delete',
+    },
   }),
   computed: {
     selected() {
       return this.selectedRows.length;
+    },
+    isSame() {
+      return this.entered === this.requiredMessage;
+    },
+    requiredMessage() {
+      const { activeModal, selected, actionDisplays } = this;
+      const suffixS = selected !== 1 ? 's' : '';
+      return `${actionDisplays[activeModal]} ${selected} data set${suffixS}`;
+    },
+  },
+  methods: {
+    resetSelectedRows() {
+      this.selectedRows = [];
+    },
+    confirmAction(action) {
+      this.modalOpen = true;
+      this.activeModal = action;
+    },
+    closeModal() {
+      this.entered = '';
+      this.modalOpen = false;
+    },
+  },
+  watch: {
+    activeTab(val) {
+      this.resetSelectedRows();
+      this.allTableData = database[val];
     },
   },
 };

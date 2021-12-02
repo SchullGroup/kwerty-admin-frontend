@@ -18,4 +18,12 @@ describe('Table Component', () => {
     KTable.watch.selected.call(mockThis);
     expect(mockThis.$emit).toHaveBeenCalledWith('change', undefined);
   });
+
+  it('should watch value', () => {
+    const mockThis = {
+      selected: null,
+    };
+    KTable.watch.value.call(mockThis, 'hello');
+    expect(mockThis.selected).toMatch('hello');
+  });
 });

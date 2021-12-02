@@ -29,5 +29,8 @@ export default {
     selected(val) {
       this.$emit('change', val);
     },
+    value(val) {
+      this.selected = val;
+    },
   },
 };
