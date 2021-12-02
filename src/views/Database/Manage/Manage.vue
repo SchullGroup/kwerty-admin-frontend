@@ -133,7 +133,7 @@
       <k-card
         :heading="`Are you sure you want to ${activeModal}?`"
         variant="in-modal"
-        :wrap-heading="true"
+        wrap-heading
         :longer-heading="activeModal === 'clear your bin'"
       >
         <div class="modal__content">
@@ -191,7 +191,43 @@
           <k-input label="Your input" v-model="entered" :reactive="true"></k-input>
           <div class="modal-controls">
             <k-button variant="link" @click="closeModal">Cancel</k-button>
-            <k-button variant="primary" @click="closeModal" :disabled="!isSame">Unpublish</k-button>
+            <k-button
+              variant="primary"
+              @click="closeModal"
+              :disabled="!isSame"
+              v-if="activeModal === 'publish'"
+              >Publish</k-button
+            >
+            <k-button
+              variant="primary"
+              @click="closeModal"
+              :disabled="!isSame"
+              v-if="activeModal === 'unpublish'"
+              >Unpublish</k-button
+            >
+            <k-button
+              variant="primary"
+              @click="closeModal"
+              :disabled="!isSame"
+              negative
+              v-if="activeModal === 'delete'"
+              >Delete</k-button
+            >
+            <k-button
+              variant="primary"
+              @click="closeModal"
+              :disabled="!isSame"
+              v-if="activeModal === 'restore'"
+              >Restore to Drafts</k-button
+            >
+            <k-button
+              variant="primary"
+              @click="closeModal"
+              :disabled="!isSame"
+              negative
+              v-if="activeModal === 'clear your bin'"
+              >Permanently Delete</k-button
+            >
           </div>
         </div>
       </k-card>
