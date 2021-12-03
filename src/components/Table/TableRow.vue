@@ -123,7 +123,8 @@ export default {
   }
 
   .startYear,
-  .endYear {
+  .endYear,
+  .available {
     text-align: center;
     justify-content: center;
   }
@@ -133,7 +134,8 @@ export default {
       display: inline;
       color: $primary-purple;
     }
-    .country, td:first-child {
+    .country,
+    td:first-child {
       display: grid;
       grid: 1fr / repeat(2, max-content);
       column-gap: 0.8rem;
@@ -143,7 +145,7 @@ export default {
         align-items: center;
       }
       .checkbox {
-        margin-right: -0.8rem
+        margin-right: -0.8rem;
       }
     }
 
