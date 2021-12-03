@@ -26,16 +26,29 @@ export default {
     innerValue: '',
   }),
   watch: {
-    innerValue(value) {
-      if (value) {
+    innerValue() {
+      this.checkValue(this.checkedValue);
+    },
+    checkedValue(val) {
+      if (!val.length) {
+        this.innerValue = false;
+        return;
+      }
+      this.checkValue(val);
+    },
+  },
+  methods: {
+    checkValue(checkedValue) {
+      const { innerValue } = this;
+      const index = checkedValue.indexOf(this.value);
+      const found = index !== -1;
+      const notFound = index === -1;
+      if (innerValue && notFound) {
         this.checkedValue.push(this.value);
-      } else {
-        const index = this.checkedValue.indexOf(this.value);
+      }
+      if (!innerValue && found) {
         this.checkedValue.splice(index, 1);
       }
-    },
-    value(val) {
-      this.innerValue = val;
     },
   },
   model: {

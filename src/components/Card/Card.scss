@@ -21,4 +21,17 @@
   &--in-modal &__heading {
     margin-bottom: 4rem;
   }
+  &.wrap-heading {
+    .card__heading {
+      max-width: 22.5rem;
+      margin-bottom: 2.6rem;
+      font-size: 2.5rem;
+      line-height: 3.2rem;
+    }
+    &.longer {
+      .card__heading {
+        max-width: 26.9rem;
+      }
+    }
+  }
 }

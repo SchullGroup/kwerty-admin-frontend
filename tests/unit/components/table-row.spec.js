@@ -14,14 +14,24 @@ describe('TableRow Component', () => {
       innerValue: ['hello'],
       value: ['world'],
       $emit: jest.fn(),
+      checkAndAdd: jest.fn(),
     };
-    // if indicator is not in value, add and emit
+
     TableRow.watch.innerValue.call(mockThis);
-    expect(mockThis.$emit).toHaveBeenCalledWith('input', ['world', 'hello']);
-    // else if indicator is in value, remove and emit
+    expect(mockThis.checkAndAdd).toHaveBeenCalledWith(['world']);
+
     mockThis.value = ['hello', 'world'];
     mockThis.$emit = jest.fn();
-    TableRow.watch.innerValue.call(mockThis);
+    mockThis.innerValue = [];
+    TableRow.methods.checkAndAdd.call(mockThis, mockThis.value);
     expect(mockThis.$emit).toHaveBeenCalledWith('input', ['world']);
+
+    TableRow.watch.value.call(mockThis, []);
+    expect(mockThis.innerValue.length).toBe(0);
+
+    mockThis.value = ['world'];
+    mockThis.innerValue = ['hello'];
+    TableRow.methods.checkAndAdd.call(mockThis, ['world']);
+    expect(mockThis.$emit).toHaveBeenCalledWith('input', ['world', 'hello']);
   });
 });

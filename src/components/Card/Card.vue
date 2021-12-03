@@ -2,6 +2,8 @@
   <div :class="['card', {
     'card--in-modal': inModal,
     'card--no-space-top': variant === 'no-space-top',
+    'wrap-heading': wrapHeading,
+    'longer': wrapHeading && longerHeading,
   }]">
     <h2 class="card__heading">
       {{ heading }}

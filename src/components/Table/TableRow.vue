@@ -52,14 +52,34 @@ export default {
   },
   watch: {
     innerValue() {
-      const { innerValue: iValue, value } = this;
+      this.checkAndAdd(this.value);
+    },
+    value(val) {
+      if (!val.length) {
+        this.innerValue = [];
+      }
+      this.checkAndAdd(val);
+    },
+  },
+  methods: {
+    checkAndAdd(value) {
+      const { innerValue: iValue } = this;
       const index = value.indexOf(this.data.indicator);
-      if (index === -1 && iValue.length === 1) {
-        this.$emit('input', [...value, ...iValue]);
-      } else {
-        const newValue = [...value];
+      const found = index !== -1;
+      const notFound = index === -1;
+      // if inner value is not set
+      // but it appears inside v-model value
+      // remove it and update v-model value
+      if (!iValue.length && found) {
+        const newValue = [...this.value];
         newValue.splice(index, 1);
         this.$emit('input', newValue);
+      }
+      // if inner value is set
+      // and not inside v-model value
+      // append innerValue and update v-model
+      if (iValue.length && notFound) {
+        this.$emit('input', [...this.value, ...iValue]);
       }
     },
   },

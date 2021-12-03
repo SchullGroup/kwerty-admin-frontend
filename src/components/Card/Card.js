@@ -8,6 +8,12 @@ export default {
     variant: {
       type: String,
     },
+    wrapHeading: {
+      type: Boolean,
+    },
+    longerHeading: {
+      type: Boolean,
+    },
   },
   computed: {
     inModal() {
