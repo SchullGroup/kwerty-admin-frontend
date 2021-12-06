@@ -1,12 +1,25 @@
 import { shallowMount } from '@vue/test-utils';
 import ManageData from '@/views/Database/Manage/Manage.vue';
 
+const $route = {
+  query: {
+    active: 'my-test-tab',
+  },
+};
+
 describe('ManageData View', () => {
-  it('should mount', () => {
+  it('should mount', async () => {
     const wrapper = shallowMount(ManageData, {
       propsData: { selectedRow: ['hello'] },
+      mocks: {
+        $route,
+      },
+    });
+    await wrapper.setData({
+      $route,
     });
     expect(wrapper.vm.$options.name).toMatch('ManageData');
+    // ManageData.mounted.call({ active: 'published' });
   });
 
   it('should reset selected rows', () => {
@@ -29,7 +42,6 @@ describe('ManageData View', () => {
     expect(mockThis.entered).toMatch('');
     expect(mockThis.modalOpen).toBeFalsy();
   });
-
   it('should open modal and set active modal', () => {
     const mockThis = {
       modalOpen: false,
@@ -38,5 +50,4 @@ describe('ManageData View', () => {
     ManageData.methods.confirmAction.call(mockThis, 'publish');
     expect(mockThis.modalOpen).toBeTruthy();
     expect(mockThis.activeModal).toMatch('publish');
-  });
-});
+  });});

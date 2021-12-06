@@ -1,5 +1,11 @@
 import {
-  KDashboardLayout, KInput, KTable, KButton, KPagination, KModal, KCard,
+  KDashboardLayout,
+  KInput,
+  KTable,
+  KButton,
+  KPagination,
+  KModal,
+  KCard,
 } from '@/components';
 import database from '@/utils/dummy-database';
 
@@ -107,5 +113,26 @@ export default {
       this.resetSelectedRows();
       this.allTableData = database[val];
     },
+  },
+  mounted() {
+    const { active } = this.$route.query;
+    let activeTab;
+    switch (active) {
+      case 'all':
+        activeTab = 'all';
+        break;
+      case 'published':
+        activeTab = 'published';
+        break;
+      case 'drafts':
+        activeTab = 'drafts';
+        break;
+      case 'deleted':
+        activeTab = 'deleted';
+        break;
+      default:
+        return;
+    }
+    this.activeTab = activeTab;
   },
 };

@@ -9,6 +9,9 @@ export default {
     open: {
       type: Boolean,
     },
+    uploading: {
+      type: Boolean,
+    },
   },
   computed: {
     isOpen() {

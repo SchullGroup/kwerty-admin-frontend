@@ -1,7 +1,11 @@
 <template>
-  <transition name='fade'>
-    <div class="modal" v-if='isOpen' @click.stop='closeModal'>
-      <div :class="['modal__content', {isOpen: isOpen}]">
+  <transition name="fade">
+    <div
+      :class="['modal', [uploading === 'true' ? 'uploading-state' : '']]"
+      v-if="isOpen"
+      @click.stop="closeModal"
+    >
+      <div :class="['modal__content', { isOpen: isOpen }]">
         <slot></slot>
       </div>
     </div>

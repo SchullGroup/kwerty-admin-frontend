@@ -9,6 +9,7 @@ import ActivityHome from '../views/Activity/Activity.vue';
 import Settings from '../views/Settings/Settings.vue';
 import Indicators from '../views/Database/Indicators/Indicators.vue';
 import ManageData from '../views/Database/Manage/Manage.vue';
+import UploadData from '../views/Database/Manage/Upload/Upload.vue';
 
 Vue.use(VueRouter);
 
@@ -57,6 +58,11 @@ export const routes = [
     path: '/database',
     name: 'ManageData',
     component: ManageData,
+  },
+  {
+    path: '/database/upload',
+    name: 'Upload',
+    component: UploadData,
   },
 ];
 

@@ -1,0 +1,138 @@
+@import '../Manage';
+
+.upload-new-data {
+  display: flex;
+  p {
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    color: $black;
+    margin-left: 2rem;
+  }
+  .arrow {
+    cursor: pointer;
+  }
+}
+.tabs {
+  margin-bottom: 3.2rem;
+  .tab-item {
+    border: none;
+    background-color: transparent;
+    margin-right: 2rem;
+    padding: 1rem 2rem;
+    opacity: 0.5;
+    &.active {
+      border-bottom: 0.2rem solid $primary-purple;
+      opacity: 1;
+    }
+  }
+  .step {
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    color: $black;
+    margin-bottom: 1.6rem;
+  }
+  .title {
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    color: $grey-dark;
+  }
+}
+.upload-content {
+  max-width: 56.5rem;
+  margin-bottom: 3.2rem;
+  h4 {
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    color: $black;
+    margin-bottom: 1.6rem;
+  }
+  .description {
+    margin-bottom: 3.2rem;
+    font-weight: normal;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: $grey-dark;
+  }
+  .upload-area {
+    width: 100%;
+    height: 20rem;
+    display: grid;
+    place-content: center;
+    background: $grey-light;
+    border-radius: 0.8rem;
+    border: 2px dashed $grey;
+    p {
+      font-weight: 600;
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      text-decoration-line: underline;
+      color: $black;
+      padding: 2.4rem 0 0;
+      text-align: center;
+    }
+  }
+  input[type='file'] {
+    display: none;
+  }
+}
+.upload-modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-content: center;
+  background-color: $black;
+  opacity: 0.6;
+  &-content {
+    width: 30rem;
+    height: 20rem;
+    background-color: #fff;
+    border-radius: 1.6rem;
+    display: grid;
+    grid-gap: 3rem;
+    place-content: center;
+    p {
+      font-weight: normal;
+      font-size: 1.6rem;
+      line-height: 2rem;
+      color: $black;
+    }
+    .uploading-file {
+      border: 0.2rem solid $grey;
+      animation: wait 5s;
+      animation-delay: 1s;
+    }
+  }
+}
+@keyframes wait {
+  0% {
+    border-color: blue;
+  }
+  40%{
+    border-color: blue;
+  }
+  80% {
+    border-color: blue;
+  }
+  100% {
+    border-color: blue;
+  }
+}
+.review__content {
+  border: 1px solid red;
+  height: 60vh;
+  overflow: auto;
+}
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2.4rem;
+}
