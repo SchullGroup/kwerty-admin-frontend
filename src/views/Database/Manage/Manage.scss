@@ -102,6 +102,8 @@
   .content__body {
     margin-left: 20rem;
     width: calc(100vw - 24rem);
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }
 

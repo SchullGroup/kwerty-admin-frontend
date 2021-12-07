@@ -127,12 +127,33 @@
   }
 }
 .review__content {
-  border: 1px solid red;
+  box-sizing: border-box;
   height: 60vh;
   overflow: auto;
+  width: 100%;
+  &::-webkit-scrollbar-button, &::-webkit-scrollbar-track {
+    width: 0;
+    height: 0;
+  }
 }
 .btn-wrapper {
   display: flex;
   justify-content: flex-end;
   margin-top: 2.4rem;
+  margin-right: 0;
+  width: 100%;
+}
+table {
+  border-collapse: collapse;
+  border: 1px solid $grey;
+  
+  tr:nth-child(2n + 1) {
+    background: rgba($grey-light, 0.25)
+  }
+
+  td, th {
+    white-space: nowrap;
+    text-align: left;
+    padding: 0.4rem;
+  }
 }
