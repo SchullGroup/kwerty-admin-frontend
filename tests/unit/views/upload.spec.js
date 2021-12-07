@@ -6,12 +6,12 @@ const $router = {
   push: jest.fn(),
 };
 const mockE = {
- target: {
-  files: [
-   {name: "Hello"}
-  ]
- }
-}
+  target: {
+    files: [
+      { name: 'Hello' },
+    ],
+  },
+};
 
 describe('manage upload file View', () => {
   it('should mount', async () => {

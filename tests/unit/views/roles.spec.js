@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Roles from '@/views/Settings/Roles/Roles';
+import Roles from '@/views/Settings/Roles/Roles.vue';
 
 describe('Roles View', () => {
   let wrapper;
