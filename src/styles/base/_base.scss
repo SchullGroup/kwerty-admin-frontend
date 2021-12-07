@@ -92,3 +92,8 @@ select {
   grid-gap: 3.6rem;
 
 }
+
+
+  #file-dropzone .dz-preview, #file-dropzone .dz-file-preview  {
+    display: none;
+  }

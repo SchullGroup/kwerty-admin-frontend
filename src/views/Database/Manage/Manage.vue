@@ -2,109 +2,107 @@
   <k-dashboard-layout>
     <header :class="['header', { selected: selected }]">
       <h1>Database</h1>
-      <transition name="header-fade" mode="out-in">
-        <!-- DEFAULT HEADER CONTROLS -->
-        <div class="header__controls" v-if="!selected">
-          <div class="search">
-            <k-input label="Search by country, indicators or categories"></k-input>
-          </div>
-          <div class="filter">
-            <k-input
-              type="select"
-              label="Filter by Category"
-              variant="dropdown"
-              v-model="category"
-              :optionsDisplay="categories"
-            ></k-input>
-          </div>
-          <div class="filter">
-            <k-input
-              type="select"
-              label="Filter by Indicator"
-              variant="dropdown"
-              v-model="indicator"
-              :optionsDisplay="indicators"
-            ></k-input>
-          </div>
-          <div class="filter">
-            <k-input
-              type="select"
-              label="Filter by Country"
-              variant="dropdown"
-              v-model="country"
-              :optionsDisplay="countries"
-            ></k-input>
-          </div>
-          <div class="button">
-            <k-button variant="primary">Upload New Data</k-button>
-          </div>
+      <!-- DEFAULT HEADER CONTROLS -->
+      <div class="header__controls" v-if="!selected">
+        <div class="search">
+          <k-input label="Search by country, indicators or categories"></k-input>
+        </div>
+        <div class="filter">
+          <k-input
+            type="select"
+            label="Filter by Category"
+            variant="dropdown"
+            v-model="category"
+            :optionsDisplay="categories"
+          ></k-input>
+        </div>
+        <div class="filter">
+          <k-input
+            type="select"
+            label="Filter by Indicator"
+            variant="dropdown"
+            v-model="indicator"
+            :optionsDisplay="indicators"
+          ></k-input>
+        </div>
+        <div class="filter">
+          <k-input
+            type="select"
+            label="Filter by Country"
+            variant="dropdown"
+            v-model="country"
+            :optionsDisplay="countries"
+          ></k-input>
+        </div>
+        <div class="button">
+          <k-button variant="primary" @click="$router.push({ name: 'Upload' })">
+            Upload New Data
+          </k-button>
+        </div>
+      </div>
+
+      <!--  HEADER CONTROLS WHEN ROWS SELECTED -->
+      <div class="header__controls__selected" v-if="selected">
+        <div class="selected-count">{{ selected }} selected</div>
+
+        <!-- BUTTONS WHEN NON DELETED DATA IS SELECTED -->
+        <div class="header__controls" v-if="activeTab !== 'deleted'">
+          <k-button
+            variant="secondary"
+            :disabled="activeTab !== 'drafts'"
+            @click="confirmAction('publish')"
+          >
+            Publish All
+          </k-button>
+          <k-button
+            variant="secondary"
+            @click="confirmAction('unpublish')"
+            :disabled="activeTab === 'drafts'"
+          >
+            Unpublish All
+          </k-button>
+          <k-button variant="secondary" negative="negative" @click="confirmAction('delete')">
+            Delete
+          </k-button>
         </div>
 
-        <!--  HEADER CONTROLS WHEN ROWS SELECTED -->
-        <div class="header__controls__selected" v-if="selected">
-          <div class="selected-count">{{ selected }} selected</div>
-
-          <!-- BUTTONS WHEN NON DELETED DATA IS SELECTED -->
-          <div class="header__controls" v-if="activeTab !== 'deleted'">
-            <k-button
-              variant="secondary"
-              :disabled="activeTab !== 'drafts'"
-              @click="confirmAction('publish')"
-            >
-              Publish All
-            </k-button>
-            <k-button
-              variant="secondary"
-              @click="confirmAction('unpublish')"
-              :disabled="activeTab === 'drafts'"
-            >
-              Unpublish All
-            </k-button>
-            <k-button variant="secondary" negative="negative" @click="confirmAction('delete')">
-              Delete
-            </k-button>
-          </div>
-
-          <!-- BUTTONS WHEN DELETED DATA IS SELECTED -->
-          <div class="header__controls" v-else>
-            <k-button variant="primary" @click="confirmAction('restore')"
-              >Restore to Drafts</k-button
-            >
-            <k-button
-              variant="secondary"
-              negative="negative"
-              @click="confirmAction('clear your bin')"
-            >
-              Permanently Delete
-            </k-button>
-          </div>
+        <!-- BUTTONS WHEN DELETED DATA IS SELECTED -->
+        <div class="header__controls" v-else>
+          <k-button variant="primary" @click="confirmAction('restore')">Restore to Drafts</k-button>
+          <k-button
+            variant="secondary"
+            negative="negative"
+            @click="confirmAction('clear your bin')"
+          >
+            Permanently Delete
+          </k-button>
         </div>
-      </transition>
+      </div>
     </header>
     <section class="content">
       <!-- SIDEBAR -->
       <aside class="content__sidebar">
-        <ul class="database__menu">
+        <ul class="content__menu">
           <li
-            :class="['database__menu__item', { active: activeTab === 'all' }]"
+            :class="['content__menu__item', { active: activeTab === 'all' }]"
             @click="activeTab = 'all'"
           >
             All Data
           </li>
           <li
-            :class="['database__menu__item', { active: activeTab === 'published' }]"
+            :class="['content__menu__item', { active: activeTab === 'published' }]"
             @click="activeTab = 'published'"
           >
             Published
           </li>
           <li
-            :class="['database__menu__item', { active: activeTab === 'drafts' }]"
+            :class="['content__menu__item', { active: activeTab === 'drafts' }]"
             @click="activeTab = 'drafts'"
           >
             Drafts
           </li>
           <li
-            :class="['database__menu__item', { active: activeTab === 'deleted' }]"
+            :class="['content__menu__item', { active: activeTab === 'deleted' }]"
             @click="activeTab = 'deleted'"
           >
             Deleted
@@ -113,7 +111,7 @@
       </aside>
 
       <!-- DATA TABLE     -->
-      <section class="database__data">
+      <section class="content__body">
         <transition name="slide-down">
           <div class="delete__alert" v-if="activeTab === 'deleted'">
             All data found here will be permanently deleted after 30 days
