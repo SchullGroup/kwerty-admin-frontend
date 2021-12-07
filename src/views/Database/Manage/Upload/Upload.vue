@@ -7,11 +7,17 @@
           <img src="@/assets/arrow.svg" alt="icon" class="arrow" @click="$router.go(-1)" />
           <p>Upload New Data</p>
         </div>
-        <k-button variant="secondary" negative="negative">Cancel Upload</k-button>
+        <k-button
+          v-if="filename"
+          @click="activeTab = 'UPLOAD CSV'"
+          variant="secondary"
+          negative="negative"
+          >Cancel Upload</k-button
+        >
       </div>
     </header>
     <section class="content">
-      <k-modal :open="openModal" uploading="true" v-if="isUploading === true">
+      <k-modal :open="openModal" uploading="true" v-if="isUploading">
         <div class="upload-modal-content">
           <div class="uploading-file"></div>
           <p>Just a second ...</p>
@@ -32,7 +38,6 @@
             v-for="tab in tabs"
             :key="tab.title"
             :class="['tab-item', activeTab === tab.title ? 'active' : '']"
-            @click="activeTab = tab.title"
           >
             <p class="step">{{ tab.step }}</p>
             <p class="title">{{ tab.title }}</p>
@@ -40,7 +45,23 @@
         </div>
         <div v-if="activeTab === 'REVIEW'">
           <div class="review__content">
-            <p>review slot</p>
+            <table border>
+              <thead>
+                <tr>
+                  <th v-for="field in fileFields" :key="field">
+                    {{ field }}
+                  </th>
+                </tr>
+              </thead>
+              <tr v-for="row in fileData" :key="Object.values(row).join('-')">
+                <td
+                  v-for="(colKey, i) in fileFields"
+                  :key="Object.values(row).join('-') + row[colKey] + i"
+                >
+                  {{ row[colKey] }}
+                </td>
+              </tr>
+            </table>
           </div>
           <div class="btn-wrapper">
             <k-button>Save & Publish</k-button>
@@ -55,7 +76,7 @@
           <section v-if="filename">
             <k-input label="Title" v-model="filename" :disabled="true"></k-input>
             <div class="btn-wrapper">
-              <k-button>Next</k-button>
+              <k-button @click="activeTab = 'REVIEW'">Next</k-button>
             </div>
           </section>
           <vue2Dropzone

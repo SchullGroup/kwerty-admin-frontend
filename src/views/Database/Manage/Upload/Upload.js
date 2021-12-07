@@ -1,3 +1,4 @@
+import XLSX from 'xlsx';
 import vue2Dropzone from 'vue2-dropzone';
 import {
   KDashboardLayout,
@@ -27,6 +28,8 @@ export default {
       url: '/',
     },
     filename: '',
+    fileData: [],
+    fileFields: [],
   }),
   methods: {
     goToTab(active) {
@@ -37,10 +40,18 @@ export default {
         },
       });
     },
-    addFile(file) {
+    async addFile(file) {
       this.isUploading = true;
       this.filename = file.name;
+      const data = await file.arrayBuffer();
+      const res = XLSX.read(data);
+      const sheetData = XLSX.utils.sheet_to_json(Object.values(res.Sheets)[0]);
+      this.fileData = sheetData;
+      this.fileFields = new Set();
+      Object.keys(sheetData[0]).forEach((k) => {
+        this.fileFields.add(k);
+      });
+      this.isUploading = false;
     },
-    // uploading() {},
   },
 };
