@@ -8,10 +8,10 @@ export function forgotPassword({ user }) {
   return instance.post('auth/admin/forgot-password', user);
 }
 
-export function resetPassword({ data, token }) {
-  return instance.patch('auth/admin/reset-password', data, {
+export function resetPassword({ token }) {
+  return instance.post('auth/admin/reset-password', {}, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `${token}`,
     },
   });
 }

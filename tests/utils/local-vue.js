@@ -13,6 +13,7 @@ const successStore = new Vuex.Store({
         getUser: () => ({
           firstName: 'Akomolafe',
           lastName: 'Oluwaseun',
+          email: 'kwerty@gmail.com',
           role: 'Super Admin',
         }),
         getProfile: () => ({
@@ -30,11 +31,13 @@ const successStore = new Vuex.Store({
           .mockResolvedValueOnce({ error: '' }),
 
         forgotPassword: jest.fn(() => 'Success'),
-        getProfile: jest
-        .fn()
+        getProfile: jest.fn(),
+        resetPassword: jest.fn()
+        .mockResolvedValueOnce({ error: '' })
+        .mockResolvedValueOnce({ error: 'yes' }),
       },
       mutations: {
-        RESET: jest.fn()
+        RESET: jest.fn(),
       },
       namespaced: true,
     },

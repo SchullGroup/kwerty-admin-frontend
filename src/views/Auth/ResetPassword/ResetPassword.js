@@ -23,8 +23,6 @@ export default {
         if (!response.error) {
           this.$toast.show({ message: response });
           this.$router.push('/check-inbox');
-        } else {
-          this.$toast.show({ message: 'Oops! Something went wrong' });
         }
       } catch (e) {
         this.$toast.show({ message: e });

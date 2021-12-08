@@ -5,11 +5,11 @@
     </template>
     <form @submit.prevent="forgotPassword">
       <div class="form__items">
-        <k-input label="Your email address" type="email" v-model="email"/>
+        <k-input label="Your email address" type="email" v-model="email" />
         <k-button :loading="isLoading" size="full" submit>Send my new password</k-button>
       </div>
-      <k-button class="btn" variant="link" size="full">
-        <router-link :to="{ name: 'Login' }">Back to login</router-link>
+      <k-button @click="$router.push({ name: 'Login' })" class="btn" variant="link" size="full">
+        Back to login
       </k-button>
     </form>
   </k-auth>

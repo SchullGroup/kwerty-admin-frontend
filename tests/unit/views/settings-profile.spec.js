@@ -20,5 +20,12 @@ describe('Settings admin profile page', () => {
     expect(wrapper.vm.$options.name).toMatch('ProfileSettings');
     expect(wrapper.attributes().class).toContain('settings__content');
     expect(wrapper.vm.logout());
+    wrapper.setData({
+      user: {
+        token: 'admindfdfydxfgbnyfg',
+      },
+    });
+    expect(wrapper.vm.sendNewPassword());
+    expect(wrapper.vm.sendNewPassword());
   });
 });

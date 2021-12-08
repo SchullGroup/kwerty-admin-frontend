@@ -31,7 +31,9 @@
           <p>We will send you a new secure password to your registered email address.</p>
           <p class="text-light">You cannot set a custom password for security purposes.</p>
         </div>
-        <k-button variant="tertiary">Set new password</k-button>
+        <k-button :loading="isLoading" variant="tertiary" @click="sendNewPassword"
+          >Set new password</k-button
+        >
       </div>
     </div>
     <div class="settings__section settings__section--with-line">
@@ -49,7 +51,7 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { KInput, KButton } from '@/components';
 import ProfileMixins from '@/mixins/Profile';
 
@@ -60,18 +62,38 @@ export default {
     KButton,
   },
   data: () => ({
-    // user: {},
+    isLoading: false,
   }),
   mixins: [ProfileMixins],
   computed: {
     ...mapGetters({
       profile: 'auth/getProfile',
+      user: 'auth/getUser',
     }),
   },
   methods: {
     ...mapMutations({
       reset: 'auth/RESET',
     }),
+    ...mapActions({
+      resetPassword: 'auth/resetPassword',
+    }),
+    async sendNewPassword() {
+      this.isLoading = true;
+      const { user } = this;
+      const { token } = user;
+      try {
+        const passwordSent = await this.resetPassword({ token });
+        if (!passwordSent.error) {
+          this.$toast.show({ message: passwordSent });
+        } else {
+          throw Error(passwordSent.error);
+        }
+        this.isLoading = false;
+      } catch (error) {
+        this.$toast.show({ message: error });
+      }
+    },
     logout() {
       this.reset();
       this.$router.push({
