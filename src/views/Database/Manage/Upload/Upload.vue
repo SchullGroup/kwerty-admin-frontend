@@ -17,7 +17,7 @@
       </div>
     </header>
     <section class="content">
-      <k-modal :open="openModal" uploading= true v-if="isUploading">
+      <k-modal :open="openModal" :uploading="true" v-if="isUploading">
         <div class="upload-modal-content">
           <div class="uploading-file"></div>
           <p>Just a second ...</p>

@@ -116,23 +116,8 @@ export default {
   },
   mounted() {
     const { active } = this.$route.query;
-    let activeTab;
-    switch (active) {
-      case 'all':
-        activeTab = 'all';
-        break;
-      case 'published':
-        activeTab = 'published';
-        break;
-      case 'drafts':
-        activeTab = 'drafts';
-        break;
-      case 'deleted':
-        activeTab = 'deleted';
-        break;
-      default:
-        return;
-    }
-    this.activeTab = activeTab;
+    const valid = ['all', 'published', 'unpublished', 'drafts'];
+    if (!active || valid.indexOf(active) === -1) return;
+    this.activeTab = active;
   },
 };

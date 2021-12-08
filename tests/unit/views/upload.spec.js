@@ -5,9 +5,11 @@ import UploadData from '@/views/Database/Manage/Upload/Upload.vue';
 const $router = {
   push: jest.fn(),
 };
-const file = {
+const mockE = {
   target: {
-    files: [{ name: 'Hello' }],
+    files: [
+      { name: 'Hello' },
+    ],
   },
 };
 
