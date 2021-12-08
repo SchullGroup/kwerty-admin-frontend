@@ -5,7 +5,7 @@
       <h3>Update profile picture</h3>
       <div class="profile">
         <div class="profile__media">
-          <img src="@/assets/avatar.png" alt="Profile picture">
+          <img src="@/assets/avatar.png" alt="Profile picture" />
         </div>
         <k-button variant="tertiary">Change avatar</k-button>
       </div>
@@ -13,23 +13,16 @@
     <div class="settings__section">
       <h3>Account Information</h3>
       <div class="form__grid">
-        <k-input
-          label="Surname"
-          placeholder="Surname"
-          disabled
-          v-model="user.lastName" />
-        <k-input
-          label="First name"
-          placeholder="First Name"
-          disabled
-          v-model="user.firstName" />
+        <k-input label="Surname" placeholder="Surname" disabled v-model="profile.lastName" />
+        <k-input label="First name" placeholder="First Name" disabled v-model="profile.firstName" />
       </div>
       <k-input
         label="Email address"
         type="email"
         placeholder="Email Address"
         disabled
-        v-model="user.email" />
+        v-model="profile.email"
+      />
     </div>
     <div class="settings__section settings__section--with-line">
       <h3>Change Password</h3>
@@ -50,14 +43,15 @@
             You will need to provide your login details to access your dashboard again.
           </p>
         </div>
-        <k-button variant="tertiary" negative>Log out</k-button>
+        <k-button @click="logout" variant="tertiary" negative>Log out</k-button>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import { KInput, KButton } from '@/components';
+import ProfileMixins from '@/mixins/Profile';
 
 export default {
   name: 'ProfileSettings',
@@ -65,10 +59,25 @@ export default {
     KInput,
     KButton,
   },
+  data: () => ({
+    // user: {},
+  }),
+  mixins: [ProfileMixins],
   computed: {
     ...mapGetters({
-      user: 'auth/getUser',
+      profile: 'auth/getProfile',
     }),
+  },
+  methods: {
+    ...mapMutations({
+      reset: 'auth/RESET',
+    }),
+    logout() {
+      this.reset();
+      this.$router.push({
+        name: 'Login',
+      });
+    },
   },
 };
 </script>

@@ -1,3 +1,4 @@
+import { mapActions } from 'vuex';
 import { KAuth, KInput, KButton } from '@/components';
 
 export default {
@@ -9,5 +10,27 @@ export default {
   },
   data: () => ({
     isLoading: false,
+    email: '',
   }),
+  methods: {
+    ...mapActions({
+      forgot: 'auth/forgotPassword',
+    }),
+    async forgotPassword() {
+      this.isLoading = true;
+      try {
+        const response = await this.forgot({ user: { email: this.email } });
+        if (!response.error) {
+          this.$toast.show({ message: response });
+          this.$router.push('/check-inbox');
+        } else {
+          this.$toast.show({ message: 'Oops! Something went wrong' });
+        }
+      } catch (e) {
+        this.$toast.show({ message: e });
+      } finally {
+        this.isLoading = false;
+      }
+    },
+  },
 };

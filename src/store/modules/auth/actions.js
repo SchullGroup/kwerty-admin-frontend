@@ -1,5 +1,5 @@
 import {
-  login, forgotPassword, resetPassword,
+  login, forgotPassword, resetPassword, getProfile,
 } from '@/api';
 import errorHandler from '@/utils/error-handler';
 
@@ -22,4 +22,11 @@ export default {
       const { message } = data;
       return message;
     }).catch((response) => errorHandler(response)),
+
+  getProfile: ({ commit }, body) => getProfile(body)
+    .then(({ data: { data } }) => {
+      commit('SET_ADMIN_PROFILE', data);
+      return data;
+    })
+    .catch((response) => errorHandler(response)),
 };

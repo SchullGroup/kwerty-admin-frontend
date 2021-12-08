@@ -6,7 +6,7 @@ describe(' Add Admin Component', () => {
   beforeEach(async () => {
     wrapper = shallowMount(AddAdmin);
   });
-  it('renders the add admin component', async () => {
+  it('renders the add user component', async () => {
     expect(wrapper.vm.$options.name).toMatch('KAddAdmin');
   });
 });
