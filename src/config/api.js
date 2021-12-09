@@ -31,7 +31,7 @@ instance.interceptors.response.use(
         setTimeout(() => {
           window.location.replace('/login');
         }, 1000);
-        return true;
+        return Promise.reject(error);
       }
     }
     return Promise.reject(error);

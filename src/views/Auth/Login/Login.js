@@ -27,11 +27,12 @@ export default {
         const user = await this.login({
           user: this.user,
         });
-        if (!user.error) {
+        console.log(user);
+        if (user.id) {
           this.$toast.show({ message: 'Successfully Logged In' });
           this.$router.push('/');
         } else {
-          this.$toast.show({ message: user.error });
+          this.$toast.show({ message: user });
         }
       } catch (error) {
         this.$toast.show({ message: error });

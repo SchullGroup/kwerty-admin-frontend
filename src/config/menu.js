@@ -51,12 +51,12 @@ const MENU_ITEMS = [
     ],
     permissions: ['Admin'],
   },
-  {
-    name: 'users',
-    label: 'Users',
-    route: '/users',
-    permissions: ['Admin'],
-  },
+  // {
+  //   name: 'users',
+  //   label: 'Users',
+  //   route: '/users',
+  //   permissions: ['Admin'],
+  // },
   {
     name: 'settings',
     label: 'Settings',
