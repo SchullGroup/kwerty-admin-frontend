@@ -1,5 +1,5 @@
 <template>
-  <div class="input__wrapper">
+  <div class="input__wrapper"  tabindex='1'>
     <div
       :class="[
         'input',
@@ -12,10 +12,11 @@
           'input--is-open': isSelect && isSelectOpen,
           'input--has-value': type === 'select' && innerValue,
           'as-dropdown': isSelect && variant === 'dropdown',
-          'with-display': !!this.optionsDisplay,
+          'with-display': !!this.optionsDisplay
         },
       ]"
       @click="isSelect ? toggleSelectOpen() : null"
+      :tabindex='isSelect ? 0 : -1'
     >
       <input
         :name="name"
