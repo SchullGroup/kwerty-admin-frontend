@@ -90,7 +90,6 @@ export default {
       this.button.text = this.editAdmin ? 'Save Changes' : 'Edit Admin';
     },
     handleEditAdmin(item) {
-      console.log(item);
       if (item) {
         this.showEditModal = true;
         this.currentAdmin = item;

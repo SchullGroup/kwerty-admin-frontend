@@ -25,12 +25,14 @@ const instance = axios.create({
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response.status === 401) {
-      await localStorage.clear();
-      setTimeout(() => {
-        window.location.replace('/login');
-      }, 1000);
-      return true;
+    if (window.location.pathname !== '/login') {
+      if (error.response.status === 401) {
+        await localStorage.clear();
+        setTimeout(() => {
+          window.location.replace('/login');
+        }, 1000);
+        return Promise.reject(error);
+      }
     }
     return Promise.reject(error);
   },

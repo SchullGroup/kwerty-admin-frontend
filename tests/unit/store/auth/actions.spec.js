@@ -53,13 +53,28 @@ jest.mock('@/api/auth', () => ({
         },
       },
     }),
+  getProfile: jest
+    .fn()
+    .mockResolvedValueOnce({
+      data: {
+        data: {
+          roleName: 'superAdmin',
+          email: 'test@example.com',
+          firstName: 'test',
+          lastName: 'example',
+        },
+      },
+    })
+    .mockRejectedValueOnce({
+      response: {
+        data: {
+          message: 'Error while performing action',
+        },
+      },
+    }),
 }));
 
-const {
-  login,
-  forgotPassword,
-  resetPassword,
-} = actions;
+const { login, forgotPassword, resetPassword, getProfile } = actions;
 const testUser = {
   email: 'test@xample.com',
   password: 'mypassword',
@@ -95,5 +110,18 @@ describe('Auth Actions', () => {
   it('handles reset password error', async () => {
     const reset = await resetPassword({ commit }, { password: testUser.password });
     expect(reset).toEqual(errorResponse);
+  });
+  it('handles get admin profile', async () => {
+    const profile = await getProfile({ commit });
+    expect(profile).toEqual({
+      roleName: 'superAdmin',
+      email: 'test@example.com',
+      firstName: 'test',
+      lastName: 'example',
+    });
+  });
+  it('handles get admin profile error', async () => {
+    const profile = await getProfile({ commit });
+    expect(profile).toEqual(errorResponse);
   });
 });

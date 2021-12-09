@@ -1,9 +1,11 @@
+import { mapGetters } from 'vuex';
 import { KDashboardLayout, KInput } from '../../components';
 import doughnutColors from '../../utils/doughnut-colors';
 import DoughnutWrapper from '../../components/Charts/DoughnutWrapper.vue';
 import LineWrapper from '../../components/Charts/LineWrapper.vue';
 import OverviewTableRow from './TableRow.vue';
 import dummyActivity from './dummyActivity';
+import ProfileMixin from '@/mixins/Profile';
 
 export default {
   name: 'DashboardHome',
@@ -14,6 +16,7 @@ export default {
     DoughnutWrapper,
     LineWrapper,
   },
+  mixins: [ProfileMixin],
   data: () => ({
     activities: null,
     overviewDuration: '>7days',
@@ -38,18 +41,26 @@ export default {
       },
     ],
     lineLabels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    lineDatasets: [{
-      data: [6000, 7500, 19000, 15000, 20500, 18000, 20000],
-      borderColor: 'rgb(90,11,117)',
-      pointBackgroundColor: 'rgba(90,11,117,1)',
-      pointHoverBackgroundColor: 'rgba(90,11,117,1)',
-      pointBorderColor: 'rgba(90,11,117,0)',
-      pointRadius: 1,
-      pointHitRadius: 64,
-      borderWidth: 2,
-    }],
+    lineDatasets: [
+      {
+        data: [6000, 7500, 19000, 15000, 20500, 18000, 20000],
+        borderColor: 'rgb(90,11,117)',
+        pointBackgroundColor: 'rgba(90,11,117,1)',
+        pointHoverBackgroundColor: 'rgba(90,11,117,1)',
+        pointBorderColor: 'rgba(90,11,117,0)',
+        pointRadius: 1,
+        pointHitRadius: 64,
+        borderWidth: 2,
+      },
+    ],
   }),
+  computed: {
+    ...mapGetters({
+      Profile: 'auth/getProfile',
+    }),
+  },
   mounted() {
     this.activities = dummyActivity;
+    this.getProfile();
   },
 };

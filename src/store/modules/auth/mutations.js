@@ -7,6 +7,10 @@ export default {
   },
   RESET: (state) => {
     state.user = {};
+    state.profile = {};
     state.token = null;
+  },
+  SET_ADMIN_PROFILE: (state, payload) => {
+    state.profile = payload;
   },
 };

@@ -5,8 +5,8 @@
     </template>
     <form>
       <div class="form__items">
-        <k-button :loading="isLoading" size="full">
-          <router-link :to="{ name: 'Login' }">Log in to your dashboard</router-link>
+        <k-button @click="$router.push({ name: 'Login' })" :loading="isLoading" size="full">
+          Log in to your dashboard
         </k-button>
       </div>
     </form>

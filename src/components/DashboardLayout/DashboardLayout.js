@@ -10,7 +10,15 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      user: 'auth/getUser',
+      profile: 'auth/getProfile',
     }),
+  },
+  filters: {
+    format(value) {
+      if (value) {
+        return value.replace('_', ' ');
+      }
+      return value;
+    },
   },
 };

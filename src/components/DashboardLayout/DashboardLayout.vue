@@ -27,11 +27,11 @@
       </nav>
       <div class="user">
         <div class="user__avatar">
-          <img src="@/assets/avatar.png" :alt="user.firstName">
+          <img src="@/assets/avatar.png" :alt="profile.firstName">
         </div>
         <div class="user__details">
-          <p class="text-bold">{{ user.firstName }} {{ user.lastName }}</p>
-          <p>{{ user.role }}</p>
+          <p class="text-bold">{{ profile.firstName }} {{ profile.lastName }}</p>
+          <p>{{ profile.roleName | format}}</p>
         </div>
       </div>
     </div>

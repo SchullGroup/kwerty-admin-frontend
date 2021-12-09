@@ -6,7 +6,7 @@ describe(' Edits Admin Component', () => {
   beforeEach(async () => {
     wrapper = shallowMount(EditAdmin);
   });
-  it('renders the edit admin component', async () => {
+  it('renders the edit user component', async () => {
     const mockThis = {
       currentadmin: {
         firstName: 'Sam',

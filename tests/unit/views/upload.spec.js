@@ -22,6 +22,6 @@ describe('manage upload file View', () => {
     });
     expect(wrapper.vm.$options.name).toMatch('Upload');
     expect(wrapper.vm.goToTab())
-    expect(wrapper.vm.addFile(file));
+    expect(wrapper.vm.addFile(mockE));
   });
 });

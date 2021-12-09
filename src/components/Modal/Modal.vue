@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div
-      :class="['modal', [uploading === 'true' ? 'uploading-state' : '']]"
+      :class="['modal', [uploading === true ? 'uploading-state' : '']]"
       v-if="isOpen"
       @click.stop="closeModal"
     >

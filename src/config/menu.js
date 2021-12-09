@@ -45,18 +45,18 @@ const MENU_ITEMS = [
       {
         name: 'adminActivities',
         label: 'Admin Activity',
-        route: '/activities/admin',
+        route: '/activities/user',
         permissions: ['Admin'],
       },
     ],
     permissions: ['Admin'],
   },
-  {
-    name: 'users',
-    label: 'Users',
-    route: '/users',
-    permissions: ['Admin'],
-  },
+  // {
+  //   name: 'users',
+  //   label: 'Users',
+  //   route: '/users',
+  //   permissions: ['Admin'],
+  // },
   {
     name: 'settings',
     label: 'Settings',
@@ -68,7 +68,7 @@ const MENU_ITEMS = [
 const ROLES = [
   'admin',
   'guest',
-  'super admin',
+  'super user',
 ];
 
 export { MENU_ITEMS, ROLES };
