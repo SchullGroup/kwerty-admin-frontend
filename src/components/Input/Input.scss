@@ -17,6 +17,7 @@
   &:focus-within,
   &.input--is-open:not(.as-dropdown) {
     border: 1px solid $primary-purple;
+    outline: none;
   }
 
   &.input--error {

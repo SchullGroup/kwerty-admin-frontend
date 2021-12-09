@@ -31,7 +31,7 @@
         </div>
         <div class="user__details">
           <p class="text-bold">{{ profile.firstName }} {{ profile.lastName }}</p>
-          <p>{{ profile.roleName | format}}</p>
+          <p>{{ snakeToTitle(profile.roleName) }}</p>
         </div>
       </div>
     </div>
