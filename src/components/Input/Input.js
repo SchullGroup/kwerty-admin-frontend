@@ -19,7 +19,7 @@ export default {
       required: true,
     },
     value: {
-      type: String,
+      type: null,
     },
     name: {
       type: String,

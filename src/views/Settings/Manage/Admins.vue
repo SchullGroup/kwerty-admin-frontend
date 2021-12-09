@@ -1,40 +1,42 @@
 <template>
-  <div class="admins">
-    <div v-for="admin in admins" :key="admin.email" :class="['admin__item']">
+  <div class='admins'>
+    <div v-for='admin in admins' :key='admin.email' :class="['admin__item']">
       <k-icons
-        @edit="handleEditAdmin(admin)"
-        @delete="showAddAdminmodal = true"
-        v-show="editAdmin"
+        v-show='editAdmin'
         :class="['icons']"
+        @delete='handleDeleteAdmin(admin.id)'
+        @edit='handleEditAdmin(admin.id)'
       />
-      <img src="@/assets/avatar.png" alt="avatar" class="avatar-icon" />
-      <div class="admin-text">
-        <p class="name">{{ admin.firstName }} {{ admin.lastName }}</p>
-        <p class="role">{{ admin.role }}</p>
+      <img alt='avatar' class='avatar-icon' src='@/assets/avatar.png' />
+      <div class='admin-text'>
+        <p class='name'>{{ titleCase(`${admin.firstName} ${admin.lastName}`) }}</p>
+        <p class='role'>{{ snakeToTitle(admin.roleName) }}</p>
       </div>
     </div>
-    <div class="btn-container">
+    <div class='btn-container'>
       <k-button
-        @click="showAddAdminmodal = true"
-        v-show="editAdmin"
-        variant="link"
-        class="add-new-admin-btn"
+        v-show='editAdmin'
+        class='add-new-admin-btn'
+        variant='link'
+        @click='showAddAdminmodal = true'
       >
         Add new admin
       </k-button>
-      <k-button @click="toggleButtonText" variant="tertiary">{{ button.text }}</k-button>
+      <k-button variant='tertiary' @click='toggleButtonText'>{{ button.text }}</k-button>
     </div>
-    <k-modal v-if="showEditModal" :open="showEditModal">
-      <k-edit-admin @close="showEditModal = false" :currentadmin="currentAdmin"></k-edit-admin>
+    <k-modal :open='showEditModal' @close='showEditModal = false'>
+      <k-edit-admin :currentadmin='currentAdmin' @close='showEditModal = false'></k-edit-admin>
     </k-modal>
-    <k-modal v-if="showAddAdminmodal" :open="showAddAdminmodal">
-      <k-add-admin @close="showAddAdminmodal = false"></k-add-admin>
+    <k-modal :open='showAddAdminmodal' @close='showEditModal = false'>
+      <k-add-admin @close='showAddAdminmodal = false'></k-add-admin>
     </k-modal>
   </div>
 </template>
 
 <script>
-import { KIcons, KButton, KModal } from '@/components';
+import { mapActions, mapGetters } from 'vuex';
+import stringHelpers from '@/utils/string-helpers';
+import { KButton, KIcons, KModal } from '@/components';
 import KEditAdmin from './EditAdmin.vue';
 import KAddAdmin from './AddAdmin.vue';
 
@@ -57,52 +59,49 @@ export default {
       text: 'Edit Admin',
     },
     show: false,
-    admins: [
-      {
-        firstName: 'Akomolafe',
-        lastName: 'Olamide',
-        role: 'Admin',
-        email: 'AO@gmail.com',
-      },
-      {
-        firstName: 'Sonny',
-        lastName: 'Kyel',
-        role: 'Guest',
-        email: 'SK@gmail.com',
-      },
-      {
-        firstName: 'Nnenna',
-        lastName: 'Ojiofor',
-        role: 'Guest',
-        email: 'NO@gmail.com',
-      },
-      {
-        firstName: 'Oluwaseun',
-        lastName: 'Morenike',
-        role: 'Admin',
-        email: 'OM@gmail.com',
-      },
-    ],
   }),
+  computed: {
+    ...mapGetters({
+      admins: 'admin/getAll',
+      roles: 'roles/getAll',
+      user: 'auth/getUser',
+    }),
+  },
   methods: {
+    ...stringHelpers,
+    ...mapActions({
+      deleteAdmin: 'admin/deleteOtherAdmin',
+    }),
     toggleButtonText() {
       this.editAdmin = !this.editAdmin;
       this.button.text = this.editAdmin ? 'Save Changes' : 'Edit Admin';
     },
-    handleEditAdmin(item) {
-      if (item) {
+    handleEditAdmin(id) {
+      if (id) {
         this.showEditModal = true;
-        this.currentAdmin = item;
+        const currentAdmin = this.admins.find((a) => a.id === id);
+        const roleId = this.roles.find((r) => r.name === currentAdmin.roleName).id;
+        this.currentAdmin = { ...currentAdmin, roleId };
       }
       return this.currentAdmin;
+    },
+    async handleDeleteAdmin(id) {
+      const { token } = this.user;
+      try {
+        const response = await this.deleteAdmin({ token, id });
+        this.$toast.show({ message: response });
+      } catch (e) {
+        this.$toast.show({ message: e });
+      }
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 .admins {
   position: relative;
+
   .admin__item {
     display: grid;
     grid-template-columns: max-content max-content max-content;
@@ -110,18 +109,22 @@ export default {
     max-width: 34rem;
     margin-bottom: 2.4rem;
     transition: grid-template-columns 2s ease;
+
     .avatar-icon {
       width: 4rem;
       height: 4rem;
     }
+
     .admin-text {
       white-space: nowrap;
+
       .name {
         font-weight: 600;
         font-size: 1.4rem;
         line-height: 1.6rem;
         color: $black;
       }
+
       .role {
         @extend .name;
         font-weight: 400;
@@ -129,6 +132,7 @@ export default {
       }
     }
   }
+
   .btn-container {
     display: flex;
     justify-content: flex-end;
