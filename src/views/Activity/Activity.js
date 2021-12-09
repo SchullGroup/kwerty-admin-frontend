@@ -1,8 +1,13 @@
+import { mapActions, mapGetters } from 'vuex';
 import {
-  KDashboardLayout, KPagination, KInput, KButton, KModal, KCard,
+  KDashboardLayout,
+  KPagination,
+  KInput,
+  KButton,
+  KModal,
+  KCard,
 } from '@/components';
 import ActivityTableRow from './TableRow.vue';
-import dummyActivity from './dummyActivity';
 
 export default {
   name: 'ActivityHome',
@@ -19,8 +24,9 @@ export default {
     type: null,
     page: 1,
     maxItemsOnPage: 20,
-    totalItems: 18,
-    displayFields: ['name', 'action', 'timestamp'],
+    totalItems: 0,
+    itemsOnPage: 20,
+    displayFields: ['name', 'activity', 'createdAt'],
     activities: [],
     duration: '>7days',
     optionsDisplay: {
@@ -41,24 +47,64 @@ export default {
       pdf: 'PDF',
     },
   }),
+  mounted() {
+    this.fetchActivities();
+    this.setType();
+  },
+  watch: {
+    page(value) {
+      if (value) {
+        this.fetchActivities(value);
+      }
+    },
+    $route() {
+      this.setType();
+    },
+  },
   computed: {
+    ...mapGetters({
+      user: 'auth/getUser',
+      allActivities: 'activity/getActivities',
+    }),
     title() {
       const { type } = this;
       return type ? `${type[0].toUpperCase()}${type.slice(1)} Activity` : 'Activity';
     },
   },
   methods: {
+    ...mapActions({
+      getAllActivities: 'activity/getActivities',
+    }),
+    async fetchActivities() {
+      const { user } = this;
+      const adminToken = user.token;
+      console.log(adminToken);
+      try {
+        const activitiesFetched = await this.getAllActivities({ adminToken });
+        if (!activitiesFetched.error) {
+          this.activities = activitiesFetched.activityLog;
+          this.page = activitiesFetched.currentPage;
+          this.totalItems = Number(activitiesFetched.total);
+          this.totalPages = activitiesFetched.totalPages;
+          console.log(activitiesFetched);
+        } else {
+          throw Error(activitiesFetched.error);
+        }
+      } catch (error) {
+        this.$toast.show({ message: error });
+      }
+    },
     setType() {
       this.type = this.$route.params.type;
     },
-  },
-  watch: {
-    $route() {
-      this.setType();
+    nextPage() {
+      const { itemsOnPage } = this;
+      if (this.page * itemsOnPage < this.totalItems) {
+        this.page += 1;
+      }
     },
-  },
-  mounted() {
-    this.setType();
-    this.activities = dummyActivity;
+    prevPage() {
+      this.page = this.page !== 1 ? this.page - 1 : this.page;
+    },
   },
 };
