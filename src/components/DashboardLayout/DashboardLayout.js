@@ -1,6 +1,7 @@
 import { mapGetters } from 'vuex';
 import { APP_NAME } from '@/config';
 import { MENU_ITEMS } from '@/config/menu';
+import stringHelpers from '../../utils/string-helpers';
 
 export default {
   name: 'DashboardLayout',
@@ -13,12 +14,7 @@ export default {
       profile: 'auth/getProfile',
     }),
   },
-  filters: {
-    format(value) {
-      if (value) {
-        return value.replace('_', ' ');
-      }
-      return value;
-    },
+  methods: {
+    ...stringHelpers,
   },
 };
