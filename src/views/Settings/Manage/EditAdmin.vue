@@ -1,25 +1,26 @@
 <template>
-  <k-card variant="in-modal" heading="Edit Admin">
-    <form class="form__items">
-      <k-input label="Surname" v-model="admin.lastName" />
-      <k-input label="First Name" v-model="admin.firstName" />
-      <k-input label="Email Address" type="email" v-model="admin.email" />
-      <k-input label="Password" variant="password" />
-      <k-input label="Set Role" type="select">
-        <option value="Admin" class="option">Admin</option>
-        <option value="Auditor" class="option">Auditor</option>
-        <option value="Manager" class="option">Manager</option>
+  <k-card heading='Edit Admin' variant='in-modal'>
+    <form class='form__items'>
+      <k-input v-model='admin.lastName' label='Surname' />
+      <k-input v-model='admin.firstName' label='First Name' />
+      <k-input v-model='admin.email' label='Email Address' type='email' />
+      <k-input v-model='password' disabled label='Password' type='password' />
+      <k-input v-model='admin.roleId' :optionsDisplay='rolesDisplay' label='Set Role'
+               type='select'>
       </k-input>
-      <div class="btn-wrapper">
-        <k-button variant="link" @click="$emit('close')">Cancel</k-button>
-        <k-button variant="secondary"  @click="$emit('close')">Finish</k-button>
+      <div class='btn-wrapper'>
+        <k-button variant='link' @click="$emit('close')">Cancel</k-button>
+        <k-button variant='secondary' :loading='sending' @click='finish'>Finish</k-button>
       </div>
     </form>
   </k-card>
 </template>
 
 <script>
-import { KCard, KInput, KButton } from '@/components';
+import { mapActions, mapGetters } from 'vuex';
+import stringHelpers from '@/utils/string-helpers';
+import rolesDisplay from '@/utils/rolesDisplay';
+import { KButton, KCard, KInput } from '@/components';
 
 export default {
   name: 'KEditAdmin',
@@ -36,7 +37,52 @@ export default {
   },
   data: () => ({
     admin: {},
+    password: '**********',
+    sending: false,
   }),
+  computed: {
+    ...mapGetters({
+      roles: 'roles/getAll',
+      user: 'auth/getUser',
+      adminPagination: 'admin/getPagination',
+    }),
+    rolesDisplay() {
+      return rolesDisplay(this.roles);
+    },
+  },
+  methods: {
+    ...stringHelpers,
+    ...mapActions(
+      {
+        updateAdmin: 'admin/editOtherAdmin',
+        fetchAdmin: 'admin/fetchAll',
+      },
+    ),
+    async finish() {
+      const {
+        admin: {
+          id, firstName, lastName, email,
+        }, user: { token },
+      } = this;
+
+      this.sending = true;
+      try {
+        const response = await this.updateAdmin({
+          token,
+          admin: {
+            id, firstName, lastName, email,
+          },
+        });
+        this.$toast.show({ message: response });
+        this.$emit('close');
+      } catch (e) {
+        this.$toast.show({ message: e });
+      } finally {
+        this.sending = false;
+      }
+    },
+
+  },
   created() {
     const { firstName, lastName, email } = this.currentadmin;
     if (firstName && lastName && email) {
@@ -47,7 +93,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 .btn-wrapper {
   display: flex;
   justify-content: flex-end;

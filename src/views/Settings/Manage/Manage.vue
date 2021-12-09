@@ -4,8 +4,9 @@
       <h1>Manage Admins</h1>
       <k-pagination
         :page="page"
-        :maxItemsOnPage="4"
-        :totalItems="totalItems"
+        :maxItemsOnPage="itemsOnPage"
+        :totalPages='pagination.totalPages'
+        :totalItems="pagination.total"
         @goToNext="nextPage"
         @goToPrev="prevPage"
       ></k-pagination>
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import { KPagination } from '@/components';
 import KAdmins from './Admins.vue';
 
@@ -27,14 +29,39 @@ export default {
     KPagination,
   },
   data: () => ({
-    page: 1,
-    totalItems: 4,
-    itemsOnPage: 20,
+    itemsOnPage: 10,
     modalOpen: true,
+    page: 1,
   }),
+  mounted() {
+    this.page = this.pagination.currentPage;
+  },
+  computed: {
+    ...mapGetters({
+      pagination: 'admin/getPagination',
+      user: 'auth/getUser',
+    }),
+  },
   methods: {
-    prevPage() {},
-    nextPage() {},
+    ...mapActions({
+      fetchAdmins: 'admin/fetchAll',
+    }),
+    prevPage() {
+      this.page -= 1;
+    },
+    nextPage() {
+      this.page += 1;
+    },
+  },
+  watch: {
+    page(num) {
+      const { token } = this.user;
+      try {
+        this.fetchAdmins({ token, page: num });
+      } catch (e) {
+        this.$toast.show({ message: e });
+      }
+    },
   },
 };
 </script>
