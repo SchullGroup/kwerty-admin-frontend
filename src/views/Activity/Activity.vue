@@ -8,6 +8,8 @@
           :maxItemsOnPage="20"
           :totalItems="totalItems"
           variant="many"
+          @goToNext="nextPage"
+          @goToPrev="prevPage"
         ></k-pagination>
         <k-input label="Search name or action"></k-input>
         <k-input
@@ -34,7 +36,7 @@
       <tbody class="activity__data__body">
         <activity-table-row
           v-for="activity in activities"
-          :key="activity.action + activity.value"
+          :key="activity.createdAt"
           :activity="activity"
           :fields="displayFields"
         >
