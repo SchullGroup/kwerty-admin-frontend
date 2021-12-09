@@ -26,6 +26,7 @@ export default {
     maxItemsOnPage: 20,
     totalItems: 0,
     itemsOnPage: 20,
+    totalPages: 0,
     displayFields: ['name', 'activity', 'createdAt'],
     activities: [],
     duration: '>7days',
@@ -75,12 +76,12 @@ export default {
     ...mapActions({
       getAllActivities: 'activity/getActivities',
     }),
-    async fetchActivities() {
+    async fetchActivities(page = 1) {
       const { user } = this;
       const adminToken = user.token;
       console.log(adminToken);
       try {
-        const activitiesFetched = await this.getAllActivities({ adminToken });
+        const activitiesFetched = await this.getAllActivities({ page, adminToken });
         if (!activitiesFetched.error) {
           this.activities = activitiesFetched.activityLog;
           this.page = activitiesFetched.currentPage;
