@@ -24,6 +24,10 @@ export default {
       type: Number,
       required: true,
     },
+    totalPages: {
+      type: Number,
+      required: true,
+    },
     variant: {
       type: String,
     },
