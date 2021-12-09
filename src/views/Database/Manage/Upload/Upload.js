@@ -42,16 +42,21 @@ export default {
     },
     async addFile(file) {
       this.isUploading = true;
-      this.filename = file.name;
-      const data = await file.arrayBuffer();
-      const res = XLSX.read(data);
-      const sheetData = XLSX.utils.sheet_to_json(Object.values(res.Sheets)[0]);
-      this.fileData = sheetData;
-      this.fileFields = new Set();
-      Object.keys(sheetData[0]).forEach((k) => {
-        this.fileFields.add(k);
-      });
-      this.isUploading = false;
+      try {
+        this.filename = file.name;
+        const data = await file.arrayBuffer();
+        const res = XLSX.read(data);
+        const sheetData = XLSX.utils.sheet_to_json(Object.values(res.Sheets)[0]);
+        this.fileData = sheetData;
+        this.fileFields = new Set();
+        Object.keys(sheetData[0]).forEach((k) => {
+          this.fileFields.add(k);
+        });
+      } catch (e) {
+        console.log(e);
+      } finally {
+        this.isUploading = false;
+      }
     },
   },
 };

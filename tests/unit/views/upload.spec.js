@@ -1,7 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import UploadData from '@/views/Database/Manage/Upload/Upload.vue';
 
-
 const $router = {
   push: jest.fn(),
 };
@@ -21,7 +20,7 @@ describe('manage upload file View', () => {
       },
     });
     expect(wrapper.vm.$options.name).toMatch('Upload');
-    expect(wrapper.vm.goToTab())
+    expect(wrapper.vm.goToTab());
     expect(wrapper.vm.addFile(mockE));
   });
 });
