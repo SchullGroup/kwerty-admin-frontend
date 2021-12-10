@@ -17,6 +17,8 @@ export default {
         await this.fetchprofile({ id, token });
       } catch (error) {
         this.$toast.show({ message: error });
+      } finally {
+        this.isLoading = false;
       }
     },
   },

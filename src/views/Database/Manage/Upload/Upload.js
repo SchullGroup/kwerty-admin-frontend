@@ -53,7 +53,7 @@ export default {
           this.fileFields.add(k);
         });
       } catch (e) {
-        console.log(e);
+        this.$toast.show({ message: e });
       } finally {
         this.isUploading = false;
       }

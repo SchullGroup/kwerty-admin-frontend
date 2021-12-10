@@ -1,7 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
-import Profile from '@/views/Settings/Profile.vue';
-import { localVue, successStore as store } from '../../utils/local-vue';
 import Vuex from 'vuex';
+import Profile from '@/views/Settings/Profile.vue';
+import ProfileMixin from '@/mixins/Profile';
+import { localVue, successStore as store } from '../../utils/local-vue';
 
 localVue.use(Vuex);
 const $router = {
@@ -13,6 +14,7 @@ describe('Settings admin profile page', () => {
     const wrapper = shallowMount(Profile, {
       store,
       localVue,
+      mixins: [ProfileMixin],
       mocks: {
         $router,
       },

@@ -83,18 +83,14 @@ export default {
     }),
     async sendNewPassword() {
       this.isLoading = true;
-      const { user } = this;
-      const { token } = user;
+      const { user: { token } } = this;
       try {
         const passwordSent = await this.resetPassword({ token });
-        if (!passwordSent.error) {
-          this.$toast.show({ message: passwordSent });
-        } else {
-          throw Error(passwordSent.error);
-        }
-        this.isLoading = false;
+        this.$toast.show({ message: passwordSent });
       } catch (error) {
         this.$toast.show({ message: error });
+      } finally {
+        this.isLoading = false;
       }
     },
     logout() {
@@ -106,7 +102,7 @@ export default {
   },
   created() {
     const { token } = this.user;
-    if (!this.admins.length) {
+    if (Array.isArray(this.admins) && !this.admins.length) {
       try {
         this.fetchAdmin({ token });
         this.fetchRoles({ token });
