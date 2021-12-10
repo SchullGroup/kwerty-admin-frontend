@@ -6,20 +6,26 @@ export default {
 
   // convert from ```spaced string``` to ```Title Case```
   titleCase(someStr) {
-    const words = someStr.split(' ');
-    const skipWords = ['a', 'an', 'the'];
-    const modified = words.map((w) => {
-      if (skipWords.indexOf(w) !== -1) {
-        return w;
-      }
-      return this.capitalize(w);
-    });
-    return modified.join(' ');
+    if (typeof someStr === 'string') {
+      const words = someStr.split(' ');
+      const skipWords = ['a', 'an', 'the'];
+      const modified = words.map((w, i) => {
+        if (skipWords.indexOf(w) !== -1 && i !== 0) {
+          return w;
+        }
+        return this.capitalize(w);
+      });
+      return modified.join(' ');
+    }
+    return someStr;
   },
 
   // convert from ```snake_case``` to ```spaced string```
   snakeCase(someStr) {
-    return someStr.replaceAll('_', ' ');
+    if (typeof someStr === 'string') {
+      return someStr.replaceAll('_', ' ');
+    }
+    return someStr;
   },
 
   // convert from ```snake_case``` to ```Title Case```

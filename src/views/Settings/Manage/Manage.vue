@@ -9,6 +9,8 @@
         :totalItems="pagination.total"
         @goToNext="nextPage"
         @goToPrev="prevPage"
+        @goToFirst="firstPage"
+        @goToLast="lastPage"
       ></k-pagination>
     </div>
     <div class="settings__section settings__section--with-line">
@@ -34,6 +36,7 @@ export default {
     page: 1,
   }),
   mounted() {
+    if (!this.pagination) return;
     this.page = this.pagination.currentPage;
   },
   computed: {
@@ -52,12 +55,18 @@ export default {
     nextPage() {
       this.page += 1;
     },
+    firstPage() {
+      this.page = 1;
+    },
+    lastPage() {
+      this.page = this.pagination.totalPages;
+    },
   },
   watch: {
-    page(num) {
+    async page(num) {
       const { token } = this.user;
       try {
-        this.fetchAdmins({ token, page: num });
+        await this.fetchAdmins({ token, page: num });
       } catch (e) {
         this.$toast.show({ message: e });
       }

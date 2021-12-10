@@ -238,6 +238,7 @@
       :page="1"
       :maxItemsOnPage="20"
       :totalItems="20"
+      :totalPages='1'
     ></k-pagination>
   </k-dashboard-layout>
 </template>
