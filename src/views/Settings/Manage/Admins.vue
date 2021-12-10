@@ -22,13 +22,13 @@
       >
         Add new admin
       </k-button>
-      <k-button variant='tertiary' @click='toggleButtonText'>{{ button.text }}</k-button>
+      <k-button @click="toggleButtonText" variant="tertiary">{{ button.text }}</k-button>
     </div>
-    <k-modal :open='showEditModal' @close='showEditModal = false'>
-      <k-edit-admin :currentadmin='currentAdmin' @close='showEditModal = false'></k-edit-admin>
+    <k-modal v-if="showEditModal" :open="showEditModal">
+      <k-edit-admin @close="showEditModal = false" :currentadmin="currentAdmin"></k-edit-admin>
     </k-modal>
-    <k-modal :open='showAddAdminmodal' @close='showEditModal = false'>
-      <k-add-admin @close='showAddAdminmodal = false'></k-add-admin>
+    <k-modal v-if="showAddAdminmodal" :open="showAddAdminmodal">
+      <k-add-admin @close="showAddAdminmodal = false"></k-add-admin>
     </k-modal>
   </div>
 </template>
