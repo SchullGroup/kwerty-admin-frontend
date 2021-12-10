@@ -17,7 +17,7 @@ const $router = {
 const mockThis = {
   setType: jest.fn(),
   fetchActivities: jest.fn(),
-  $route: $route,
+  $route,
   page: 1,
 };
 describe('Activity Component', () => {
