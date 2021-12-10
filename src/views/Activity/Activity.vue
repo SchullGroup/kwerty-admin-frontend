@@ -38,7 +38,7 @@
       </thead>
       <tbody class="activity__data__body">
         <activity-table-row
-          v-for="activity in activities"
+          v-for="activity in allActivities"
           :key="activity.createdAt"
           :activity="activity"
           :fields="displayFields"
