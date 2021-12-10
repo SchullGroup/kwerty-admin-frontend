@@ -9,7 +9,7 @@ localVue.use(Toast);
 const successStore = new Vuex.Store({
   modules: {
     auth: {
-      getters: {
+      getters: {on''
         getUser: () => ({
           firstName: 'Akomolafe',
           lastName: 'Oluwaseun',
