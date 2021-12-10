@@ -8,6 +8,7 @@ import {
   KCard,
 } from '@/components';
 import ActivityTableRow from './TableRow.vue';
+import dummyActivity from './dummyActivity';
 
 export default {
   name: 'ActivityHome',
