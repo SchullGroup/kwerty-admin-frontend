@@ -49,7 +49,6 @@ export default {
     KModal,
     KAddAdmin,
   },
-  props: {},
   data: () => ({
     editAdmin: false,
     showEditModal: false,
@@ -77,11 +76,13 @@ export default {
       this.button.text = this.editAdmin ? 'Save Changes' : 'Edit Admin';
     },
     handleEditAdmin(id) {
-      if (id) {
+      try {
         this.showEditModal = true;
         const currentAdmin = this.admins.find((a) => a.id === id);
         const roleId = this.roles.find((r) => r.name === currentAdmin.roleName).id;
         this.currentAdmin = { ...currentAdmin, roleId };
+      } catch (e) {
+        this.$toast.show({ message: e });
       }
       return this.currentAdmin;
     },

@@ -47,6 +47,7 @@ export default {
       adminPagination: 'admin/getPagination',
     }),
     rolesDisplay() {
+      if (!Array.isArray(this.roles)) return {};
       return rolesDisplay(this.roles);
     },
   },
@@ -61,7 +62,7 @@ export default {
     async finish() {
       const {
         admin: {
-          id, firstName, lastName, email,
+          id, firstName, lastName, email, roleId,
         }, user: { token },
       } = this;
 
@@ -70,7 +71,7 @@ export default {
         const response = await this.updateAdmin({
           token,
           admin: {
-            id, firstName, lastName, email,
+            id, firstName, lastName, email, roleId,
           },
         });
         this.$toast.show({ message: response });

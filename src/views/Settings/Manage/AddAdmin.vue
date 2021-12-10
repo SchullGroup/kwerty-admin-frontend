@@ -39,6 +39,7 @@ export default {
       user: 'auth/getUser',
     }),
     rolesDisplay() {
+      if (!Array.isArray(this.roles)) return {};
       return rolesDisplay(this.roles);
     },
   },

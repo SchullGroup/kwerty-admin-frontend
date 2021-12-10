@@ -2,6 +2,8 @@ import { shallowMount } from '@vue/test-utils';
 import ActivityHome from '@/views/Activity/Activity';
 import TableRow from '@/views/Activity/TableRow.vue';
 import { localVue, successStore as store } from '../../utils/local-vue';
+import Vuex from 'vuex';
+localVue.use(Vuex);
 
 const $route = {
   params: {
@@ -17,7 +19,7 @@ const $router = {
 const mockThis = {
   setType: jest.fn(),
   fetchActivities: jest.fn(),
-  $route: $route,
+  $route,
   page: 1,
 };
 describe('Activity Component', () => {
