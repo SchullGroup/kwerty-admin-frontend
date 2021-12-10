@@ -12,7 +12,6 @@ export default {
       fetchprofile: 'auth/getProfile',
     }),
     async getProfile() {
-      this.isLoading = true;
       try {
         const { id, token } = this.user;
         await this.fetchprofile({ id, token });

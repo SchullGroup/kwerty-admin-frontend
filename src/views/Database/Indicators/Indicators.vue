@@ -91,7 +91,7 @@
         :page="page"
         :maxItemsOnPage="20"
         :totalItems="totalItems"
-        :totalPages='1'
+        :totalPages="totalPages"
         variant="many"
         @goToNext="nextPage"
         @goToPrev="prevPage"

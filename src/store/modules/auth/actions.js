@@ -20,7 +20,6 @@ export default {
   resetPassword: (context, body) => resetPassword(body)
     .then(({ data }) => {
       const { message } = data;
-      console.log(message);
       return message;
     }).catch((response) => errorHandler(response)),
 

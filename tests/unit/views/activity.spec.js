@@ -1,7 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
-import ActivityHome from '../../../src/views/Activity/Activity';
-import TableRow from '../../../src/views/Activity/TableRow.vue';
+import ActivityHome from '@/views/Activity/Activity';
+import TableRow from '@/views/Activity/TableRow.vue';
 import { localVue, successStore as store } from '../../utils/local-vue';
+import Vuex from 'vuex';
+localVue.use(Vuex);
 
 const $route = {
   params: {
@@ -44,7 +46,13 @@ describe('Activity Component', () => {
     expect(wrapper.vm.fetchActivities());
     expect(wrapper.vm.prevPage());
     expect(wrapper.vm.nextPage());
+    expect(wrapper.vm.firstPage());
+    expect(wrapper.vm.lastPage());
   });
-
-  expect(TableRow.methods.initials('Ammiel Yawson')).toMatch('AY');
+  it('should fromat the date', () => {
+    expect(TableRow.methods.initials('Ammiel Yawson')).toMatch('AY');
+    expect(TableRow.filters.formatDate(new Date(), 'createdAt'));
+    expect(TableRow.filters.formatDate(new Date(), 'somethingelse'));
+    expect(TableRow.filters.formatDate('', 'createdAt'));
+  });
 });

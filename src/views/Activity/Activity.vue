@@ -11,6 +11,8 @@
           variant="many"
           @goToNext="nextPage"
           @goToPrev="prevPage"
+          @goToFirst="firstPage"
+          @goToLast="lastPage"
         ></k-pagination>
         <k-input label="Search name or action"></k-input>
         <k-input
@@ -36,7 +38,7 @@
       </thead>
       <tbody class="activity__data__body">
         <activity-table-row
-          v-for="activity in activities"
+          v-for="activity in allActivities"
           :key="activity.createdAt"
           :activity="activity"
           :fields="displayFields"

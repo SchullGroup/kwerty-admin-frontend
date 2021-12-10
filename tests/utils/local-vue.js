@@ -36,7 +36,10 @@ const successStore = new Vuex.Store({
           .mockResolvedValueOnce({ id: '' }),
 
         forgotPassword: jest.fn(() => 'Success'),
-        getProfile: jest.fn(),
+        getProfile: jest
+          .fn()
+          .mockResolvedValueOnce({ error: '' })
+          .mockResolvedValueOnce({ error: 'yes' }),
         resetPassword: jest
           .fn()
           .mockResolvedValueOnce({ error: '' })

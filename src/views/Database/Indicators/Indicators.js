@@ -28,6 +28,7 @@ export default {
     page: 1,
     totalItems: 20,
     itemsOnPage: 20,
+    totalPages: 1,
     categories: 'All Categories',
     modalCategories: 'Economy',
     modalFrequency: 'Yearly',
