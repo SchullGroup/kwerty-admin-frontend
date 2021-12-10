@@ -10,7 +10,7 @@ jest.mock('@/config', () => ({
   instance: {
     get: jest.fn().mockResolvedValue(true),
     post: jest.fn().mockResolvedValue('success'),
-    put: jest.fn().mockResolvedValue('edited'),
+    put: jest.fn().mockResolvedValueOnce('edited'),
     delete: jest.fn().mockResolvedValue('deleted'),
   },
 }));
