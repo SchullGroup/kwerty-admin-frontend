@@ -22,10 +22,8 @@ export default {
 
   // convert from ```snake_case``` to ```spaced string```
   snakeCase(someStr) {
-    if (typeof someStr === 'string') {
-      return someStr.replaceAll('_', ' ');
-    }
-    return someStr;
+    if (typeof someStr !== 'string') return someStr;
+    return someStr.replaceAll('_', ' ');
   },
 
   // convert from ```snake_case``` to ```Title Case```
