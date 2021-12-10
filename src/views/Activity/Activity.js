@@ -29,7 +29,6 @@ export default {
     itemsOnPage: 20,
     totalPages: 0,
     displayFields: ['name', 'activity', 'createdAt'],
-    activities: [],
     duration: '>7days',
     optionsDisplay: {
       alltime: 'All time',
@@ -83,7 +82,6 @@ export default {
       try {
         const activitiesFetched = await this.getAllActivities({ page, adminToken });
         if (!activitiesFetched.error) {
-          this.activities = activitiesFetched.activityLog;
           this.page = Number(activitiesFetched.currentPage);
           this.totalItems = Number(activitiesFetched.total);
           this.totalPages = activitiesFetched.totalPages;

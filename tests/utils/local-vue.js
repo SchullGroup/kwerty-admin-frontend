@@ -54,6 +54,11 @@ const successStore = new Vuex.Store({
             name: 'test name',
             createdAt: 'someDate',
           },
+          {
+            activity: 'logged in',
+            name: 'test name',
+            createdAt: 'someDate',
+          },
         ],
       },
       actions: {
