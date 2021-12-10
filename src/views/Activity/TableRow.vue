@@ -9,14 +9,16 @@
         untitled: field === 'name' && activity[field] === 'Untitled User',
       }"
     >
-      <span class="initials" v-if="field === 'name'">{{initials(activity[field])}}</span>
-      {{ activity[field] }}
+      <span class="initials" v-if="field === 'name'">{{ initials(activity[field]) }}</span>
+      {{ activity[field] | formatDate(field)}}
       <span class="value" v-if="field === 'action'">&nbsp;{{ '\n' + activity['value'] }}</span>
     </td>
   </tr>
 </template>
 
 <script>
+import format from 'date-fns/format';
+
 export default {
   name: 'ActivityTableRow',
   props: {
@@ -27,12 +29,27 @@ export default {
       type: Array,
     },
   },
+  filters: {
+    formatDate(value, field) {
+      if (value) {
+        switch (field) {
+          case 'createdAt':
+            return `${format(new Date(value), 'p')} , ${format(new Date(value), 'd')}-${format(new Date(value), 'MM')}-${format(new Date(value), 'Y')}`;
+          default:
+            return value;
+        }
+      }
+      return value;
+    },
+  },
   methods: {
     initials(name) {
       if (name === 'Untitled User') return '?';
       let value = '';
-      name.split(' ').forEach((n) => { value += n[0]; });
-      return value;
+      name.split(' ').forEach((n) => {
+        value += n[0];
+      });
+      return value.toUpperCase();
     },
   },
 };

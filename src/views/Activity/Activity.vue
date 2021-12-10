@@ -11,6 +11,8 @@
           variant="many"
           @goToNext="nextPage"
           @goToPrev="prevPage"
+          @goToFirst="firstPage"
+          @goToLast="lastPage"
         ></k-pagination>
         <k-input label="Search name or action"></k-input>
         <k-input

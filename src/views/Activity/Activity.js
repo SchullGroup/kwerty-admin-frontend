@@ -80,15 +80,13 @@ export default {
     async fetchActivities(page = 1) {
       const { user } = this;
       const adminToken = user.token;
-      console.log(adminToken);
       try {
         const activitiesFetched = await this.getAllActivities({ page, adminToken });
         if (!activitiesFetched.error) {
           this.activities = activitiesFetched.activityLog;
-          this.page = activitiesFetched.currentPage;
+          this.page = Number(activitiesFetched.currentPage);
           this.totalItems = Number(activitiesFetched.total);
           this.totalPages = activitiesFetched.totalPages;
-          console.log(activitiesFetched);
         } else {
           throw Error(activitiesFetched.error);
         }
@@ -100,13 +98,16 @@ export default {
       this.type = this.$route.params.type;
     },
     nextPage() {
-      const { itemsOnPage } = this;
-      if (this.page * itemsOnPage < this.totalItems) {
-        this.page += 1;
-      }
+      this.page += 1;
     },
     prevPage() {
-      this.page = this.page !== 1 ? this.page - 1 : this.page;
+      this.page -= 1;
+    },
+    firstPage() {
+      this.page = 1;
+    },
+    lastPage() {
+      this.page = this.totalPages;
     },
   },
 };
