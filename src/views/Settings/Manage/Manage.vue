@@ -6,6 +6,7 @@
         :page="page"
         :maxItemsOnPage="4"
         :totalItems="totalItems"
+        :totalPages="totalPages"
         @goToNext="nextPage"
         @goToPrev="prevPage"
       ></k-pagination>
@@ -30,6 +31,7 @@ export default {
     page: 1,
     totalItems: 4,
     itemsOnPage: 20,
+    totalPages: 0,
     modalOpen: true,
   }),
   methods: {

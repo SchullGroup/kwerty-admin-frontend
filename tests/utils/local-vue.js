@@ -15,7 +15,7 @@ const successStore = new Vuex.Store({
           lastName: 'Oluwaseun',
           email: 'kwerty@gmail.com',
           role: 'Super Admin',
-          token: 'esdfghbvrertyth'
+          token: 'esdfghbvrertyth',
         }),
         getProfile: () => ({
           firstName: 'Akomolafe',
@@ -32,7 +32,10 @@ const successStore = new Vuex.Store({
           .mockResolvedValueOnce({ error: '' }),
 
         forgotPassword: jest.fn(() => 'Success'),
-        getProfile: jest.fn(),
+        getProfile: jest
+          .fn()
+          .mockResolvedValueOnce({ error: '' })
+          .mockResolvedValueOnce({ error: 'yes' }),
         resetPassword: jest
           .fn()
           .mockResolvedValueOnce({ error: '' })
@@ -55,9 +58,9 @@ const successStore = new Vuex.Store({
       },
       actions: {
         getActivities: jest
-        .fn()
-        .mockResolvedValueOnce({ error: ''})
-        .mockResolvedValueOnce({ error: 'yes'})
+          .fn()
+          .mockResolvedValueOnce({ error: '' })
+          .mockResolvedValueOnce({ error: 'yes' }),
       },
       mutations: {
         SET_ACTIVITIES: jest.fn(),
