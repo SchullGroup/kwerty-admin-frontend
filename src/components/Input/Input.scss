@@ -13,8 +13,8 @@
   border-radius: 0.8rem;
   background: transparent;
 
-  &:focus,
-  &:focus-within,
+  &:focus:not(.as-dropdown),
+  &:focus-within:not(.as-dropdown),
   &.input--is-open:not(.as-dropdown) {
     border: 1px solid $primary-purple;
     outline: none;
