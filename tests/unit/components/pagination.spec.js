@@ -7,7 +7,7 @@ describe('Pagination Component', () => {
   beforeAll(() => {
     wrapper = mount(IPagination, {
       propsData: {
-        page: 1, maxItemsOnPage: 20, totalItems: 248, variant: 'many',
+        page: 1, maxItemsOnPage: 20, totalItems: 248, totalPages: 3, variant: 'many',
       },
     });
   });
@@ -24,7 +24,7 @@ describe('Pagination Component', () => {
     await wrapper.find('.pagination__button:nth-of-type(4)').trigger('click');
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.emitted()).toHaveProperty('goToPrev');
+    expect(wrapper.emitted().goToPrev.length).toBe(1);
     expect(wrapper.emitted()).toHaveProperty('goToNext');
     expect(wrapper.emitted()).toHaveProperty('goToFirst');
     expect(wrapper.emitted()).toHaveProperty('goToLast');
