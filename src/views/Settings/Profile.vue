@@ -102,13 +102,11 @@ export default {
   },
   created() {
     const { token } = this.user;
-    if (Array.isArray(this.admins) && !this.admins.length) {
-      try {
-        this.fetchAdmin({ token });
-        this.fetchRoles({ token });
-      } catch (e) {
-        this.$toast.show({ message: e });
-      }
+    try {
+      this.fetchAdmin({ token });
+      this.fetchRoles({ token });
+    } catch (e) {
+      this.$toast.show({ message: e });
     }
   },
 };

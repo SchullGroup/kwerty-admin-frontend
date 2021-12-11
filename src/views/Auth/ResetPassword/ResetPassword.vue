@@ -5,8 +5,8 @@
     </template>
     <form @submit.prevent="forgotPassword">
       <div class="form__items">
-        <k-input label="Your email address" type="email" />
-        <k-button :loading="isLoading" size="full">Send my new password</k-button>
+        <k-input label="Your email address" type="email" v-model='email' />
+        <k-button :loading="isLoading" size="full" submit>Send my new password</k-button>
       </div>
       <k-button @click="$router.push({ name: 'Login' })" class="btn" variant="link" size="full">
         Back to login

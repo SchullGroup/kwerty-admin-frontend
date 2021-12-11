@@ -29,5 +29,14 @@ describe('Settings admin profile page', () => {
     });
     expect(wrapper.vm.sendNewPassword());
     expect(wrapper.vm.sendNewPassword());
+    expect(wrapper.vm.sendNewPassword());
+
+    const mockThis = {
+      user: { token: 'dafd' },
+      fetchAdmins: jest.fn().mockRejectedValueOnce(new Error('error occurred')),
+      fetchRoles: jest.fn().mockRejectedValueOnce(new Error('error occurred')),
+      $toast: { show: jest.fn() },
+    };
+    Profile.created.call(mockThis);
   });
 });

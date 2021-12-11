@@ -20,10 +20,8 @@ export default {
       this.isLoading = true;
       try {
         const response = await this.forgot({ user: { email: this.email } });
-        if (!response.error) {
-          this.$toast.show({ message: response });
-          this.$router.push('/check-inbox');
-        }
+        this.$toast.show({ message: response });
+        this.$router.push('/check-inbox');
       } catch (e) {
         this.$toast.show({ message: e });
       } finally {

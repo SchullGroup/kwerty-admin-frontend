@@ -34,8 +34,10 @@ const successStore = new Vuex.Store({
           .mockResolvedValueOnce({ id: '' })
           .mockResolvedValueOnce({ id: 'yes' })
           .mockResolvedValueOnce({ id: '' }),
-
-        forgotPassword: jest.fn(() => 'Success'),
+        forgotPassword: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'password reset successfully' })
+          .mockRejectedValueOnce(new Error('error occurred')),
         getProfile: jest
           .fn()
           .mockResolvedValueOnce({ error: '' })
@@ -43,7 +45,8 @@ const successStore = new Vuex.Store({
         resetPassword: jest
           .fn()
           .mockResolvedValueOnce({ error: '' })
-          .mockResolvedValueOnce({ error: 'yes' }),
+          .mockResolvedValueOnce({ error: 'yes' })
+          .mockRejectedValueOnce(new Error('error occurred')),
       },
       mutations: {
         RESET: jest.fn(),
@@ -75,6 +78,9 @@ const successStore = new Vuex.Store({
       getters: {
         getAll: jest.fn().mockResolvedValue([{ id: '1', name: 'super_admin' }]),
       },
+      actions: {
+        fetchAll: jest.fn().mockResolvedValue([{ id: '1', name: 'super_admin' }]),
+      },
       namespaced: true,
     },
     admin: {
@@ -85,7 +91,10 @@ const successStore = new Vuex.Store({
         }],
       },
       actions: {
-        fetchAll: jest.fn(),
+        fetchAll: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'fetched successfully' })
+          .mockRejectedValueOnce(new Error('error occurred')),
         addAdmin: jest
           .fn()
           .mockResolvedValueOnce({ message: 'updated successfully' })
