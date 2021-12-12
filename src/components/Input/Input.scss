@@ -13,6 +13,10 @@
   border-radius: 0.8rem;
   background: transparent;
 
+  &:not(.input--select) {
+    overflow: hidden
+  }
+
   &:focus:not(.as-dropdown),
   &:focus-within:not(.as-dropdown),
   &.input--is-open:not(.as-dropdown) {
