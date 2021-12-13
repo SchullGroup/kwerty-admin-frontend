@@ -37,44 +37,59 @@
         </tr>
       </thead>
       <tbody class="activity__data__body">
-        <activity-table-row
-          v-for="activity in allActivities"
-          :key="activity.createdAt"
-          :activity="activity"
-          :fields="displayFields"
-        >
-        </activity-table-row>
+        <template v-if="isLoading">
+          <tr v-for="i in Array(20).keys()" :key="i">
+            <td
+              v-for="field in displayFields"
+              :key="i + field"
+              :class="field"
+              :id="field"
+              style="height: 20px"
+            >
+              <div class="suspense w-70"></div>
+            </td>
+          </tr>
+        </template>
+        <template v-else>
+          <activity-table-row
+            v-for="activity in allActivities"
+            :key="activity.createdAt"
+            :activity="activity"
+            :fields="displayFields"
+          >
+          </activity-table-row>
+        </template>
       </tbody>
     </table>
     <k-modal @close="modalOpen = false" :open="modalOpen">
       <k-card variant="in-modal" heading="Export Activity">
         <form class="form__items">
-          <k-input label="Title" name='title'></k-input>
+          <k-input label="Title" name="title"></k-input>
           <k-input
             label="File Type"
-            name='file-type'
+            name="file-type"
             type="select"
             v-model="defaultFileType"
             :optionsDisplay="fileTypes"
           ></k-input>
-          <div class='input-row'>
+          <div class="input-row">
             <k-input
               label="Start Date"
-              name='start-date'
+              name="start-date"
               type="select"
               v-model="defaultStartDate"
             ></k-input>
             <k-input
               label="End Date"
-              name='end-date'
+              name="end-date"
               type="select"
               v-model="defaultEndDate"
             ></k-input>
           </div>
-      <div class='modal-controls'>
-        <k-button variant='link' @click='modalOpen = false'>Cancel</k-button>
-        <k-button variant='secondary' @click='modalOpen = false'>Download File</k-button>
-      </div>
+          <div class="modal-controls">
+            <k-button variant="link" @click="modalOpen = false">Cancel</k-button>
+            <k-button variant="secondary" @click="modalOpen = false">Download File</k-button>
+          </div>
         </form>
       </k-card>
     </k-modal>
