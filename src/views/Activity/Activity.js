@@ -24,6 +24,7 @@ export default {
     type: null,
     page: 1,
     maxItemsOnPage: 20,
+    isLoading: false,
     paginationData: {
       page: 1,
       totalItems: 0,
@@ -80,6 +81,7 @@ export default {
       getAllActivities: 'activity/getActivities',
     }),
     async fetchActivities(page = 1) {
+      this.isLoading = true;
       const { user } = this;
       const adminToken = user.token;
       try {
@@ -91,6 +93,7 @@ export default {
         } else {
           throw Error(activitiesFetched.error);
         }
+        this.isLoading = false;
       } catch (error) {
         this.$toast.show({ message: error });
       }
