@@ -14,7 +14,7 @@
       ></k-pagination>
     </div>
     <div class="settings__section settings__section--with-line">
-      <k-admins></k-admins>
+      <k-admins :loading='isLoading'></k-admins>
     </div>
   </div>
 </template>
@@ -33,6 +33,7 @@ export default {
   data: () => ({
     itemsOnPage: 10,
     modalOpen: true,
+    isLoading: false,
     page: 1,
   }),
   mounted() {
@@ -65,10 +66,13 @@ export default {
   watch: {
     async page(num) {
       const { token } = this.user;
+      this.isLoading = true;
       try {
         await this.fetchAdmins({ token, page: num });
       } catch (e) {
         this.$toast.show({ message: e });
+      } finally {
+        this.isLoading = false;
       }
     },
   },

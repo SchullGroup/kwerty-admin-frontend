@@ -1,18 +1,39 @@
 <template>
   <div class='admins'>
-    <div v-for='admin in admins' :key='admin.email' :class="['admin__item']">
-      <k-icons
-        v-show='editAdmin'
-        :class="['icons']"
-        @delete='handleDeleteAdmin(admin.id)'
-        @edit='handleEditAdmin(admin.id)'
-      />
-      <img alt='avatar' class='avatar-icon' src='@/assets/avatar.png' />
-      <div class='admin-text'>
-        <p class='name'>{{ titleCase(`${admin.firstName} ${admin.lastName}`) }}</p>
-        <p class='role'>{{ snakeToTitle(admin.roleName) }}</p>
+    <template v-if='loading'>
+      <div v-for='i in Array(10).keys()' :key='i' class='admin__item'>
+        <k-icons
+          v-show='editAdmin'
+          :class="['icons']"
+        />
+        <div class='avatar-icon'>
+          <div class='suspense'></div>
+        </div>
+        <div class='admin-text'>
+          <div class='name'>
+            <div class='suspense fixed-height w-70'></div>
+          </div>
+          <div class='role'>
+            <div class='suspense fixed-height w-50'></div>
+          </div>
+        </div>
       </div>
-    </div>
+    </template>
+    <template v-else>
+      <div v-for='admin in admins' :key='admin.email' :class="['admin__item']">
+        <k-icons
+          v-show='editAdmin'
+          :class="['icons']"
+          @delete='handleDeleteAdmin(admin.id)'
+          @edit='handleEditAdmin(admin.id)'
+        />
+        <img alt='avatar' class='avatar-icon' src='@/assets/avatar.png' />
+        <div class='admin-text'>
+          <p class='name'>{{ titleCase(`${admin.firstName} ${admin.lastName}`) }}</p>
+          <p class='role'>{{ snakeToTitle(admin.roleName) }}</p>
+        </div>
+      </div>
+    </template>
     <div class='btn-container'>
       <k-button
         v-show='editAdmin'
@@ -48,6 +69,11 @@ export default {
     KEditAdmin,
     KModal,
     KAddAdmin,
+  },
+  props: {
+    loading: {
+      type: Boolean,
+    },
   },
   data: () => ({
     editAdmin: false,
@@ -114,12 +140,18 @@ export default {
     .avatar-icon {
       width: 4rem;
       height: 4rem;
+      border-radius: 50%;
+      overflow: hidden;
     }
 
     .admin-text {
       white-space: nowrap;
+      width: 100%;
+      min-width: 36rem;
 
       .name {
+        width: 100%;
+        height: 1.6rem;
         font-weight: 600;
         font-size: 1.4rem;
         line-height: 1.6rem;

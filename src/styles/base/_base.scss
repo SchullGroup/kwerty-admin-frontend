@@ -97,3 +97,45 @@ select {
   #file-dropzone .dz-preview, #file-dropzone .dz-file-preview  {
     display: none;
   }
+
+
+.suspense {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgb(235, 235, 235);
+  overflow: hidden;
+
+  &.fixed-height {
+    max-height: 24px;
+  }
+
+  &.w-70 {
+    max-width: 70%;
+  }
+
+  &.w-50 {
+    max-width: 50%;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 40px;
+    top: 0;
+    left: -32px;
+    background: rgba(255, 255, 255, .9);
+    filter: blur(16px);
+    animation: suspense .75s 0.05s ease infinite;
+  }
+}
+
+@keyframes suspense {
+  from {
+    left: -32px;
+  }
+  to {
+    left: calc(100% + 32px);
+  }
+}
