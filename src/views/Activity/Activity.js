@@ -25,6 +25,7 @@ export default {
     page: 1,
     maxItemsOnPage: 20,
     isLoading: false,
+    // userActivities: [],
     paginationData: {
       page: 1,
       totalItems: 0,
@@ -52,12 +53,10 @@ export default {
     },
   }),
   mounted() {
-    this.fetchActivities();
     this.setType();
   },
   watch: {
     page(value) {
-      console.log(value);
       if (value) {
         this.fetchActivities(value);
       }
@@ -69,23 +68,29 @@ export default {
   computed: {
     ...mapGetters({
       user: 'auth/getUser',
-      allActivities: 'activity/getActivities',
+      adminActivities: 'activity/getActivities',
+      userActivities: 'activity/getUserActivities',
     }),
     title() {
       const { type } = this;
       return type ? `${type[0].toUpperCase()}${type.slice(1)} Activity` : 'Activity';
     },
+    activities() {
+      return this.type === 'admin' ? this.adminActivities : this.userActivities;
+    },
   },
   methods: {
     ...mapActions({
-      getAllActivities: 'activity/getActivities',
+      getAdminActivities: 'activity/getActivities',
+      getUserActivities: 'activity/getUserActivities',
     }),
     async fetchActivities(page = 1) {
+      if (this.type !== 'admin') return;
       this.isLoading = true;
       const { user } = this;
       const adminToken = user.token;
       try {
-        const activitiesFetched = await this.getAllActivities({ page, adminToken });
+        const activitiesFetched = await this.getAdminActivities({ page, adminToken });
         if (!activitiesFetched.error) {
           this.paginationData.page = Number(activitiesFetched.currentPage);
           this.paginationData.totalItems = Number(activitiesFetched.total);
@@ -98,8 +103,33 @@ export default {
         this.$toast.show({ message: error });
       }
     },
+    async fetchUserActivities(page = 1) {
+      if (this.type !== 'user') return;
+      this.isLoading = true;
+      const { user } = this;
+      const adminToken = user.token;
+      try {
+        const userActivities = await this.getUserActivities({ page, adminToken });
+        if (!userActivities.error) {
+          this.paginationData.page = Number(userActivities.currentPage);
+          this.paginationData.totalItems = Number(userActivities.total);
+          this.paginationData.totalPages = userActivities.totalPages;
+        } else {
+          throw Error(userActivities.error);
+        }
+        this.isLoading = false;
+      } catch (error) {
+        this.toast.show({ message: error });
+      }
+    },
     setType() {
-      this.type = this.$route.params.type;
+      const { type } = this.$route.params;
+      this.type = type === 'admin' ? 'admin' : 'user';
+      if (type === 'admin') {
+        this.fetchActivities();
+      } else {
+        this.fetchUserActivities();
+      }
     },
     nextPage() {
       this.page += 1;

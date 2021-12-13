@@ -41,13 +41,20 @@ describe('Activity Component', () => {
     await ActivityHome.watch.page.call(mockThis, []);
     await ActivityHome.watch.$route.call(mockThis, []);
     expect(ActivityHome.computed.title.call(mockThis)).toMatch('Activity');
+    expect(ActivityHome.computed.activities.call(mockThis));
     expect(wrapper.vm.$options.name).toMatch('ActivityHome');
+    wrapper.setData({
+      type: 'admin',
+    });
     expect(wrapper.vm.fetchActivities());
     expect(wrapper.vm.fetchActivities());
+    expect(wrapper.vm.setType());
     expect(wrapper.vm.prevPage());
     expect(wrapper.vm.nextPage());
     expect(wrapper.vm.firstPage());
     expect(wrapper.vm.lastPage());
+    expect(wrapper.vm.fetchUserActivities());
+    expect(wrapper.vm.fetchUserActivities());
   });
   it('should fromat the date', () => {
     expect(TableRow.methods.initials('Ammiel Yawson')).toMatch('AY');
