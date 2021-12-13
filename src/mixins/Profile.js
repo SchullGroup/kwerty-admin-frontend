@@ -12,16 +12,13 @@ export default {
       fetchprofile: 'auth/getProfile',
     }),
     async getProfile() {
-      this.isLoading = true;
       try {
         const { id, token } = this.user;
-        const userProfile = await this.fetchprofile({ id, token });
-        if (userProfile.error) {
-          throw Error(userProfile.error);
-        }
-        this.isLoading = false;
+        await this.fetchprofile({ id, token });
       } catch (error) {
         this.$toast.show({ message: error });
+      } finally {
+        this.isLoading = false;
       }
     },
   },

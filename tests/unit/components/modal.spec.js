@@ -15,10 +15,11 @@ describe('Modal Component', () => {
     const mockArgs = {
       target: {
         classList: {
-          contains: () => true,
+          contains: jest.fn().mockReturnValueOnce(true).mockReturnValueOnce(false),
         },
       },
     };
+    await KModal.methods.closeModal.call(mockThis, mockArgs);
     await KModal.methods.closeModal.call(mockThis, mockArgs);
     expect(mockThis.$emit).toBeCalledWith('close');
   });

@@ -80,8 +80,22 @@ describe('Input Component', () => {
 
   it('should close options and click element below', async () => {
     const target = {
-      parentElement: true,
+      parentElement: { querySelector: jest.fn().mockImplementation((v) => v) },
     };
+    Object.defineProperty(window.document, 'elementFromPoint', {
+      writable: true,
+      value: jest
+        .fn()
+        .mockReturnValueOnce({ click: jest.fn() })
+        .mockReturnValueOnce(target.parentElement)
+        .mockReturnValueOnce('svg')
+        .mockReturnValueOnce('.input__icon')
+        .mockReturnValueOnce(true),
+    });
+    wrapper.vm.clickElementBelow.call(mockProps, target, 0, 0)();
+    wrapper.vm.clickElementBelow.call(mockProps, target, 0, 0)();
+    wrapper.vm.clickElementBelow.call(mockProps, target, 0, 0)();
+    wrapper.vm.clickElementBelow.call(mockProps, target, 0, 0)();
     wrapper.vm.clickElementBelow.call(mockProps, target, 0, 0)();
   });
 

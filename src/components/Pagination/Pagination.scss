@@ -8,6 +8,12 @@
     background: transparent;
     border: none;
     border-radius: 0.4rem;
+    &.disabled {
+      cursor: not-allowed;
+      background: $grey-light;
+      //filter: saturate(0);
+      opacity: 0.3;
+    }
 
     &:hover {
       background: $grey-light;

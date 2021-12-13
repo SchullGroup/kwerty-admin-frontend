@@ -69,6 +69,7 @@ export default {
     ...mapGetters({
       profile: 'auth/getProfile',
       user: 'auth/getUser',
+      admins: 'admin/getAll',
     }),
   },
   methods: {
@@ -77,21 +78,19 @@ export default {
     }),
     ...mapActions({
       resetPassword: 'auth/resetPassword',
+      fetchAdmin: 'admin/fetchAll',
+      fetchRoles: 'roles/fetchAll',
     }),
     async sendNewPassword() {
       this.isLoading = true;
-      const { user } = this;
-      const { token } = user;
+      const { user: { token } } = this;
       try {
         const passwordSent = await this.resetPassword({ token });
-        if (!passwordSent.error) {
-          this.$toast.show({ message: passwordSent });
-        } else {
-          throw Error(passwordSent.error);
-        }
-        this.isLoading = false;
+        this.$toast.show({ message: passwordSent });
       } catch (error) {
         this.$toast.show({ message: error });
+      } finally {
+        this.isLoading = false;
       }
     },
     logout() {
@@ -100,6 +99,15 @@ export default {
         name: 'Login',
       });
     },
+  },
+  created() {
+    const { token } = this.user;
+    try {
+      this.fetchAdmin({ token });
+      this.fetchRoles({ token });
+    } catch (e) {
+      this.$toast.show({ message: e });
+    }
   },
 };
 </script>

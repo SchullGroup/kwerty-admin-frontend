@@ -6,6 +6,9 @@ import { APP_NAME } from '../config/app';
 
 // Import all modules from modules folder
 import auth from './modules/auth';
+import admin from './modules/admin';
+import roles from './modules/roles';
+import activity from './modules/activity';
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
@@ -21,6 +24,9 @@ export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   modules: {
     auth,
+    admin,
+    roles,
+    activity,
   },
   plugins: [vuexLocal.plugin],
 });

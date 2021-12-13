@@ -4,19 +4,23 @@
       <h1>Manage Admins</h1>
       <k-pagination
         :page="page"
-        :maxItemsOnPage="4"
-        :totalItems="totalItems"
+        :maxItemsOnPage="itemsOnPage"
+        :totalPages='pagination.totalPages'
+        :totalItems="pagination.total"
         @goToNext="nextPage"
         @goToPrev="prevPage"
+        @goToFirst="firstPage"
+        @goToLast="lastPage"
       ></k-pagination>
     </div>
     <div class="settings__section settings__section--with-line">
-      <k-admins></k-admins>
+      <k-admins :loading='isLoading'></k-admins>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import { KPagination } from '@/components';
 import KAdmins from './Admins.vue';
 
@@ -27,14 +31,50 @@ export default {
     KPagination,
   },
   data: () => ({
-    page: 1,
-    totalItems: 4,
-    itemsOnPage: 20,
+    itemsOnPage: 10,
     modalOpen: true,
+    isLoading: false,
+    page: 1,
   }),
+  mounted() {
+    if (!this.pagination) return;
+    this.page = this.pagination.currentPage;
+  },
+  computed: {
+    ...mapGetters({
+      pagination: 'admin/getPagination',
+      user: 'auth/getUser',
+    }),
+  },
   methods: {
-    prevPage() {},
-    nextPage() {},
+    ...mapActions({
+      fetchAdmins: 'admin/fetchAll',
+    }),
+    prevPage() {
+      this.page -= 1;
+    },
+    nextPage() {
+      this.page += 1;
+    },
+    firstPage() {
+      this.page = 1;
+    },
+    lastPage() {
+      this.page = this.pagination.totalPages;
+    },
+  },
+  watch: {
+    async page(num) {
+      const { token } = this.user;
+      this.isLoading = true;
+      try {
+        await this.fetchAdmins({ token, page: num });
+      } catch (e) {
+        this.$toast.show({ message: e });
+      } finally {
+        this.isLoading = false;
+      }
+    },
   },
 };
 </script>

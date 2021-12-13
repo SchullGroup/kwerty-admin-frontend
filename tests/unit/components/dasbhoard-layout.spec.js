@@ -1,11 +1,7 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { localVue, successStore as store } from '../../utils/local-vue';
-import Vuex from 'vuex';
 
 import KDashboardLayout from '@/components/DashboardLayout/DashboardLayout.vue';
-
-
-localVue.use(Vuex);
 
 describe('Dashboard Layout', () => {
   it('should mount', () => {
