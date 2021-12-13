@@ -24,9 +24,12 @@ export default {
     type: null,
     page: 1,
     maxItemsOnPage: 20,
-    totalItems: 0,
-    itemsOnPage: 20,
-    totalPages: 0,
+    paginationData: {
+      page: 1,
+      totalItems: 0,
+      itemsOnPage: 20,
+      totalPages: 0,
+    },
     displayFields: ['name', 'activity', 'createdAt'],
     duration: '>7days',
     optionsDisplay: {
@@ -53,6 +56,7 @@ export default {
   },
   watch: {
     page(value) {
+      console.log(value);
       if (value) {
         this.fetchActivities(value);
       }
@@ -81,9 +85,9 @@ export default {
       try {
         const activitiesFetched = await this.getAllActivities({ page, adminToken });
         if (!activitiesFetched.error) {
-          this.page = Number(activitiesFetched.currentPage);
-          this.totalItems = Number(activitiesFetched.total);
-          this.totalPages = activitiesFetched.totalPages;
+          this.paginationData.page = Number(activitiesFetched.currentPage);
+          this.paginationData.totalItems = Number(activitiesFetched.total);
+          this.paginationData.totalPages = activitiesFetched.totalPages;
         } else {
           throw Error(activitiesFetched.error);
         }
@@ -104,7 +108,7 @@ export default {
       this.page = 1;
     },
     lastPage() {
-      this.page = this.totalPages;
+      this.page = this.paginationData.totalPages;
     },
   },
 };

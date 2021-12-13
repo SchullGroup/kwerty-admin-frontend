@@ -4,10 +4,10 @@
       <h1>{{ title }}</h1>
       <div class="activity__controls">
         <k-pagination
-          :page="page"
+          :page="paginationData.page"
           :maxItemsOnPage="20"
-          :totalItems="totalItems"
-          :totalPages="totalPages"
+          :totalItems="paginationData.totalItems"
+          :totalPages="paginationData.totalPages"
           variant="many"
           @goToNext="nextPage"
           @goToPrev="prevPage"
