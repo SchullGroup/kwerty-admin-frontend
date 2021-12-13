@@ -52,7 +52,7 @@
         </template>
         <template v-else>
           <activity-table-row
-            v-for="activity in allActivities"
+            v-for="activity in activities"
             :key="activity.createdAt"
             :activity="activity"
             :fields="displayFields"

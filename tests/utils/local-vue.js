@@ -55,22 +55,36 @@ const successStore = new Vuex.Store({
     },
     activity: {
       getters: {
-        getActivities: () => [
+        getActivities: jest.fn().mockResolvedValueOnce([
           {
             activity: 'logged in',
             name: 'test name',
             createdAt: 'someDate',
           },
-        ],
+        ]),
+        getUserActivities: jest
+          .fn()
+          .mockResolvedValueOnce([
+            {
+              activity: 'logged in',
+              name: 'test name',
+              createdAt: 'someDate',
+            },
+          ]),
       },
       actions: {
         getActivities: jest
           .fn()
           .mockResolvedValueOnce({ error: '' })
           .mockResolvedValueOnce({ error: 'yes' }),
+        getUserActivities: jest
+          .fn()
+          .mockResolvedValueOnce({ error: '' })
+          .mockResolvedValueOnce({ error: 'yes' }),
       },
       mutations: {
         SET_ACTIVITIES: jest.fn(),
+        SET_USER_ACTIVITIES: jest.fn(),
       },
       namespaced: true,
     },
@@ -86,9 +100,14 @@ const successStore = new Vuex.Store({
     admin: {
       getters: {
         getPagination: () => ({ currentPage: 1, total: 13, totalPages: 1 }),
-        getAll: () => [{
-          id: 1, firstName: 'Steve', lastName: 'Rogers', roleName: 'super_admin',
-        }],
+        getAll: () => [
+          {
+            id: 1,
+            firstName: 'Steve',
+            lastName: 'Rogers',
+            roleName: 'super_admin',
+          },
+        ],
       },
       actions: {
         fetchAll: jest

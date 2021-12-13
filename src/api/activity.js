@@ -7,4 +7,10 @@ export function getActivities({ page, adminToken }) {
     },
   });
 }
-export function dummy() {}
+export function getUserActivities({ page, adminToken }) {
+  return instance.get(`activity-log?type=user&page=${page}&limit=20`, {
+    headers: {
+      Authorization: `Bearer ${adminToken}`,
+    },
+  });
+}

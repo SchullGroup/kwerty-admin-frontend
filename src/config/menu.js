@@ -45,7 +45,7 @@ const MENU_ITEMS = [
       {
         name: 'adminActivities',
         label: 'Admin Activity',
-        route: '/activities/user',
+        route: '/activities/admin',
         permissions: ['Admin'],
       },
     ],
