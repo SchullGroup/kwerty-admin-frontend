@@ -1,11 +1,7 @@
 import { instance } from '../config';
 
-export function getAllRoles({ token }) {
-  return instance.get('/role', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export function getAllRoles() {
+  return instance.get('/role');
 }
 
 // here to stop errors

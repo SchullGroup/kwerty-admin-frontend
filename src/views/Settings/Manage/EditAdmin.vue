@@ -63,13 +63,12 @@ export default {
       const {
         admin: {
           id, firstName, lastName, email, roleId,
-        }, user: { token },
+        },
       } = this;
 
       this.sending = true;
       try {
         const response = await this.updateAdmin({
-          token,
           admin: {
             id, firstName, lastName, email, roleId,
           },

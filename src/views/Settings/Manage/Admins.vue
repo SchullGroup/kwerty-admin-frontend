@@ -113,9 +113,8 @@ export default {
       return this.currentAdmin;
     },
     async handleDeleteAdmin(id) {
-      const { token } = this.user;
       try {
-        const response = await this.deleteAdmin({ token, id });
+        const response = await this.deleteAdmin({ id });
         this.$toast.show({ message: response });
       } catch (e) {
         this.$toast.show({ message: e });
