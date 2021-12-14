@@ -48,10 +48,10 @@ export default {
       addAdmin: 'admin/addAdmin',
     }),
     async handleAddAdmin() {
-      const { admin, user: { token } } = this;
+      const { admin } = this;
       this.sending = true;
       try {
-        const response = await this.addAdmin({ token, admin });
+        const response = await this.addAdmin({ admin });
         this.$toast.show({ message: response });
         this.$emit('close');
       } catch (e) {

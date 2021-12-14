@@ -19,7 +19,7 @@ export default {
     },
     checkedValue: {
       type: null,
-      default: [],
+      default: () => [],
     },
   },
   data: () => ({

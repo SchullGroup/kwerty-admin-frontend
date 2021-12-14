@@ -65,10 +65,9 @@ export default {
   },
   watch: {
     async page(num) {
-      const { token } = this.user;
       this.isLoading = true;
       try {
-        await this.fetchAdmins({ token, page: num });
+        await this.fetchAdmins({ page: num });
       } catch (e) {
         this.$toast.show({ message: e });
       } finally {
