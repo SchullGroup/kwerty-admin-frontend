@@ -13,6 +13,7 @@ import KAuth from './Auth/Auth.vue';
 import KIcons from './Icons/Icons.vue';
 import KModal from './Modal/Modal.vue';
 import KTable from './Table/Table.vue';
+import KInputTag from './Input/InputTags.vue';
 
 export {
   KButton,
@@ -30,4 +31,5 @@ export {
   KIcons,
   KModal,
   KTable,
+  KInputTag,
 };
