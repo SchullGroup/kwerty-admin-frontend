@@ -51,6 +51,8 @@ export default {
       csv: 'CSV',
       pdf: 'PDF',
     },
+    svgPath:
+      'M18.896.44a2.91 2.91 0 0 1 2.91 2.909v1.94h-1.94v11.637a2.91 2.91 0 0 1-2.91 2.91H3.38a2.91 2.91 0 0 1-2.91-2.91v-1.94h15.518v1.94a.97.97 0 0 0 .856.963l.113.007a.97.97 0 0 0 .963-.857l.007-.113V2.379H5.32a.97.97 0 0 0-.963.856l-.007.114v9.698h-1.94V3.349A2.91 2.91 0 0 1 5.32.439h13.577Z',
   }),
   mounted() {
     this.setType();
@@ -67,7 +69,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: 'auth/getUser',
       adminActivities: 'activity/getActivities',
       userActivities: 'activity/getUserActivities',
     }),
@@ -87,10 +88,8 @@ export default {
     async fetchActivities(page = 1) {
       if (this.type !== 'admin') return;
       this.isLoading = true;
-      const { user } = this;
-      const adminToken = user.token;
       try {
-        const activitiesFetched = await this.getAdminActivities({ page, adminToken });
+        const activitiesFetched = await this.getAdminActivities({ page });
         if (!activitiesFetched.error) {
           this.paginationData.page = Number(activitiesFetched.currentPage);
           this.paginationData.totalItems = Number(activitiesFetched.total);
@@ -106,10 +105,8 @@ export default {
     async fetchUserActivities(page = 1) {
       if (this.type !== 'user') return;
       this.isLoading = true;
-      const { user } = this;
-      const adminToken = user.token;
       try {
-        const userActivities = await this.getUserActivities({ page, adminToken });
+        const userActivities = await this.getUserActivities({ page });
         if (!userActivities.error) {
           this.paginationData.page = Number(userActivities.currentPage);
           this.paginationData.totalItems = Number(userActivities.total);

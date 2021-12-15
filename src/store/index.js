@@ -9,6 +9,7 @@ import auth from './modules/auth';
 import admin from './modules/admin';
 import roles from './modules/roles';
 import activity from './modules/activity';
+import indicators from './modules/indicators';
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     admin,
     roles,
     activity,
+    indicators,
   },
   plugins: [vuexLocal.plugin],
 });

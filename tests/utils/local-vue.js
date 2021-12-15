@@ -129,6 +129,42 @@ const successStore = new Vuex.Store({
       },
       namespaced: true,
     },
+    indicators: {
+      getters: {
+        getIndicators: jest.fn().mockResolvedValueOnce([
+          {
+            name: 'World Hunger',
+            category: 'Health',
+            frequency: 'yearly',
+            lastModified: 'some-date',
+          },
+          {
+            name: 'World Hunger',
+            category: 'Health',
+            frequency: 'yearly',
+            lastModified: 'some-date',
+          },
+        ]),
+      },
+      actions: {
+        addIndicator: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'indicator successfully added' })
+          .mockRejectedValueOnce({ message: { error: 'error occurred' } }),
+        getIndicators: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'indicator successfully fetched' })
+          .mockResolvedValueOnce({ message: 'error occurred' }),
+        deleteIndicator: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'indicator successfully deleted' })
+          .mockRejectedValueOnce({ message: 'error occurred' }),
+      },
+      mutations: {
+        SET_INDICATORS: jest.fn(),
+      },
+      namespaced: true,
+    },
   },
 });
 

@@ -5,7 +5,7 @@
         Indicators <span v-if="selected !== 0">{{ selected }}</span>
       </h1>
       <div v-if="selected === 0" :class="['indicators__header--content']">
-        <k-input label="Search by name or category"></k-input>
+        <k-input label="Search by name or category" v-model="search"></k-input>
         <k-input
           type="select"
           variant="dropdown"
@@ -28,8 +28,8 @@
         variant="secondary"
         negative="negative"
         @click="showDeleteModal = true"
-        >Delete</k-button
-      >
+        >Delete
+      </k-button>
     </header>
     <!-- DELETE MODAL -->
     <k-modal v-if="showDeleteModal" :open="showDeleteModal">
@@ -57,33 +57,45 @@
         v-model="selectedRows"
         :fields="tableFields"
         :fields-display="tableFieldsDisplay"
-        :datalist="tableData"
+        :datalist="indicators"
       >
       </k-table>
+      <!-- EMPTY STATE  -->
+      <div v-if="indicators.length === 0" class="no-activity text-center">
+        <div class="icon">
+          <svg width="22" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path :d="svgPath" fill="#666" />
+          </svg>
+        </div>
+        <p>There are currently no indicators</p>
+      </div>
       <!-- ADD INDICATOR MODAL -->
       <k-modal v-if="showModal" :open="showModal">
         <k-card heading="Add New Indicator" variant="in-modal">
-          <form class="form__items">
-            <k-input label="Name of Indicator" v-model="roleTitle"></k-input>
+          <div class="form__items">
+            <k-input label="Name of Indicator" v-model="indicator.name"></k-input>
             <k-input
               label="Category"
               type="select"
               variant="dropdown"
-              v-model="modalCategories"
+              v-model="indicator.category"
               :optionsDisplay="optionsCategories"
             ></k-input>
             <k-input
               label="Frequency"
               type="select"
               variant="dropdown"
-              v-model="modalFrequency"
+              v-model="indicator.frequency"
               :optionsDisplay="optionsFrequency"
             ></k-input>
+            <k-input-tag v-model="tags"></k-input-tag>
             <div class="btn-wrapper">
               <k-button variant="link" @click="showModal = false">Cancel</k-button>
-              <k-button @click="showModal = false">Save & Continue</k-button>
+              <k-button @click="createIndicator" :loading="isLoading" submit
+                >Save & Continue
+              </k-button>
             </div>
-          </form>
+          </div>
         </k-card>
       </k-modal>
       <k-pagination
@@ -95,6 +107,8 @@
         variant="many"
         @goToNext="nextPage"
         @goToPrev="prevPage"
+        @goToFirst="firstPage"
+        @goToLast="lastPage"
       ></k-pagination>
     </div>
   </k-dashboard-layout>
@@ -106,4 +120,4 @@ import KIndicators from './Indicators';
 export default KIndicators;
 </script>
 
-<style lang="scss" src="./Indicators.scss" scoped></style>
+<style lang='scss' src='./Indicators.scss' scoped></style>
