@@ -53,8 +53,6 @@ describe('Activity Component', () => {
     expect(wrapper.vm.nextPage());
     expect(wrapper.vm.firstPage());
     expect(wrapper.vm.lastPage());
-    expect(wrapper.vm.fetchUserActivities());
-    expect(wrapper.vm.fetchUserActivities());
   });
   it('should fromat the date', () => {
     expect(TableRow.methods.initials('Ammiel Yawson')).toMatch('AY');

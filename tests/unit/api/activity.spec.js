@@ -1,4 +1,4 @@
-import { getActivities, getUserActivities } from '@/api/activity';
+import { getActivities } from '@/api/activity';
 
 jest.mock('@/config', () => ({
   instance: {
@@ -11,10 +11,6 @@ const adminToken = 'my-test-token';
 describe('activity api', () => {
   it('fetches all activities', async () => {
     const activities = await getActivities({ adminToken });
-    expect(activities).toBe(true);
-  });
-  it('fetches all user activities', async () => {
-    const activities = await getUserActivities({ adminToken });
     expect(activities).toBe(true);
   });
 });

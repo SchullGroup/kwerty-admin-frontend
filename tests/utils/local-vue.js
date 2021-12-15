@@ -77,10 +77,6 @@ const successStore = new Vuex.Store({
           .fn()
           .mockResolvedValueOnce({ error: '' })
           .mockResolvedValueOnce({ error: 'yes' }),
-        getUserActivities: jest
-          .fn()
-          .mockResolvedValueOnce({ error: '' })
-          .mockResolvedValueOnce({ error: 'yes' }),
       },
       mutations: {
         SET_ACTIVITIES: jest.fn(),

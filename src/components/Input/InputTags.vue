@@ -17,11 +17,11 @@
 
 <script>
 export default {
+  name: 'Inputtag',
   data() {
     return {
       message: 'Tags',
       tag: '',
-      // tags: [],
     };
   },
   model: {

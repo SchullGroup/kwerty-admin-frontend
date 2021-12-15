@@ -86,10 +86,10 @@ export default {
       getUserActivities: 'activity/getUserActivities',
     }),
     async fetchActivities(page = 1) {
-      if (this.type !== 'admin') return;
+      const { type } = this;
       this.isLoading = true;
       try {
-        const activitiesFetched = await this.getAdminActivities({ page });
+        const activitiesFetched = await this.getAdminActivities({ page, type });
         if (!activitiesFetched.error) {
           this.paginationData.page = Number(activitiesFetched.currentPage);
           this.paginationData.totalItems = Number(activitiesFetched.total);
@@ -102,31 +102,10 @@ export default {
         this.$toast.show({ message: error });
       }
     },
-    async fetchUserActivities(page = 1) {
-      if (this.type !== 'user') return;
-      this.isLoading = true;
-      try {
-        const userActivities = await this.getUserActivities({ page });
-        if (!userActivities.error) {
-          this.paginationData.page = Number(userActivities.currentPage);
-          this.paginationData.totalItems = Number(userActivities.total);
-          this.paginationData.totalPages = userActivities.totalPages;
-        } else {
-          throw Error(userActivities.error);
-        }
-        this.isLoading = false;
-      } catch (error) {
-        this.toast.show({ message: error });
-      }
-    },
     setType() {
       const { type } = this.$route.params;
       this.type = type === 'admin' ? 'admin' : 'user';
-      if (type === 'admin') {
-        this.fetchActivities();
-      } else {
-        this.fetchUserActivities();
-      }
+      this.fetchActivities();
     },
     nextPage() {
       this.page += 1;
