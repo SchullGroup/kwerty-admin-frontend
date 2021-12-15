@@ -31,7 +31,6 @@
       </div>
       <k-button size="full" variant="tertiary">Tertiary button</k-button>
     <section class="cards">
-      <section>
         <h2>Card <span class="small">Default</span></h2>
         <k-card heading="Role">
           <h3>Super Admin</h3>
@@ -101,66 +100,105 @@
         </section>
       </div>
       <section>
-        <h2>Card <span class="small">Variant: 'rounded'</span></h2>
-        <k-card :variants="['rounded']" heading="Role">
-          <h3>Super Admin</h3>
-          <p>
-            This is just a test description to understand how this design would really look like in
-            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-            is done.
-          </p>
-        </k-card>
+        <k-icons></k-icons>
       </section>
-      <section>
-        <h2>Card <span class="small">Variant: 'mb-shorter'</span></h2>
-        <k-card :variants="['mb-shorter']" heading="Role">
-          <h3>Super Admin</h3>
-          <p>
-            This is just a test description to understand how this design would really look like in
-            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
-            is done.
-          </p>
-        </k-card>
-      </section>
-    </section>
-
-    <div class="pagination">
-      <h2>Pagination</h2>
+      <div class="modal">
+        <h2>Modal</h2>
+        <k-button @click="modalOpen = true">Open Modal</k-button>
+        <k-modal :open="modalOpen">
+          <k-card heading="Add Role" variant="in-modal">
+            <k-input label="Title" v-model="roleTitle"></k-input>
+            <br />
+            <k-input label="Description" v-model="roleDescription"></k-input>
+            <br />
+            <div class="buttons" style="display: flex; justify-content: end">
+              <k-button variant="link" @click="modalOpen = false">Close</k-button>
+            </div>
+          </k-card>
+        </k-modal>
+      </div>
       <k-pagination
-        :currentPageStart="currentPageStart"
-        :currentPageEnd="currentPageEnd"
+        :forTable="true"
+        :page="page"
+        :maxItemsOnPage="20"
         :totalItems="totalItems"
+        variant="many"
         @goToNext="nextPage"
         @goToPrev="prevPage"
       ></k-pagination>
+
+      <section class="table">
+        <h2>Table</h2>
+        <div class="selected">selected: {{ selected.length }}</div>
+        <div>{{ selected }}</div>
+        <k-table
+          :fields="tableFields"
+          :fields-display="tableFieldsDisplay"
+          :datalist="allTableData"
+          v-model="selected"
+        ></k-table>
+      </section>
     </div>
-  </div>
+  </k-dashboard-layout>
 </template>
 
 <script>
-import KCard from '@/components/Card/Card.vue';
-import KPagination from '@/components/Pagination/Pagination.vue';
-import KButton from '@/components/Button/Button.vue';
+import {
+  KButton,
+  // KCheckbox,
+  KCard,
+  KPagination,
+  // KToggle,
+  // KRadio,
+  KDashboardLayout,
+  KInput,
+  KIcons,
+  KModal,
+  KTable,
+} from '@/components';
+import database from '@/utils/dummy-database';
 
 export default {
   name: 'Components',
-  components: { KCard, KPagination, KButton },
+  components: {
+    KModal,
+    KButton,
+    // KCheckbox,
+    KCard,
+    KPagination,
+    // KToggle,
+    // KRadio,
+    KDashboardLayout,
+    KInput,
+    KIcons,
+    KTable,
+  },
   data: () => ({
     page: 1,
     totalItems: 243,
     itemsOnPage: 20,
+    label: [],
+    checked: '',
+    title: 'Filler text',
+    badEmail: 'thisisnotacorrectemail',
+    password: 'some complex password!212@334',
+    color: '',
+    color2: '',
+    modalOpen: true,
+    roleTitle: 'Data Consultant',
+    roleDescription:
+      'This is just a test description to understand how this design would really look',
+    tableFields: ['indicator', 'country', 'startYear', 'endYear', 'lastModified'],
+    tableFieldsDisplay: {
+      indicator: 'Name of Indicator',
+      country: 'Country',
+      startYear: 'Start Year',
+      endYear: 'End Year',
+      lastModified: 'Last Modified',
+    },
+    allTableData: database.all,
+    selected: [],
   }),
-  computed: {
-    currentPageEnd() {
-      const { totalItems, itemsOnPage } = this;
-      const nextEnd = (this.page - 1) * itemsOnPage + itemsOnPage;
-      return totalItems < nextEnd ? totalItems : nextEnd;
-    },
-    currentPageStart() {
-      const { itemsOnPage } = this;
-      return (this.page - 1) * itemsOnPage + 1;
-    },
-  },
   methods: {
     nextPage() {
       const { itemsOnPage } = this;
