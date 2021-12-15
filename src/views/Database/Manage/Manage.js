@@ -7,6 +7,8 @@ import {
   KModal,
   KCard,
 } from '@/components';
+import BackIcon from './BackIcon.vue';
+import SingleData from './SingleData.vue';
 import database from '@/utils/dummy-database';
 
 export default {
@@ -19,12 +21,15 @@ export default {
     KInput,
     KDashboardLayout,
     KTable,
+    BackIcon,
+    SingleData,
   },
   data: () => ({
     activeTab: 'all',
     category: 'all',
     indicator: 'all',
     country: 'all',
+    isEditing: false,
     categories: {
       all: 'All Categories',
       agriculture: 'Agriculture',
@@ -81,6 +86,8 @@ export default {
       restore: 'Restore',
       'clear your bin': 'Permanently delete',
     },
+    isSingleView: false,
+    singleViewData: database.single,
   }),
   computed: {
     selected() {
@@ -106,6 +113,10 @@ export default {
     closeModal() {
       this.entered = '';
       this.modalOpen = false;
+    },
+    changePage(pageId) {
+      console.log(pageId);
+      this.isSingleView = !this.isSingleView;
     },
   },
   watch: {

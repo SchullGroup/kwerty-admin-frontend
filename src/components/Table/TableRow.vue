@@ -15,7 +15,9 @@
       <span class="flag" v-if="field === 'country'">
         <img :src="flags[data[field].toLowerCase()]" alt="" />
       </span>
-      {{ data[field] }}
+      <span @click="$emit('clickAction')">
+        {{ data[field] }}
+      </span>
     </td>
   </tr>
 </template>
@@ -113,6 +115,7 @@ export default {
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
+    cursor: pointer;
   }
 
   .timestamp,

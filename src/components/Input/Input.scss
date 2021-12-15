@@ -42,12 +42,18 @@
   &.input--select--native {
     padding: 0 3.2rem;
   }
+  
+  &.input--textarea {
+    min-height: 6.4rem;
+    height: auto;
+  }
 }
 
 /* Child Styles */
 .input {
   & > input,
-  & > select {
+  & > select,
+  & > textarea {
     box-sizing: border-box;
     height: 100%;
     width: 100%;
@@ -56,7 +62,9 @@
   }
 
   input,
-  input:focus {
+  input:focus,
+  textarea,
+  textarea:focus {
     border: none;
     outline: none;
     font-size: 1.4rem;
@@ -64,7 +72,8 @@
     background: none;
   }
 
-  input::placeholder {
+  input::placeholder,
+  textarea::placeholder {
     opacity: 0;
   }
 
@@ -77,6 +86,10 @@
   &.input--with-label {
     input:not(:placeholder-shown) {
       padding-top: 1.2rem;
+    }
+
+    textarea:not(:placeholder-shown) {
+      padding-top: 3.2rem;
     }
 
     label {
@@ -93,7 +106,8 @@
       -ms-user-select: none;
     }
 
-    input:not(:placeholder-shown) ~ label {
+    input:not(:placeholder-shown) ~ label,
+    textarea:not(:placeholder-shown) ~ label {
       top: 1.6rem;
       font-size: 1rem;
       line-height: 1.2rem;
@@ -115,10 +129,6 @@
       transition: transform 0.15s ease-out;
       pointer-events: none;
     }
-  }
-
-  &__icon--click-through {
-    //pointer-events: none;
   }
 
   &__icon--is-open svg {
