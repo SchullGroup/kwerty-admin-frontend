@@ -191,6 +191,7 @@
       transform-origin: 0 0;
       opacity: 1;
       transition: transform 100ms ease-out, opacity 60ms linear;
+      margin-bottom: 40rem;
 
       &.is-hidden {
         transform: rotateX(90deg);

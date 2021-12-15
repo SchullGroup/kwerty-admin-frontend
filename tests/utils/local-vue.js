@@ -77,18 +77,50 @@ const successStore = new Vuex.Store({
     roles: {
       getters: {
         getAll: jest.fn().mockResolvedValue([{ id: '1', name: 'super_admin' }]),
+        getAllDetails: jest.fn().mockResolvedValue([
+          {
+            id: '1',
+            name: 'super_admin',
+            description: 'some description',
+            permissions: {
+              dataset: ['create'],
+              role: [],
+              admin: [],
+              indicator: [],
+              activity: [],
+            },
+          },
+        ]),
       },
       actions: {
         fetchAll: jest.fn().mockResolvedValue([{ id: '1', name: 'super_admin' }]),
+        fetchAlDetails: jest.fn().mockResolvedValue([{ id: '1', name: 'super_admin' }]),
+        addRole: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'added successfully' })
+          .mockRejectedValueOnce(new Error('error occurred')),
+        editRole: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'updated successfully' })
+          .mockRejectedValueOnce(new Error('error occurred')),
+        deleteRole: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'deleted successfully' })
+          .mockRejectedValueOnce(new Error('error occurred')),
       },
       namespaced: true,
     },
     admin: {
       getters: {
         getPagination: () => ({ currentPage: 1, total: 13, totalPages: 1 }),
-        getAll: () => [{
-          id: 1, firstName: 'Steve', lastName: 'Rogers', roleName: 'super_admin',
-        }],
+        getAll: () => [
+          {
+            id: 1,
+            firstName: 'Steve',
+            lastName: 'Rogers',
+            roleName: 'super_admin',
+          },
+        ],
       },
       actions: {
         fetchAll: jest
@@ -97,7 +129,7 @@ const successStore = new Vuex.Store({
           .mockRejectedValueOnce(new Error('error occurred')),
         addAdmin: jest
           .fn()
-          .mockResolvedValueOnce({ message: 'updated successfully' })
+          .mockResolvedValueOnce({ message: 'added successfully' })
           .mockRejectedValueOnce(new Error('error occurred')),
         editOtherAdmin: jest
           .fn()
@@ -105,7 +137,7 @@ const successStore = new Vuex.Store({
           .mockRejectedValueOnce(new Error('error occurred')),
         deleteOtherAdmin: jest
           .fn()
-          .mockResolvedValueOnce({ message: 'updated successfully' })
+          .mockResolvedValueOnce({ message: 'deleted successfully' })
           .mockRejectedValueOnce(new Error('error occurred')),
       },
       namespaced: true,

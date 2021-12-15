@@ -115,6 +115,7 @@ export default {
     async handleDeleteAdmin(id) {
       try {
         const response = await this.deleteAdmin({ id });
+        if (response.error) throw Error(response.error);
         this.$toast.show({ message: response });
       } catch (e) {
         this.$toast.show({ message: e });

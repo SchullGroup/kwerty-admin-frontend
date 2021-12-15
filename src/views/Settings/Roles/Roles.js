@@ -1,8 +1,10 @@
+import { mapActions, mapGetters } from 'vuex';
 import KCard from '@/components/Card/Card.vue';
 import KButton from '@/components/Button/Button.vue';
 import EditableListItem from './EditableListItem.vue';
 import KModal from '../../../components/Modal/Modal.vue';
 import RoleForm from './RoleForm.vue';
+import stringHelpers from '../../../utils/string-helpers';
 
 export default {
   name: 'RolesAndPermissions',
@@ -18,33 +20,17 @@ export default {
     showControls: true,
     editing: false,
     role: {},
-    roles: [
-      {
-        title: 'Super Admin',
-        description:
-          'This is just a test description to understand how this design would really look like in real life. I’m hoping it gets to three lines or else I’m going to keep typing until it is done.',
-        noDelete: true,
-        noEdit: true,
-      },
-      {
-        title: 'Guest',
-        description:
-          'This is just a test description to understand how this design would really look like in real life. I’m hoping it gets to three lines or else I’m going to keep typing until it is done.',
-        noDelete: true,
-      },
-      {
-        title: 'Admin',
-        description:
-          'This is just a test description to understand how this design would really look like in real life. I’m hoping it gets to three lines or else I’m going to keep typing until it is done.',
-      },
-      {
-        title: 'Data Analyst',
-        description:
-          'This is just a test description to understand how this design would really look like in real life. I’m hoping it gets to three lines or else I’m going to keep typing until it is done.',
-      },
-    ],
   }),
+  computed: {
+    ...mapGetters({
+      roles: 'roles/getAllDetails',
+    }),
+  },
   methods: {
+    ...stringHelpers,
+    ...mapActions({
+      deleteRole: 'roles/deleteRole',
+    }),
     addItem() {
       this.role = null;
       this.modalOpen = true;
@@ -53,9 +39,13 @@ export default {
       this.role = val;
       this.modalOpen = true;
     },
-    deleteItem(role) {
-      const index = this.roles.findIndex((r) => r.title === role.title);
-      this.roles.splice(index, 1);
+    async deleteItem(id) {
+      try {
+        await this.deleteRole({ id });
+        this.$toast.show({ message: 'Role deleted successfully' });
+      } catch (e) {
+        this.$toast.show({ message: e });
+      }
     },
   },
 };

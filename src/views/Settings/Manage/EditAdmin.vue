@@ -73,6 +73,7 @@ export default {
             id, firstName, lastName, email, roleId,
           },
         });
+        if (response.error) throw Error(response.error);
         this.$toast.show({ message: response });
         this.$emit('close');
       } catch (e) {

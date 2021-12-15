@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import { KCheckbox } from '@/components';
+import Checkbox from '../../../src/components/Checkbox/Checkbox';
 
 let wrapper;
 describe('Checkbox Component', () => {
@@ -39,5 +40,9 @@ describe('Checkbox Component', () => {
     mockThis.innerValue = true;
     KCheckbox.watch.checkedValue.call(mockThis, []);
     expect(mockThis.innerValue).toBeFalsy();
+  });
+
+  it('has checked value prop with [] as default', () => {
+    expect(Checkbox.props.checkedValue.default()).toEqual([]);
   });
 });

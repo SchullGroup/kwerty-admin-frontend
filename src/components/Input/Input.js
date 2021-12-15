@@ -49,6 +49,18 @@ export default {
       this.innerValue = val;
     },
   },
+  updated() {
+    if (this.$refs.list) {
+      const { list } = this.$refs;
+      const pos = list.getBoundingClientRect();
+      const height = (Object.keys(this.optionsDisplay).length * 48) + 32;
+      const difference = window.innerHeight - (pos.top + height);
+      if (difference < 0) {
+        list.style.top = `${window.innerHeight - (Math.abs(difference) + height)}px`;
+      }
+      console.log(pos, height);
+    }
+  },
   methods: {
     updateInput(e) {
       this.innerValue = e.target.value;

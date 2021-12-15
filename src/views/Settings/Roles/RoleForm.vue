@@ -1,7 +1,7 @@
 <template>
   <k-card :heading="edit ? 'Edit Role' : 'Add Role'" variant='in-modal'>
     <form ref='form' class='form__items'>
-      <k-input v-model='formValue.title' label='Title' name='title'></k-input>
+      <k-input v-model='formValue.name' label='Title' name='title'></k-input>
       <k-input v-model='formValue.description' label='Description' name='description'></k-input>
       <div class='permissions'>
         <div
@@ -22,13 +22,16 @@
       </div>
       <div class='controls'>
         <k-button type='button' variant='link' @click="$emit('close')">Cancel</k-button>
-        <k-button type='button' variant='secondary' @click="$emit('close')"> Finish</k-button>
+        <k-button :loading='isLoading' type='button' variant='secondary' @click='handleSubmit'>
+          Finish
+        </k-button>
       </div>
     </form>
   </k-card>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import {
   KButton, KCard, KCheckbox, KInput,
 } from '@/components';
@@ -43,6 +46,8 @@ export default {
     KCheckbox,
   },
   data: () => ({
+    isLoading: false,
+    id: null,
     formValue: {},
     oldTitle: '',
     permissions: {
@@ -55,6 +60,21 @@ export default {
   }),
   methods: {
     ...stringHelpers,
+    ...mapActions({
+      addRole: 'roles/addRole',
+      editRole: 'roles/editRole',
+    }),
+    dataFromProps(edit) {
+      const {
+        id, name, description, permissions,
+      } = edit;
+      this.formValue = { name, description };
+      const rolePerm = JSON.parse(permissions);
+      Object.keys(this.permissions).forEach((category) => {
+        this.permissions[category] = rolePerm[category];
+      });
+      this.id = id;
+    },
     permissionToLabel(permission, label) {
       const getLabel = (cat) => {
         if (cat === 'admin') return 'administrators';
@@ -63,6 +83,38 @@ export default {
       };
       const permissionLabel = `${this.capitalize(this.snakeCase(permission))} ${getLabel(label)}`;
       return { value: permission, label: permissionLabel };
+    },
+    async handleSubmit() {
+      this.isLoading = true;
+      try {
+        const { formValue, permissions, id } = this;
+        if (this.edit) {
+          const message = await this.editRole({
+            role: {
+              ...formValue,
+              permissions: JSON.stringify(permissions),
+            },
+            id,
+          });
+          if (message.error) throw Error(message.error);
+          this.$toast.show({ message });
+          this.$emit('close');
+        } else {
+          const message = await this.addRole({
+            role: {
+              ...formValue,
+              permissions: JSON.stringify(permissions),
+            },
+          });
+          if (message.error) throw Error(message.error);
+          this.$toast.show({ message });
+          this.$emit('close');
+        }
+      } catch (e) {
+        this.$toast.show({ message: e });
+      } finally {
+        this.isLoading = false;
+      }
     },
   },
   computed: {
@@ -74,20 +126,13 @@ export default {
         admin: ['create', 'update', 'delete', 'view'],
         activity: ['view_user', 'view_admin'],
       };
-      const res = Object.entries(allPermissions).reduce((prepared, [category, permissions]) => {
+      return Object.entries(allPermissions).reduce((prepared, [category, permissions]) => {
         const permissionLabels = permissions.map((p) => this.permissionToLabel(p, category));
         return {
           ...prepared,
           [category]: permissionLabels,
         };
       }, {});
-
-      return res;
-    },
-  },
-  watch: {
-    permissions(val) {
-      console.log(val);
     },
   },
   props: {
@@ -97,18 +142,10 @@ export default {
   },
   mounted() {
     if (this.edit) {
-      this.oldTitle = this.edit.title;
-      this.formValue = { ...this.edit };
+      this.oldTitle = this.edit.name;
+      this.dataFromProps(this.edit);
     } else {
-      this.formValue = {};
-    }
-  },
-  beforeUpdate() {
-    if (this.edit) {
-      this.oldTitle = this.edit.title;
-      this.formValue = { ...this.edit };
-    } else {
-      this.formValue = {};
+      this.formValue = { name: '', description: '' };
     }
   },
 };

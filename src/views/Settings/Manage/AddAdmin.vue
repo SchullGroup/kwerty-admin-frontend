@@ -52,6 +52,7 @@ export default {
       this.sending = true;
       try {
         const response = await this.addAdmin({ admin });
+        if (response.error) throw Error(response.error);
         this.$toast.show({ message: response });
         this.$emit('close');
       } catch (e) {
