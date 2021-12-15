@@ -1,10 +1,5 @@
 <template>
-  <div :class="['card', {
-    'card--in-modal': inModal,
-    'card--no-space-top': variant === 'no-space-top',
-    'wrap-heading': wrapHeading,
-    'longer': wrapHeading && longerHeading,
-  }]">
+  <div :class="['card', ...(variants ? variants.map((variant) => `card--${variant}`) : [])]">
     <h2 class="card__heading">
       {{ heading }}
     </h2>

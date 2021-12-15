@@ -1,19 +1,14 @@
 .pagination {
-  display: grid;
-  grid: 1fr / auto-flow max-content;
-  column-gap: 0.4rem;
+  width: 22rem;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+
   &__button {
     height: 2.4rem;
     background: transparent;
     border: none;
-    border-radius: 0.4rem;
-    &.disabled {
-      cursor: not-allowed;
-      background: $grey-light;
-      //filter: saturate(0);
-      opacity: 0.3;
-    }
+    border-radius: .4rem;
 
     &:hover {
       background: $grey-light;
@@ -27,21 +22,5 @@
 
   &__info {
     margin: 0 1.6rem;
-    white-space: nowrap;
   }
-}
-.pagination__table {
-  position: fixed;
-  bottom: 4rem;
-  padding: 1.2rem 1.4rem;
-  max-width: 30rem;
-  display: grid;
-  grid: 1fr / auto-flow max-content;
-  column-gap: 0.4rem;
-  align-items: center;
-  background: #ffffff;
-  box-shadow: 4px 4px 15px rgba(38, 38, 38, 0.05), -4px -4px 15px rgba(38, 38, 38, 0.05);
-  border-radius: 40px;
-  transform: translateX(-50%);
-  left: 50%;
 }
