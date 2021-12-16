@@ -51,10 +51,12 @@ export default {
       fetchAdmins: 'admin/fetchAll',
     }),
     prevPage() {
-      this.page -= 1;
+      const { page } = this;
+      this.page = page !== 1 ? page - 1 : page;
     },
     nextPage() {
-      this.page += 1;
+      const { page, pagination: { totalPages } } = this;
+      this.page = page !== totalPages ? page + 1 : page;
     },
     firstPage() {
       this.page = 1;
