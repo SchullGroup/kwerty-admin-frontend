@@ -10,17 +10,18 @@
       }"
     >
       <span class="checkbox" v-if="i === 0">
-        <k-checkbox :name="data[field]" :value="data[field]" v-model="innerValue" />
+        <k-checkbox :name="data[field]" :value="data['id']" v-model="innerValue" />
       </span>
       <span class="flag" v-if="field === 'country'">
         <img :src="flags[data[field].toLowerCase()]" alt="" />
       </span>
-      {{ data[field] }}
+      {{ data[field] | formatDate(field) }}
     </td>
   </tr>
 </template>
 
 <script>
+import format from 'date-fns/format';
 import KCheckbox from '../Checkbox/Checkbox';
 // remove later
 import polandFlag from '@/assets/poland.svg';
@@ -81,6 +82,23 @@ export default {
       if (iValue.length && notFound) {
         this.$emit('input', [...this.value, ...iValue]);
       }
+    },
+  },
+  filters: {
+    formatDate(value, field) {
+      if (value) {
+        switch (field) {
+          case 'createdAt':
+          case 'updatedAt':
+            return `${format(new Date(value), 'p')} , ${format(new Date(value), 'd')}-${format(
+              new Date(value),
+              'MM',
+            )}-${format(new Date(value), 'Y')}`;
+          default:
+            return value;
+        }
+      }
+      return value;
     },
   },
 };
