@@ -3,6 +3,6 @@ export default {
   pagination: {
     currentPage: 1,
     total: NaN,
-    totalPages: NaN,
+    totalPages: 1,
   },
 };

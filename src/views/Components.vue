@@ -30,54 +30,16 @@
         <k-button :disabled="true" variant="link">Link button disabled</k-button>
       </div>
       <k-button size="full" variant="tertiary">Tertiary button</k-button>
-      <br />
-      <br />
-      <h2>Checkbox</h2>
-      <div class="content">
-        <k-checkbox v-model="label" value="new label" name="label1" label="new label" />
-        <k-checkbox
-          v-model="label"
-          value="another label"
-          name="label2"
-          label="another label"
-          fill="fill"
-        />
-        <k-checkbox v-model="label" value="selected" name="label3" label="new label" />
-        <k-checkbox v-model="label" value="last label" name="label4" label="last label" />
-      </div>
-      <h2>Toggle button</h2>
-      <div class="content">
-        <k-toggle />
-      </div>
-      <h2>Radio</h2>
-      <div class="content">
-        <k-radio v-model="checked" name="country" label="Nigeria" value="Nigeria" id="nigeria" />
-        <k-radio v-model="checked" name="country" label="Ghana" value="Ghana" id="ghana" />
-        <span>{{ checked }}</span>
-      </div>
-      <section class="cards">
-        <section>
-          <h2>Card <span class="small">Default</span></h2>
-          <k-card heading="Role">
-            <h3>Super Admin</h3>
-            <p>
-              This is just a test description to understand how this design would really look like
-              in real life. I’m hoping it gets to three lines or else I’m going to keep typing until
-              it is done.
-            </p>
-          </k-card>
-        </section>
-        <section>
-          <h2>Card <span class="small">Variant: 'in-modal'</span></h2>
-          <k-card variant="in-modal" heading="Role">
-            <h3>Super Admin</h3>
-            <p>
-              This is just a test description to understand how this d esign would really look like
-              in real life. I’m hoping it gets to three lines or else I’m going to keep typing until
-              it is done.
-            </p>
-          </k-card>
-        </section>
+    <section class="cards">
+        <h2>Card <span class="small">Default</span></h2>
+        <k-card heading="Role">
+          <h3>Super Admin</h3>
+          <p>
+            This is just a test description to understand how this design would really look like in
+            real life. I’m hoping it gets to three lines or else I’m going to keep typing until it
+            is done.
+          </p>
+        </k-card>
       </section>
       <div class="pagination">
         <section>
@@ -186,11 +148,11 @@
 <script>
 import {
   KButton,
-  KCheckbox,
+  // KCheckbox,
   KCard,
   KPagination,
-  KToggle,
-  KRadio,
+  // KToggle,
+  // KRadio,
   KDashboardLayout,
   KInput,
   KIcons,
@@ -205,11 +167,11 @@ export default {
   components: {
     KModal,
     KButton,
-    KCheckbox,
+    // KCheckbox,
     KCard,
     KPagination,
-    KToggle,
-    KRadio,
+    // KToggle,
+    // KRadio,
     KDashboardLayout,
     KInput,
     KIcons,
@@ -253,20 +215,6 @@ export default {
     prevPage() {
       this.page = this.page !== 1 ? this.page - 1 : this.page;
     },
-  },
-  mounted() {
-    this.$toast.show({
-      message: 'Your password has been reset. Please check your email for your new password.',
-    });
-    this.$toast.show({
-      message: 'Your password has been reset. Please check your email for your new password.',
-    });
-    this.$toast.show({
-      message: 'Your password has been reset. Please check your email for your new password.',
-    });
-    this.$toast.show({
-      message: 'Your password has been reset. Please check your email for your new password.',
-    });
   },
 };
 </script>

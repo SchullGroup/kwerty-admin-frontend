@@ -169,3 +169,15 @@
 .slide-down-enter-to, .slide-down-leave {
   max-height: 4rem;
 }
+.back-button {
+  border: none;
+  padding: 0;
+  margin-right: 2rem;
+  background: transparent;
+  cursor: pointer;
+  height: 20px;
+}
+.selected-count {
+  display: flex;
+  align-items: center;
+}

@@ -147,6 +147,7 @@ export default {
   ],
   published: [
     {
+      id: 18,
       indicator: 'Primary Income ',
       country: 'Norway',
       startYear: '1986',
@@ -154,6 +155,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 19,
       indicator: 'Portfolio Investments (Liabilities)',
       country: 'Norway',
       startYear: '1986',
@@ -161,6 +163,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 20,
       indicator: 'Official Reserve Assets',
       country: 'Poland',
       startYear: '1986',
@@ -168,6 +171,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 21,
       indicator: 'Population Men ',
       country: 'Italy',
       startYear: '1986',
@@ -175,6 +179,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 22,
       indicator: 'Urban population',
       country: 'Poland',
       startYear: '1986',
@@ -182,6 +187,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 23,
       indicator: 'Marriages',
       country: 'Italy',
       startYear: '1986',
@@ -189,6 +195,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 24,
       indicator: 'Legal Separations',
       country: 'Poland',
       startYear: '1986',
@@ -196,6 +203,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 25,
       indicator: 'Death by Causes (System)',
       country: 'Poland',
       startYear: '1986',
@@ -203,6 +211,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 26,
       indicator: 'Death without the exact cause',
       country: 'Poland',
       startYear: '1986',
@@ -210,6 +219,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 27,
       indicator: 'Internal Migration for Permanent Residence',
       country: 'Poland',
       startYear: '1986',
@@ -219,6 +229,7 @@ export default {
   ],
   drafts: [
     {
+      id: 28,
       indicator: 'Central Budget',
       country: 'Poland',
       startYear: '1986',
@@ -226,6 +237,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 29,
       indicator: 'Direct Investment (Assets)',
       country: 'Italy',
       startYear: '1986',
@@ -233,6 +245,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 30,
       indicator: 'Portfolio Investments (Liabilities)',
       country: 'Norway',
       startYear: '1986',
@@ -240,6 +253,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 31,
       indicator: 'Population Men ',
       country: 'Italy',
       startYear: '1986',
@@ -247,6 +261,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 33,
       indicator: 'Urban population',
       country: 'Poland',
       startYear: '1986',
@@ -254,6 +269,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 34,
       indicator: 'Death by Causes (System)',
       country: 'Poland',
       startYear: '1986',
@@ -261,6 +277,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 35,
       indicator: 'Death without the exact cause',
       country: 'Poland',
       startYear: '1986',
@@ -268,6 +285,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 36,
       indicator: 'Internal Migration for Permanent Residence',
       country: 'Poland',
       startYear: '1986',
@@ -277,6 +295,7 @@ export default {
   ],
   deleted: [
     {
+      id: 37,
       indicator: 'Death by Causes (System)',
       country: 'Poland',
       startYear: '1986',
@@ -287,6 +306,7 @@ export default {
   ],
   indicators: [
     {
+      id: 38,
       indicator: 'Primary Income',
       category: 'Economy',
       frequency: 'Yearly',
@@ -294,6 +314,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 39,
       indicator: 'Capital Account',
       category: 'Economy',
       frequency: 'Yearly',
@@ -301,6 +322,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 40,
       indicator: 'Agricultural Land',
       category: 'Economy',
       frequency: 'Yearly',
@@ -308,6 +330,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 41,
       indicator: 'Agricultural Budget',
       category: 'Economy',
       frequency: 'Yearly',
@@ -315,6 +338,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 42,
       indicator: 'Life Expectancy - Man',
       category: 'Economy',
       frequency: 'Yearly',
@@ -322,6 +346,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 43,
       indicator: 'Life Expectancy - Woman',
       category: 'Economy',
       frequency: 'Yearly',
@@ -329,6 +354,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 44,
       indicator: 'Marriages',
       category: 'Economy',
       frequency: 'Yearly',
@@ -336,6 +362,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 45,
       indicator: 'Divorces',
       category: 'Economy',
       frequency: 'Yearly',
@@ -343,6 +370,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 46,
       indicator: 'Legal Separation',
       category: 'Economy',
       frequency: 'Yearly',
@@ -350,6 +378,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 47,
       indicator: 'Live Births',
       category: 'Economy',
       frequency: 'Yearly',
@@ -357,6 +386,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 48,
       indicator: 'Value Added Tax',
       category: 'Economy',
       frequency: 'Yearly',
@@ -364,6 +394,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 49,
       indicator: 'Total Population',
       category: 'Economy',
       frequency: 'Yearly',
@@ -371,6 +402,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 50,
       indicator: 'Primary Income',
       category: 'Economy',
       frequency: 'Yearly',
@@ -378,6 +410,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 51,
       indicator: 'Primary Income',
       category: 'Economy',
       frequency: 'Yearly',
@@ -385,6 +418,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 52,
       indicator: 'Primary Income',
       category: 'Economy',
       frequency: 'Yearly',
@@ -392,6 +426,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 53,
       indicator: 'Primary Income',
       category: 'Economy',
       frequency: 'Yearly',
@@ -399,6 +434,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 54,
       indicator: 'Primary Income',
       category: 'Economy',
       frequency: 'Yearly',
@@ -406,6 +442,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 55,
       indicator: 'Primary Income',
       category: 'Economy',
       frequency: 'Yearly',
@@ -413,6 +450,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 56,
       indicator: 'Primary Income',
       category: 'Economy',
       frequency: 'Yearly',
@@ -420,6 +458,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
+      id: 57,
       indicator: 'Primary Income',
       category: 'Economy',
       frequency: 'Yearly',
@@ -427,4 +466,52 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
   ],
+  single: {
+    id: 1,
+    indicator: 'Central Budget',
+    category: 'Economy',
+    country: 'Poland',
+    startYear: '1986',
+    endYear: '2020',
+    lastModified: '4:32 PM, 22-02-2021',
+    metric: 'United States Dollar',
+    frequency: 'Yearly',
+    source: 'World Bank',
+    link: 'bit.ly/21SHajes10',
+    // eslint-disable-next-line
+    note: `This is a summarized analysis of the data set. When it is empty, it will not show up on the customer end. It usually talks about the trends of the chart you’re seeing. Sometimes, it could talk about the history, focus on an anomaly or suggest what else to look at to really understand it. It is never a comprehensive tool to understand the data we share.`,
+    data: [
+      '{ "period": "2000", "value": "" } ',
+      '{ "period": "2001", "value": "" } ',
+      '{ "period": "2002", "value": "24,055.90" } ',
+      '{ "period": "2003", "value": "27,648.40" } ',
+      '{ "period": "2004", "value": "33,208.50" } ',
+      '{ "period": "2005", "value": "34,617.90" } ',
+      '{ "period": "2006", "value": "36,815.50" } ',
+      '{ "period": "2007", "value": "49,824.10" } ',
+      '{ "period": "2008", "value": "57,177.40" } ',
+      '{ "period": "2009", "value": "44,663.00" } ',
+      '{ "period": "2010", "value": "47,255.90" } ',
+      '{ "period": "2011", "value": "52,701.00" } ',
+      '{ "period": "2012", "value": "57,949.30" } ',
+      '{ "period": "2013", "value": "47,520.70" } ',
+      '{ "period": "2014", "value": "55,332.20" } ',
+      '{ "period": "2015", "value": "55,785.40" } ',
+      '{ "period": "2016", "value": "57,795.30" } ',
+      '{ "period": "2017", "value": "64.378.0" } ',
+      '{ "period": "2018", "value": "77,143.70" } ',
+      '{ "period": "2019", "value": "78,902.80" } ',
+      '{ "period": "2020", "value": "78,498.80" } ',
+      '{ "period": "2021", "value": "86,967.40" }',
+    ],
+    tags: [
+      'budget',
+      'poland',
+      'central budget',
+      'dollar',
+      'gross domestic product',
+      'gdp',
+      'world bank data',
+    ],
+  },
 };

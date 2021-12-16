@@ -131,6 +131,7 @@ export default {
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
+    cursor: pointer;
   }
 
   .timestamp,
