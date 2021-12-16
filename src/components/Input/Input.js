@@ -49,20 +49,20 @@ export default {
     this.innerValue = this.value;
     this.listenForSelect();
   },
-  // updated() {
-  //   if (this.$refs.list) {
-  //     const { list } = this.$refs;
-  //     const pos = list.getBoundingClientRect();
-  //     const height = (list.children.length * 48) + 32;
-  //     const difference = window.innerHeight - (pos.top + height);
-  //     if (pos.top + height < window.innerHeight) list.style.top = '76px';
-  //     console.log(pos.top, height, window.innerHeight);
-  //     if (difference < 0) {
-  //       list.style.top = `-${height + difference}px`;
-  //     }
-  //     console.log(pos, height);
-  //   }
-  // },
+  updated() {
+    if (this.$refs.list) {
+      const { list } = this.$refs;
+      const pos = list.parentElement.getBoundingClientRect();
+      const fromTop = pos.top + 76;
+      const screenH = window.innerHeight;
+      const height = (list.children.length * 48) + 32;
+      const overflow = screenH - (fromTop + height);
+      if (fromTop + height < screenH) list.style.top = '76px';
+      if (overflow < 0) {
+        list.style.top = `${overflow + 64}px`;
+      }
+    }
+  },
   methods: {
     updateInput(e) {
       this.innerValue = e.target.value;
