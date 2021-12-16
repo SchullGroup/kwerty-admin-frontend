@@ -5,7 +5,7 @@
         Indicators <span v-if="selected !== 0">{{ selected }}</span>
       </h1>
       <div v-if="selected === 0" :class="['indicators__header--content']">
-        <k-input label="Search by name or category" v-model="search"></k-input>
+        <k-input label="Search by name or category" v-model="search" reactive></k-input>
         <k-input
           type="select"
           variant="dropdown"
@@ -33,22 +33,24 @@
     </header>
     <!-- DELETE MODAL -->
     <k-modal v-if="showDeleteModal" :open="showDeleteModal">
-      <k-card
-        heading="Are you sure you want to delete this indicator?"
-        variant="in-modal"
-        wrap-heading="true"
-      >
+      <k-card heading="Are you sure you want to delete this indicator?" variant="in-modal" longer wrap-heading>
         <p>
           If you delete this indicator, all data stored underneath this indicator will be <br />
           permanently deleted.
         </p>
         <p class="delete-text">
-          Type <span> Delete {{ selected }} indicator</span> to confirm this action.
+          Type <span> {{ requiredMessage }}</span> to confirm this action.
         </p>
-        <k-input label="Your Input" v-model="deleteIndicator"></k-input>
+        <k-input label="Your Input" v-model="modelDeleteText" :reactive="true"></k-input>
         <div class="btn-wrapper">
           <k-button variant="link" @click="showDeleteModal = false">Cancel</k-button>
-          <k-button @click="showDeleteModal = false" negative="negative">Delete</k-button>
+          <k-button
+            :disabled="!isSame"
+            @click="removeIndicator"
+            negative="negative"
+            :loading="isLoading"
+            >Delete</k-button
+          >
         </div>
       </k-card>
     </k-modal>

@@ -67,18 +67,26 @@ export default {
       countriesAvailable: 'Countries available',
       updatedAt: 'Last Modified',
     },
+    modelDeleteText: '',
     svgPath:
       'M18.896.44a2.91 2.91 0 0 1 2.91 2.909v1.94h-1.94v11.637a2.91 2.91 0 0 1-2.91 2.91H3.38a2.91 2.91 0 0 1-2.91-2.91v-1.94h15.518v1.94a.97.97 0 0 0 .856.963l.113.007a.97.97 0 0 0 .963-.857l.007-.113V2.379H5.32a.97.97 0 0 0-.963.856l-.007.114v9.698h-1.94V3.349A2.91 2.91 0 0 1 5.32.439h13.577Z',
   }),
   watch: {
     page(val) {
       if (val) {
-        this.fetchIndicator(val);
+        this.fetchIndicators(val);
+      }
+    },
+    search(val) {
+      if (val) {
+        this.fetchIndicators();
+      } else if (!val) {
+        this.fetchIndicators();
       }
     },
   },
   mounted() {
-    this.fetchIndicator();
+    this.fetchIndicators();
   },
   computed: {
     ...mapGetters({
@@ -88,13 +96,22 @@ export default {
       return this.selectedRows.length;
     },
     emptyState() {
-      return this.pagination.page === 1 && this.indicators.length === 0;
+      return this.pagination.page === 1 && this.indicators.length === 0 && !this.isLoading;
+    },
+    isSame() {
+      return this.modelDeleteText === this.requiredMessage;
+    },
+    requiredMessage() {
+      const { selected } = this;
+      const suffixS = selected !== 1 ? 's' : '';
+      return `Delete ${selected} Indicator${suffixS}`;
     },
   },
   methods: {
     ...mapActions({
       addIndicator: 'indicators/addIndicator',
       getIndicators: 'indicators/getIndicators',
+      deleteIndicator: 'indicators/deleteIndicator',
     }),
     async createIndicator() {
       const { indicator } = this;
@@ -110,11 +127,10 @@ export default {
         this.isLoading = false;
         this.resetForm();
       } catch (error) {
-        console.log(error);
         this.$toast.show({ message: error });
       }
     },
-    async fetchIndicator(page = 1) {
+    async fetchIndicators(page = 1) {
       const { search } = this;
       this.isLoading = true;
       try {
@@ -131,6 +147,22 @@ export default {
         this.$toast.show({ message: error });
       }
     },
+    async removeIndicator() {
+      const { selectedRows } = this;
+      console.log(selectedRows);
+      this.isLoading = true;
+      try {
+        const indicatorRemoved = await this.deleteIndicator({ ids: [...selectedRows] });
+        if (indicatorRemoved.error) {
+          throw Error(indicatorRemoved.error);
+        }
+        this.$toast.show({ message: indicatorRemoved });
+        this.showDeleteModal = false;
+        this.fetchIndicators();
+      } catch (error) {
+        this.$toast.show({ massage: error });
+      }
+    },
     resetForm() {
       this.indicator.name = '';
       this.indicator.category = '';
@@ -140,7 +172,7 @@ export default {
     },
     closeAddIndicators() {
       this.showModal = false;
-      this.fetchIndicator();
+      this.fetchIndicators();
     },
     prevPage() {
       this.page -= 1;

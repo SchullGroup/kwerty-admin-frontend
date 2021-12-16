@@ -154,7 +154,7 @@ const successStore = new Vuex.Store({
     },
     indicators: {
       getters: {
-        getIndicators: jest.fn().mockResolvedValueOnce([
+        getIndicators: jest.fn().mockResolvedValue([
           {
             name: 'World Hunger',
             category: 'Health',
@@ -173,6 +173,7 @@ const successStore = new Vuex.Store({
         addIndicator: jest
           .fn()
           .mockResolvedValueOnce({ message: 'indicator successfully added' })
+          .mockResolvedValueOnce({ message: { error: 'error occurred' } })
           .mockRejectedValueOnce({ message: { error: 'error occurred' } }),
         getIndicators: jest
           .fn()

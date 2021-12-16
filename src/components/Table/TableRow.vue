@@ -67,7 +67,7 @@ export default {
   methods: {
     checkAndAdd(value) {
       const { innerValue: iValue } = this;
-      const index = value.indexOf(this.data.indicator);
+      const index = value.indexOf(this.data.id);
       const found = index !== -1;
       const notFound = index === -1;
       // if inner value is not set
@@ -94,7 +94,7 @@ export default {
           case 'updatedAt':
             return `${format(new Date(value), 'p')} , ${format(new Date(value), 'd')}-${format(
               new Date(value),
-              'MM'
+              'MM',
             )}-${format(new Date(value), 'Y')}`;
           default:
             return value;

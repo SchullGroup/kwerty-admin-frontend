@@ -8,6 +8,6 @@ export function addIndicator({ indicator }) {
   return instance.post('/indicator', indicator);
 }
 
-export function deleteIndicator({ body }) {
-  return instance.delete('/indicator', body);
+export function deleteIndicator(body) {
+  return instance.delete('/indicator', { data: { ...body } });
 }
