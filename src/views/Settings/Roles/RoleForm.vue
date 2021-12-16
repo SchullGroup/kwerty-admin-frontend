@@ -92,7 +92,7 @@ export default {
           const message = await this.editRole({
             role: {
               ...formValue,
-              permissions: JSON.stringify(permissions),
+              permissions,
             },
             id,
           });
@@ -103,7 +103,7 @@ export default {
           const message = await this.addRole({
             role: {
               ...formValue,
-              permissions: JSON.stringify(permissions),
+              permissions,
             },
           });
           if (message.error) throw Error(message.error);

@@ -203,6 +203,12 @@
       transition: transform 100ms ease-out, opacity 60ms linear;
       margin-bottom: 40rem;
 
+      &.scrollable {
+        max-height: 51.2rem;
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+
       &.is-hidden {
         transform: rotateX(90deg);
         opacity: 0;

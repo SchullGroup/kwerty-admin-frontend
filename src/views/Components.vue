@@ -96,6 +96,15 @@
             <option value="crimson" class="option">Crimson</option>
             <option value="orange" class="option">Orange</option>
             <option value="indigo" class="option">Indigo</option>
+            <option value="crimson" class="option">Crimson</option>
+            <option value="orange" class="option">Orange</option>
+            <option value="indigo" class="option">Indigo</option>
+            <option value="crimson" class="option">Crimson</option>
+            <option value="orange" class="option">Orange</option>
+            <option value="indigo" class="option">Indigo</option>
+            <option value="crimson" class="option">Crimson</option>
+            <option value="orange" class="option">Orange</option>
+            <option value="indigo" class="option">Indigo</option>
           </k-input>
         </section>
       </div>
