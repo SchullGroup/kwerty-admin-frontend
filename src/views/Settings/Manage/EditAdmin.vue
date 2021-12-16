@@ -63,17 +63,17 @@ export default {
       const {
         admin: {
           id, firstName, lastName, email, roleId,
-        }, user: { token },
+        },
       } = this;
 
       this.sending = true;
       try {
         const response = await this.updateAdmin({
-          token,
           admin: {
             id, firstName, lastName, email, roleId,
           },
         });
+        if (response.error) throw Error(response.error);
         this.$toast.show({ message: response });
         this.$emit('close');
       } catch (e) {
