@@ -25,7 +25,7 @@
 
 <script>
 import KCheckbox from '../Checkbox/Checkbox';
-import { formatDate } from '@/utils/formatters';
+import formatters from '@/utils/formatters';
 
 export default {
   name: 'TableRow',
@@ -84,7 +84,8 @@ export default {
         switch (field) {
           case 'createdAt':
           case 'updatedAt':
-            return formatDate(value);
+          case 'lastModified':
+            return formatters.formatDate(value);
           default:
             return value;
         }

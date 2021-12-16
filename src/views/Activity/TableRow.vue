@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { formatDate } from '@/utils/formatters';
+import formatters from '@/utils/formatters';
 
 export default {
   name: 'ActivityTableRow',
@@ -34,7 +34,7 @@ export default {
       if (value) {
         switch (field) {
           case 'createdAt':
-            return formatDate(value);
+            return formatters.formatDate(value);
           default:
             return value;
         }
