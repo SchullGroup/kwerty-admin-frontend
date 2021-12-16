@@ -5,40 +5,32 @@
       :key="data[field]"
       :class="{
         [field]: true,
-        [data[field].toLowerCase()]: field === 'status',
+        [data[field] && data[field].toString().toLowerCase()]: field === 'status',
         untitled: field === 'name' && data[field] === 'Untitled User',
+        'text-capitalize': field === 'country'
       }"
     >
       <span class="checkbox" v-if="i === 0">
         <k-checkbox :name="data[field]" :value="data['id']" v-model="innerValue" />
       </span>
       <span class="flag" v-if="field === 'country'">
-        <img :src="flags[data[field].toLowerCase()]" alt="" />
+        <img :src="`/countries/${data[field].toLowerCase()}.svg`" alt="" />
       </span>
       <span @click="$emit('clickAction')">
-        {{ data[field] | formatDate(field) }}
+        {{ data[field] | formatField(field) }}
       </span>
     </td>
   </tr>
 </template>
 
 <script>
-import format from 'date-fns/format';
 import KCheckbox from '../Checkbox/Checkbox';
-// remove later
-import polandFlag from '@/assets/poland.svg';
-import norwayFlag from '@/assets/norway.svg';
-import italyFlag from '@/assets/italy.svg';
+import { formatDate } from '@/utils/formatters';
 
 export default {
   name: 'TableRow',
   components: { KCheckbox },
   data: () => ({
-    flags: {
-      poland: polandFlag,
-      norway: norwayFlag,
-      italy: italyFlag,
-    },
     innerValue: [],
     rowId: null,
   }),
@@ -92,10 +84,7 @@ export default {
         switch (field) {
           case 'createdAt':
           case 'updatedAt':
-            return `${format(new Date(value), 'p')} , ${format(new Date(value), 'd')}-${format(
-              new Date(value),
-              'MM',
-            )}-${format(new Date(value), 'Y')}`;
+            return formatDate(value);
           default:
             return value;
         }
@@ -162,8 +151,14 @@ export default {
       column-gap: 0.8rem;
       align-items: center;
       .flag {
+        width: 3.2rem;
+        height: 1.8rem;
         display: flex;
         align-items: center;
+        img {
+          width: 100%;
+          height: auto;
+        }
       }
       .checkbox {
         margin-right: -0.8rem;

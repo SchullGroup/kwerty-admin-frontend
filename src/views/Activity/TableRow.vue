@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import format from 'date-fns/format';
+import { formatDate } from '@/utils/formatters';
 
 export default {
   name: 'ActivityTableRow',
@@ -34,7 +34,7 @@ export default {
       if (value) {
         switch (field) {
           case 'createdAt':
-            return `${format(new Date(value), 'p')} , ${format(new Date(value), 'd')}-${format(new Date(value), 'MM')}-${format(new Date(value), 'Y')}`;
+            return formatDate(value);
           default:
             return value;
         }

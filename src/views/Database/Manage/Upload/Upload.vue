@@ -28,7 +28,7 @@
         <ul class="content__menu">
           <li class="content__menu__item active" @click="goToTab('all')">All Data</li>
           <li class="content__menu__item" @click="goToTab('published')">Published</li>
-          <li class="content__menu__item" @click="goToTab('drafts')">Drafts</li>
+          <li class="content__menu__item" @click="goToTab('draft')">Drafts</li>
           <li class="content__menu__item" @click="goToTab('deleted')">Deleted</li>
         </ul>
       </aside>

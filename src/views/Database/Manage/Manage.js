@@ -1,3 +1,4 @@
+import { mapActions, mapGetters } from 'vuex';
 import {
   KDashboardLayout,
   KInput,
@@ -10,6 +11,7 @@ import {
 import BackIcon from './BackIcon.vue';
 import SingleData from './SingleData.vue';
 import database from '@/utils/dummy-database';
+import countries from '@/utils/countries';
 
 export default {
   name: 'ManageData',
@@ -54,21 +56,22 @@ export default {
       'Official Reserve Assets': 'Official Reserve Assets',
       'Public Finance Sector Revenue': 'Public Finance Sector Revenue',
     },
-    countries: {
-      all: 'All Countries',
-      germany: 'Germany',
-      france: 'France',
-      italy: 'Italy',
-      poland: 'Poland',
-      spain: 'Spain',
-      portugal: 'Portugal',
-      netherlands: 'Netherlands',
-      ireland: 'Ireland',
-      belgium: 'Belgium',
-    },
-    tableFields: ['indicator', 'country', 'startYear', 'endYear', 'lastModified'],
+    countries,
+    // countries: {
+    //   all: 'All Countries',
+    //   germany: 'Germany',
+    //   france: 'France',
+    //   italy: 'Italy',
+    //   poland: 'Poland',
+    //   spain: 'Spain',
+    //   portugal: 'Portugal',
+    //   netherlands: 'Netherlands',
+    //   ireland: 'Ireland',
+    //   belgium: 'Belgium',
+    // },
+    tableFields: ['nameOfIndicator', 'country', 'startYear', 'endYear', 'lastModified'],
     tableFieldsDisplay: {
-      indicator: 'Name of Indicator',
+      nameOfIndicator: 'Name of Indicator',
       country: 'Country',
       startYear: 'Start Year',
       endYear: 'End Year',
@@ -88,8 +91,20 @@ export default {
     },
     isSingleView: false,
     singleViewData: database.single,
+    svgPath:
+      'M18.896.44a2.91 2.91 0 0 1 2.91 2.909v1.94h-1.94v11.637a2.91 2.91 0 0 1-2.91 2.91H3.38a2.91 2.91 0 0 1-2.91-2.91v-1.94h15.518v1.94a.97.97 0 0 0 .856.963l.113.007a.97.97 0 0 0 .963-.857l.007-.113V2.379H5.32a.97.97 0 0 0-.963.856l-.007.114v9.698h-1.94V3.349A2.91 2.91 0 0 1 5.32.439h13.577Z', // eslint-disable-line
+    isFetching: true,
+    paginationData: {
+      currentPage: 1,
+      totalPages: 1,
+      total: 0,
+    },
+    search: '',
   }),
   computed: {
+    ...mapGetters({
+      allData: 'database/getDatabase',
+    }),
     selected() {
       return this.selectedRows.length;
     },
@@ -101,8 +116,19 @@ export default {
       const suffixS = selected !== 1 ? 's' : '';
       return `${actionDisplays[activeModal]} ${selected} data set${suffixS}`;
     },
+    currentPage: {
+      get() {
+        return this.paginationData.currentPage;
+      },
+      set(value) {
+        this.paginationData.currentPage = value;
+      },
+    },
   },
   methods: {
+    ...mapActions({
+      fetchDatabase: 'database/fetchDatabase',
+    }),
     resetSelectedRows() {
       this.selectedRows = [];
     },
@@ -118,17 +144,48 @@ export default {
       console.log(pageId);
       this.isSingleView = !this.isSingleView;
     },
+    async getData(params) {
+      let reqParams = { ...params }; // eslint-disable-line
+      const { activeTab, search } = this;
+      reqParams[activeTab] = activeTab === 'all' ? '' : 'yes';
+      reqParams.search = search;
+      this.isFetching = true;
+      try {
+        const paginationData = await this.fetchDatabase(reqParams);
+        if (!paginationData.error) {
+          this.paginationData = paginationData;
+          this.paginationData.currentPage = Number(paginationData.currentPage);
+        } else {
+          throw Error(paginationData.error);
+        }
+      } catch (error) {
+        this.$toast.show({ message: error });
+      } finally {
+        this.isFetching = false;
+      }
+    },
   },
   watch: {
     activeTab(val) {
       this.resetSelectedRows();
       this.allTableData = database[val];
+      this.getData();
+    },
+    currentPage(val) {
+      this.getData({ page: val });
+    },
+    search() {
+      this.getData();
     },
   },
   mounted() {
     const { active } = this.$route.query;
-    const valid = ['all', 'published', 'unpublished', 'drafts'];
-    if (!active || valid.indexOf(active) === -1) return;
-    this.activeTab = active;
+    const valid = ['all', 'published', 'unpublished', 'draft'];
+    if (!active || valid.indexOf(active) === -1) {
+      this.activeTab = 'all';
+    } else {
+      this.activeTab = active;
+    }
+    this.getData({});
   },
 };
