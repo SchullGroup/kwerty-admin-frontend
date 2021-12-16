@@ -17,6 +17,7 @@
             :key="Object.values(data).join('-')"
             :data="data"
             :fields="fields"
+            @clickAction="$emit('clickAction', data.id)"
             v-model='selected'
           >
           </table-row>

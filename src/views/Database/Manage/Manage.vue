@@ -1,81 +1,116 @@
 <template>
   <k-dashboard-layout>
-    <header :class="['header', { selected: selected }]">
+    <header :class="['header', 'selected']">
       <h1>Database</h1>
-      <!-- DEFAULT HEADER CONTROLS -->
-      <div class="header__controls" v-if="!selected">
-        <div class="search">
-          <k-input label="Search by country, indicators or categories"></k-input>
+      <template v-if="!isSingleView">
+        <!-- DEFAULT HEADER CONTROLS -->
+        <div class="header__controls" v-if="!selected">
+          <div class="search">
+            <k-input label="Search by country, indicators or categories"></k-input>
+          </div>
+          <div class="filter">
+            <k-input
+              type="select"
+              label="Filter by Category"
+              variant="dropdown"
+              v-model="category"
+              :optionsDisplay="categories"
+            ></k-input>
+          </div>
+          <div class="filter">
+            <k-input
+              type="select"
+              label="Filter by Indicator"
+              variant="dropdown"
+              v-model="indicator"
+              :optionsDisplay="indicators"
+            ></k-input>
+          </div>
+          <div class="filter">
+            <k-input
+              type="select"
+              label="Filter by Country"
+              variant="dropdown"
+              v-model="country"
+              :optionsDisplay="countries"
+            ></k-input>
+          </div>
+          <div class="button">
+            <k-button variant="primary" @click="$router.push({ name: 'Upload' })">
+              Upload New Data
+            </k-button>
+          </div>
         </div>
-        <div class="filter">
-          <k-input
-            type="select"
-            label="Filter by Category"
-            variant="dropdown"
-            v-model="category"
-            :optionsDisplay="categories"
-          ></k-input>
-        </div>
-        <div class="filter">
-          <k-input
-            type="select"
-            label="Filter by Indicator"
-            variant="dropdown"
-            v-model="indicator"
-            :optionsDisplay="indicators"
-          ></k-input>
-        </div>
-        <div class="filter">
-          <k-input
-            type="select"
-            label="Filter by Country"
-            variant="dropdown"
-            v-model="country"
-            :optionsDisplay="countries"
-          ></k-input>
-        </div>
-        <div class="button">
-          <k-button variant="primary" @click="$router.push({ name: 'Upload' })">
-            Upload New Data
-          </k-button>
-        </div>
-      </div>
 
-      <!--  HEADER CONTROLS WHEN ROWS SELECTED -->
-      <div class="header__controls__selected" v-if="selected">
-        <div class="selected-count">{{ selected }} selected</div>
+        <!--  HEADER CONTROLS WHEN ROWS SELECTED -->
+        <div class="header__controls__selected" v-if="selected">
+          <div class="selected-count">{{ selected }} selected</div>
+
+          <!-- BUTTONS WHEN NON DELETED DATA IS SELECTED -->
+          <div class="header__controls" v-if="activeTab !== 'deleted'">
+            <k-button
+              variant="secondary"
+              :disabled="activeTab !== 'drafts'"
+              @click="confirmAction('publish')"
+            >
+              Publish All
+            </k-button>
+            <k-button
+              variant="secondary"
+              @click="confirmAction('unpublish')"
+              :disabled="activeTab === 'drafts'"
+            >
+              Unpublish All
+            </k-button>
+            <k-button variant="secondary" negative="negative" @click="confirmAction('delete')">
+              Delete
+            </k-button>
+          </div>
+
+          <!-- BUTTONS WHEN DELETED DATA IS SELECTED -->
+          <div class="header__controls" v-else>
+            <k-button
+              variant="primary"
+              @click="confirmAction('restore')"
+              >
+              Restore to Drafts
+            </k-button>
+            <k-button
+              variant="secondary"
+              negative="negative"
+              @click="confirmAction('clear your bin')"
+            >
+              Permanently Delete
+            </k-button>
+          </div>
+        </div>
+      </template>
+      <!-- HEADER FOR SINGLE DATA VIEW -->
+      <div class="header__controls__selected" v-else>
+        <div class="selected-count">
+          <button class="back-button" @click="changePage">
+            <BackIcon />
+          </button>
+          {{ singleViewData.country }} -  {{ singleViewData.indicator }}
+        </div>
 
         <!-- BUTTONS WHEN NON DELETED DATA IS SELECTED -->
-        <div class="header__controls" v-if="activeTab !== 'deleted'">
+        <div class="header__controls">
           <k-button
-            variant="secondary"
-            :disabled="activeTab !== 'drafts'"
-            @click="confirmAction('publish')"
-          >
-            Publish All
-          </k-button>
-          <k-button
-            variant="secondary"
-            @click="confirmAction('unpublish')"
-            :disabled="activeTab === 'drafts'"
-          >
-            Unpublish All
-          </k-button>
-          <k-button variant="secondary" negative="negative" @click="confirmAction('delete')">
-            Delete
-          </k-button>
-        </div>
-
-        <!-- BUTTONS WHEN DELETED DATA IS SELECTED -->
-        <div class="header__controls" v-else>
-          <k-button variant="primary" @click="confirmAction('restore')">Restore to Drafts</k-button>
-          <k-button
-            variant="secondary"
-            negative="negative"
-            @click="confirmAction('clear your bin')"
-          >
-            Permanently Delete
-          </k-button>
+          variant="primary"
+          @click="isEditing = true"
+        >
+          Edit
+        </k-button>
+        <k-button
+          variant="secondary"
+          @click="isEditing = false"
+        >
+          Publish
+        </k-button>
+        <k-button variant="secondary" negative="negative" @click="confirmAction('delete')">
+          Delete
+        </k-button>
         </div>
       </div>
     </header>
@@ -109,9 +144,14 @@
           </li>
         </ul>
       </aside>
-
+      <!-- Single Data view -->
+      <SingleData
+        v-if="isSingleView"
+        :isEditing="isEditing"
+        :data="singleViewData"
+        />
       <!-- DATA TABLE     -->
-      <section class="content__body">
+      <section class="content__body" v-else>
         <transition name="slide-down">
           <div class="delete__alert" v-if="activeTab === 'deleted'">
             All data found here will be permanently deleted after 30 days
@@ -121,6 +161,7 @@
           :fields="tableFields"
           :fields-display="tableFieldsDisplay"
           :datalist="allTableData"
+          @clickAction="changePage"
           v-model="selectedRows"
         ></k-table>
       </section>
@@ -233,6 +274,7 @@
 
     <!-- PAGINATION -->
     <k-pagination
+      v-if="!isSingleView"
       :forTable="true"
       variant="many"
       :page="1"

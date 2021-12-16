@@ -18,6 +18,9 @@ export default {
     value: {
       type: null,
     },
+    clickAction: {
+      type: Function,
+    },
   },
   data: () => ({
     selected: [],

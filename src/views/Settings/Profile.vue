@@ -80,6 +80,7 @@ export default {
       resetPassword: 'auth/resetPassword',
       fetchAdmin: 'admin/fetchAll',
       fetchRoles: 'roles/fetchAll',
+      fetchRolesDetails: 'roles/fetchDetails',
     }),
     async sendNewPassword() {
       this.isLoading = true;
@@ -101,10 +102,10 @@ export default {
     },
   },
   created() {
-    const { token } = this.user;
     try {
-      this.fetchAdmin({ token });
-      this.fetchRoles({ token });
+      this.fetchAdmin({});
+      this.fetchRoles({});
+      this.fetchRolesDetails({ page: 1 });
     } catch (e) {
       this.$toast.show({ message: e });
     }

@@ -4,10 +4,6 @@ import DropdownIcon from './dropdownIcon.vue';
 
 export default {
   name: 'KInput',
-  mounted() {
-    this.innerValue = this.value;
-    this.listenForSelect();
-  },
   data: () => ({
     innerValue: null,
     overrideType: null,
@@ -48,6 +44,24 @@ export default {
     value(val) {
       this.innerValue = val;
     },
+  },
+  mounted() {
+    this.innerValue = this.value;
+    this.listenForSelect();
+  },
+  updated() {
+    if (this.$refs.list) {
+      const { list } = this.$refs;
+      const pos = list.parentElement.getBoundingClientRect();
+      const fromTop = pos.top + 76;
+      const screenH = window.innerHeight;
+      const height = (list.children.length * 48) + 32;
+      const overflow = screenH - (fromTop + height);
+      if (fromTop + height < screenH) list.style.top = '76px';
+      if (overflow < 0) {
+        list.style.top = `${overflow + 64}px`;
+      }
+    }
   },
   methods: {
     updateInput(e) {

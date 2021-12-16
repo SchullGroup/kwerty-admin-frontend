@@ -5,17 +5,17 @@
       <editable-list-item
         :show-controls="editing"
         v-for="role in roles"
-        :key="role.title"
+        :key="role.id"
         :styling="{ marginBottom: '3.2rem' }"
         :no-delete="role.noDelete"
         :no-edit="role.noEdit"
         :item="role"
         @edit="editItem"
-        @delete="deleteItem"
+        @delete="deleteItem(role.id)"
       >
         <div class="role">
           <h3 class="role__title">
-            {{ role.title }}
+            {{ snakeToTitle(role.name) }}
           </h3>
           <div class="role__description">{{ role.description }}</div>
         </div>

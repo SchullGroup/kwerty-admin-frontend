@@ -12,13 +12,28 @@
           'input--is-open': isSelect && isSelectOpen,
           'input--has-value': type === 'select' && innerValue,
           'as-dropdown': isSelect && variant === 'dropdown',
-          'with-display': !!this.optionsDisplay
+          'with-display': !!this.optionsDisplay,
+          'input--textarea': variant === 'textarea',
         },
       ]"
       @click="isSelect ? toggleSelectOpen() : null"
       :tabindex='isSelect ? 0 : -1'
     >
+      <textarea
+        v-if="variant === 'textarea'"
+        rows="5"
+        :name="name"
+        :id="name"
+        :value="isSelect && selectedOption ? selectedOption : innerValue"
+        :placeholder="label"
+        :disabled="disabled"
+        @change="updateInput"
+        @keyup="reactive ? updateInput($event) : null"
+        >
+
+      </textarea>
       <input
+        v-else
         :name="name"
         :id="name"
         :type="overrideType || type"
