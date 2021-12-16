@@ -4,7 +4,9 @@ import errorHandler from '@/utils/error-handler';
 export default {
   addIndicator: ({ dispatch }, indicator) => addIndicator(indicator)
     .then(({ data }) => {
-      dispatch('getIndicators');
+      // const page = body.page;
+      // const search = body.search;
+      dispatch('getIndicators', {});
       const { message } = data;
       return message;
     })

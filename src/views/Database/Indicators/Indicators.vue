@@ -61,7 +61,7 @@
       >
       </k-table>
       <!-- EMPTY STATE  -->
-      <div v-if="indicators.length === 0" class="no-activity text-center">
+      <div v-if="emptyState" class="no-activity text-center">
         <div class="icon">
           <svg width="22" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path :d="svgPath" fill="#666" />
@@ -90,7 +90,7 @@
             ></k-input>
             <k-input-tag v-model="tags"></k-input-tag>
             <div class="btn-wrapper">
-              <k-button variant="link" @click="showModal = false">Cancel</k-button>
+              <k-button variant="link" @click="closeAddIndicators">Cancel</k-button>
               <k-button @click="createIndicator" :loading="isLoading" submit
                 >Save & Continue
               </k-button>
@@ -100,10 +100,10 @@
       </k-modal>
       <k-pagination
         :forTable="true"
-        :page="page"
+        :page="pagination.page"
         :maxItemsOnPage="20"
-        :totalItems="totalItems"
-        :totalPages="totalPages"
+        :totalItems="pagination.totalItems"
+        :totalPages="pagination.totalPages"
         variant="many"
         @goToNext="nextPage"
         @goToPrev="prevPage"

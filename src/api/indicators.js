@@ -1,6 +1,6 @@
 import { instance } from '../config';
 
-export function getIndicators({ page, search }) {
+export function getIndicators({ page = 1, search = '' }) {
   return instance.get(`/indicator?search=${search}&page=${page}&limit=20`);
 }
 
