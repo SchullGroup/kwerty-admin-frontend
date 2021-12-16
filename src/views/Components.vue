@@ -138,6 +138,9 @@
           v-model="selected"
         ></k-table>
       </section>
+      <section>
+        <k-input-tag v-model='tags'></k-input-tag>
+      </section>
     </div>
   </k-dashboard-layout>
 </template>
@@ -155,6 +158,7 @@ import {
   KIcons,
   KModal,
   KTable,
+  KInputTag,
 } from '@/components';
 import database from '@/utils/dummy-database';
 
@@ -172,8 +176,10 @@ export default {
     KInput,
     KIcons,
     KTable,
+    KInputTag,
   },
   data: () => ({
+    tags: [],
     page: 1,
     totalItems: 243,
     itemsOnPage: 20,

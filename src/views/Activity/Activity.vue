@@ -52,12 +52,21 @@
         </template>
         <template v-else>
           <activity-table-row
-            v-for="activity in allActivities"
+            v-for="activity in activities"
             :key="activity.createdAt"
             :activity="activity"
             :fields="displayFields"
           >
           </activity-table-row>
+          <!-- EMPTY STATE  -->
+          <div v-if="activities.length === 0" class="no-activity text-center">
+            <div class="icon">
+              <svg width="22" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path :d="svgPath" fill="#666" />
+              </svg>
+            </div>
+            <p>There are currently no {{ type }} activities</p>
+          </div>
         </template>
       </tbody>
     </table>

@@ -1,7 +1,7 @@
 export default {
   all: [
     {
-      id: 1,
+      id: 'fgsawyfcghyegehhe',
       indicator: 'Central Budget',
       country: 'Poland',
       startYear: '1986',
@@ -9,7 +9,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 2,
+      id: 'fghfghbkyfcghyegehhe',
       indicator: 'Primary Income ',
       country: 'Norway',
       startYear: '1986',
@@ -17,7 +17,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 3,
+      id: 'fghdjkyfjhyegehhe',
       indicator: 'Current Account to GDP',
       country: 'Norway',
       startYear: '1986',
@@ -25,7 +25,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 4,
+      id: 'fghertfcghyegehhe',
       indicator: 'Direct Investment (Assets)',
       country: 'Italy',
       startYear: '1986',
@@ -33,7 +33,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 5,
+      id: 'fgxcvyfcghyegehhe',
       indicator: 'Direct Investment (Liabilities)',
       country: 'Poland',
       startYear: '1986',
@@ -41,7 +41,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 6,
+      id: 'fghdjkyfcghyegehhe',
       indicator: 'Portfolio Investments (Liabilities)',
       country: 'Norway',
       startYear: '1986',
@@ -49,7 +49,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 7,
+      id: 'fghdjkyfcghtryhhe',
       indicator: 'Official Reserve Assets',
       country: 'Poland',
       startYear: '1986',
@@ -57,7 +57,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 8,
+      id: 'fghdjkyfcgghjehhe',
       indicator: 'Population Men ',
       country: 'Italy',
       startYear: '1986',
@@ -65,7 +65,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 9,
+      id: 'fghdjkyfctyuigehhe',
       indicator: 'Population Women',
       country: 'Poland',
       startYear: '1986',
@@ -73,7 +73,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 10,
+      id: 'fghdjkyfcgrtyugehhe',
       indicator: 'Urban population',
       country: 'Poland',
       startYear: '1986',
@@ -81,7 +81,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 11,
+      id: 'fghdjkyfghjyegehhe',
       indicator: 'Urban Population % of total Population ',
       country: 'Norway',
       startYear: '1986',
@@ -89,7 +89,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 12,
+      id: 'fghdjkyfcghtfghhe',
       indicator: 'Marriages',
       country: 'Italy',
       startYear: '1986',
@@ -97,7 +97,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 13,
+      id: 'fghdjkyfcgfghgehhe',
       indicator: 'Legal Separations',
       country: 'Poland',
       startYear: '1986',
@@ -105,7 +105,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 14,
+      id: 'fghdjkyfcghjigehhe',
       indicator: 'Death by Causes (System)',
       country: 'Poland',
       startYear: '1986',
@@ -113,7 +113,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 15,
+      id: 'fghdjkyfcghyegehhe',
       indicator: 'Urban Population % of total Population 2',
       country: 'Norway',
       startYear: '1985',
@@ -121,7 +121,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 15,
+      id: 'fghdjkyfcghtyukhhe',
       indicator: 'Marriages 2',
       country: 'Italy',
       startYear: '1985',
@@ -129,7 +129,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 16,
+      id: 'fghdjkyfcfghgehhe',
       indicator: 'Legal Separations 2',
       country: 'Poland',
       startYear: '1985',
@@ -137,7 +137,7 @@ export default {
       lastModified: '4:32 PM, 22-02-2021',
     },
     {
-      id: 17,
+      id: 'fghdjkyfcgfcvbehhe',
       indicator: 'Death by Causes (System) 2',
       country: 'Poland',
       startYear: '1985',

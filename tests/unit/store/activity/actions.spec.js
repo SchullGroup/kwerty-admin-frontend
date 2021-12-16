@@ -30,9 +30,11 @@ const { getActivities } = actions;
 
 const commit = jest.fn();
 
+const body = { type: 'admin' };
+
 describe('activity actions', () => {
   it('Fetched all admin activities', async () => {
-    const activitiesFetched = await getActivities({ commit }, 1);
+    const activitiesFetched = await getActivities({ commit }, body);
     expect(activitiesFetched).toEqual({
       name: 'superAdmin',
       activity: 'test@example.com',

@@ -106,3 +106,8 @@
   grid: 1fr / 1fr 1fr;
   column-gap: 2rem;
 }
+.no-activity{
+  height: 60vh;
+  display: grid;
+  place-content: center;
+}

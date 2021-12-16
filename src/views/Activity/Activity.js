@@ -25,6 +25,7 @@ export default {
     page: 1,
     maxItemsOnPage: 20,
     isLoading: false,
+    // userActivities: [],
     paginationData: {
       page: 1,
       totalItems: 0,
@@ -50,14 +51,14 @@ export default {
       csv: 'CSV',
       pdf: 'PDF',
     },
+    svgPath:
+      'M18.896.44a2.91 2.91 0 0 1 2.91 2.909v1.94h-1.94v11.637a2.91 2.91 0 0 1-2.91 2.91H3.38a2.91 2.91 0 0 1-2.91-2.91v-1.94h15.518v1.94a.97.97 0 0 0 .856.963l.113.007a.97.97 0 0 0 .963-.857l.007-.113V2.379H5.32a.97.97 0 0 0-.963.856l-.007.114v9.698h-1.94V3.349A2.91 2.91 0 0 1 5.32.439h13.577Z',
   }),
   mounted() {
-    this.fetchActivities();
     this.setType();
   },
   watch: {
     page(value) {
-      console.log(value);
       if (value) {
         this.fetchActivities(value);
       }
@@ -68,24 +69,27 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: 'auth/getUser',
-      allActivities: 'activity/getActivities',
+      adminActivities: 'activity/getActivities',
+      userActivities: 'activity/getUserActivities',
     }),
     title() {
       const { type } = this;
       return type ? `${type[0].toUpperCase()}${type.slice(1)} Activity` : 'Activity';
     },
+    activities() {
+      return this.type === 'admin' ? this.adminActivities : this.userActivities;
+    },
   },
   methods: {
     ...mapActions({
-      getAllActivities: 'activity/getActivities',
+      getAdminActivities: 'activity/getActivities',
+      getUserActivities: 'activity/getUserActivities',
     }),
     async fetchActivities(page = 1) {
+      const { type } = this;
       this.isLoading = true;
-      const { user } = this;
-      const adminToken = user.token;
       try {
-        const activitiesFetched = await this.getAllActivities({ page, adminToken });
+        const activitiesFetched = await this.getAdminActivities({ page, type });
         if (!activitiesFetched.error) {
           this.paginationData.page = Number(activitiesFetched.currentPage);
           this.paginationData.totalItems = Number(activitiesFetched.total);
@@ -99,7 +103,9 @@ export default {
       }
     },
     setType() {
-      this.type = this.$route.params.type;
+      const { type } = this.$route.params;
+      this.type = type === 'admin' ? 'admin' : 'user';
+      this.fetchActivities();
     },
     nextPage() {
       this.page += 1;

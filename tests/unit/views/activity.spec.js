@@ -41,9 +41,14 @@ describe('Activity Component', () => {
     await ActivityHome.watch.page.call(mockThis, []);
     await ActivityHome.watch.$route.call(mockThis, []);
     expect(ActivityHome.computed.title.call(mockThis)).toMatch('Activity');
+    expect(ActivityHome.computed.activities.call(mockThis));
     expect(wrapper.vm.$options.name).toMatch('ActivityHome');
+    wrapper.setData({
+      type: 'admin',
+    });
     expect(wrapper.vm.fetchActivities());
     expect(wrapper.vm.fetchActivities());
+    expect(wrapper.vm.setType());
     expect(wrapper.vm.prevPage());
     expect(wrapper.vm.nextPage());
     expect(wrapper.vm.firstPage());
