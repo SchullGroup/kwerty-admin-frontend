@@ -127,6 +127,7 @@ export default {
         this.isLoading = false;
         this.resetForm();
       } catch (error) {
+        console.log(error);
         this.$toast.show({ message: error });
       }
     },
