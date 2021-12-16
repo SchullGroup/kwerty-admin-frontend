@@ -1,6 +1,6 @@
 <template>
   <k-card :heading="edit ? 'Edit Role' : 'Add Role'" variant='in-modal'>
-    <form ref='form' class='form__items'>
+    <form ref='form' class='form__items' @submit.prevent='handleSubmit'>
       <k-input v-model='formValue.name' label='Title' name='title'></k-input>
       <k-input v-model='formValue.description' label='Description' name='description'></k-input>
       <div class='permissions'>
@@ -22,7 +22,7 @@
       </div>
       <div class='controls'>
         <k-button type='button' variant='link' @click="$emit('close')">Cancel</k-button>
-        <k-button :loading='isLoading' type='button' variant='secondary' @click='handleSubmit'>
+        <k-button :loading='isLoading' variant='secondary' submit>
           Finish
         </k-button>
       </div>
@@ -92,7 +92,7 @@ export default {
           const message = await this.editRole({
             role: {
               ...formValue,
-              permissions: JSON.stringify(permissions),
+              permissions,
             },
             id,
           });
@@ -103,7 +103,7 @@ export default {
           const message = await this.addRole({
             role: {
               ...formValue,
-              permissions: JSON.stringify(permissions),
+              permissions,
             },
           });
           if (message.error) throw Error(message.error);

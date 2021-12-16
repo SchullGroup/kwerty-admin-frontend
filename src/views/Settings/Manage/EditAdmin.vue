@@ -1,6 +1,6 @@
 <template>
   <k-card heading='Edit Admin' variant='in-modal'>
-    <form class='form__items'>
+    <form class='form__items' @submit.prevent="finish">
       <k-input v-model='admin.lastName' label='Surname' />
       <k-input v-model='admin.firstName' label='First Name' />
       <k-input v-model='admin.email' label='Email Address' type='email' />
@@ -10,7 +10,7 @@
       </k-input>
       <div class='btn-wrapper'>
         <k-button variant='link' @click="$emit('close')">Cancel</k-button>
-        <k-button variant='secondary' :loading='sending' @click='finish'>Finish</k-button>
+        <k-button variant='secondary' :loading='sending' submit>Finish</k-button>
       </div>
     </form>
   </k-card>
