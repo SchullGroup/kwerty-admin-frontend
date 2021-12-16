@@ -4,7 +4,7 @@ import errorHandler from '@/utils/error-handler';
 export default {
   addIndicator: ({ dispatch }, indicator) => addIndicator(indicator)
     .then(({ data }) => {
-      dispatch('getIndicators');
+      dispatch('getIndicators', {});
       const { message } = data;
       return message;
     })
@@ -17,7 +17,7 @@ export default {
     .catch((response) => errorHandler(response, true)),
   deleteIndicator: ({ dispatch }, body) => deleteIndicator(body)
     .then(({ data }) => {
-      dispatch('getIndicators');
+      dispatch('getIndicators', {});
       const { message } = data;
       return message;
     })

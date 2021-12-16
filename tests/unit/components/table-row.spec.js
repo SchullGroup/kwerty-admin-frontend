@@ -9,12 +9,13 @@ describe('TableRow Component', () => {
   it('should emit input on value change', () => {
     const mockThis = {
       data: {
-        indicator: 'hello',
+        id: 'hello',
       },
       innerValue: ['hello'],
       value: ['world'],
       $emit: jest.fn(),
       checkAndAdd: jest.fn(),
+      format: jest.fn(),
     };
 
     TableRow.watch.innerValue.call(mockThis);
@@ -33,5 +34,6 @@ describe('TableRow Component', () => {
     mockThis.innerValue = ['hello'];
     TableRow.methods.checkAndAdd.call(mockThis, ['world']);
     expect(mockThis.$emit).toHaveBeenCalledWith('input', ['world', 'hello']);
+    TableRow.filters.formatDate.call(mockThis);
   });
 });
