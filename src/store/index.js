@@ -10,6 +10,7 @@ import admin from './modules/admin';
 import roles from './modules/roles';
 import activity from './modules/activity';
 import indicators from './modules/indicators';
+import database from './modules/database';
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
@@ -29,6 +30,7 @@ export default new Vuex.Store({
     roles,
     activity,
     indicators,
+    database,
   },
   plugins: [vuexLocal.plugin],
 });

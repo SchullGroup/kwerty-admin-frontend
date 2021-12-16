@@ -9,7 +9,7 @@
         </div>
         <k-button
           v-if="filename"
-          @click="activeTab = 'UPLOAD CSV'"
+          @click="resetPage"
           variant="secondary"
           negative="negative"
           >Cancel Upload</k-button
@@ -48,7 +48,7 @@
             <table border>
               <thead>
                 <tr>
-                  <th v-for="field in fileFields" :key="field">
+                  <th v-for="field in fileFields" :key="field" :id="field">
                     {{ field }}
                   </th>
                 </tr>
@@ -64,7 +64,11 @@
             </table>
           </div>
           <div class="btn-wrapper">
-            <k-button>Save & Publish</k-button>
+            <k-button
+              @click="uploadDataToCloud"
+              :loading="dataIsUploading">
+              Save & Publish
+            </k-button>
           </div>
         </div>
         <div class="upload-content" v-if="activeTab === 'UPLOAD CSV'">

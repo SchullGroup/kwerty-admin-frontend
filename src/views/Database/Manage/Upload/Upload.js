@@ -1,5 +1,6 @@
 import XLSX from 'xlsx';
 import vue2Dropzone from 'vue2-dropzone';
+import { mapActions } from 'vuex';
 import {
   KDashboardLayout,
   KButton,
@@ -30,8 +31,13 @@ export default {
     filename: '',
     fileData: [],
     fileFields: [],
+    htmlFile: null,
+    dataIsUploading: false,
   }),
   methods: {
+    ...mapActions({
+      uploadCSV: 'database/uploadCSV',
+    }),
     goToTab(active) {
       this.$router.push({
         name: 'ManageData',
@@ -55,8 +61,36 @@ export default {
       } catch (e) {
         this.$toast.show({ message: e });
       } finally {
-        this.isUploading = false;
+        setTimeout(() => {
+          this.htmlFile = file;
+          this.isUploading = false;
+        }, 2000);
       }
+    },
+    async uploadDataToCloud() {
+      this.dataIsUploading = true;
+      const formData = new FormData();
+      formData.append('file', this.htmlFile);
+      try {
+        const isUploaded = await this.uploadCSV(formData);
+        if (!isUploaded.error) {
+          this.$toast.show({ message: 'Data uploaded successfully' });
+          this.$router.push({ name: 'ManageData' });
+        } else {
+          throw Error(isUploaded.error);
+        }
+      } catch (e) {
+        this.$toast.show({ message: e });
+      } finally {
+        this.dataIsUploading = false;
+      }
+    },
+    resetPage() {
+      this.htmlFile = null;
+      this.activeTab = 'UPLOAD CSV';
+      this.filename = '';
+      this.fileData = [];
+      this.fileFields = [];
     },
   },
 };
