@@ -22,7 +22,7 @@
       </div>
       <div class='controls'>
         <k-button type='button' variant='link' @click="$emit('close')">Cancel</k-button>
-        <k-button :loading='isLoading' type='button' variant='secondary' submit>
+        <k-button :loading='isLoading' variant='secondary' submit>
           Finish
         </k-button>
       </div>
