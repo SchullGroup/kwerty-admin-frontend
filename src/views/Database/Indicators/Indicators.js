@@ -54,7 +54,6 @@ export default {
       Trade: 'Trade',
     },
     optionsFrequency: {
-      all: 'All',
       quarterly: 'Quarterly',
       monthly: 'Monthly',
       yearly: 'Yearly',
@@ -77,12 +76,8 @@ export default {
         this.fetchIndicators(val);
       }
     },
-    search(val) {
-      if (val) {
-        this.fetchIndicators();
-      } else if (!val) {
-        this.fetchIndicators();
-      }
+    search() {
+      this.fetchIndicators();
     },
   },
   mounted() {
@@ -119,7 +114,6 @@ export default {
       this.isLoading = true;
       try {
         const newIndicator = await this.addIndicator({ indicator: { ...indicator, tags } });
-        console.log(indicator);
         if (newIndicator.error) {
           throw Error(newIndicator.error);
         }
@@ -150,7 +144,6 @@ export default {
     },
     async removeIndicator() {
       const { selectedRows } = this;
-      console.log(selectedRows);
       this.isLoading = true;
       try {
         const indicatorRemoved = await this.deleteIndicator({ ids: [...selectedRows] });
@@ -159,6 +152,7 @@ export default {
         }
         this.$toast.show({ message: indicatorRemoved });
         this.showDeleteModal = false;
+        this.selected = '';
         this.fetchIndicators();
       } catch (error) {
         this.$toast.show({ massage: error });
