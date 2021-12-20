@@ -6,7 +6,10 @@
         <!-- DEFAULT HEADER CONTROLS -->
         <div class="header__controls" v-if="!selected">
           <div class="search">
-            <k-input label="Search by country, indicators or categories" v-model="search"></k-input>
+            <k-input
+            label="Search by country, indicators or categories"
+            v-model="search"
+            reactive></k-input>
           </div>
           <div class="filter">
             <k-input
@@ -87,11 +90,11 @@
       </template>
       <!-- HEADER FOR SINGLE DATA VIEW -->
       <div class="header__controls__selected" v-else>
-        <div class="selected-count">
+        <div class="selected-count text-capitalize">
           <button class="back-button" @click="changePage">
             <BackIcon />
           </button>
-          {{ singleViewData.country }} -  {{ singleViewData.indicator }}
+          {{ singleViewData.country }} -  {{ singleViewData.indicatorName }}
         </div>
 
         <!-- BUTTONS WHEN NON DELETED DATA IS SELECTED -->
@@ -149,6 +152,7 @@
         v-if="isSingleView"
         :isEditing="isEditing"
         :data="singleViewData"
+        :nameOfIndicator="currentNameOfIndicator"
         />
       <!-- DATA TABLE     -->
       <section class="content__body" v-else>

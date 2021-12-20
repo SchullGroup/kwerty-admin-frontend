@@ -79,7 +79,7 @@ export default {
     },
   },
   filters: {
-    formatDate(value, field) {
+    formatField(value, field) {
       if (value) {
         switch (field) {
           case 'createdAt':

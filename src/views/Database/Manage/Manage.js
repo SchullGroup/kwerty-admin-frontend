@@ -10,7 +10,6 @@ import {
 } from '@/components';
 import BackIcon from './BackIcon.vue';
 import SingleData from './SingleData.vue';
-import database from '@/utils/dummy-database';
 import countries from '@/utils/countries';
 
 export default {
@@ -28,12 +27,12 @@ export default {
   },
   data: () => ({
     activeTab: 'all',
-    category: 'all',
+    category: '',
     indicator: 'all',
-    country: 'all',
+    country: '',
     isEditing: false,
     categories: {
-      all: 'All Categories',
+      '': 'All Categories',
       agriculture: 'Agriculture',
       economy: 'Economy',
       finance: 'Finance',
@@ -57,18 +56,6 @@ export default {
       'Public Finance Sector Revenue': 'Public Finance Sector Revenue',
     },
     countries,
-    // countries: {
-    //   all: 'All Countries',
-    //   germany: 'Germany',
-    //   france: 'France',
-    //   italy: 'Italy',
-    //   poland: 'Poland',
-    //   spain: 'Spain',
-    //   portugal: 'Portugal',
-    //   netherlands: 'Netherlands',
-    //   ireland: 'Ireland',
-    //   belgium: 'Belgium',
-    // },
     tableFields: ['nameOfIndicator', 'country', 'startYear', 'endYear', 'lastModified'],
     tableFieldsDisplay: {
       nameOfIndicator: 'Name of Indicator',
@@ -77,7 +64,6 @@ export default {
       endYear: 'End Year',
       lastModified: 'Last Modified',
     },
-    allTableData: database.all,
     selectedRows: [],
     modalOpen: false,
     activeModal: 'unpublish',
@@ -90,7 +76,7 @@ export default {
       'clear your bin': 'Permanently delete',
     },
     isSingleView: false,
-    singleViewData: database.single,
+    singleViewData: {},
     svgPath:
       'M18.896.44a2.91 2.91 0 0 1 2.91 2.909v1.94h-1.94v11.637a2.91 2.91 0 0 1-2.91 2.91H3.38a2.91 2.91 0 0 1-2.91-2.91v-1.94h15.518v1.94a.97.97 0 0 0 .856.963l.113.007a.97.97 0 0 0 .963-.857l.007-.113V2.379H5.32a.97.97 0 0 0-.963.856l-.007.114v9.698h-1.94V3.349A2.91 2.91 0 0 1 5.32.439h13.577Z', // eslint-disable-line
     isFetching: true,
@@ -100,6 +86,7 @@ export default {
       total: 0,
     },
     search: '',
+    currentNameOfIndicator: '',
   }),
   computed: {
     ...mapGetters({
@@ -128,6 +115,7 @@ export default {
   methods: {
     ...mapActions({
       fetchDatabase: 'database/fetchDatabase',
+      fetchDataById: 'database/fetchDataById',
     }),
     resetSelectedRows() {
       this.selectedRows = [];
@@ -141,17 +129,26 @@ export default {
       this.modalOpen = false;
     },
     changePage(pageId) {
-      console.log(pageId);
+      if (typeof pageId === 'string') {
+        this.fetchSingleData({ pageId });
+        // remove later when BE is fixed;
+        const currentData = this.allData.find((data) => data.id === pageId);
+        this.currentNameOfIndicator = currentData.nameOfIndicator;
+      } else {
+        this.currentNameOfIndicator = '';
+      }
       this.isSingleView = !this.isSingleView;
     },
     async getData(params) {
       let reqParams = { ...params }; // eslint-disable-line
-      const { activeTab, search } = this;
+      const {
+        activeTab, search, country, category,
+      } = this;
       reqParams[activeTab] = activeTab === 'all' ? '' : 'yes';
       reqParams.search = search;
       this.isFetching = true;
       try {
-        const paginationData = await this.fetchDatabase(reqParams);
+        const paginationData = await this.fetchDatabase({ ...reqParams, country, category });
         if (!paginationData.error) {
           this.paginationData = paginationData;
           this.paginationData.currentPage = Number(paginationData.currentPage);
@@ -164,17 +161,37 @@ export default {
         this.isFetching = false;
       }
     },
+    async fetchSingleData({ pageId }) {
+      this.isFetching = true;
+      try {
+        const singleData = await this.fetchDataById(pageId);
+        if (!singleData.error) {
+          this.singleViewData = singleData;
+        } else {
+          throw Error(singleData.error);
+        }
+      } catch (error) {
+        this.$toast.show({ message: error });
+      } finally {
+        this.isFetching = false;
+      }
+    },
   },
   watch: {
-    activeTab(val) {
+    activeTab() {
       this.resetSelectedRows();
-      this.allTableData = database[val];
       this.getData();
     },
     currentPage(val) {
       this.getData({ page: val });
     },
     search() {
+      this.getData();
+    },
+    country() {
+      this.getData();
+    },
+    category() {
       this.getData();
     },
   },

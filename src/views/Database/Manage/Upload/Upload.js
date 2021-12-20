@@ -47,7 +47,6 @@ export default {
       });
     },
     async addFile(file) {
-      this.isUploading = true;
       try {
         this.filename = file.name;
         const data = await file.arrayBuffer();
@@ -61,14 +60,12 @@ export default {
       } catch (e) {
         this.$toast.show({ message: e });
       } finally {
-        setTimeout(() => {
-          this.htmlFile = file;
-          this.isUploading = false;
-        }, 2000);
+        this.htmlFile = file;
       }
     },
     async uploadDataToCloud() {
       this.dataIsUploading = true;
+      this.isUploading = true;
       const formData = new FormData();
       formData.append('file', this.htmlFile);
       try {
@@ -83,6 +80,7 @@ export default {
         this.$toast.show({ message: e });
       } finally {
         this.dataIsUploading = false;
+        this.isUploading = false;
       }
     },
     resetPage() {

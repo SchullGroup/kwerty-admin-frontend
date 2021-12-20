@@ -77,12 +77,8 @@ export default {
         this.fetchIndicators(val);
       }
     },
-    search(val) {
-      if (val) {
-        this.fetchIndicators();
-      } else if (!val) {
-        this.fetchIndicators();
-      }
+    search() {
+      this.fetchIndicators();
     },
   },
   mounted() {

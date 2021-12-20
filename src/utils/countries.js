@@ -1,14 +1,13 @@
 import countries from './countries.json';
-import stringHelpers from './string-helpers';
 
 const countryArray = countries;
 
 const formattedCountries = {
-  all: 'All Countries',
+  '': 'All Countries',
 };
 
 countryArray.forEach((country) => {
-  formattedCountries[stringHelpers.convertToCamelCase(country.name)] = country.name;
+  formattedCountries[country.name.toLowerCase()] = country.name;
 });
 
 export default formattedCountries;

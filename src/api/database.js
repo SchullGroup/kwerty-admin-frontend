@@ -20,3 +20,6 @@ export function getAllCountryData(params) {
 export function updateData({ id, payload }) {
   return instance.put(`dataset/${id}`, payload);
 }
+export function getSingleData({ id }) {
+  return instance.get(`dataset/${id}`);
+}
