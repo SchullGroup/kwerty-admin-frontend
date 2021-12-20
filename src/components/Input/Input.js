@@ -55,14 +55,15 @@ export default {
       const pos = list.parentElement.getBoundingClientRect();
       const fromTop = pos.top + 76;
       const screenH = window.innerHeight;
-      const height = list.children.length * 48 + 32;
-      const overflow = screenH - (fromTop + height);
+      const height = (list.children.length * 48) + 32;
+      // TODO: confirm what this is doing from @Ammiel
+      // const overflow = screenH - (fromTop + height);
       if (fromTop + height < screenH) list.style.top = '76px';
-      if (overflow < 0) {
-        list.style.top = `${overflow + 64}px`;
-      }
+
       if (list.children.length > 10 && !list.classList.contains('scrollable')) {
         list.classList.add('scrollable');
+      // } else {
+      //   list.style.top = `${overflow + 64}px`;
       }
     }
   },

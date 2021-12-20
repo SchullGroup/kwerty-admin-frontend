@@ -7,7 +7,7 @@
           label="Name of indicator"
           placeholder="Name of Indicator"
           :disabled="!isEditing"
-          v-model="data.indicator" />
+          v-model="data.indicatorName" />
         <k-input
           label="Name of Category"
           placeholder="Name of Category"
@@ -26,13 +26,13 @@
           :disabled="!isEditing"
           v-model="data.metric" />
       </div>
-      <div class="form__grid">
+      <!-- <div class="form__grid">
         <k-input
           label="Data Frequency"
           placeholder="Data Frequency"
           :disabled="!isEditing"
           v-model="data.frequency" />
-      </div>
+      </div> -->
       <h3>About The Data</h3>
       <div class="form__grid">
         <k-input
@@ -52,7 +52,7 @@
         placeholder="Notes"
         variant="textarea"
         :disabled="!isEditing"
-        v-model="data.note" />
+        v-model="data.notes" />
       <h3>Tags</h3>
       <div class="tags">
         <p class="tag" v-for="tag in data.tags" :key="tag">
@@ -73,10 +73,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="point in datapoints" :key="point.period">
-            <td>{{point.period}}</td>
-            <td>{{point.value}}</td>
-          </tr>
+          <template v-for="point in data.data" >
+            <tr v-if="point.value" :key="point.period">
+                <td>{{point.period}}</td>
+                <td>{{point.value || '--'}}</td>
+            </tr>
+          </template>
         </tbody>
       </table>
     </div>
@@ -85,7 +87,6 @@
 
 <script>
 import { KInput } from '@/components';
-import datapoints from './dummySingleData';
 
 export default {
   name: 'SingleData',
@@ -99,10 +100,11 @@ export default {
       type: Boolean,
       default: false,
     },
+    nameOfIndicator: {
+      type: String,
+      default: '',
+    },
   },
-  data: () => ({
-    datapoints,
-  }),
 };
 </script>
 

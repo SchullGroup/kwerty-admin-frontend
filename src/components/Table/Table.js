@@ -21,6 +21,10 @@ export default {
     clickAction: {
       type: Function,
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: () => ({
     selected: [],

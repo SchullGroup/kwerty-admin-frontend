@@ -30,4 +30,10 @@ export default {
   snakeToTitle(someStr) {
     return this.titleCase(this.snakeCase(someStr));
   },
+
+  // convert from ```spaced string``` to ```camelCase```
+  convertToCamelCase(someStr) {
+    if (typeof someStr !== 'string') return someStr;
+    return someStr.replaceAll(' ', '');
+  },
 };

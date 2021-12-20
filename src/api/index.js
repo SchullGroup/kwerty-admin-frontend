@@ -3,3 +3,4 @@ export * from './admin';
 export * from './roles';
 export * from './activity';
 export * from './indicators';
+export * from './database';

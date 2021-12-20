@@ -31,10 +31,10 @@ export default {
           this.$toast.show({ message: 'Successfully Logged In' });
           this.$router.push('/');
         } else {
-          this.$toast.show({ message: user });
+          this.$toast.show({ message: 'Invalid login details' });
         }
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: 'Invalid login details' });
       } finally {
         this.isLoading = false;
       }

@@ -33,7 +33,11 @@
     </header>
     <!-- DELETE MODAL -->
     <k-modal v-if="showDeleteModal" :open="showDeleteModal">
-      <k-card heading="Are you sure you want to delete this indicator?" variant="in-modal" longer wrap-heading>
+      <k-card
+        heading="Are you sure you want to delete this indicator?"
+        variant="in-modal"
+        longer
+        wrap-heading>
         <p>
           If you delete this indicator, all data stored underneath this indicator will be <br />
           permanently deleted.

@@ -21,7 +21,7 @@ export default {
       required: true,
     },
     totalItems: {
-      type: Number,
+      type: [Number, String],
       required: true,
     },
     totalPages: {

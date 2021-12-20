@@ -12,15 +12,30 @@
       </tr>
     </thead>
     <tbody class="table__data__body">
-      <table-row
-        v-for="data in datalist"
-        :key="Object.values(data).join('-')"
-        :data="data"
-        :fields="fields"
-        @clickAction="$emit('clickAction', data.id)"
-        v-model="selected"
-      >
-      </table-row>
+      <template v-if="loading">
+          <tr v-for="i in 20" :key="i">
+            <td
+              v-for="field in fields"
+              :key="i + field"
+              :class="field"
+              :id="field"
+              style="height: 20px"
+            >
+              <div class="suspense w-70"></div>
+            </td>
+          </tr>
+        </template>
+        <template v-else>
+          <table-row
+            v-for="data in datalist"
+            :key="data.id"
+            :data="data"
+            :fields="fields"
+            @clickAction="$emit('clickAction', data.id)"
+            v-model='selected'
+          >
+          </table-row>
+        </template>
     </tbody>
   </table>
 </template>

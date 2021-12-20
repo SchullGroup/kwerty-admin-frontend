@@ -6,7 +6,10 @@
         <!-- DEFAULT HEADER CONTROLS -->
         <div class="header__controls" v-if="!selected">
           <div class="search">
-            <k-input label="Search by country, indicators or categories"></k-input>
+            <k-input
+            label="Search by country, indicators or categories"
+            v-model="search"
+            reactive></k-input>
           </div>
           <div class="filter">
             <k-input
@@ -50,7 +53,7 @@
           <div class="header__controls" v-if="activeTab !== 'deleted'">
             <k-button
               variant="secondary"
-              :disabled="activeTab !== 'drafts'"
+              :disabled="activeTab !== 'draft'"
               @click="confirmAction('publish')"
             >
               Publish All
@@ -58,7 +61,7 @@
             <k-button
               variant="secondary"
               @click="confirmAction('unpublish')"
-              :disabled="activeTab === 'drafts'"
+              :disabled="activeTab === 'draft'"
             >
               Unpublish All
             </k-button>
@@ -87,11 +90,11 @@
       </template>
       <!-- HEADER FOR SINGLE DATA VIEW -->
       <div class="header__controls__selected" v-else>
-        <div class="selected-count">
+        <div class="selected-count text-capitalize">
           <button class="back-button" @click="changePage">
             <BackIcon />
           </button>
-          {{ singleViewData.country }} -  {{ singleViewData.indicator }}
+          {{ singleViewData.country }} -  {{ singleViewData.indicatorName }}
         </div>
 
         <!-- BUTTONS WHEN NON DELETED DATA IS SELECTED -->
@@ -131,8 +134,8 @@
             Published
           </li>
           <li
-            :class="['content__menu__item', { active: activeTab === 'drafts' }]"
-            @click="activeTab = 'drafts'"
+            :class="['content__menu__item', { active: activeTab === 'draft' }]"
+            @click="activeTab = 'draft'"
           >
             Drafts
           </li>
@@ -149,6 +152,7 @@
         v-if="isSingleView"
         :isEditing="isEditing"
         :data="singleViewData"
+        :nameOfIndicator="currentNameOfIndicator"
         />
       <!-- DATA TABLE     -->
       <section class="content__body" v-else>
@@ -157,13 +161,24 @@
             All data found here will be permanently deleted after 30 days
           </div>
         </transition>
-        <k-table
-          :fields="tableFields"
-          :fields-display="tableFieldsDisplay"
-          :datalist="allTableData"
-          @clickAction="changePage"
-          v-model="selectedRows"
-        ></k-table>
+
+          <div v-if="!isFetching && allData.length === 0" class="no-activity text-center">
+            <div class="icon">
+              <svg width="22" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path :d="svgPath" fill="#666" />
+              </svg>
+            </div>
+            <p>There is currently no data in the database</p>
+          </div>
+          <k-table
+            v-else
+            :loading="isFetching"
+            :fields="tableFields"
+            :fields-display="tableFieldsDisplay"
+            :datalist="allData"
+            @clickAction="changePage"
+            v-model="selectedRows"
+          ></k-table>
       </section>
     </section>
 
@@ -277,10 +292,14 @@
       v-if="!isSingleView"
       :forTable="true"
       variant="many"
-      :page="1"
+      :page="paginationData.currentPage"
       :maxItemsOnPage="20"
-      :totalItems="20"
-      :totalPages='1'
+      :totalItems="paginationData.total"
+      :totalPages='paginationData.totalPages'
+      @goToNext="currentPage = paginationData.currentPage + 1"
+      @goToPrev="currentPage = paginationData.currentPage - 1"
+      @goToFirst="currentPage = 1"
+      @goToLast="currentPage = Number(paginationData.totalPages)"
     ></k-pagination>
   </k-dashboard-layout>
 </template>
