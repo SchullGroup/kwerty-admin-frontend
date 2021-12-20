@@ -4,44 +4,46 @@
       <h1>Database</h1>
       <template v-if="!isSingleView">
         <!-- DEFAULT HEADER CONTROLS -->
-        <div class="header__controls" v-if="!selected">
+        <div class="header__controls header__controls-flex" v-if="!selected">
           <div class="search">
             <k-input
             label="Search by country, indicators or categories"
             v-model="search"
             reactive></k-input>
           </div>
-          <div class="filter">
-            <k-input
-              type="select"
-              label="Filter by Category"
-              variant="dropdown"
-              v-model="category"
-              :optionsDisplay="categories"
-            ></k-input>
-          </div>
-          <div class="filter">
-            <k-input
-              type="select"
-              label="Filter by Indicator"
-              variant="dropdown"
-              v-model="indicator"
-              :optionsDisplay="indicators"
-            ></k-input>
-          </div>
-          <div class="filter">
-            <k-input
-              type="select"
-              label="Filter by Country"
-              variant="dropdown"
-              v-model="country"
-              :optionsDisplay="countries"
-            ></k-input>
-          </div>
-          <div class="button">
-            <k-button variant="primary" @click="$router.push({ name: 'Upload' })">
-              Upload New Data
-            </k-button>
+          <div class="header__controls">
+            <div class="filter">
+              <k-input
+                type="select"
+                label="Filter by Category"
+                variant="dropdown"
+                v-model="category"
+                :optionsDisplay="categories"
+              ></k-input>
+            </div>
+            <div class="filter">
+              <k-input
+                type="select"
+                label="Filter by Indicator"
+                variant="dropdown"
+                v-model="indicator"
+                :optionsDisplay="indicators"
+              ></k-input>
+            </div>
+            <div class="filter">
+              <k-input
+                type="select"
+                label="Filter by Country"
+                variant="dropdown"
+                v-model="country"
+                :optionsDisplay="countries"
+              ></k-input>
+            </div>
+            <div class="button">
+              <k-button variant="primary" @click="$router.push({ name: 'Upload' })">
+                Upload New Data
+              </k-button>
+            </div>
           </div>
         </div>
 
@@ -247,39 +249,44 @@
             <k-button variant="link" @click="closeModal">Cancel</k-button>
             <k-button
               variant="primary"
-              @click="closeModal"
+             @click="actOnData('publish')"
               :disabled="!isSame"
               v-if="activeModal === 'publish'"
+              :loading="isActing"
               >Publish</k-button
             >
             <k-button
               variant="primary"
-              @click="closeModal"
+              @click="actOnData('unpublish')"
               :disabled="!isSame"
               v-if="activeModal === 'unpublish'"
+              :loading="isActing"
               >Unpublish</k-button
             >
             <k-button
               variant="primary"
-              @click="closeModal"
+              @click="actOnData('soft_delete')"
               :disabled="!isSame"
               negative
               v-if="activeModal === 'delete'"
+              :loading="isActing"
               >Delete</k-button
             >
             <k-button
               variant="primary"
-              @click="closeModal"
+              @click="actOnData('restore_delete')"
               :disabled="!isSame"
               v-if="activeModal === 'restore'"
+              :loading="isActing"
               >Restore to Drafts</k-button
             >
             <k-button
               variant="primary"
-              @click="closeModal"
+              @click="actOnData('hard_delete')"
               :disabled="!isSame"
               negative
               v-if="activeModal === 'clear your bin'"
+              :loading="isActing"
               >Permanently Delete</k-button
             >
           </div>

@@ -38,8 +38,12 @@
     display: grid;
     grid: 1fr / auto-flow max-content;
     column-gap: 1.6rem;
+    &-flex {
+      display: flex;
+    }
     .search {
       width: 36rem;
+      flex: 1;
     }
     .filter{
       width: 19rem;
