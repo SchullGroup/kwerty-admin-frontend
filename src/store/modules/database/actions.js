@@ -1,4 +1,6 @@
-import { getAllCountryData, uploadData, getSingleData } from '@/api';
+import {
+  getAllCountryData, uploadData, getSingleData, updateDataStatus,
+} from '@/api';
 import errorHandler from '@/utils/error-handler';
 
 export default {
@@ -15,5 +17,8 @@ export default {
     .catch((response) => errorHandler(response, true)),
   fetchDataById: (context, id) => getSingleData({ id })
     .then(async ({ data: { data } }) => data)
+    .catch((response) => errorHandler(response, true)),
+  performDataAction: (context, payload) => updateDataStatus(payload)
+    .then(async ({ data: { message } }) => message)
     .catch((response) => errorHandler(response, true)),
 };
