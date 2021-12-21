@@ -1,10 +1,10 @@
 import { instance } from '../config';
 
 export function getActivities({
-  page,
-  type,
-  search,
-  duration,
+  page = 1,
+  type = '',
+  search = '',
+  duration = '',
 }) {
   let url = `activity-log?type=${type}&page=${page}&limit=20`;
   if (search) {
@@ -15,4 +15,16 @@ export function getActivities({
   return instance.get(url);
 }
 
-export function dummy() {}
+export function exportActivities({
+  startDate,
+  endDate,
+  fileType,
+  type,
+}) {
+  return instance.get(
+    `/activity-log/export?
+    start_data${startDate}&
+    end_date=${endDate}&file_type=${fileType}
+    &title=Admin Activity&type=${type}`,
+  );
+}

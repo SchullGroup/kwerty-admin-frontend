@@ -89,6 +89,7 @@ export default {
   methods: {
     ...mapActions({
       getAdminActivities: 'activity/getActivities',
+      exportActivities: 'activity/exportActivities',
     }),
     async fetchActivities(page = 1) {
       const { type, search, duration } = this;
@@ -106,6 +107,31 @@ export default {
           this.paginationData.totalPages = activitiesFetched.totalPages;
         } else {
           throw Error(activitiesFetched.error);
+        }
+        this.isLoading = false;
+      } catch (error) {
+        this.$toast.show({ message: error });
+      }
+    },
+    async downloadActivities() {
+      const {
+        type,
+        startDate,
+        endDate,
+        fileType,
+      } = this;
+      this.isLoading = true;
+      try {
+        const downloaded = await this.exportActivities({
+          type,
+          startDate,
+          endDate,
+          fileType,
+        });
+        if (downloaded) {
+          this.$toast.show({ message: downloaded });
+        } else {
+          throw Error(downloaded.error);
         }
         this.isLoading = false;
       } catch (error) {

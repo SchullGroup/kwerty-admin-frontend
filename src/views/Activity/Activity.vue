@@ -73,7 +73,7 @@
     <!-- EXPORT MODAL -->
     <k-modal @close="modalOpen = false" :open="modalOpen">
       <k-card variant="in-modal" heading="Export Activity">
-        <form class="form__items">
+        <form class="form__items" @submit="downloadActivities">
           <k-input label="Title" name="title"></k-input>
           <k-input
             label="File Type"
