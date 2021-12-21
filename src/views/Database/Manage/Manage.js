@@ -87,6 +87,7 @@ export default {
     },
     search: '',
     currentNameOfIndicator: '',
+    isActing: false,
   }),
   computed: {
     ...mapGetters({
@@ -116,6 +117,7 @@ export default {
     ...mapActions({
       fetchDatabase: 'database/fetchDatabase',
       fetchDataById: 'database/fetchDataById',
+      performDataAction: 'database/performDataAction',
     }),
     resetSelectedRows() {
       this.selectedRows = [];
@@ -131,9 +133,6 @@ export default {
     changePage(pageId) {
       if (typeof pageId === 'string') {
         this.fetchSingleData({ pageId });
-        // remove later when BE is fixed;
-        const currentData = this.allData.find((data) => data.id === pageId);
-        this.currentNameOfIndicator = currentData.nameOfIndicator;
       } else {
         this.currentNameOfIndicator = '';
       }
@@ -174,6 +173,23 @@ export default {
         this.$toast.show({ message: error });
       } finally {
         this.isFetching = false;
+      }
+    },
+    async actOnData(action) {
+      this.isActing = true;
+      try {
+        const actionDone = await this.performDataAction({ action, ids: this.selectedRows });
+        if (!actionDone.error) {
+          this.$toast.show({ message: actionDone });
+          this.closeModal();
+          this.getData();
+        } else {
+          throw Error(actionDone.error);
+        }
+      } catch (error) {
+        this.$toast.show({ message: error });
+      } finally {
+        this.isActing = false;
       }
     },
   },

@@ -4,7 +4,7 @@
       <h1>Database</h1>
       <template v-if="!isSingleView">
         <!-- DEFAULT HEADER CONTROLS -->
-        <div class="header__controls with-search" v-if="!selected">
+        <div class="header__controls with-search header__controls-flex" v-if="!selected">
           <div class="search">
             <k-input
             label="Search by country, indicators or categories"
@@ -248,39 +248,44 @@
             <k-button variant="link" @click="closeModal">Cancel</k-button>
             <k-button
               variant="primary"
-              @click="closeModal"
+             @click="actOnData('publish')"
               :disabled="!isSame"
               v-if="activeModal === 'publish'"
+              :loading="isActing"
               >Publish</k-button
             >
             <k-button
               variant="primary"
-              @click="closeModal"
+              @click="actOnData('unpublish')"
               :disabled="!isSame"
               v-if="activeModal === 'unpublish'"
+              :loading="isActing"
               >Unpublish</k-button
             >
             <k-button
               variant="primary"
-              @click="closeModal"
+              @click="actOnData('soft_delete')"
               :disabled="!isSame"
               negative
               v-if="activeModal === 'delete'"
+              :loading="isActing"
               >Delete</k-button
             >
             <k-button
               variant="primary"
-              @click="closeModal"
+              @click="actOnData('restore_delete')"
               :disabled="!isSame"
               v-if="activeModal === 'restore'"
+              :loading="isActing"
               >Restore to Drafts</k-button
             >
             <k-button
               variant="primary"
-              @click="closeModal"
+              @click="actOnData('hard_delete')"
               :disabled="!isSame"
               negative
               v-if="activeModal === 'clear your bin'"
+              :loading="isActing"
               >Permanently Delete</k-button
             >
           </div>

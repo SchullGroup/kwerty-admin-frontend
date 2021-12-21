@@ -23,3 +23,7 @@ export function updateData({ id, payload }) {
 export function getSingleData({ id }) {
   return instance.get(`dataset/${id}`);
 }
+
+export function updateDataStatus(payload) {
+  return instance.put('dataset', payload);
+}
