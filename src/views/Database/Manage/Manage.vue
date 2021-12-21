@@ -4,7 +4,7 @@
       <h1>Database</h1>
       <template v-if="!isSingleView">
         <!-- DEFAULT HEADER CONTROLS -->
-        <div class="header__controls" v-if="!selected">
+        <div class="header__controls with-search" v-if="!selected">
           <div class="search">
             <k-input
             label="Search by country, indicators or categories"
@@ -36,6 +36,7 @@
               variant="dropdown"
               v-model="country"
               :optionsDisplay="countries"
+              filterInside
             ></k-input>
           </div>
           <div class="button">

@@ -40,7 +40,7 @@ th {
 tr,
 thead {
   display: grid;
-  grid: 4.8rem / 30rem minmax(40rem, auto) 6.6rem 30rem;
+  grid: 4.8rem / 0rem minmax(40rem, auto) 6.6rem 30rem;
   align-items: center;
 }
 
@@ -61,7 +61,7 @@ tr {
 td {
   color: $grey-darker;
   font-weight: 400;
-  width: 80%;
+  width: calc(100% - 2.4rem);
   word-break: break-all;
   display: -webkit-box;
   text-overflow: ellipsis;

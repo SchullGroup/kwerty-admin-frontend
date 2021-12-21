@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import ManageData from '@/views/Database/Manage/Manage.vue';
+import { localVue, successStore as store } from '../../utils/local-vue';
 
 const $route = {
   query: {
@@ -10,6 +11,8 @@ const $route = {
 describe('ManageData View', () => {
   it('should mount', async () => {
     const wrapper = shallowMount(ManageData, {
+      localVue,
+      store,
       propsData: { selectedRow: ['hello'] },
       mocks: {
         $route,
@@ -26,6 +29,7 @@ describe('ManageData View', () => {
     const mockThis = {
       selectedRows: ['hello', 'world'],
       resetSelectedRows: jest.fn(),
+      getData: jest.fn(),
       allTableData: null,
     };
     ManageData.methods.resetSelectedRows.call(mockThis);
@@ -73,6 +77,6 @@ describe('ManageData View', () => {
 
   it('should do nothing if active query is invalid', () => {
     $route.query.active = 'something';
-    expect(ManageData.mounted.call({ $route })).toBeFalsy();
+    expect(ManageData.mounted.call({ $route, getData: jest.fn() })).toBeFalsy();
   });
 });

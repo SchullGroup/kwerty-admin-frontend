@@ -34,6 +34,7 @@ describe('TableRow Component', () => {
     mockThis.innerValue = ['hello'];
     TableRow.methods.checkAndAdd.call(mockThis, ['world']);
     expect(mockThis.$emit).toHaveBeenCalledWith('input', ['world', 'hello']);
-    TableRow.filters.formatDate.call(mockThis);
+    TableRow.filters.formatField.call(mockThis);
+    TableRow.filters.formatField.call(mockThis, new Date(), 'createdAt');
   });
 });

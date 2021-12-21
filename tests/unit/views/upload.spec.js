@@ -28,17 +28,27 @@ jest.mock('xlsx', () => ({
 }));
 
 describe('manage upload file View', () => {
-  it('should mount', async () => {
-    const wrapper = shallowMount(UploadData, {
+  let wrapper;
+  beforeAll(() => {
+    wrapper = shallowMount(UploadData, {
       localVue,
       store,
       mocks: {
         $router,
       },
     });
+  });
+
+  it('should mount', async () => {
     expect(wrapper.vm.$options.name).toMatch('Upload');
     expect(wrapper.vm.goToTab());
     expect(wrapper.vm.addFile(file));
     expect(wrapper.vm.addFile(file));
+  });
+  it('should upload data to cloud', () => {
+    expect(wrapper.vm.uploadDataToCloud());
+  });
+  it('should reset page', () => {
+    expect(wrapper.vm.resetPage());
   });
 });
