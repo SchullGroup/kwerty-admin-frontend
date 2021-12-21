@@ -18,11 +18,7 @@ describe('ManageData View', () => {
         $route,
       },
     });
-    await wrapper.setData({
-      $route,
-    });
     expect(wrapper.vm.$options.name).toMatch('ManageData');
-    // ManageData.mounted.call({ active: 'published' });
   });
 
   it('should reset selected rows', () => {
@@ -31,10 +27,32 @@ describe('ManageData View', () => {
       resetSelectedRows: jest.fn(),
       getData: jest.fn(),
       allTableData: null,
+      getData: jest.fn(),
+      $route: { query: {active: 'published'}}
     };
     ManageData.methods.resetSelectedRows.call(mockThis);
     ManageData.watch.activeTab.call(mockThis, 'deleted');
+    ManageData.mounted.call(mockThis);
     expect(mockThis.selectedRows.length).toBeFalsy();
+  });
+
+  it('should call methods', () => {
+    const wrapper = shallowMount(ManageData, {
+      store,
+      localVue,
+      mocks: {
+        $route,
+      }
+    });
+    const mockThis = {
+      getData: jest.fn(),
+    };
+    ManageData.watch.search.call(mockThis)
+    ManageData.watch.country.call(mockThis);
+    ManageData.watch.category.call(mockThis);
+    expect(wrapper.vm.getData());
+    expect(wrapper.vm.fetchSingleData({ pageId: '234tgbvbh7' }));
+    expect(wrapper.vm.changePage());
   });
 
   it('should close modal', () => {

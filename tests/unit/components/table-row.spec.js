@@ -15,7 +15,7 @@ describe('TableRow Component', () => {
       value: ['world'],
       $emit: jest.fn(),
       checkAndAdd: jest.fn(),
-      format: jest.fn(),
+      formatters: jest.fn(),
     };
 
     TableRow.watch.innerValue.call(mockThis);
