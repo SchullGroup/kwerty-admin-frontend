@@ -14,7 +14,7 @@
           @goToFirst="firstPage"
           @goToLast="lastPage"
         ></k-pagination>
-        <k-input label="Search name or action"></k-input>
+        <k-input label="Search name or action" v-model="search" reactive></k-input>
         <k-input
           type="select"
           variant="dropdown"
@@ -70,6 +70,7 @@
         </template>
       </tbody>
     </table>
+    <!-- EXPORT MODAL -->
     <k-modal @close="modalOpen = false" :open="modalOpen">
       <k-card variant="in-modal" heading="Export Activity">
         <form class="form__items">
@@ -78,7 +79,7 @@
             label="File Type"
             name="file-type"
             type="select"
-            v-model="defaultFileType"
+            v-model="fileType"
             :optionsDisplay="fileTypes"
           ></k-input>
           <div class="input-row">
@@ -86,13 +87,13 @@
               label="Start Date"
               name="start-date"
               type="select"
-              v-model="defaultStartDate"
+              v-model="startDate"
             ></k-input>
             <k-input
               label="End Date"
               name="end-date"
               type="select"
-              v-model="defaultEndDate"
+              v-model="endDate"
             ></k-input>
           </div>
           <div class="modal-controls">

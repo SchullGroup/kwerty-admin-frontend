@@ -64,6 +64,7 @@
         :fields="tableFields"
         :fields-display="tableFieldsDisplay"
         :datalist="indicators"
+        :loading="isLoading"
       >
       </k-table>
       <!-- EMPTY STATE  -->

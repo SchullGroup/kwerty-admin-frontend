@@ -25,7 +25,7 @@ export default {
     page: 1,
     maxItemsOnPage: 20,
     isLoading: false,
-    // userActivities: [],
+    search: '',
     paginationData: {
       page: 1,
       totalItems: 0,
@@ -33,20 +33,20 @@ export default {
       totalPages: 0,
     },
     displayFields: ['name', 'activity', 'createdAt'],
-    duration: '>7days',
+    duration: '',
     optionsDisplay: {
-      alltime: 'All time',
-      '>24hours': 'Last 24 hours',
-      '>7days': 'Last 7 days',
-      '>30days': 'Last 30 days',
-      '>3months': 'Last 3 months',
-      '>6months': 'Last 6 months',
+      '': 'All',
+      '24hours': 'Last 24 hours',
+      '7days': 'Last 7 days',
+      '30days': 'Last 30 days',
+      '3months': 'Last 3 months',
+      '6months': 'Last 6 months',
       lastyear: 'Last year',
     },
     modalOpen: false,
-    defaultFileType: 'csv',
-    defaultStartDate: '22-02-2021',
-    defaultEndDate: '24-02-21',
+    fileType: 'csv',
+    startDate: '',
+    endDate: '',
     fileTypes: {
       csv: 'CSV',
       pdf: 'PDF',
@@ -62,6 +62,12 @@ export default {
       if (value) {
         this.fetchActivities(value);
       }
+    },
+    search() {
+      this.fetchActivities();
+    },
+    duration() {
+      this.fetchActivities();
     },
     $route() {
       this.setType();
@@ -83,13 +89,17 @@ export default {
   methods: {
     ...mapActions({
       getAdminActivities: 'activity/getActivities',
-      getUserActivities: 'activity/getUserActivities',
     }),
     async fetchActivities(page = 1) {
-      const { type } = this;
+      const { type, search, duration } = this;
       this.isLoading = true;
       try {
-        const activitiesFetched = await this.getAdminActivities({ page, type });
+        const activitiesFetched = await this.getAdminActivities({
+          page,
+          type,
+          search,
+          duration,
+        });
         if (!activitiesFetched.error) {
           this.paginationData.page = Number(activitiesFetched.currentPage);
           this.paginationData.totalItems = Number(activitiesFetched.total);

@@ -62,15 +62,13 @@ const successStore = new Vuex.Store({
             createdAt: 'someDate',
           },
         ]),
-        getUserActivities: jest
-          .fn()
-          .mockResolvedValueOnce([
-            {
-              activity: 'logged in',
-              name: 'test name',
-              createdAt: 'someDate',
-            },
-          ]),
+        getUserActivities: jest.fn().mockResolvedValueOnce([
+          {
+            activity: 'logged in',
+            name: 'test name',
+            createdAt: 'someDate',
+          },
+        ]),
       },
       actions: {
         getActivities: jest
@@ -186,6 +184,30 @@ const successStore = new Vuex.Store({
       },
       mutations: {
         SET_INDICATORS: jest.fn(),
+      },
+      namespaced: true,
+    },
+    database: {
+      actions: {
+        fetchDatabase: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'database fetched successfully' })
+          .mockRejectedValueOnce({ message: { error: 'error occured' } }),
+        fetchDataById: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'database fetched successfully' })
+          .mockRejectedValueOnce({ message: { error: 'error occured' } }),
+      },
+      getters: {
+        getDatabase: jest.fn().mockResolvedValue([
+          {
+            name: 'database',
+            indicators: 'some indicators',
+          },
+        ]),
+      },
+      mutations: {
+        SET_DATABASE: jest.fn(),
       },
       namespaced: true,
     },
