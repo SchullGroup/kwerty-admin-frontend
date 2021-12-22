@@ -91,6 +91,10 @@
           <k-input label="Password" type="password" v-model="password" variant="password"></k-input>
         </section>
         <section>
+          <h2>Date Input</h2> <div class='small'>{{date}}</div>
+          <k-input label="Date" type="date" v-model="date"></k-input>
+        </section>
+        <section>
           <h2>Select Input <span class="small">Custom</span></h2>
           <k-input label="Color" type="select" v-model="color2" variant="custom">
             <option value="crimson" class="option">Crimson</option>
@@ -131,6 +135,7 @@
         :page="page"
         :maxItemsOnPage="20"
         :totalItems="totalItems"
+        :totalPages='7'
         variant="many"
         @goToNext="nextPage"
         @goToPrev="prevPage"
@@ -188,6 +193,7 @@ export default {
     KInputTag,
   },
   data: () => ({
+    date: null,
     tags: [],
     page: 1,
     totalItems: 243,
@@ -214,6 +220,9 @@ export default {
     allTableData: database.all,
     selected: [],
   }),
+  created() {
+    window.vm = this;
+  },
   methods: {
     nextPage() {
       const { itemsOnPage } = this;

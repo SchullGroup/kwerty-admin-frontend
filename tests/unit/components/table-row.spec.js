@@ -15,7 +15,7 @@ describe('TableRow Component', () => {
       value: ['world'],
       $emit: jest.fn(),
       checkAndAdd: jest.fn(),
-      format: jest.fn(),
+      formatters: jest.fn(),
     };
 
     TableRow.watch.innerValue.call(mockThis);
@@ -34,6 +34,6 @@ describe('TableRow Component', () => {
     mockThis.innerValue = ['hello'];
     TableRow.methods.checkAndAdd.call(mockThis, ['world']);
     expect(mockThis.$emit).toHaveBeenCalledWith('input', ['world', 'hello']);
-    TableRow.filters.formatDate.call(mockThis);
+    TableRow.filters.formatField.call(mockThis, new Date(), 'createdAt');
   });
 });

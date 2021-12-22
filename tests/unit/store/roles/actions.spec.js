@@ -95,6 +95,12 @@ describe('roles store actions', () => {
   const token = 'some_key';
   // const roles = [{ id: 1, name: 'super_admin' }];
   // FETCHES ROLES
+
+  Object.defineProperty(window, 'scrollTo', {
+    writable: true,
+    value: jest.fn().mockResolvedValue(true),
+  });
+
   it('fetches all roles', async () => {
     const response = await fetchAll({ commit }, { token });
     expect(response).toEqual([{ id: 1, name: 'super_admin' }]);

@@ -139,3 +139,20 @@ select {
     left: calc(100% + 32px);
   }
 }
+
+.vc-container {
+  --purple-600: #900F7B !important;
+  border: none;
+  padding: .8rem;
+  box-shadow: 2px 2px 30px rgba(128, 128, 128, 0.1);
+
+  * {
+    font-size: 1.2rem !important;
+    line-height: 1.4rem;
+    font-weight: 500;
+  }
+}
+
+.vc-title {
+  font-size: inherit !important;
+}

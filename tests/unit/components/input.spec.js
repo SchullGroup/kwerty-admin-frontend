@@ -1,6 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
 import { KInput } from '@/components';
 
+jest.mock('date-fns/format', () => jest.fn());
+
 describe('Input Component', () => {
   let wrapper = null;
   let mockEventObject;
@@ -16,6 +18,8 @@ describe('Input Component', () => {
       target: { classList: { contains: () => true }, tagName: 'OPTION' },
     };
     mockProps = {
+      code: 'Backspace',
+      filter: 'Polan',
       type: 'password',
       variant: 'password',
       togglePasswordType: jest.fn(),
@@ -25,10 +29,18 @@ describe('Input Component', () => {
       overrideType: null,
       $refs: {
         list: {
+          children: ['option1', 'option2'],
           addEventListener: jest.fn(),
+          parentElement: {
+            getBoundingClientRect: jest.fn().mockReturnValue({ top: 200 }),
+          },
         },
       },
     };
+    Object.defineProperty(window, 'innerHeight', {
+      writable: true,
+      value: 300,
+    });
   });
 
   it('should mount', () => {
@@ -42,6 +54,10 @@ describe('Input Component', () => {
   });
 
   it('should have all methods', () => {
+    expect(wrapper.vm.record(mockProps));
+    mockProps.code = 'KeyA';
+    mockProps.key = 'a';
+    expect(wrapper.vm.record(mockProps));
     expect(wrapper.vm.togglePasswordType());
     expect(wrapper.vm.toggleSelectOpen());
     expect(wrapper.vm.listenForSelect());
@@ -53,6 +69,11 @@ describe('Input Component', () => {
 
     KInput.methods.listenForSelect.call(mockProps);
     expect(mockProps.$refs.list.addEventListener).toBeCalled();
+
+    const mockThis = {
+      selectOption: jest.fn(),
+    };
+    KInput.methods.enterOption.call(mockThis, { code: 'Enter' });
   });
 
   it('should call right method on icon click', async () => {
@@ -105,5 +126,54 @@ describe('Input Component', () => {
     };
     KInput.watch.value.call(mockThis, 'hello');
     expect(mockThis.innerValue).toMatch('hello');
+
+    // date
+    mockThis.isDate = true;
+    mockThis.$emit = jest.fn();
+    KInput.watch.value.call(mockThis, 'hello');
+    KInput.watch.date.call(mockThis, 'hello');
+    expect(mockThis.$emit).toHaveBeenCalled();
+  });
+
+  it('should listen to click if type is date', () => {
+    const mockEvent = {
+      target: { classList: { contains: jest.fn().mockReturnValue(true) } },
+    };
+
+    const mockThis = {
+      value: new Date(),
+      listenForSelect: jest.fn(),
+      type: 'date',
+      $refs: {
+        date: {
+          addEventListener: jest.fn((action, fn = jest.fn()) => {
+            fn(mockEvent);
+          }),
+        },
+      },
+    };
+    KInput.mounted.call(mockThis);
+  });
+
+  it('should filterOptions', () => {
+    const mockThis = {
+      filterInside: true,
+      filter: 'pola',
+      optionsDisplay: { poland: 'Poland', ghana: 'Ghana' },
+    };
+    KInput.computed.filteredOptions.call(mockThis);
+
+    mockThis.filter = '';
+    KInput.computed.filteredOptions.call(mockThis);
+  });
+
+  it('should format date', () => {
+    const mockThis = {
+      date: new Date(),
+    };
+    KInput.computed.formattedDate.call(mockThis);
+
+    mockThis.date = 'not date';
+    KInput.computed.formattedDate.call(mockThis);
   });
 });

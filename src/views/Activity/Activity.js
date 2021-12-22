@@ -1,4 +1,10 @@
 import { mapActions, mapGetters } from 'vuex';
+// import JsonCSV from 'vue-json-csv';
+// import Vue from 'vue';
+import formatISO from 'date-fns/formatISO';
+import XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+
 import {
   KDashboardLayout,
   KPagination,
@@ -9,6 +15,7 @@ import {
 } from '@/components';
 import ActivityTableRow from './TableRow.vue';
 
+// Vue.component('downloadCsv', JsonCSV);
 export default {
   name: 'ActivityHome',
   components: {
@@ -21,11 +28,12 @@ export default {
     KDashboardLayout,
   },
   data: () => ({
+    downloadData: [],
     type: null,
     page: 1,
     maxItemsOnPage: 20,
     isLoading: false,
-    // userActivities: [],
+    search: '',
     paginationData: {
       page: 1,
       totalItems: 0,
@@ -33,25 +41,27 @@ export default {
       totalPages: 0,
     },
     displayFields: ['name', 'activity', 'createdAt'],
-    duration: '>7days',
+    duration: '',
     optionsDisplay: {
-      alltime: 'All time',
-      '>24hours': 'Last 24 hours',
-      '>7days': 'Last 7 days',
-      '>30days': 'Last 30 days',
-      '>3months': 'Last 3 months',
-      '>6months': 'Last 6 months',
+      '': 'All',
+      '24hours': 'Last 24 hours',
+      '7days': 'Last 7 days',
+      '30days': 'Last 30 days',
+      '3months': 'Last 3 months',
+      '6months': 'Last 6 months',
       lastyear: 'Last year',
     },
     modalOpen: false,
-    defaultFileType: 'csv',
-    defaultStartDate: '22-02-2021',
-    defaultEndDate: '24-02-21',
+    fileType: 'csv',
+    startDate: '',
+    endDate: '',
+    title: '',
     fileTypes: {
       csv: 'CSV',
       pdf: 'PDF',
     },
     svgPath:
+    // eslint-disable-next-line vue/max-len
       'M18.896.44a2.91 2.91 0 0 1 2.91 2.909v1.94h-1.94v11.637a2.91 2.91 0 0 1-2.91 2.91H3.38a2.91 2.91 0 0 1-2.91-2.91v-1.94h15.518v1.94a.97.97 0 0 0 .856.963l.113.007a.97.97 0 0 0 .963-.857l.007-.113V2.379H5.32a.97.97 0 0 0-.963.856l-.007.114v9.698h-1.94V3.349A2.91 2.91 0 0 1 5.32.439h13.577Z',
   }),
   mounted() {
@@ -63,6 +73,12 @@ export default {
         this.fetchActivities(value);
       }
     },
+    search() {
+      this.fetchActivities();
+    },
+    duration() {
+      this.fetchActivities();
+    },
     $route() {
       this.setType();
     },
@@ -72,7 +88,7 @@ export default {
       adminActivities: 'activity/getActivities',
       userActivities: 'activity/getUserActivities',
     }),
-    title() {
+    pageTitle() {
       const { type } = this;
       return type ? `${type[0].toUpperCase()}${type.slice(1)} Activity` : 'Activity';
     },
@@ -83,13 +99,18 @@ export default {
   methods: {
     ...mapActions({
       getAdminActivities: 'activity/getActivities',
-      getUserActivities: 'activity/getUserActivities',
+      exportActivities: 'activity/exportActivities',
     }),
     async fetchActivities(page = 1) {
-      const { type } = this;
+      const { type, search, duration } = this;
       this.isLoading = true;
       try {
-        const activitiesFetched = await this.getAdminActivities({ page, type });
+        const activitiesFetched = await this.getAdminActivities({
+          page,
+          type,
+          search,
+          duration,
+        });
         if (!activitiesFetched.error) {
           this.paginationData.page = Number(activitiesFetched.currentPage);
           this.paginationData.totalItems = Number(activitiesFetched.total);
@@ -99,6 +120,46 @@ export default {
         }
         this.isLoading = false;
       } catch (error) {
+        this.$toast.show({ message: error });
+      }
+    },
+    async downloadActivities() {
+      const {
+        type,
+        startDate,
+        endDate,
+        fileType,
+        title,
+      } = this;
+      const startdate = formatISO(new Date(startDate));
+      const enddate = formatISO(new Date(endDate));
+      console.log(startdate);
+      console.log(startdate);
+      this.isLoading = true;
+      try {
+        const downloaded = await this.exportActivities({
+          type,
+          startdate,
+          enddate,
+          fileType,
+          title,
+        });
+        if (downloaded) {
+          console.log('type is ', typeof downloaded);
+          console.log(downloaded);
+          const ws = XLSX.utils.json_to_sheet(JSON.parse(downloaded));
+
+          const csv = XLSX.utils.sheet_to_csv(ws);
+
+          const blob = new Blob([csv], { type: 'text/plain;charset=UTF-8' });
+          saveAs(blob, 'export.csv');
+        } else {
+          throw Error(downloaded.error);
+        }
+        this.isLoading = false;
+        this.modalOpen = false;
+      } catch (error) {
+        console.log(error);
         this.$toast.show({ message: error });
       }
     },
