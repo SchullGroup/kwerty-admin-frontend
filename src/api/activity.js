@@ -2,7 +2,7 @@ import { instance } from '../config';
 
 export function getActivities({
   page = 1,
-  type = '',
+  type = null,
   search = '',
   duration = '',
 }) {
@@ -16,15 +16,14 @@ export function getActivities({
 }
 
 export function exportActivities({
-  startDate,
-  endDate,
+  startdate,
+  enddate,
   fileType,
   type,
+  title,
 }) {
   return instance.get(
-    `/activity-log/export?
-    start_data${startDate}&
-    end_date=${endDate}&file_type=${fileType}
-    &title=Admin Activity&type=${type}`,
+    // eslint-disable-next-line vue/max-len
+    `/activity-log/export?start_date=${startdate}&end_date=${enddate}&file_type=${fileType}&title=${title}&type=${type}`,
   );
 }

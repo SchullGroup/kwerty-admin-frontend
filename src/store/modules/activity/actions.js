@@ -13,8 +13,8 @@ export default {
     })
     .catch((response) => errorHandler(response, true)),
   exportActivities: ({ dispatch }, body) => exportActivities(body)
-    .then(({ data: { data } }) => {
-      dispatch('getActivities', {});
+    .then(({ data }) => {
+      dispatch('getActivities', { type: body.type });
       return data;
     })
     .catch((response) => errorHandler(response, true)),
