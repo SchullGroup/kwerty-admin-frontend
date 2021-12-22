@@ -1,6 +1,4 @@
 import { mapActions, mapGetters } from 'vuex';
-// import JsonCSV from 'vue-json-csv';
-// import Vue from 'vue';
 import formatISO from 'date-fns/formatISO';
 import XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
@@ -15,7 +13,6 @@ import {
 } from '@/components';
 import ActivityTableRow from './TableRow.vue';
 
-// Vue.component('downloadCsv', JsonCSV);
 export default {
   name: 'ActivityHome',
   components: {
@@ -152,7 +149,7 @@ export default {
           const csv = XLSX.utils.sheet_to_csv(ws);
 
           const blob = new Blob([csv], { type: 'text/plain;charset=UTF-8' });
-          saveAs(blob, 'export.csv');
+          saveAs(blob, 'title');
         } else {
           throw Error(downloaded.error);
         }
