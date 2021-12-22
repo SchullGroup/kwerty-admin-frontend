@@ -165,6 +165,7 @@ export default {
           }
 
           clickTarget.click();
+          clickTarget.focus();
         } catch (e) {
           console.log(e.message);
         }
