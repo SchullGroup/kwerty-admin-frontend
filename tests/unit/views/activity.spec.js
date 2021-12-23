@@ -15,10 +15,28 @@ const $router = {
     path: '/activities',
   },
 };
+// jest.mock('xlsx', () => ({
+//   __esModules: true,
+//   saveAs: jest.fn().mockReturnValue({ Sheets: [{}] }),
+//   utils: {
+//     sheet_to_json: jest.fn().mockReturnValue([
+//       'name', 'activity', 'createdAt'
+//     ]),
+//   },
+// }));
+
+// const file = {
+//   name: 'Hello',
+//   saveAs: jest
+//     .fn()
+//     .mockResolvedValueOnce([{ id: 1 }])
+//     .mockRejectedValueOnce('Error occurred'),
+// };
 
 const mockThis = {
   setType: jest.fn(),
   fetchActivities: jest.fn(),
+  formatISO: jest.fn(),
   $route,
   page: 1,
 };
@@ -39,8 +57,10 @@ describe('Activity Component', () => {
       },
     });
     await ActivityHome.watch.page.call(mockThis, []);
+    await ActivityHome.watch.search.call(mockThis, []);
+    await ActivityHome.watch.duration.call(mockThis, []);
     await ActivityHome.watch.$route.call(mockThis, []);
-    expect(ActivityHome.computed.title.call(mockThis)).toMatch('Activity');
+    expect(ActivityHome.computed.pageTitle.call(mockThis)).toMatch('Activity');
     expect(ActivityHome.computed.activities.call(mockThis));
     expect(wrapper.vm.$options.name).toMatch('ActivityHome');
     wrapper.setData({
@@ -48,6 +68,12 @@ describe('Activity Component', () => {
     });
     expect(wrapper.vm.fetchActivities());
     expect(wrapper.vm.fetchActivities());
+    wrapper.setData({
+      startdate: mockThis.formatISO(new Date()),
+      enddate: mockThis.formatISO(new Date())
+    })
+    expect(wrapper.vm.downloadActivities());
+    expect(wrapper.vm.downloadActivities());
     expect(wrapper.vm.setType());
     expect(wrapper.vm.prevPage());
     expect(wrapper.vm.nextPage());
