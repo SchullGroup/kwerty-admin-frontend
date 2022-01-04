@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import KCheckbox from '../Checkbox/Checkbox';
 import formatters from '@/utils/formatters';
+import KCheckbox from '../Checkbox/Checkbox';
 
 export default {
   name: 'TableRow',
