@@ -8,8 +8,36 @@
   }
   tr {
     display: grid;
-    grid: 4.8rem / 50rem repeat(4, 1fr);
+    grid: 4.8rem / 40rem repeat(4, 1fr);
     align-items: center;
+  }
+  .table__header-row{
+    display: grid;
+    grid: 4.8rem / 40rem repeat(4, 1fr);
+    align-items: center;
+  }
+  .table__header-customers {
+    display: grid;
+    grid: 4.8rem / 40rem repeat(3, 1fr) repeat(2, max-content);
+    align-items: center;
+    .lastSeen {
+      padding-left: 7rem;
+    }
+    &-option {
+      grid: 6rem / 40rem repeat(2, 1fr) repeat(2, max-content);
+      .timestamp{
+        right: -3rem;
+        position: relative;
+      }
+    }
+    .view-activity{
+      width: 9rem;
+      justify-content: center;
+    }
+    .button {
+      width: 14rem;
+      justify-content: center;
+    }
   }
   td,
   th {
@@ -36,7 +64,10 @@
       margin-top: .4rem;
     }
   }
-  .timestamp, .lastModified  {
+  th .timestamp {
+    text-align: right;
+  }
+  .timestamp, .lastModified, .updatedAt  {
     text-align: right;
     justify-content: end;
   }

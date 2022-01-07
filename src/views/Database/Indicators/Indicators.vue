@@ -65,8 +65,38 @@
         :fields-display="tableFieldsDisplay"
         :datalist="indicators"
         :loading="isLoading"
+        @clickAction=action
       >
       </k-table>
+      <!-- EDIT INDICATOR MODAL -->
+      <k-modal v-if="editIndicatorModal" :open="editIndicatorModal">
+        <k-card heading="Edit Indicator" variant="in-modal">
+          <div class="form__items">
+            <k-input label="Name of Indicator" v-model="indicator.name"></k-input>
+            <k-input
+              label="Category"
+              type="select"
+              variant="dropdown"
+              v-model="indicator.category"
+              :optionsDisplay="optionsCategories"
+            ></k-input>
+            <k-input
+              label="Frequency"
+              type="select"
+              variant="dropdown"
+              v-model="indicator.frequency"
+              :optionsDisplay="optionsFrequency"
+            ></k-input>
+            <k-input-tag v-model="tags"></k-input-tag>
+            <div class="btn-wrapper">
+              <k-button variant="link" @click="closeEditIndicators">Cancel</k-button>
+              <k-button @click="editIndicator" :loading="isLoading" submit
+                >Save & Continue
+              </k-button>
+            </div>
+          </div>
+        </k-card>
+      </k-modal>
       <!-- EMPTY STATE  -->
       <div v-if="emptyState" class="no-activity text-center">
         <div class="icon">

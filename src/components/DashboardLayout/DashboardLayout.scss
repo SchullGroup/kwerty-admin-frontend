@@ -2,7 +2,7 @@
   min-height: 100vh;
   &__header {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, max-content);
     position: sticky;
     top: 0;
     background: rgba($white, 0.8);
@@ -30,8 +30,9 @@
         border-bottom: 1px solid transparent;
         transition: border-color 200ms ease-in-out;
         line-height: 1.7rem;
+        height: 6.4rem;
         > a {
-          padding: 2.3rem 1.6rem;
+          padding: 2.3rem 2.8rem;
           position: relative;
         }
         &:hover {

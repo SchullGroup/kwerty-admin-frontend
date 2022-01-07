@@ -10,6 +10,8 @@ import Settings from '../views/Settings/Settings.vue';
 import Indicators from '../views/Database/Indicators/Indicators.vue';
 import ManageData from '../views/Database/Manage/Manage.vue';
 import UploadData from '../views/Database/Manage/Upload/Upload.vue';
+import Customers from '../views/Customers/Customers.vue';
+import SingleCustomer from '../views/Customers/Customer.vue';
 
 Vue.use(VueRouter);
 
@@ -57,6 +59,16 @@ export const routes = [
     path: '/settings',
     name: 'Settings',
     component: Settings,
+  },
+  {
+    path: '/customers',
+    name: 'Customers',
+    component: Customers,
+  },
+  {
+    path: '/single-user',
+    name: 'Customer',
+    component: SingleCustomer,
   },
   {
     path: '/database/indicators',

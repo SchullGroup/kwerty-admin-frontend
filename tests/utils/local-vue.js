@@ -75,6 +75,10 @@ const successStore = new Vuex.Store({
           .fn()
           .mockResolvedValueOnce({ error: '' })
           .mockResolvedValueOnce({ error: 'yes' }),
+        exportActivities: jest
+          .fn()
+          .mockResolvedValue({ error: '' })
+          .mockResolvedValueOnce({ error: 'yes' }),
       },
       mutations: {
         SET_ACTIVITIES: jest.fn(),
@@ -171,6 +175,11 @@ const successStore = new Vuex.Store({
         addIndicator: jest
           .fn()
           .mockResolvedValueOnce({ message: 'indicator successfully added' })
+          .mockResolvedValueOnce({ message: { error: 'error occurred' } })
+          .mockRejectedValueOnce({ message: { error: 'error occurred' } }),
+        updateIndicator: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'indicator successfully updated' })
           .mockResolvedValueOnce({ message: { error: 'error occurred' } })
           .mockRejectedValueOnce({ message: { error: 'error occurred' } }),
         getIndicators: jest

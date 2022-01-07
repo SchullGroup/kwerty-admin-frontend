@@ -11,3 +11,7 @@ export function addIndicator({ indicator }) {
 export function deleteIndicator(body) {
   return instance.delete('/indicator', { data: { ...body } });
 }
+
+export function updateIndicator({ id, indicator }) {
+  return instance.put(`/indicator/${id}`, indicator)
+}

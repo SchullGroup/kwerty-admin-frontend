@@ -1,8 +1,5 @@
 import { mapActions, mapGetters } from 'vuex';
-// import JsonCSV from 'vue-json-csv';
-// import Vue from 'vue';
 import formatISO from 'date-fns/formatISO';
-import XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 
 import {
@@ -15,7 +12,6 @@ import {
 } from '@/components';
 import ActivityTableRow from './TableRow.vue';
 
-// Vue.component('downloadCsv', JsonCSV);
 export default {
   name: 'ActivityHome',
   components: {
@@ -49,7 +45,7 @@ export default {
       '30days': 'Last 30 days',
       '3months': 'Last 3 months',
       '6months': 'Last 6 months',
-      lastyear: 'Last year',
+      '12months': 'Last year',
     },
     modalOpen: false,
     fileType: 'csv',
@@ -133,8 +129,6 @@ export default {
       } = this;
       const startdate = formatISO(new Date(startDate));
       const enddate = formatISO(new Date(endDate));
-      console.log(startdate);
-      console.log(startdate);
       this.isLoading = true;
       try {
         const downloaded = await this.exportActivities({
@@ -144,22 +138,15 @@ export default {
           fileType,
           title,
         });
-        if (downloaded) {
-          console.log('type is ', typeof downloaded);
-          console.log(downloaded);
-          const ws = XLSX.utils.json_to_sheet(JSON.parse(downloaded));
-
-          const csv = XLSX.utils.sheet_to_csv(ws);
-
-          const blob = new Blob([csv], { type: 'text/plain;charset=UTF-8' });
-          saveAs(blob, 'export.csv');
-        } else {
+        if (downloaded.error) {
           throw Error(downloaded.error);
         }
+        const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
+        saveAs(blob, `${title}.csv`);
+        this.$toast.show({ message: `Exported ${title}.csv` });
         this.isLoading = false;
         this.modalOpen = false;
       } catch (error) {
-        console.log(error);
         this.$toast.show({ message: error });
       }
     },
