@@ -43,9 +43,11 @@
       >
         Add new admin
       </k-button>
-      <k-button v-if='!editAdmin' variant='tertiary' @click='toggleButtonText'>Download CSV
+      <k-button v-if='!editAdmin' variant='tertiary'>Download CSV
       </k-button>
-      <k-button variant='secondary' @click='toggleButtonText'>{{ button.text }}</k-button>
+      <k-button :variant='!editAdmin ? "secondary" : "tertiary"' @click='toggleButtonText'>
+        {{ button.text }}
+      </k-button>
     </div>
     <k-modal :open='showEditModal' @close='showEditModal = false'>
       <k-edit-admin :currentadmin='currentAdmin' @close='showEditModal = false'></k-edit-admin>
