@@ -9,6 +9,13 @@ Vue.config.productionTip = false;
 
 Vue.use(ToastNotification);
 
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = store.getters['auth/getToken'];
+  const isAuthView = to.meta.authView;
+  if (!isAuthView && !isAuthenticated) next({ name: 'Login' });
+  else next();
+});
+
 new Vue({
   router,
   store,

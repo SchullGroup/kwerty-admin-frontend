@@ -28,16 +28,25 @@ export const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: {
+      authView: true,
+    },
   },
   {
     path: '/reset-password',
     name: 'ResetPassword',
     component: ResetPassword,
+    meta: {
+      authView: true,
+    },
   },
   {
     path: '/check-inbox',
     name: 'CheckInbox',
     component: CheckInbox,
+    meta: {
+      authView: true,
+    },
   },
   {
     path: '/activities/:type',
