@@ -161,7 +161,6 @@
 </template>
 
 <script>
-import { saveAs } from 'file-saver';
 import {
   KButton,
   KCard,
