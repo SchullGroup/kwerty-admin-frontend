@@ -43,7 +43,11 @@
       >
         Add new admin
       </k-button>
-      <k-button variant='tertiary' @click='toggleButtonText'>{{ button.text }}</k-button>
+      <k-button v-if='!editAdmin' variant='tertiary'>Download CSV
+      </k-button>
+      <k-button :variant='!editAdmin ? "secondary" : "tertiary"' @click='toggleButtonText'>
+        {{ button.text }}
+      </k-button>
     </div>
     <k-modal :open='showEditModal' @close='showEditModal = false'>
       <k-edit-admin :currentadmin='currentAdmin' @close='showEditModal = false'></k-edit-admin>
@@ -167,9 +171,11 @@ export default {
   }
 
   .btn-container {
-    display: flex;
+    display: grid;
     justify-content: flex-end;
     align-items: center;
+    grid: 1fr / auto-flow max-content;
+    column-gap: 1.6rem;
   }
 }
 </style>
