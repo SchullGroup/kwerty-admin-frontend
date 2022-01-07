@@ -4,11 +4,21 @@
       Activities Table
     </caption>
     <thead class="table__data__header">
-      <tr>
+      <tr :class="[
+      'table__header-row',
+      {
+        'table__header-customers': customers && customerOption,
+        'table__header-customers-option': customers && !customerOption,
+      }
+      ]">
         <th v-for="field in fields" :key="field" :class="field" :id="field">
           <span class="value">{{ fieldsDisplay ? fieldsDisplay[field] : field }}</span>
           <span class="caret"></span>
         </th>
+      <template v-if="customers">
+        <th class="view-activity"></th>
+        <th class="button"></th>
+      </template>
       </tr>
     </thead>
     <tbody class="table__data__body">
@@ -32,7 +42,10 @@
             :data="data"
             :fields="fields"
             @clickAction="$emit('clickAction', data.id)"
+            @view="$emit('view', data.id)"
             v-model='selected'
+            :customers='customers'
+            :customerOption='customerOption'
           >
           </table-row>
         </template>

@@ -15,23 +15,6 @@ const $router = {
     path: '/activities',
   },
 };
-// jest.mock('xlsx', () => ({
-//   __esModules: true,
-//   saveAs: jest.fn().mockReturnValue({ Sheets: [{}] }),
-//   utils: {
-//     sheet_to_json: jest.fn().mockReturnValue([
-//       'name', 'activity', 'createdAt'
-//     ]),
-//   },
-// }));
-
-// const file = {
-//   name: 'Hello',
-//   saveAs: jest
-//     .fn()
-//     .mockResolvedValueOnce([{ id: 1 }])
-//     .mockRejectedValueOnce('Error occurred'),
-// };
 
 const mockThis = {
   setType: jest.fn(),

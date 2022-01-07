@@ -177,6 +177,11 @@ const successStore = new Vuex.Store({
           .mockResolvedValueOnce({ message: 'indicator successfully added' })
           .mockResolvedValueOnce({ message: { error: 'error occurred' } })
           .mockRejectedValueOnce({ message: { error: 'error occurred' } }),
+        updateIndicator: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'indicator successfully updated' })
+          .mockResolvedValueOnce({ message: { error: 'error occurred' } })
+          .mockRejectedValueOnce({ message: { error: 'error occurred' } }),
         getIndicators: jest
           .fn()
           .mockResolvedValueOnce({ message: 'indicator successfully fetched' })

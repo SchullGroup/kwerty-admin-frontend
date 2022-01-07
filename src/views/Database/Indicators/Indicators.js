@@ -29,6 +29,7 @@ export default {
     search: '',
     showModal: false,
     showDeleteModal: false,
+    editIndicatorModal: false,
     selectedRows: [],
     itemsOnPage: 20,
     empty: false,
@@ -107,6 +108,7 @@ export default {
       addIndicator: 'indicators/addIndicator',
       getIndicators: 'indicators/getIndicators',
       deleteIndicator: 'indicators/deleteIndicator',
+      updateIndicator: 'indicators/updateIndicator',
     }),
     async createIndicator() {
       const { indicator } = this;
@@ -121,7 +123,6 @@ export default {
         this.isLoading = false;
         this.resetForm();
       } catch (error) {
-        console.log(error);
         this.$toast.show({ message: error });
       }
     },
@@ -158,15 +159,58 @@ export default {
         this.$toast.show({ massage: error });
       }
     },
+    async editIndicator() {
+      const {
+        indicator: {
+          id,
+          name,
+          category,
+          frequency,
+        },
+      } = this;
+      const tags = this.tags.join(',');
+      this.isLoading = true;
+      try {
+        const editedIndicator = await this.updateIndicator(
+          {
+            indicator: {
+              name,
+              category,
+              frequency,
+              tags,
+            },
+            id,
+          },
+        );
+        if (editedIndicator.error) {
+          throw Error(editedIndicator.error);
+        }
+        this.$toast.show({ message: editedIndicator });
+        this.isLoading = false;
+        this.resetForm();
+      } catch (error) {
+        this.$toast.show({ message: error });
+      }
+    },
+    action(id) {
+      const currentIndicator = this.indicators.find((indicator) => indicator.id === id);
+      this.indicator = currentIndicator;
+      this.editIndicatorModal = true;
+    },
     resetForm() {
       this.indicator.name = '';
       this.indicator.category = '';
       this.indicator.frequency = '';
       this.tags = [];
       this.showModal = false;
+      this.editIndicatorModal = false;
     },
     closeAddIndicators() {
       this.showModal = false;
+      this.fetchIndicators();
+    },
+    closeEditIndicators() {
+      this.editIndicatorModal = false;
       this.fetchIndicators();
     },
     prevPage() {

@@ -1,0 +1,20 @@
+.customers {
+ &__header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  position: sticky;
+    background-color: $white;
+    top: 0rem;
+    z-index: 3000;
+    margin-top: -10rem;
+    padding-top: 8rem;
+    box-sizing: border-box;
+    height: 20rem;
+  &--content{
+   display: grid;
+   grid-template-columns: max-content 36rem max-content;
+   grid-column-gap: 1.6rem;
+  }
+ }
+}

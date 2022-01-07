@@ -45,7 +45,7 @@ export default {
       '30days': 'Last 30 days',
       '3months': 'Last 3 months',
       '6months': 'Last 6 months',
-      lastyear: 'Last year',
+      '12months': 'Last year',
     },
     modalOpen: false,
     fileType: 'csv',

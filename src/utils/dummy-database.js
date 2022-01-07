@@ -1,3 +1,7 @@
+import img1 from '@/assets/profile/DJ.png';
+import img2 from '@/assets/profile/JF.png';
+import img3 from '@/assets/profile/LR.png';
+
 export default {
   all: [
     {
@@ -514,4 +518,78 @@ export default {
       'world bank data',
     ],
   },
+  Customers: [
+    {
+      id: 'sdf6i8ywhggdhk',
+      name: 'Jason Fried',
+      email: 'jason.fried@gmail.com',
+      joined: '18-02-2021',
+      lastSeen: '4:32 PM, 22-02-2021',
+      imgUrl: img1,
+      status: 'active',
+    },
+    {
+      id: 'sdf6i8y3hggdhk',
+      name: 'Jason Fried',
+      email: 'jason.fried@gmail.com',
+      joined: '18-02-2021',
+      lastSeen: '4:32 PM, 22-02-2021',
+      imgUrl: img2,
+      status: 'active',
+    },
+    {
+      id: 'sdf6i84whggdhk',
+      name: 'Jason Fried',
+      email: 'jason.fried@gmail.com',
+      joined: '18-02-2021',
+      lastSeen: '4:32 PM, 22-02-2021',
+      imgUrl: img3,
+      status: 'active',
+    },
+    {
+      id: 'sdf6i8ywhtgdhk',
+      name: 'Jason Fried',
+      email: 'jason.fried@gmail.com',
+      joined: '18-02-2021',
+      lastSeen: '4:32 PM, 22-02-2021',
+      imgUrl: img1,
+      status: 'active',
+    },
+    {
+      id: 'sdf6i8ywhghdhk',
+      name: 'Jason Fried',
+      email: 'jason.fried@gmail.com',
+      joined: '18-02-2021',
+      lastSeen: '4:32 PM, 22-02-2021',
+      imgUrl: img2,
+      status: 'disabled',
+    },
+    {
+      id: 'sdf6i8ywhgadhk',
+      name: 'Jason Fried',
+      email: 'jason.fried@gmail.com',
+      joined: '18-02-2021',
+      lastSeen: '4:32 PM, 22-02-2021',
+      imgUrl: img3,
+      status: 'disabled',
+    },
+    {
+      id: 'sdf6i8ywhghshk',
+      name: 'Jason Fried',
+      email: 'jason.fried@gmail.com',
+      joined: '18-02-2021',
+      lastSeen: '4:32 PM, 22-02-2021',
+      imgUrl: img1,
+      status: 'active',
+    },
+    {
+      id: 'sdf6i8ywdghshk',
+      name: 'Jason Fried',
+      email: 'jason.fried@gmail.com',
+      joined: '18-02-2021',
+      lastSeen: '4:32 PM, 22-02-2021',
+      imgUrl: img1,
+      status: 'active',
+    },
+  ],
 };

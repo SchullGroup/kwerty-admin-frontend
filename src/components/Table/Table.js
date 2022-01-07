@@ -10,7 +10,7 @@ export default {
       type: Array,
     },
     datalist: {
-      type: Array,
+      type: null,
     },
     fieldsDisplay: {
       type: Object,
@@ -22,6 +22,14 @@ export default {
       type: Function,
     },
     loading: {
+      type: Boolean,
+      default: false,
+    },
+    customers: {
+      type: Boolean,
+      default: false,
+    },
+    customerOption: {
       type: Boolean,
       default: false,
     },
