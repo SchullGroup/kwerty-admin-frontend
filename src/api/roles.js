@@ -19,3 +19,7 @@ export function editRole({ id, role }) {
 export function deleteRole({ id }) {
   return instance.delete(`/role/${id}`);
 }
+
+export function exportRoles() {
+  return instance.get('/role/export');
+}
