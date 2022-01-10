@@ -19,3 +19,7 @@ export function editOtherAdmin({ admin: { id, ...admin } }) {
 export function deleteOtherAdmin({ id }) {
   return instance.delete(`/admin/${id}`);
 }
+
+export function exportAdmins() {
+  return instance.get('/admin/export');
+}

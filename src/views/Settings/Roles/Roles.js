@@ -1,4 +1,6 @@
+import { saveAs } from 'file-saver';
 import { mapActions, mapGetters } from 'vuex';
+import { exportRoles } from '@/api';
 import KCard from '@/components/Card/Card.vue';
 import KButton from '@/components/Button/Button.vue';
 import EditableListItem from './EditableListItem.vue';
@@ -38,6 +40,17 @@ export default {
     editItem(val) {
       this.role = val;
       this.modalOpen = true;
+    },
+    async download() {
+      try {
+        const data = await (exportRoles());
+        if (data.error) throw Error(data.error);
+        console.log(data);
+        const blob = new Blob([data.data], { type: 'text/plain;charset=UTF-8' });
+        saveAs(blob, 'Kwerty Roles.csv');
+      } catch (e) {
+        this.$toast.show({ message: e });
+      }
     },
     async deleteItem(id) {
       try {
