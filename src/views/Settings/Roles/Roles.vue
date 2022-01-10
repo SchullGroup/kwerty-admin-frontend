@@ -22,7 +22,7 @@
       </editable-list-item>
       <div class='controls'>
         <template>
-          <k-button v-if='!editing' variant='tertiary'>Download CSV</k-button>
+          <k-button v-if='!editing' variant='tertiary' @click='download'>Download CSV</k-button>
           <k-button v-if='!editing' variant='secondary' @click='editing = true'>Edit Roles
           </k-button>
         </template>

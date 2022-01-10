@@ -43,7 +43,7 @@
       >
         Add new admin
       </k-button>
-      <k-button v-if='!editAdmin' variant='tertiary'>Download CSV
+      <k-button v-if='!editAdmin' variant='tertiary' @click='download'>Download CSV
       </k-button>
       <k-button :variant='!editAdmin ? "secondary" : "tertiary"' @click='toggleButtonText'>
         {{ button.text }}
@@ -60,7 +60,9 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { saveAs } from 'file-saver';
 import stringHelpers from '@/utils/string-helpers';
+import { exportAdmins } from '@/api';
 import { KButton, KIcons, KModal } from '@/components';
 import KEditAdmin from './EditAdmin.vue';
 import KAddAdmin from './AddAdmin.vue';
@@ -104,6 +106,17 @@ export default {
     toggleButtonText() {
       this.editAdmin = !this.editAdmin;
       this.button.text = this.editAdmin ? 'Save Changes' : 'Edit Admin';
+    },
+    async download() {
+      try {
+        const data = await (exportAdmins());
+        if (data.error) throw Error(data.error);
+        console.log(data);
+        const blob = new Blob([data.data], { type: 'text/plain;charset=UTF-8' });
+        saveAs(blob, 'Kwerty Administrators.csv');
+      } catch (e) {
+        this.$toast.show({ message: e });
+      }
     },
     handleEditAdmin(id) {
       try {
