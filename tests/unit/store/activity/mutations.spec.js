@@ -2,7 +2,7 @@ import mutations from '@/store/modules/activity/mutations';
 
 const { SET_ACTIVITIES, SET_USER_ACTIVITIES } = mutations;
 
-let state = {
+const state = {
   activities: [],
   userActivities: [],
 };

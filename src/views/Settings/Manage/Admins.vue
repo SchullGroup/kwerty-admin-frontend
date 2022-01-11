@@ -111,7 +111,6 @@ export default {
       try {
         const data = await (exportAdmins());
         if (data.error) throw Error(data.error);
-        console.log(data);
         const blob = new Blob([data.data], { type: 'text/plain;charset=UTF-8' });
         saveAs(blob, 'Kwerty Administrators.csv');
       } catch (e) {
