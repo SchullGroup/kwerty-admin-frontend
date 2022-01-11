@@ -74,7 +74,9 @@ jest.mock('@/api/auth', () => ({
     }),
 }));
 
-const { login, forgotPassword, resetPassword, getProfile } = actions;
+const {
+  login, forgotPassword, resetPassword, getProfile,
+} = actions;
 const testUser = {
   email: 'test@xample.com',
   password: 'mypassword',

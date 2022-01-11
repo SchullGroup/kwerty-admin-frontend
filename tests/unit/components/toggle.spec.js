@@ -11,6 +11,6 @@ describe('Toggle component', () => {
     expect(wrapper.vm.$options.name).toMatch('KToggle');
     expect(wrapper.attributes().class).toContain('wrapper');
     expect(wrapper.findAll('button').length).toEqual(2);
-    expect(wrapper.vm.toggle())
+    expect(wrapper.vm.toggle());
   });
 });

@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils';
+import Vuex from 'vuex';
 import Login from '@/views/Auth/Login';
 import { KAuth, KInput, KButton } from '@/components';
 import { localVue, successStore as store } from '../../utils/local-vue';
-import Vuex from 'vuex';
 import KToast from '@/plugins/toast';
 
 localVue.use(Vuex);
-localVue.use(KToast)
+localVue.use(KToast);
 
 describe('mount the Login page', () => {
   it('renders the login page', () => {
@@ -22,14 +22,14 @@ describe('mount the Login page', () => {
     });
     expect(wrapper.vm.$options.name).toMatch('Login');
     expect(wrapper.findComponent(KAuth).exists()).toBe(true);
-    expect(wrapper.vm.loginUser())
+    expect(wrapper.vm.loginUser());
     wrapper.setData({
       user: {
         email: 'admin@g.com',
         password: '12345',
-      }
+      },
     });
-    expect(wrapper.vm.loginUser())
-    expect(wrapper.vm.loginUser())
+    expect(wrapper.vm.loginUser());
+    expect(wrapper.vm.loginUser());
   });
 });

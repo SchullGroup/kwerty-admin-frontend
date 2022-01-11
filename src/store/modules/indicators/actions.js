@@ -1,4 +1,6 @@
-import { addIndicator, getIndicators, deleteIndicator, updateIndicator } from '@/api';
+import {
+  addIndicator, getIndicators, deleteIndicator, updateIndicator,
+} from '@/api';
 import errorHandler from '@/utils/error-handler';
 
 export default {

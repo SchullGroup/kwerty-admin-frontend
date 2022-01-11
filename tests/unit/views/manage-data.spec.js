@@ -28,7 +28,7 @@ describe('ManageData View', () => {
       getData: jest.fn(),
       allTableData: null,
       getData: jest.fn(),
-      $route: { query: {active: 'published'}}
+      $route: { query: { active: 'published' } },
     };
     ManageData.methods.resetSelectedRows.call(mockThis);
     ManageData.watch.activeTab.call(mockThis, 'deleted');
@@ -42,12 +42,12 @@ describe('ManageData View', () => {
       localVue,
       mocks: {
         $route,
-      }
+      },
     });
     const mockThis = {
       getData: jest.fn(),
     };
-    ManageData.watch.search.call(mockThis)
+    ManageData.watch.search.call(mockThis);
     ManageData.watch.country.call(mockThis);
     ManageData.watch.category.call(mockThis);
     expect(wrapper.vm.getData());

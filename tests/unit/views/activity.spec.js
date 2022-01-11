@@ -1,8 +1,9 @@
 import { shallowMount } from '@vue/test-utils';
+import Vuex from 'vuex';
 import ActivityHome from '@/views/Activity/Activity';
 import TableRow from '@/views/Activity/TableRow.vue';
 import { localVue, successStore as store } from '../../utils/local-vue';
-import Vuex from 'vuex';
+
 localVue.use(Vuex);
 
 const $route = {
@@ -53,8 +54,8 @@ describe('Activity Component', () => {
     expect(wrapper.vm.fetchActivities());
     wrapper.setData({
       startdate: mockThis.formatISO(new Date()),
-      enddate: mockThis.formatISO(new Date())
-    })
+      enddate: mockThis.formatISO(new Date()),
+    });
     expect(wrapper.vm.downloadActivities());
     expect(wrapper.vm.downloadActivities());
     expect(wrapper.vm.setType());

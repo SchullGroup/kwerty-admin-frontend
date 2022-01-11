@@ -1,6 +1,8 @@
 import mutations from '@/store/modules/auth/mutations';
 
-const { SET_USER, SET_TOKEN, RESET, SET_ADMIN_PROFILE } = mutations;
+const {
+  SET_USER, SET_TOKEN, RESET, SET_ADMIN_PROFILE,
+} = mutations;
 
 let state = {
   user: {},

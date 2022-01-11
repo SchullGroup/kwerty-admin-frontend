@@ -14,8 +14,8 @@ const mockThis = {
   indicators: [
     {
       name: 'soem name',
-      id: 'some id'
-    }
+      id: 'some id',
+    },
   ],
 };
 
@@ -30,7 +30,7 @@ describe('Database indicators page', () => {
   it('renders the indicators page', async () => {
     Indicators.watch.page.call(mockThis);
     Indicators.watch.search.call(mockThis);
-    Indicators.methods.action.call(mockThis)
+    Indicators.methods.action.call(mockThis);
     expect(wrapper.vm.$options.name).toMatch('Indicators');
     expect(wrapper.vm.prevPage({ page: 1 }));
     expect(wrapper.vm.nextPage({ page: 1 }));
