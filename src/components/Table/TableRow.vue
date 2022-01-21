@@ -41,8 +41,9 @@
 </template>
 
 <script>
-import { KCheckbox } from '@/components';
+
 import formatters from '@/utils/formatters';
+import KCheckbox from '../Checkbox/Checkbox';
 
 export default {
   name: 'TableRow',

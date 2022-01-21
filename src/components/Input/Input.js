@@ -165,6 +165,7 @@ export default {
           }
 
           clickTarget.click();
+          clickTarget.closest('.input').focus();
         } catch (e) {
           console.log(e.message);
         }
