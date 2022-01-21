@@ -25,7 +25,7 @@ const MENU_ITEMS = [
       {
         name: 'country',
         label: 'Country Dashboard',
-        route: '/country',
+        route: '/database/country',
         permissions: ['Admin'],
       },
     ],

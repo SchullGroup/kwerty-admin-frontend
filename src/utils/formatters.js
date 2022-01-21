@@ -2,5 +2,7 @@ import format from 'date-fns/format';
 
 export default {
   // eslint-disable-next-line
-   formatDate(value){ return  `${format(new Date(value), 'p')} , ${format(new Date(value), 'd')}-${format(new Date(value), 'MM')}-${format(new Date(value), 'Y')}`;}
+  formatDate(value) { return  `${format(new Date(value), 'p')} , ${format(new Date(value), 'd')}-${format(new Date(value), 'MM')}-${format(new Date(value), 'Y')}`;},
+  // eslint-disable-next-line
+  formatDateJoined(value) { return `${format(new Date(value), 'd')}-${format(new Date(value), 'MM')}-${format(new Date(value), 'Y')}`; },
 };

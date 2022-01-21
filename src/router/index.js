@@ -8,6 +8,8 @@ import CheckInbox from '../views/Auth/CheckInbox/CheckInbox.vue';
 import ActivityHome from '../views/Activity/Activity.vue';
 import Settings from '../views/Settings/Settings.vue';
 import Indicators from '../views/Database/Indicators/Indicators.vue';
+import Country from '../views/Database/Country/Country.vue';
+import SingleCountry from '../views/Database/Country/SingleCountry.vue';
 import ManageData from '../views/Database/Manage/Manage.vue';
 import UploadData from '../views/Database/Manage/Upload/Upload.vue';
 import Customers from '../views/Customers/Customers.vue';
@@ -65,6 +67,16 @@ export const routes = [
     path: '/database/indicators',
     name: 'Indicators',
     component: Indicators,
+  },
+  {
+    path: '/database/Country',
+    name: 'country',
+    component: Country,
+  },
+  {
+    path: '/database/country/id',
+    name: 'SingleCountry',
+    component: SingleCountry,
   },
   {
     path: '/database',

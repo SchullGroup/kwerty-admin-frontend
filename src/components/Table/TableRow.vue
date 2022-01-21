@@ -20,8 +20,8 @@
         <k-checkbox :name="data[field]" :value="data['id']" v-model="innerValue" />
       </span>
       <span class="image"
-      v-if="(field === 'name') && (customers === true)">
-        <img class="image-item" :src="data.imgUrl" alt="pic">
+      v-if="(field === 'name' || field === 'fullName') && (customers === true)">
+        <img class="image-item" :src="data.imageUrl" alt="pic">
       </span>
       <span class="flag" v-if="field === 'country'">
         <img :src="`/countries/${data[field].toLowerCase()}.svg`" alt="" />
@@ -120,8 +120,10 @@ export default {
           case 'createdAt':
           case 'updatedAt':
           case 'lastModified':
-          // case 'lastSeen':
+          case 'userLastSeen':
             return formatters.formatDate(value);
+          case 'joined':
+            return formatters.formatDateJoined(value);
           default:
             return value;
         }
@@ -271,8 +273,9 @@ export default {
 .image {
   width: 3.4rem;
   height: 3.4rem;
-  display: grid;
-  place-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: rgba($primary-purple, 0.1);
   color: $primary-purple;
   border-radius: 50%;
@@ -280,6 +283,7 @@ export default {
   &-item {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
   }
 }
 %btn {
