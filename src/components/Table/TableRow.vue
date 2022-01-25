@@ -1,11 +1,13 @@
 <template>
-  <tr :class="[
-  'table__row',
-  {
-    'table__row-customers': customers && customerOption,
-    'table__row-customers-option': customers && !customerOption,
-  }
-  ]">
+  <tr
+    :class="[
+      'table__row',
+      {
+        'table__row-customers': customers && customerOption,
+        'table__row-customers-option': customers && !customerOption,
+      },
+    ]"
+  >
     <td
       v-for="(field, i) in fields"
       :key="data[field]"
@@ -13,15 +15,14 @@
         [field]: true,
         [data[field] && data[field].toString().toLowerCase()]: field === 'status',
         untitled: field === 'name' && data[field] === 'Untitled User',
-        'text-capitalize': field === 'country'
+        'text-capitalize': field === 'country',
       }"
     >
-      <span class="checkbox" v-if="(i === 0) && !customers">
+      <span class="checkbox" v-if="i === 0 && !customers">
         <k-checkbox :name="data[field]" :value="data['id']" v-model="innerValue" />
       </span>
-      <span class="image"
-      v-if="(field === 'name' || field === 'fullName') && (customers === true)">
-        <img class="image-item" :src="data.imageUrl" alt="pic">
+      <span class="image" v-if="(field === 'name' || field === 'fullName') && customers === true">
+        <img class="image-item" :src="data.imageUrl" alt="pic" />
       </span>
       <span class="flag" v-if="field === 'country'">
         <img :src="`/countries/${data[field].toLowerCase()}.svg`" alt="" />
@@ -30,18 +31,21 @@
         {{ data[field] | formatField(field) }}
       </span>
     </td>
-    <td class="view-activity" v-if="(customers === true) && (customerOption === true)" >
+    <td class="view-activity" v-if="customers === true && customerOption === true">
       <button class="view-activity__btn" @click="$emit('view')">View Activity</button>
     </td>
-    <td class="button" v-if="(customers === true) && (customerOption === true)" >
-      <button :class="[[data.status === 'active' ? 'disable': 'enable']]">
-        {{ data.status === 'active' ? 'Disable' : 'Enable' }}</button>
+    <td class="button" v-if="customers === true && customerOption === true">
+      <button
+        @click="$emit('changeStatus', [ data.status === 'enabled' ? 'disable' : 'enable'], data.id)"
+        :class="[[data.status === 'enabled' ? 'disable' : 'enable']]"
+      >
+        {{ data.status === 'enabled' ? 'Disable' : 'Enable' }}
+      </button>
     </td>
   </tr>
 </template>
 
 <script>
-
 import formatters from '@/utils/formatters';
 import KCheckbox from '../Checkbox/Checkbox';
 
@@ -144,7 +148,7 @@ export default {
   th {
     box-sizing: border-box;
   }
-  .table__row{
+  .table__row {
     .updatedAt {
       display: flex;
       justify-content: flex-end;
@@ -162,7 +166,7 @@ export default {
     align-items: center;
     &-customers {
       display: grid;
-      grid: 4.8rem / minmax(auto, 40rem) repeat(3, 1fr) max-content max-content;;
+      grid: 4.8rem / minmax(auto, 40rem) repeat(3, 1fr) max-content max-content;
       align-items: center;
       .button {
         width: 7.8rem;
@@ -180,9 +184,9 @@ export default {
     background-color: transparent;
   }
 
-  .table__row-customers-option{
+  .table__row-customers-option {
     display: grid;
-    grid: 4.8rem / minmax(auto, 40rem) repeat(2, 1fr) ;
+    grid: 4.8rem / minmax(auto, 40rem) repeat(2, 1fr);
   }
 
   td,
@@ -308,7 +312,7 @@ export default {
   @extend %btn;
   background-color: white;
   color: $black;
-  border: .1rem solid $grey;
+  border: 0.1rem solid $grey;
   border-radius: 0.4rem;
 }
 </style>

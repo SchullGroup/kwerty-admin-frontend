@@ -4,4 +4,6 @@ export function getAllCustomers() {
   return instance.get('./customer');
 }
 
-export function dummy() {}
+export function disableCustomer(user) {
+  return instance.patch('./customer', user);
+}

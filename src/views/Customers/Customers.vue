@@ -27,6 +27,7 @@
         :customers="true"
         :customerOption="true"
         @view="$router.push({ name: 'Customer' })"
+        @changeStatus="changeUserStatus(status, id)"
       >
       </k-table>
    </div>

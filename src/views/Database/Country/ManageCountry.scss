@@ -1,0 +1,70 @@
+.country__header {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(auto, max-content));
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  background-color: $white;
+  top: 0rem;
+  z-index: 3000;
+  margin-top: -10rem;
+  padding: 7rem 0 2rem 0;
+  box-sizing: border-box;
+  // height: 18rem;
+  &--right {
+    display: grid;
+    grid-template-columns: max(36.5rem) max-content;
+    grid-gap: 1.6rem;
+  }
+  &--left {
+    span {
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1.6rem;
+      line-height: 1.9rem;
+      img {
+        margin-right: 2rem;
+      }
+    }
+  }
+}
+
+.country__body {
+  margin-top: 3.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 3.6rem;
+  .country-card {
+    max-width: 36.5rem;
+    height: 22.1rem;
+    border: 0.1rem solid $grey;
+    border-radius: 0.8rem;
+    &--image {
+      height: 14.4rem;
+      max-width: 36.5rem;
+      border-radius: 0.8rem 0.8rem 0 0;
+      .card-image {
+        width: 100%;
+        height: auto;
+        border-radius: 0.8rem 0.8rem 0 0;
+      }
+    }
+    &--texts {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.4rem;
+      .country-name {
+        font-weight: 700;
+        font-size: 1.6rem;
+        line-height: 1.9rem;
+        color: $black;
+      }
+      .card-btns {
+        display: flex;
+        justify-content: flex-end;
+        grid-gap: 0.5rem;
+      }
+    }
+  }
+}

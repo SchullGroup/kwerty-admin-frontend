@@ -27,6 +27,7 @@ export default {
     startDate: '',
     endDate: '',
     title: '',
+    status: '',
     pagination: {
       page: 1,
       totalItems: 9,
@@ -56,6 +57,7 @@ export default {
   methods: {
     ...mapActions({
       getAllCustomers: 'customers/getAllCustomers',
+      disableCustomer: 'customers/disableCustomer',
     }),
     async fetchAllCustomers() {
       this.isLoading = true;
@@ -72,6 +74,18 @@ export default {
       } catch (error) {
         this.$toast.show({ message: error });
         this.isLoading = false;
+      }
+    },
+    async changeUserStatus(status, id) {
+      try {
+        const response = await this.disableCustomer({ user: { status, id } });
+        if (!response.error) {
+          this.toast.show({ message: response });
+        } else {
+          throw Error(response.error);
+        }
+      } catch (error) {
+        this.$toast.show({ message: error });
       }
     },
     downloadUsers() {},

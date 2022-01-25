@@ -13,6 +13,7 @@
     <section class="country__body">
       <div class="country--profile">
         <div class="country--profile-image">
+          <k-input></k-input>
           <div class="country-picture-wrapper">
             <!-- <img src="@/assets/nigeria.jpg" alt="pic" class="country-picture" /> -->
             <img :src="url" alt="" class="country-picture" />
@@ -41,12 +42,12 @@
             variant="dropdown"
             v-model="selectedIndicator"
             :optionsDisplay="optionsIndicators"
-            @input="setValue"
+            @input="addIndicator"
           ></k-input>
           <ul class="summary--indicators-items">
             <li class="name" v-for="(item, index) in indicators" :key="index">
               {{ item }}
-              <span @click="removeTag(index, indicators)"
+              <span @click="removeItem(index, indicators)"
                 ><img src="@/assets/deleteIcon.svg" alt="icon"
               /></span>
             </li>
@@ -67,12 +68,12 @@
             variant="dropdown"
             v-model="selectedChart"
             :optionsDisplay="optionsCharts"
-            @input="setTopCharts"
+            @input="addTopChart"
           ></k-input>
           <ul class="summary--indicators-items">
             <li class="name" v-for="(item, index) in charts" :key="index">
               {{ item }}
-              <span @click="removeTag(index, charts)"
+              <span @click="removeItem(index, charts)"
                 ><img src="@/assets/deleteIcon.svg" alt="icon"
               /></span>
             </li>
@@ -152,13 +153,13 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    setValue(val) {
+    addIndicator(val) {
       this.indicators.push(val);
     },
-    setTopCharts(val) {
+    addTopChart(val) {
       this.charts.push(val);
     },
-    removeTag(index, from) {
+    removeItem(index, from) {
       from.splice(index, 1);
     },
   },

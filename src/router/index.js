@@ -9,6 +9,7 @@ import ActivityHome from '../views/Activity/Activity.vue';
 import Settings from '../views/Settings/Settings.vue';
 import Indicators from '../views/Database/Indicators/Indicators.vue';
 import Country from '../views/Database/Country/Country.vue';
+import ManageCountry from '../views/Database/Country/ManageCountry.vue';
 import SingleCountry from '../views/Database/Country/SingleCountry.vue';
 import ManageData from '../views/Database/Manage/Manage.vue';
 import UploadData from '../views/Database/Manage/Upload/Upload.vue';
@@ -72,6 +73,11 @@ export const routes = [
     path: '/database/Country',
     name: 'country',
     component: Country,
+  },
+  {
+    path: '/database/countries',
+    name: 'ManageCountry',
+    component: ManageCountry,
   },
   {
     path: '/database/country/id',

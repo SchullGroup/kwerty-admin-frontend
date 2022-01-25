@@ -7,9 +7,10 @@
         <div class="header__controls with-search header__controls-flex" v-if="!selected">
           <div class="search">
             <k-input
-            label="Search by country, indicators or categories"
-            v-model="search"
-            reactive></k-input>
+              label="Search by country, indicators or categories"
+              v-model="search"
+              reactive
+            ></k-input>
           </div>
           <div class="filter">
             <k-input
@@ -73,10 +74,7 @@
 
           <!-- BUTTONS WHEN DELETED DATA IS SELECTED -->
           <div class="header__controls" v-else>
-            <k-button
-              variant="primary"
-              @click="confirmAction('restore')"
-              >
+            <k-button variant="primary" @click="confirmAction('restore')">
               Restore to Drafts
             </k-button>
             <k-button
@@ -95,26 +93,25 @@
           <button class="back-button" @click="changePage">
             <BackIcon />
           </button>
-          {{ singleViewData.country }} -  {{ singleViewData.indicatorName }}
+          {{ singleViewData.country }} - {{ singleViewData.indicatorName }}
         </div>
 
         <!-- BUTTONS WHEN NON DELETED DATA IS SELECTED -->
         <div class="header__controls">
+          <k-button variant="primary" @click="isEditing = true">{{
+            isEditing === true ? 'Save and Continue' : 'Edit'
+          }}</k-button>
+          <k-button v-if="!isEditing" variant="secondary" @click="isEditing = false">
+            Publish
+          </k-button>
           <k-button
-          variant="primary"
-          @click="isEditing = true"
-        >
-          Edit
-        </k-button>
-        <k-button
-          variant="secondary"
-          @click="isEditing = false"
-        >
-          Publish
-        </k-button>
-        <k-button variant="secondary" negative="negative" @click="confirmAction('delete')">
-          Delete
-        </k-button>
+            v-if="!isEditing"
+            variant="secondary"
+            negative="negative"
+            @click="confirmAction('delete')"
+          >
+            Delete
+          </k-button>
         </div>
       </div>
     </header>
@@ -154,7 +151,7 @@
         :isEditing="isEditing"
         :data="singleViewData"
         :nameOfIndicator="currentNameOfIndicator"
-        />
+      />
       <!-- DATA TABLE     -->
       <section class="content__body" v-else>
         <transition name="slide-down">
@@ -163,23 +160,23 @@
           </div>
         </transition>
 
-          <div v-if="!isFetching && allData.length === 0" class="no-activity text-center">
-            <div class="icon">
-              <svg width="22" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path :d="svgPath" fill="#666" />
-              </svg>
-            </div>
-            <p>There is currently no data in the database</p>
+        <div v-if="!isFetching && allData.length === 0" class="no-activity text-center">
+          <div class="icon">
+            <svg width="22" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path :d="svgPath" fill="#666" />
+            </svg>
           </div>
-          <k-table
-            v-else
-            :loading="isFetching"
-            :fields="tableFields"
-            :fields-display="tableFieldsDisplay"
-            :datalist="allData"
-            @clickAction="changePage"
-            v-model="selectedRows"
-          ></k-table>
+          <p>There is currently no data in the database</p>
+        </div>
+        <k-table
+          v-else
+          :loading="isFetching"
+          :fields="tableFields"
+          :fields-display="tableFieldsDisplay"
+          :datalist="allData"
+          @clickAction="changePage"
+          v-model="selectedRows"
+        ></k-table>
       </section>
     </section>
 
@@ -248,7 +245,7 @@
             <k-button variant="link" @click="closeModal">Cancel</k-button>
             <k-button
               variant="primary"
-             @click="actOnData('publish')"
+              @click="actOnData('publish')"
               :disabled="!isSame"
               v-if="activeModal === 'publish'"
               :loading="isActing"
@@ -301,7 +298,7 @@
       :page="paginationData.currentPage"
       :maxItemsOnPage="20"
       :totalItems="paginationData.total"
-      :totalPages='paginationData.totalPages'
+      :totalPages="paginationData.totalPages"
       @goToNext="currentPage = paginationData.currentPage + 1"
       @goToPrev="currentPage = paginationData.currentPage - 1"
       @goToFirst="currentPage = 1"

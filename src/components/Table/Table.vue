@@ -46,6 +46,7 @@
             v-model='selected'
             :customers='customers'
             :customerOption='customerOption'
+            changeStatus
           >
           </table-row>
         </template>
