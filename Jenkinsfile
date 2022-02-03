@@ -14,7 +14,7 @@ pipeline {
             }
             steps {
                 echo 'Kwerty Admin Frontend Deploy Stage'
-                sh 'ssh projects@44.239.126.131 "cd kwerty-admin-frontend && git stash && git pull origin develop && npm install && npm run build && pm2 restart kwerty-admin-frontend"'
+                sh 'ssh projects@44.239.126.131 "cd kwerty-admin-frontend && git stash && git pull origin develop && npm install && npm run build && pm2 restart kwerty-admin"'
             }
         }
     }
