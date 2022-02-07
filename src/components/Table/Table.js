@@ -33,6 +33,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    changeStatus: {
+      type: null,
+    },
   },
   data: () => ({
     selected: [],

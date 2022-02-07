@@ -25,6 +25,7 @@ export default {
   data: () => ({
     isLoading: false,
     tags: [],
+    newIndicator: {},
     indicator: {},
     search: '',
     showModal: false,
@@ -111,15 +112,15 @@ export default {
       updateIndicator: 'indicators/updateIndicator',
     }),
     async createIndicator() {
-      const { indicator } = this;
+      const { newIndicator } = this;
       const tags = this.tags.join(',');
       this.isLoading = true;
       try {
-        const newIndicator = await this.addIndicator({ indicator: { ...indicator, tags } });
-        if (newIndicator.error) {
-          throw Error(newIndicator.error);
+        const createdIndicator = await this.addIndicator({ indicator: { ...newIndicator, tags } });
+        if (createdIndicator.error) {
+          throw Error(createdIndicator.error);
         }
-        this.$toast.show({ message: newIndicator });
+        this.$toast.show({ message: createdIndicator });
         this.isLoading = false;
         this.resetForm();
       } catch (error) {

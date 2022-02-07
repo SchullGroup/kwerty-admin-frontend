@@ -39,7 +39,7 @@ export default {
       type: String,
     },
     optionsDisplay: {
-      type: Object,
+      type: null,
     },
     filterInside: {
       type: Boolean,

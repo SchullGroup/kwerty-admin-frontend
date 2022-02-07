@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="wrapper">
-      <p class="title">{{ message }}</p>
+      <p class="title"> <slot/></p>
       <div class="content">
         <p class="item" v-for="(t, i) in tags" :key="t + i">
           {{ t }}
@@ -20,7 +20,7 @@ export default {
   name: 'Inputtag',
   data() {
     return {
-      message: 'Tags',
+      msg: 'Tags',
       tag: '',
     };
   },
@@ -31,6 +31,9 @@ export default {
     tags: {
       type: Array,
       default: () => [],
+    },
+    message: {
+      type: String,
     },
   },
   methods: {

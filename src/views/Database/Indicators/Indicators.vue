@@ -87,7 +87,9 @@
               v-model="indicator.frequency"
               :optionsDisplay="optionsFrequency"
             ></k-input>
-            <k-input-tag v-model="tags"></k-input-tag>
+            <k-input-tag v-model="tags">
+              <p>Tags</p>
+            </k-input-tag>
             <div class="btn-wrapper">
               <k-button variant="link" @click="closeEditIndicators">Cancel</k-button>
               <k-button @click="editIndicator" :loading="isLoading" submit
@@ -110,19 +112,19 @@
       <k-modal v-if="showModal" :open="showModal">
         <k-card heading="Add New Indicator" variant="in-modal">
           <div class="form__items">
-            <k-input label="Name of Indicator" v-model="indicator.name"></k-input>
+            <k-input label="Name of Indicator" v-model="newIndicator.name"></k-input>
             <k-input
               label="Category"
               type="select"
               variant="dropdown"
-              v-model="indicator.category"
+              v-model="newIndicator.category"
               :optionsDisplay="optionsCategories"
             ></k-input>
             <k-input
               label="Frequency"
               type="select"
               variant="dropdown"
-              v-model="indicator.frequency"
+              v-model="newIndicator.frequency"
               :optionsDisplay="optionsFrequency"
             ></k-input>
             <k-input-tag v-model="tags"></k-input-tag>

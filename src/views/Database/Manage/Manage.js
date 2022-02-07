@@ -136,6 +136,7 @@ export default {
       } else {
         this.currentNameOfIndicator = '';
       }
+      this.isEditing = false;
       this.isSingleView = !this.isSingleView;
     },
     async getData(params) {
@@ -164,6 +165,7 @@ export default {
       this.isFetching = true;
       try {
         const singleData = await this.fetchDataById(pageId);
+        console.log(singleData);
         if (!singleData.error) {
           this.singleViewData = singleData;
         } else {
