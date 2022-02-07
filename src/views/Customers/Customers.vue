@@ -26,8 +26,8 @@
         :loading="isLoading"
         :customers="true"
         :customerOption="true"
-        @view="$router.push({ name: 'Customer' })"
-        @changeStatus="changeUserStatus(status, id)"
+        @view="(email, name) => $router.push({ name: 'SingleCustomer', query: { email, name } })"
+        @changeStatus="changeUserStatus"
       >
       </k-table>
    </div>

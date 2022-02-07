@@ -1,32 +1,37 @@
 <template>
   <k-dashboard-layout>
-   <header class="customer__header">
-    <div class="customer__header--text">
-     <p @click="$router.go(-1)">
-      <img src="@/assets/back.svg" alt="" class="back-arrow">
-      Back
-     </p>
-     <h1>{{customer.fullName}} Activities</h1>
-    </div>
-    <div class="header--content">
-     <k-pagination
-        :page="pagination.page"
-        :maxItemsOnPage="20"
-        :totalItems="pagination.totalItems"
-        :totalPages="pagination.totalPages"
-        variant="many"
-        @goToNext="nextPage"
-        @goToPrev="prevPage"
-        @goToFirst="firstPage"
-        @goToLast="lastPage"
-      ></k-pagination>
-       <k-input type="select" variant="dropdown"
-       label="Duration" v-model="duration" :optionsDisplay="optionsDurations"></k-input>
-       <k-button variant="secondary" @click="modalOpen = true">Export</k-button>
-    </div>
-   </header>
-   <div class="table__content">
-     <k-table
+    <header class="customer__header">
+      <div class="customer__header--text">
+        <p @click="$router.go(-1)">
+          <img src="@/assets/back.svg" alt="" class="back-arrow" />
+          Back
+        </p>
+        <h1>{{ name }} Activities</h1>
+      </div>
+      <div class="header--content">
+        <k-pagination
+          :page="pagination.page"
+          :maxItemsOnPage="20"
+          :totalItems="pagination.totalItems"
+          :totalPages="pagination.totalPages"
+          variant="many"
+          @goToNext="nextPage"
+          @goToPrev="prevPage"
+          @goToFirst="firstPage"
+          @goToLast="lastPage"
+        ></k-pagination>
+        <k-input
+          type="select"
+          variant="dropdown"
+          label="Duration"
+          v-model="duration"
+          :optionsDisplay="optionsDurations"
+        ></k-input>
+        <k-button variant="secondary" @click="modalOpen = true">Export</k-button>
+      </div>
+    </header>
+    <div class="table__content">
+      <k-table
         :fields="tableFields"
         :fields-display="tableFieldsDisplay"
         :datalist="customerData"
@@ -34,16 +39,16 @@
         :customers="true"
       >
       </k-table>
-   </div>
+    </div>
   </k-dashboard-layout>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 // eslint-disable-next-line vue/max-len
 import {
   KDashboardLayout,
-  KInput,
-  KButton,
+  KInput, KButton,
   KPagination,
   KTable,
 } from '@/components';
@@ -70,35 +75,43 @@ export default {
       '6months': 'Last 6 months',
       '12months': 'Last year',
     },
-    customer: {
-      fullName: 'Jason Frieds',
-    },
-    customerData: [
-      {
-        id: 'aesdfghj3wef7tfc',
-        name: 'Lena Dunham',
-        actions: 'Logged in',
-        timestamp: '4:32 PM, 22-02-2021',
-      },
-      {
-        name: 'jason Frieds',
-        actions: 'Logged in',
-        timestamp: '4:32 PM, 22-02-2021',
-      },
-    ],
+    name: '',
+    customerData: [],
+    page: 1,
     pagination: {
       page: 1,
       totalItems: 9,
       totalPages: 4,
     },
-    tableFields: ['name', 'actions', 'timestamp'],
+    tableFields: ['fullName', 'actions', 'userLastSeen'],
     tableFieldsDisplay: {
-      name: 'Name',
+      fullName: 'Name',
       actions: 'Actions',
-      timestamp: 'Timestamp',
+      userLastSeen: 'Timestamp',
     },
   }),
+  mounted() {
+    const { email } = this.$route.query;
+    this.name = this.$route.query.name;
+    this.getSingleUserActivities(email);
+  },
   methods: {
+    ...mapActions({
+      singleCustomerActivities: 'customers/singleCustomerActivities',
+    }),
+    async getSingleUserActivities(email) {
+      try {
+        const response = await this.singleCustomerActivities(email);
+        if (!response.error) {
+          this.pagination.page = response.currentPage;
+          this.pagination.totalItems = response.total;
+          this.pagination.totalPages = response.totalPages;
+          this.customerData = response.customer;
+        }
+      } catch (error) {
+        this.$toast.show({ message: error });
+      }
+    },
     prevPage() {
       this.page -= 1;
     },
@@ -117,26 +130,26 @@ export default {
 
 <style lang="scss" scoped>
 .customer__header {
- display: grid;
- grid-template-columns: max-content max-content;
- justify-content: space-between;
- &--text{
-   display: grid;
-   grid-row-gap: .8rem;
-   p{
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    cursor: pointer;
-   }
-   .back-arrow{
-     margin-right: 1.1rem;
-   }
- }
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-content: space-between;
+  &--text {
+    display: grid;
+    grid-row-gap: 0.8rem;
+    p {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      cursor: pointer;
+    }
+    .back-arrow {
+      margin-right: 1.1rem;
+    }
+  }
 }
 .header--content {
- display: grid;
- grid-template-columns: max-content 16.5rem max-content;
- grid-column-gap: 1.6rem;
+  display: grid;
+  grid-template-columns: max-content 16.5rem max-content;
+  grid-column-gap: 1.6rem;
 }
 </style>

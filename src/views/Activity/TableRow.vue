@@ -35,6 +35,8 @@ export default {
         switch (field) {
           case 'createdAt':
             return formatters.formatDate(value);
+          // case 'createdAt':
+          //   return field = 'Timestamp';
           default:
             return value;
         }
@@ -84,7 +86,7 @@ export default {
     overflow: hidden;
   }
 
-  .timestamp {
+  .createdAt {
     width: 100%;
     text-align: right;
     justify-content: end;

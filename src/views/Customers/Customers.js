@@ -57,7 +57,7 @@ export default {
   methods: {
     ...mapActions({
       getAllCustomers: 'customers/getAllCustomers',
-      disableCustomer: 'customers/disableCustomer',
+      changeCustomerStatus: 'customers/changeCustomerStatus',
     }),
     async fetchAllCustomers() {
       this.isLoading = true;
@@ -76,11 +76,11 @@ export default {
         this.isLoading = false;
       }
     },
-    async changeUserStatus(status, id) {
+    async changeUserStatus(user) {
       try {
-        const response = await this.disableCustomer({ user: { status, id } });
+        const response = await this.changeCustomerStatus(user);
         if (!response.error) {
-          this.toast.show({ message: response });
+          this.$toast.show({ message: response });
         } else {
           throw Error(response.error);
         }

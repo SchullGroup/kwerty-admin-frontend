@@ -34,8 +34,9 @@
     }
     tr {
       display: grid;
-      grid: 4.8rem / 40rem minmax(40rem, auto) 30rem;
+      grid: 4.8rem / 40rem minmax(40rem, auto) 20rem;
       align-items: center;
+      // border: 1px solid red;
     }
     td,
     th {
@@ -58,10 +59,10 @@
         display: inline-block;
         border: 0.4rem solid transparent;
         border-top-color: $black;
-        margin-top: .4rem;
+        margin-top: 0.4rem;
       }
     }
-    .timestamp {
+    .createdAt {
       text-align: right;
       justify-content: end;
     }
@@ -79,7 +80,7 @@
         color: $primary-purple;
       }
       .name {
-       color: rgba($black, 0.85);
+        color: rgba($black, 0.85);
         &.untitled {
           font-style: italic;
         }
@@ -106,7 +107,7 @@
   grid: 1fr / 1fr 1fr;
   column-gap: 2rem;
 }
-.no-activity{
+.no-activity {
   height: 60vh;
   display: grid;
   place-content: center;

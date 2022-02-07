@@ -32,11 +32,13 @@
       </span>
     </td>
     <td class="view-activity" v-if="customers === true && customerOption === true">
-      <button class="view-activity__btn" @click="$emit('view')">View Activity</button>
+      <button class="view-activity__btn" @click="$emit('view', data.email)">View Activity</button>
     </td>
     <td class="button" v-if="customers === true && customerOption === true">
       <button
-        @click="$emit('changeStatus', [ data.status === 'enabled' ? 'disable' : 'enable'], data.id)"
+        @click="
+          $emit('changeStatus')
+        "
         :class="[[data.status === 'enabled' ? 'disable' : 'enable']]"
       >
         {{ data.status === 'enabled' ? 'Disable' : 'Enable' }}

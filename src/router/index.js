@@ -61,7 +61,7 @@ export const routes = [
   },
   {
     path: '/single-user',
-    name: 'Customer',
+    name: 'SingleCustomer',
     component: SingleCustomer,
   },
   {
