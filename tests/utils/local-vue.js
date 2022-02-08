@@ -220,6 +220,27 @@ const successStore = new Vuex.Store({
       },
       namespaced: true,
     },
+    customers: {
+      actions: {
+        getAllCustomers: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'customers fetched successfully' })
+          .mockRejectedValueOnce({ message: { error: 'error occured' } }),
+        changeCustomerStatus: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'customer status updated' })
+          .mockRejectedValueOnce({ message: { error: 'error occured' } }),
+      },
+      getters: {
+        getCustomers: jest.fn().mockRejectedValue([
+          {
+            name: 'sam john',
+            email: 'some@gmail.com'
+          }
+        ])
+      },
+      namespaced: true,
+    }
   },
 });
 
