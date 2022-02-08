@@ -51,7 +51,7 @@
         v-model="data.notes"
       />
       <h3>Tags</h3>
-      <k-input-tag v-model="data.tags">
+      <k-input-tag v-model="tags">
         <p>Type in related keywords</p>
       </k-input-tag>
       <!-- <div class="tags">
@@ -99,7 +99,7 @@
                 <input type="text" :value="point.period" />
               </td>
               <td class="value-td">
-                <input type="text" :value="point.value || '--'" style="text-align:right;"/>
+                <input type="text" :value="point.value || '--'" style="text-align: right" />
               </td>
             </tr>
           </template>
@@ -128,10 +128,26 @@ export default {
       type: String,
       default: '',
     },
+    updateSingleData: {
+      type: Function,
+    },
   },
   data: () => ({
     message: 'Type in related keywords',
+    tags: [],
+    singleData: {},
   }),
+  mounted() {
+    this.singleData = { ...this.data };
+  },
+  watch: {
+    singleData: {
+      deep: true,
+      handler(val) {
+        this.$emit('updateSingleData', val);
+      },
+    },
+  },
   methods: {
     removeItem(point, data) {
       data.splice(point, 1);

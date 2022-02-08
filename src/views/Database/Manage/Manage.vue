@@ -98,9 +98,12 @@
 
         <!-- BUTTONS WHEN NON DELETED DATA IS SELECTED -->
         <div class="header__controls">
-          <k-button variant="primary" @click="isEditing = true">{{
-            isEditing === true ? 'Save and Continue' : 'Edit'
-          }}</k-button>
+          <k-button v-if="!isEditing" variant="primary" @click="isEditing = true">
+            Edit
+          </k-button>
+          <k-button v-if="isEditing === true" variant="primary" @click="updateSingleData">
+            Save & Continue
+          </k-button>
           <k-button v-if="!isEditing" variant="secondary" @click="isEditing = false">
             Publish
           </k-button>
@@ -151,6 +154,7 @@
         :isEditing="isEditing"
         :data="singleViewData"
         :nameOfIndicator="currentNameOfIndicator"
+        @updateSingleData="updateSingleData"
       />
       <!-- DATA TABLE     -->
       <section class="content__body" v-else>

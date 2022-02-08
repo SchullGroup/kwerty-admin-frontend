@@ -11,6 +11,7 @@ import {
 import BackIcon from './BackIcon.vue';
 import SingleData from './SingleData.vue';
 import countries from '@/utils/countries';
+import { updateData } from '@/api/database';
 
 export default {
   name: 'ManageData',
@@ -159,6 +160,24 @@ export default {
         this.$toast.show({ message: error });
       } finally {
         this.isFetching = false;
+      }
+    },
+    async updateSingleData(val = this.singleViewData) {
+      const { singleViewData } = this;
+      const { id } = singleViewData;
+      try {
+        const response = await updateData({ id, singleViewData: val });
+        // console.log(response);
+        // console.log(val);
+        if (!response.error) {
+          this.$toast.show({ message: response.data.message });
+        } else {
+          throw Error(response.error);
+        }
+        this.isEditing = false;
+        this.getData({});
+      } catch (error) {
+        console.log(error);
       }
     },
     async fetchSingleData({ pageId }) {
