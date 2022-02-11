@@ -62,6 +62,10 @@ export default {
   }),
   mounted() {
     this.setType();
+    const {
+      $route: { query },
+    } = this;
+    this.search = query.userName;
   },
   watch: {
     page(value) {
@@ -153,7 +157,10 @@ export default {
     setType() {
       const { type } = this.$route.params;
       this.type = type === 'admin' ? 'admin' : 'user';
-      this.fetchActivities();
+      if (!this.$route.query.userName) this.fetchActivities();
+    },
+    modelAdminName() {
+      this.$route.query.userName = this.search;
     },
     nextPage() {
       this.page += 1;

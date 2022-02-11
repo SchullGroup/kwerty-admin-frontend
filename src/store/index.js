@@ -12,6 +12,7 @@ import activity from './modules/activity';
 import indicators from './modules/indicators';
 import database from './modules/database';
 import customers from './modules/customers';
+import dashboard from './modules/dashboard';
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     indicators,
     database,
     customers,
+    dashboard,
   },
   plugins: [vuexLocal.plugin],
 });

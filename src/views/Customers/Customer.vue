@@ -6,7 +6,7 @@
           <img src="@/assets/back.svg" alt="" class="back-arrow" />
           Back
         </p>
-        <h1>{{ name }} Activities</h1>
+        <h1>{{ name }}'s Activities</h1>
       </div>
       <div class="header--content">
         <k-pagination

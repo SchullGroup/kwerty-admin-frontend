@@ -154,7 +154,8 @@
         :isEditing="isEditing"
         :data="singleViewData"
         :nameOfIndicator="currentNameOfIndicator"
-        @updateSingleData="updateSingleData"
+        :dataTags="dataTags"
+        @syncSingleData="(val) => singleViewData = {...val}"
       />
       <!-- DATA TABLE     -->
       <section class="content__body" v-else>

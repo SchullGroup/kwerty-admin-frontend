@@ -5,16 +5,19 @@
       :key="activity[field]"
       :class="{
         [field]: true,
+        [activity[field]]: field === 'activity',
         [activity[field].toLowerCase()]: field === 'status',
         untitled: field === 'name' && activity[field] === 'Untitled User',
       }"
     >
-      {{ activity[field] }}
+      {{ activity[field] | formatDate(field) }}
     </td>
   </tr>
 </template>
 
 <script>
+import formatters from '@/utils/formatters';
+
 export default {
   name: 'OverviewTableRow',
   props: {
@@ -23,6 +26,19 @@ export default {
     },
     fields: {
       type: Array,
+    },
+  },
+  filters: {
+    formatDate(value, field) {
+      if (value) {
+        switch (field) {
+          case 'createdAt':
+            return formatters.formatDate(value);
+          default:
+            return value;
+        }
+      }
+      return value;
     },
   },
 };
@@ -61,7 +77,7 @@ tr {
 td {
   color: $grey-darker;
   font-weight: 400;
-  width: calc(100% - 2.4rem);
+  // width: calc(100% - 2.4rem);
   word-break: break-all;
   display: -webkit-box;
   text-overflow: ellipsis;
@@ -84,6 +100,11 @@ td {
   width: 100%;
   justify-content: end;
   padding: 0;
+}
+
+.activity{
+  text-overflow: ellipsis;
+  max-width: 18rem;
 }
 
 .name {

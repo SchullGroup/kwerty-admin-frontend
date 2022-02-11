@@ -89,6 +89,7 @@ export default {
     search: '',
     currentNameOfIndicator: '',
     isActing: false,
+    dataTags: [],
   }),
   computed: {
     ...mapGetters({
@@ -162,13 +163,37 @@ export default {
         this.isFetching = false;
       }
     },
-    async updateSingleData(val = this.singleViewData) {
-      const { singleViewData } = this;
-      const { id } = singleViewData;
+    async updateSingleData() {
+      const { singleViewData, dataTags } = this;
+      const {
+        id,
+        data,
+        currency,
+        metric,
+        country,
+        notes,
+        source,
+        link,
+      } = singleViewData;
+      const tags = dataTags ? dataTags.join(',') : '';
       try {
-        const response = await updateData({ id, singleViewData: val });
-        // console.log(response);
-        // console.log(val);
+        const response = await updateData({
+          id,
+          payload:
+          {
+            ...{
+              data,
+              currency,
+              metric,
+              country,
+              notes,
+              source,
+              link,
+            },
+            tags,
+          },
+        });
+        console.log(response);
         if (!response.error) {
           this.$toast.show({ message: response.data.message });
         } else {
@@ -187,6 +212,7 @@ export default {
         console.log(singleData);
         if (!singleData.error) {
           this.singleViewData = singleData;
+          this.dataTags = singleData.tags ? singleData.tags.split(',') : [];
         } else {
           throw Error(singleData.error);
         }

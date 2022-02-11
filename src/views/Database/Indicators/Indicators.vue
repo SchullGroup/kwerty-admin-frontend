@@ -10,7 +10,7 @@
           type="select"
           variant="dropdown"
           label="Filter by Category"
-          v-model="categories"
+          v-model="category"
           :optionsDisplay="optionsCategories"
         ></k-input>
         <k-input

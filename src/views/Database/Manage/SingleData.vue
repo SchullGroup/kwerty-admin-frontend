@@ -6,13 +6,13 @@
         <k-input
           label="Name of indicator"
           placeholder="Name of Indicator"
-          :disabled="!isEditing"
+          :disabled="!isEditing || isEditable === false"
           v-model="data.indicatorName"
         />
         <k-input
           label="Name of Category"
           placeholder="Name of Category"
-          :disabled="!isEditing"
+          :disabled="!isEditing || isEditable === false"
           v-model="data.category"
         />
       </div>
@@ -51,14 +51,9 @@
         v-model="data.notes"
       />
       <h3>Tags</h3>
-      <k-input-tag v-model="tags">
+      <k-input-tag :disabled="!isEditing" v-model="dataTags">
         <p>Type in related keywords</p>
       </k-input-tag>
-      <!-- <div class="tags">
-        <p class="tag" v-for="tag in data.tags" :key="tag">
-          {{ tag }}
-        </p>
-      </div> -->
     </div>
     <div class="single-data__table">
       <table class="data-table">
@@ -75,7 +70,7 @@
           </tr>
         </thead>
         <tbody>
-          <template v-for="point in data.data">
+          <template v-for="(point, i) in data.data">
             <tr v-if="point && !isEditing" :key="point.period">
               <td>
                 {{ point.period }}
@@ -93,13 +88,54 @@
               ]"
             >
               <td class="period-td">
-                <span v-if="isEditing" @click="removeItem(point, data.data)"
+                <span
+                  v-if="isEditing"
+                  @click="removeItem(i, data.data)"
+                  data-hover="Delete"
+                  class="span"
                   ><img src="@/assets/deleteIcon.svg" alt="icon"
                 /></span>
                 <input type="text" :value="point.period" />
               </td>
               <td class="value-td">
                 <input type="text" :value="point.value || '--'" style="text-align: right" />
+              </td>
+            </tr>
+          </template>
+          <!-- new input for data -->
+          <template v-if="isEditing">
+            <tr
+              :class="[
+                {
+                  'table-row': isEditing,
+                },
+              ]"
+            >
+              <td class="period-td">
+                <span
+                  v-if="isEditing"
+                  @click="removeItem(point, data.data)"
+                  data-hover="Delete"
+                  class="span"
+                  ><img src="@/assets/deleteIcon.svg" alt="icon"
+                /></span>
+                <input
+                  type="text"
+                  v-model="newData.period"
+                  value=""
+                  placeholder="period"
+                  name="period"
+                />
+              </td>
+              <td class="value-td">
+                <input
+                  type="text"
+                  value=""
+                  v-model="newData.value"
+                  style="text-align: right"
+                  placeholder="value"
+                  name="value"
+                />
               </td>
             </tr>
           </template>
@@ -124,6 +160,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isEditable: {
+      type: Boolean,
+      default: false,
+    },
     nameOfIndicator: {
       type: String,
       default: '',
@@ -131,20 +171,25 @@ export default {
     updateSingleData: {
       type: Function,
     },
+    dataTags: {
+      type: Array,
+    },
   },
   data: () => ({
     message: 'Type in related keywords',
-    tags: [],
     singleData: {},
+    newData: {},
   }),
   mounted() {
-    this.singleData = { ...this.data };
+    const { data } = this;
+    this.singleData = { ...data };
   },
+  computed: {},
   watch: {
     singleData: {
       deep: true,
       handler(val) {
-        this.$emit('updateSingleData', val);
+        this.$emit('syncSingleData', val);
       },
     },
   },
@@ -253,9 +298,25 @@ export default {
       display: flex;
       align-items: center;
       padding-left: 0;
-      span {
+      .span {
         margin-right: 3rem;
         cursor: pointer;
+        position: relative;
+        &::before {
+          content: attr(data-hover);
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          left: 1.5rem;
+          top: -1rem;
+          font-size: 0.8rem;
+          color: $error;
+          transition: opacity 1s ease-in-out;
+        }
+        &:hover::before {
+          opacity: 0.5;
+          visibility: visible;
+        }
       }
     }
     .value-td {
