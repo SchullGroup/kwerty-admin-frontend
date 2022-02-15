@@ -104,7 +104,7 @@
                 </overview-table-row>
               </template>
               <!-- EMPTY STATE START -->
-              <div v-if="!activities" class="no-activity text-center">
+              <div v-if="!recentActivities" class="no-activity text-center">
                 <div class="icon">
                   <svg width="22" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path :d="svgPath" fill="#666" />

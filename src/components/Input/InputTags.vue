@@ -5,11 +5,11 @@
       <div class="content">
         <p class="item" v-for="(t, i) in tags" :key="t + i">
           {{ t }}
-          <span @click="removeTag(i)" class="close"
+          <span @click="removeTag(i)" :class="['close', { 'disabled' : disabled }]"
             ><img src="@/assets/deleteIcon.svg" alt=""
           /></span>
         </p>
-        <input type="text" v-model="tag" @keyup="handleKey" />
+        <input type="text" v-model="tag" :disabled='disabled' @keyup="handleKey" />
       </div>
     </div>
   </div>
@@ -34,6 +34,9 @@ export default {
     },
     message: {
       type: String,
+    },
+    disabled: {
+      type: Boolean,
     },
   },
   methods: {
@@ -103,6 +106,9 @@ export default {
       }
     }
   }
+}
+.disabled{
+  pointer-events: none;
 }
 .close {
   position: absolute;

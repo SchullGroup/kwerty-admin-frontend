@@ -8,9 +8,10 @@ import CheckInbox from '../views/Auth/CheckInbox/CheckInbox.vue';
 import ActivityHome from '../views/Activity/Activity.vue';
 import Settings from '../views/Settings/Settings.vue';
 import Indicators from '../views/Database/Indicators/Indicators.vue';
-import Country from '../views/Database/Country/Country.vue';
-import ManageCountry from '../views/Database/Country/ManageCountry.vue';
-import SingleCountry from '../views/Database/Country/SingleCountry.vue';
+import Country from '../views/Database/Country/CountryOverview/CountryOverview.vue';
+import ManageCountry from '../views/Database/Country/ManageCountry/ManageCountry.vue';
+import AddCountry from '../views/Database/Country/AddCountry/AddCountry.vue';
+import ViewSingleCountry from '../views/Database/Country/ViewSingleCountry/ViewSingleCountry.vue';
 import ManageData from '../views/Database/Manage/Manage.vue';
 import UploadData from '../views/Database/Manage/Upload/Upload.vue';
 import Customers from '../views/Customers/Customers.vue';
@@ -71,7 +72,7 @@ export const routes = [
   },
   {
     path: '/database/Country',
-    name: 'country',
+    name: 'CountryOverview',
     component: Country,
   },
   {
@@ -80,9 +81,14 @@ export const routes = [
     component: ManageCountry,
   },
   {
+    path: '/database/addcountry',
+    name: 'AddCountry',
+    component: AddCountry,
+  },
+  {
     path: '/database/country/id',
-    name: 'SingleCountry',
-    component: SingleCountry,
+    name: 'ViewSingleCountry',
+    component: ViewSingleCountry,
   },
   {
     path: '/database',

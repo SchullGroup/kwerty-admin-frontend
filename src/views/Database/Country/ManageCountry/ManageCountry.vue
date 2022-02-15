@@ -7,7 +7,7 @@
       </div>
       <div class="country__header--right">
         <k-input label="Search for country" v-model="search" reactive></k-input>
-        <k-button @click="modalOpen = true">Add New Country</k-button>
+        <k-button @click="$router.push({ name: 'AddCountry' })">Add New Country</k-button>
       </div>
     </header>
     <section class="country__body">
@@ -18,7 +18,10 @@
         <div class="country-card--texts">
           <p class="country-name">Nigeria</p>
           <div class="card-btns">
-            <k-button variant="link" size="small" @click="$router.push({ name: 'SingleCountry' })"
+            <k-button
+              variant="link"
+              size="small"
+              @click="$router.push({ name: 'ViewSingleCountry' })"
               >Edit</k-button
             >
             <k-button variant="link" size="small">Remove</k-button>

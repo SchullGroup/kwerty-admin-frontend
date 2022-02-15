@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Toast from '@/plugins/toast';
@@ -198,10 +199,12 @@ const successStore = new Vuex.Store({
     },
     database: {
       actions: {
+        // eslint-disable-next-line no-undef
         fetchDatabase: jest
           .fn()
           .mockResolvedValueOnce({ message: 'database fetched successfully' })
           .mockRejectedValueOnce({ message: { error: 'error occured' } }),
+        // eslint-disable-next-line no-undef
         fetchDataById: jest
           .fn()
           .mockResolvedValueOnce({ message: 'database fetched successfully' })
@@ -235,12 +238,25 @@ const successStore = new Vuex.Store({
         getCustomers: jest.fn().mockRejectedValue([
           {
             name: 'sam john',
-            email: 'some@gmail.com'
-          }
-        ])
+            email: 'some@gmail.com',
+          },
+        ]),
       },
       namespaced: true,
-    }
+    },
+    dashboard: {
+      actions: {
+        getRecentAdminActivities: jest
+          .fn()
+          .mockResolvedValueOnce({ error: '' })
+          .mockResolvedValueOnce({ message: 'fectched succesfully' }),
+        getAnalytics: jest
+          .fn()
+          .mockResolvedValueOnce({ error: '' })
+          .mockResolvedValueOnce({ message: 'fectched succesfully' }),
+      },
+      getters: {},
+    },
   },
 });
 

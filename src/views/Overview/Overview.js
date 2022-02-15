@@ -4,7 +4,6 @@ import doughnutColors from '../../utils/doughnut-colors';
 import DoughnutWrapper from '../../components/Charts/DoughnutWrapper.vue';
 import LineWrapper from '../../components/Charts/LineWrapper.vue';
 import OverviewTableRow from './TableRow.vue';
-import dummyActivity from './dummyActivity';
 import ProfileMixin from '@/mixins/Profile';
 import avatar from '@/assets/avatar.svg';
 
@@ -38,7 +37,7 @@ export default {
       '30 days': 'Last 30 days',
       '3 months': 'Last 3 months',
       '6 months': 'Last 6 months',
-      lastyear: 'Last year',
+      '12 months': 'Last year',
     },
     displayFields: ['activity', 'createdAt', 'status'],
     svgPath:
@@ -59,6 +58,11 @@ export default {
       },
     ],
   }),
+  async mounted() {
+    await this.getProfile();
+    await this.getRecentActivities();
+    await this.getDashBoardAnalytics();
+  },
   watch: {
     overviewDuration() {
       this.getDashBoardAnalytics();
@@ -68,11 +72,6 @@ export default {
         setTimeout(this.setShow, 0);
       }
     },
-    // chartDataset(val) {
-    //   if (val.length === 1) {
-    //     this.showChart = false;
-    //   }
-    // },
   },
   computed: {
     ...mapGetters({
@@ -95,12 +94,6 @@ export default {
         ],
       };
     },
-  },
-  mounted() {
-    this.activities = dummyActivity;
-    this.getProfile();
-    this.getRecentActivities();
-    this.getDashBoardAnalytics();
   },
   methods: {
     ...mapActions({

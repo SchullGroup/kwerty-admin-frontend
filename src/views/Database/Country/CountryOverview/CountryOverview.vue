@@ -260,9 +260,9 @@
 </template>
 
 <script>
-import CountryDashboard from './Country';
+import CountryDashboard from './CountryOverview';
 
 export default CountryDashboard;
 </script>
 
-<style lang="scss" scoped src="./Country.scss"></style>
+<style lang="scss" scoped src="./CountryOverview.scss"></style>

@@ -6,17 +6,16 @@
         <h1>Nigeria: Country Dashboard</h1>
       </div>
       <div class="country__header--right">
-        <k-button variant="secondary" negative="negative">Cancel</k-button>
+        <k-button variant="secondary" negative="negative" @click="$router.go(-1)">Cancel</k-button>
         <k-button variant="secondary">Save & Publish</k-button>
       </div>
     </header>
     <section class="country__body">
       <div class="country--profile">
         <div class="country--profile-image">
-          <k-input></k-input>
           <div class="country-picture-wrapper">
-            <!-- <img src="@/assets/nigeria.jpg" alt="pic" class="country-picture" /> -->
-            <img :src="url" alt="" class="country-picture" />
+            <img src="@/assets/nigeria.jpg" alt="pic" class="country-picture" />
+            <!-- <img :src="url" alt="" class="country-picture" /> -->
           </div>
           <k-button class="btn" variant="tertiary">
             <input
@@ -166,4 +165,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="./SingleCountry.scss"></style>
+<style lang="scss" scoped src="./ViewSingleCountry.scss"></style>

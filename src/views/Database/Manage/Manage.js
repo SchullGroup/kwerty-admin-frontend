@@ -168,7 +168,6 @@ export default {
       const {
         id,
         data,
-        currency,
         metric,
         country,
         notes,
@@ -183,7 +182,6 @@ export default {
           {
             ...{
               data,
-              currency,
               metric,
               country,
               notes,
@@ -200,6 +198,7 @@ export default {
           throw Error(response.error);
         }
         this.isEditing = false;
+        this.fetchSingleData({ pageId: id });
         this.getData({});
       } catch (error) {
         console.log(error);
@@ -209,7 +208,7 @@ export default {
       this.isFetching = true;
       try {
         const singleData = await this.fetchDataById(pageId);
-        console.log(singleData);
+        // console.log(singleData);
         if (!singleData.error) {
           this.singleViewData = singleData;
           this.dataTags = singleData.tags ? singleData.tags.split(',') : [];
