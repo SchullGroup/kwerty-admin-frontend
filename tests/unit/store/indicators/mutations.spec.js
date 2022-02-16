@@ -2,7 +2,7 @@ import mutations from '@/store/modules/indicators/mutations';
 
 const { SET_INDICATORS } = mutations;
 
-let state = {
+const state = {
   indicators: [],
 };
 
@@ -16,5 +16,5 @@ describe('SET_INDICATORS', () => {
     ];
     SET_INDICATORS(state, newIndicators);
     expect(state.indicators).toBe(newIndicators);
-  })
+  });
 });

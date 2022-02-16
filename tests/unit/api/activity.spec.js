@@ -6,7 +6,6 @@ jest.mock('@/config', () => ({
   },
 }));
 
-
 describe('activity api', () => {
   it('fetches all activities', async () => {
     const activities = await getActivities({ page: 1, type: 'afmin', search: 'edited' });
