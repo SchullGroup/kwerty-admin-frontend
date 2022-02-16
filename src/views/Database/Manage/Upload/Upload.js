@@ -1,4 +1,4 @@
-import XLSX from 'xlsx';
+import { read, utils } from 'xlsx';
 import vue2Dropzone from 'vue2-dropzone';
 import { mapActions } from 'vuex';
 import {
@@ -50,8 +50,8 @@ export default {
       try {
         this.filename = file.name;
         const data = await file.arrayBuffer();
-        const res = XLSX.read(data);
-        const sheetData = XLSX.utils.sheet_to_json(Object.values(res.Sheets)[0]);
+        const res = read(data);
+        const sheetData = utils.sheet_to_json(Object.values(res.Sheets)[0]);
         this.fileData = sheetData;
         this.fileFields = new Set();
         Object.keys(sheetData[0]).forEach((k) => {

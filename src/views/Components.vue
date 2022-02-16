@@ -1,38 +1,38 @@
 <template>
   <k-dashboard-layout>
-    <div class="container">
+    <div class='container'>
       <h2>Components</h2>
       <h2>primary button</h2>
       <div class="content">
         <k-button>Primary Button</k-button>
         <k-button>Primary button hover</k-button>
-        <k-button :disabled="true">Primary button disabled</k-button>
-        <k-button :negative="true">Primary button negative</k-button>
+        <k-button :disabled='true'>Primary button disabled</k-button>
+        <k-button :negative='true'>Primary button negative</k-button>
       </div>
       <h2>secondary button</h2>
-      <div class="content">
-        <k-button variant="secondary">Secondary button</k-button>
-        <k-button variant="secondary">Secondary button hover</k-button>
-        <k-button :disabled="true" variant="secondary">Secondary button disabled</k-button>
-        <k-button :negative="true" variant="secondary">Secondary button negative</k-button>
+      <div class='content'>
+        <k-button variant='secondary'>Secondary button</k-button>
+        <k-button variant='secondary'>Secondary button hover</k-button>
+        <k-button :disabled='true' variant='secondary'>Secondary button disabled</k-button>
+        <k-button :negative='true' variant='secondary'>Secondary button negative</k-button>
       </div>
       <h2>Tertiary button</h2>
-      <div class="content">
-        <k-button variant="tertiary">Tertiary button</k-button>
-        <k-button variant="tertiary">Tertiary button hover</k-button>
-        <k-button :disabled="true" variant="tertiary">Tertiary button disabled</k-button>
-        <k-button :negative="true" variant="tertiary">Tertiary button negative</k-button>
+      <div class='content'>
+        <k-button variant='tertiary'>Tertiary button</k-button>
+        <k-button variant='tertiary'>Tertiary button hover</k-button>
+        <k-button :disabled='true' variant='tertiary'>Tertiary button disabled</k-button>
+        <k-button :negative='true' variant='tertiary'>Tertiary button negative</k-button>
       </div>
       <h2>Link button</h2>
-      <div class="content">
-        <k-button variant="link">Link button</k-button>
-        <k-button variant="link">Link button hover</k-button>
-        <k-button :disabled="true" variant="link">Link button disabled</k-button>
+      <div class='content'>
+        <k-button variant='link'>Link button</k-button>
+        <k-button variant='link'>Link button hover</k-button>
+        <k-button :disabled='true' variant='link'>Link button disabled</k-button>
       </div>
-      <k-button size="full" variant="tertiary">Tertiary button</k-button>
-    <section class="cards">
-        <h2>Card <span class="small">Default</span></h2>
-        <k-card heading="Role">
+      <k-button size='full' variant='tertiary'>Tertiary button</k-button>
+      <section class='cards'>
+        <h2>Card <span class='small'>Default</span></h2>
+        <k-card heading='Role'>
           <h3>Super Admin</h3>
           <p>
             This is just a test description to understand how this design would really look like in
@@ -41,115 +41,116 @@
           </p>
         </k-card>
       </section>
-      <div class="pagination">
+      <div class='pagination'>
         <section>
           <h2>Pagination</h2>
           <k-pagination
-            :page="page"
-            :maxItemsOnPage="20"
-            :totalItems="totalItems"
-            @goToNext="nextPage"
-            @goToPrev="prevPage"
+            :maxItemsOnPage='20'
+            :page='page'
+            :totalItems='totalItems'
+            @goToNext='nextPage'
+            @goToPrev='prevPage'
           ></k-pagination>
         </section>
         <section>
-          <h2>Pagination <span class="small">variant: many</span></h2>
+          <h2>Pagination <span class='small'>variant: many</span></h2>
           <k-pagination
-            :page="page"
-            :maxItemsOnPage="20"
-            :totalItems="totalItems"
-            variant="many"
-            @goToNext="nextPage"
-            @goToPrev="prevPage"
+            :maxItemsOnPage='20'
+            :page='page'
+            :totalItems='totalItems'
+            variant='many'
+            @goToNext='nextPage'
+            @goToPrev='prevPage'
           ></k-pagination>
         </section>
       </div>
-      <div class="inputs">
+      <div class='inputs'>
         <section>
           <h2>Text Input</h2>
-          <k-input label="Name"></k-input>
+          <k-input label='Name'></k-input>
         </section>
         <section>
-          <h2>Text Input <span class="small">Filled</span></h2>
-          <k-input label="Title" v-model="title"></k-input>
+          <h2>Text Input <span class='small'>Filled</span></h2>
+          <k-input v-model='title' label='Title'></k-input>
         </section>
         <section>
-          <h2>Text Input <span class="small">Disabled</span></h2>
-          <k-input label="Title" v-model="title" :disabled="true"></k-input>
+          <h2>Text Input <span class='small'>Disabled</span></h2>
+          <k-input v-model='title' :disabled='true' label='Title'></k-input>
         </section>
         <section>
-          <h2>Email Input <span class="small">Error</span></h2>
+          <h2>Email Input <span class='small'>Error</span></h2>
           <k-input
-            label="Title"
-            type="email"
-            v-model="badEmail"
-            error="Your email address is not correct."
+            v-model='badEmail'
+            error='Your email address is not correct.'
+            label='Title'
+            type='email'
           ></k-input>
         </section>
         <section>
           <h2>Password Input</h2>
-          <k-input label="Password" type="password" v-model="password" variant="password"></k-input>
+          <k-input v-model='password' label='Password' type='password' variant='password'></k-input>
         </section>
         <section>
-          <h2>Date Input</h2> <div class='small'>{{date}}</div>
-          <k-input label="Date" type="date" v-model="date"></k-input>
+          <h2>Date Input</h2>
+          <div class='small'>{{ date }}</div>
+          <k-input v-model='date' label='Date' type='date'></k-input>
         </section>
         <section>
-          <h2>Select Input <span class="small">Custom</span></h2>
-          <k-input label="Color" type="select" v-model="color2" variant="custom">
-            <option value="crimson" class="option">Crimson</option>
-            <option value="orange" class="option">Orange</option>
-            <option value="indigo" class="option">Indigo</option>
-            <option value="crimson" class="option">Crimson</option>
-            <option value="orange" class="option">Orange</option>
-            <option value="indigo" class="option">Indigo</option>
-            <option value="crimson" class="option">Crimson</option>
-            <option value="orange" class="option">Orange</option>
-            <option value="indigo" class="option">Indigo</option>
-            <option value="crimson" class="option">Crimson</option>
-            <option value="orange" class="option">Orange</option>
-            <option value="indigo" class="option">Indigo</option>
+          <h2>Select Input <span class='small'>Custom</span></h2>
+          <k-input v-model='color2' label='Color' type='select' variant='custom'>
+            <option class='option' value='crimson'>Crimson</option>
+            <option class='option' value='orange'>Orange</option>
+            <option class='option' value='indigo'>Indigo</option>
+            <option class='option' value='crimson'>Crimson</option>
+            <option class='option' value='orange'>Orange</option>
+            <option class='option' value='indigo'>Indigo</option>
+            <option class='option' value='crimson'>Crimson</option>
+            <option class='option' value='orange'>Orange</option>
+            <option class='option' value='indigo'>Indigo</option>
+            <option class='option' value='crimson'>Crimson</option>
+            <option class='option' value='orange'>Orange</option>
+            <option class='option' value='indigo'>Indigo</option>
           </k-input>
         </section>
       </div>
       <section>
         <k-icons></k-icons>
       </section>
-      <div class="modal">
+      <div class='modal'>
         <h2>Modal</h2>
-        <k-button @click="modalOpen = true">Open Modal</k-button>
-        <k-modal :open="modalOpen">
-          <k-card heading="Add Role" variant="in-modal">
-            <k-input label="Title" v-model="roleTitle"></k-input>
+        <k-button @click='modalOpen = true'>Open Modal</k-button>
+        <k-modal :open='modalOpen'>
+          <k-card heading='Add Role' variant='in-modal'>
+            <k-input v-model='roleTitle' label='Title'></k-input>
             <br />
-            <k-input label="Description" v-model="roleDescription"></k-input>
+            <k-input v-model='roleDescription' label='Description'></k-input>
             <br />
-            <div class="buttons" style="display: flex; justify-content: end">
-              <k-button variant="link" @click="modalOpen = false">Close</k-button>
+            <div class='buttons' style='display: flex; justify-content: end'>
+              <k-button variant='link' @click='modalOpen = false'>Close</k-button>
             </div>
           </k-card>
         </k-modal>
       </div>
       <k-pagination
-        :forTable="true"
-        :page="page"
-        :maxItemsOnPage="20"
-        :totalItems="totalItems"
+        :forTable='true'
+        :maxItemsOnPage='20'
+        :page='page'
+        :totalItems='totalItems'
         :totalPages='7'
-        variant="many"
-        @goToNext="nextPage"
-        @goToPrev="prevPage"
+        variant='many'
+        @goToNext='nextPage'
+        @goToPrev='prevPage'
       ></k-pagination>
 
-      <section class="table">
+      <section class='table'>
         <h2>Table</h2>
-        <div class="selected">selected: {{ selected.length }}</div>
+        <div class='selected'>selected: {{ selected.length }}</div>
         <div>{{ selected }}</div>
         <k-table
-          :fields="tableFields"
-          :fields-display="tableFieldsDisplay"
-          :datalist="allTableData"
-          v-model="selected"
+          v-model='selected'
+          :datalist='allTableData'
+          :fields='tableFields'
+          :fields-display='tableFieldsDisplay'
         ></k-table>
       </section>
       <section>
@@ -162,17 +163,14 @@
 <script>
 import {
   KButton,
-  // KCheckbox,
   KCard,
-  KPagination,
-  // KToggle,
-  // KRadio,
   KDashboardLayout,
-  KInput,
   KIcons,
-  KModal,
-  KTable,
+  KInput,
   KInputTag,
+  KModal,
+  KPagination,
+  KTable,
 } from '@/components';
 import database from '@/utils/dummy-database';
 
@@ -237,15 +235,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 .container {
   padding: 3.6rem;
+
   .content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 1rem;
     margin: 2rem 0;
   }
+
   width: 90%;
   max-width: 1200px;
   margin: auto;
