@@ -15,3 +15,7 @@ export function deleteIndicator(body) {
 export function updateIndicator({ id, indicator }) {
   return instance.put(`/indicator/${id}`, indicator);
 }
+
+export const getIndicatorsList = () => instance.get('/indicator');
+
+export const searchIndicators = ({ name }) => instance.get(`/indicator?search=${name}`);

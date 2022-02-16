@@ -4,22 +4,33 @@
       :class="[
         'input',
         {
-          'input--with-label': label,
+          'input--with-label': label || isCopy,
           'input--error': error,
           'input--disabled': disabled,
           'input--select': type === 'select' || type === 'date',
-          'input--with-icon': variant === 'password' || isSelect || isDate,
+          'input--with-icon': variant === 'password' || isSelect || isDate || isCopy,
           'input--is-open': isSelect && isSelectOpen,
           'input--has-value': type === 'select' && innerValue,
           'as-dropdown': isSelect && variant === 'dropdown',
           'with-display': !!this.optionsDisplay,
           'input--textarea': variant === 'textarea',
+          'input--search': type === 'search',
+          'has--search': searchInside,
+          'input--copy': isCopy
         },
       ]"
       :tabindex='isSelect ? 0 : -1'
-      @click='isSelect || isDate ? toggleSelectOpen() : null'
-      @keyup='(e) => {filterInside ? record(e) : null}'
+      @click='(isSelect || isDate) && !disabled ? toggleSelectOpen() : null'
+      @focus='isSelectOpen ? focusInsideSearch() : null'
+      @keyup='(e) => {filterInside || searchInside ? record(e) : null}'
     >
+      <svg v-if="type === 'search' " class='search-icon' fill='none' height='14' viewBox='0 0 14 14'
+           width='14' xmlns='http://www.w3.org/2000/svg'>
+        <path
+          :d='searchInputPath'
+          fill='#666666' />
+      </svg>
+
       <textarea
         v-if="variant === 'textarea'"
         :id='name'
@@ -29,7 +40,7 @@
         :value='isSelect && selectedOption ? selectedOption : innerValue'
         rows='5'
         @change='updateInput'
-        @keyup='reactive ? updateInput($event) : null'
+        @keyup='updateInput($event)'
       >
 
       </textarea>
@@ -42,7 +53,8 @@
         :type='overrideType || type'
         :value='isSelect && selectedOption ? selectedOption : isDate ? formattedDate : innerValue'
         @change='updateInput'
-        @keyup='reactive ? updateInput($event) : null'
+        @keyup='updateInput($event)'
+        ref='input'
       />
       <label :for='name'>{{ label }}</label>
 
@@ -60,6 +72,11 @@
           <hide-icon v-show='passwordVisible'></hide-icon>
         </template>
         <dropdown-icon v-if='isSelect || isDate'></dropdown-icon>
+        <svg v-if='isCopy' fill='none' height='20' viewBox='0 0 18 20'
+             width='18' xmlns='http://www.w3.org/2000/svg'>
+        <path :d='copyIconPath' fill='black' />
+        </svg>
+
       </span>
 
       <!-- Select -->
@@ -69,17 +86,24 @@
           @click.stop='closeOptionsHandler'
         ></div>
         <div ref='list' :class="['options-list', { 'is-hidden': !isSelectOpen }]" tabindex='-1'>
+          <input v-if='searchInside' v-model='filter' ref='search'
+                 :placeholder="'Search ' + this.searchInside" :tabindex='isSelectOpen ? 0 : -1'
+                 class='search-options' type='text'
+                 @click.stop @keyup.stop
+                 />
           <template v-if='optionsDisplay'>
-            <option
-              v-for='[value, display] in Object.entries(filteredOptions)'
-              :key='value'
-              :value='value'
-              class='option'
-              tabindex='0'
-              @keyup='enterOption'
-            >
-              {{ display }}
-            </option>
+            <div ref='itemList' class='list'>
+              <div
+                v-for='[value, display] in Object.entries(filteredOptions)'
+                :key='value'
+                :tabindex='isSelectOpen ? 0 : -1'
+                :data-value='value'
+                class='option'
+                @keyup='enterOption'
+              >
+                {{ display }}
+              </div>
+            </div>
           </template>
           <slot v-else></slot>
         </div>
@@ -97,9 +121,11 @@
         </div>
       </template>
     </div>
-    <div v-if='error' class='error-message'>
-      {{ this.error }}
-    </div>
+    <transition name='grow'>
+      <div v-if='error' class='error-message'>
+        {{ this.error }}
+      </div>
+    </transition>
   </div>
 </template>
 

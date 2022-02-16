@@ -1,4 +1,5 @@
 import { Line } from 'vue-chartjs';
+import format from 'date-fns/format';
 
 export default {
   extends: Line,
@@ -8,21 +9,38 @@ export default {
       return {
         responsive: true,
         aspectRatio: 1.75,
+        tooltips: {
+          callbacks: {
+            label({ datasetIndex, index }, data) {
+              const value = data.datasets[datasetIndex].data[index];
+              // eslint-disable-next-line no-sequences
+              return `${format(new Date(value.x), 'm')}, ${format(new Date(value.x), 'aaa')}`;
+            },
+          }, // end callbacks:
+        }, // end tooltips
         scales: {
           yAxes: [
             {
               gridLines: { borderDash: [2, 2] },
               ticks: {
-                suggestedMax: 27000,
+                // suggestedMax: 27000,
                 beginAtZero: true,
-                stepSize: 3000,
+                // stepSize: 3000,
               },
             },
           ],
           xAxes: [
             {
+              type: 'time',
+              time: {
+                unit: 'day',
+                // isoWeekday: true,
+                displayFormats: {
+                  day: 'ddd DD',
+                },
+              },
               gridLines: {
-                display: false,
+                // display: false,
                 drawBorder: false,
               },
               ticks: {

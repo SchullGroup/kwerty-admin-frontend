@@ -7,3 +7,7 @@ export function getRecentAdminActivities({ id, duration }) {
 export function getAnalytics({ duration }) {
   return instance.get(`/admin-dashboard/analytics?duration=${duration}`);
 }
+
+export function getActiveUsers({ duration }) {
+  return instance.get(`/admin-dashboard/active-users?duration=${duration}`);
+}

@@ -1,4 +1,7 @@
-import { addIndicator, getIndicators, deleteIndicator, updateIndicator } from '@/api';
+import {
+  addIndicator, getIndicators, deleteIndicator, updateIndicator,
+  getIndicatorsList, searchIndicators,
+} from '@/api';
 import errorHandler from '@/utils/error-handler';
 
 export default {
@@ -29,4 +32,20 @@ export default {
       return message;
     })
     .catch((response) => errorHandler(response, true)),
+  getInitialIndicators: ({ commit }) => getIndicatorsList()
+    .then(({ data: { data } }) => {
+      commit('ADD_INDICATORS', data.indicator);
+      commit('ADD_CATEGORIES', data.indicator);
+
+      return data;
+    })
+    .catch((response) => errorHandler(response)),
+  fetchIndicatorsWith: ({ commit }, body) => searchIndicators(body)
+    .then(({ data: { data } }) => {
+      commit('ADD_INDICATORS', data.indicator);
+      commit('ADD_CATEGORIES', data.indicator);
+
+      return data;
+    })
+    .catch((response) => errorHandler(response)),
 };

@@ -44,7 +44,7 @@
     grid: 1fr / auto-flow max-content;
     column-gap: 1.6rem;
     &.with-search {
-      grid: 1fr / minmax(23rem, 36rem) repeat(3, minmax(16rem, 19rem)) max-content;
+      grid: 1fr / minmax(23rem, 36rem) repeat(3, minmax(16rem, 20rem)) max-content;
     }
     .search {
       width: 100%;

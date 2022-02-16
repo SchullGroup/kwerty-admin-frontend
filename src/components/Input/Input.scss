@@ -1,6 +1,7 @@
 .input__wrapper {
   width: 100%;
 }
+
 .input {
   position: relative;
   width: 100%;
@@ -39,18 +40,24 @@
     background: #f2f2f2;
   }
 
-  &.input--select--native {
-    padding: 0 3.2rem;
-  }
-  
   &.input--textarea {
     min-height: 6.4rem;
+    height: auto;
+  }
+
+  &.input--search {
+    min-height: 4.8rem;
     height: auto;
   }
 }
 
 /* Child Styles */
 .input {
+  input::-ms-reveal,
+  input::-ms-clear {
+    display: none;
+  }
+
   & > input,
   & > select,
   & > textarea {
@@ -59,6 +66,11 @@
     width: 100%;
     padding: 0 3.2rem;
     color: #000;
+    font-family: inherit;
+  }
+
+  & > textarea {
+    padding-top: 3.2rem;
   }
 
   input,
@@ -84,6 +96,14 @@
   }
 
   &.input--with-label {
+    &.input--textarea {
+      label {
+        top: 4rem;
+      }
+
+      transform: translateY(0);
+    }
+
     input:not(:placeholder-shown) {
       padding-top: 1.2rem
     }
@@ -119,6 +139,22 @@
     }
   }
 
+  &.input--search {
+    input {
+      padding-left: 6.4rem;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 3.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
   &.input--with-icon > .input__icon {
     height: 90%;
     display: grid;
@@ -142,17 +178,18 @@
       text-transform: capitalize;
     }
 
-    & * {
+    & *:not(input) {
       user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
     }
 
-    input {
+    & > input {
       pointer-events: none;
       color: black;
       opacity: 1;
+      padding-right: 0.8rem;
     }
 
     select {
@@ -177,10 +214,13 @@
       pointer-events: auto;
       visibility: visible;
       transition: 100ms ease-out;
-      // background: #00000011;
+      background: rgba(0,0,0,0.2);;
+
+      @media (min-width: 725px) {
+        background: none;
+      }
 
       &.is-hidden {
-        // display: none;
         pointer-events: none;
         visibility: hidden;
       }
@@ -202,18 +242,45 @@
       transform: rotateX(0);
       transform-origin: 0 0;
       opacity: 1;
-      transition: transform 100ms ease-out, opacity 60ms linear;
+      transition: transform 100ms ease-out, opacity 60ms linear, top 200ms ease;
       margin-bottom: 40rem;
+      max-width: 90vw;
 
       &.scrollable {
-        max-height: 51.2rem;
-        overflow-y: scroll;
-        overflow-x: hidden;
+        max-height: 49.2rem;
+        //overflow-y: scroll;
+        //overflow-x: hidden;
+        .list {
+          max-height: 43.2rem;
+          overflow-y: scroll;
+          overflow-x: hidden;
+        }
       }
 
       &.is-hidden {
         transform: rotateX(90deg);
         opacity: 0;
+      }
+
+      input.search-options {
+        @extend .option;
+        display: block;
+        pointer-events: auto;
+        width: 100%;
+        border: 1px solid $grey-light;
+        background: white;
+        position: sticky;
+        top: 0;
+        margin-bottom: 1.6rem;
+
+        &::placeholder {
+          opacity: 0.4;
+        }
+
+        &:hover, &:focus, &:focus-visible {
+          background: white !important;
+          //outline: none;
+        }
       }
 
       option, .option {
@@ -232,6 +299,19 @@
           background: #f2f2f2;
           outline: none;
         }
+      }
+    }
+  }
+
+  &.has--search {
+    .options-list.scrollable {
+      max-height: 43rem;
+      //max-height: 48rem;
+      .list {
+        //  max-height: 38.4rem;
+        max-height: 33.6rem;
+        overflow-y: scroll;
+        overflow-x: hidden;
       }
     }
   }
@@ -262,6 +342,7 @@
       color: $black;
     }
   }
+
   .date-container {
     position: absolute;
     top: 7.2rem;
@@ -277,11 +358,19 @@
       opacity: 0;
     }
   }
+&--copy.input--with-label {
+  input:not(:placeholder-shown) {
+    padding-top: 0;
+  }
 }
+}
+
+
 .error-message {
   display: block;
-  margin: 1.6rem 0 0;
+  margin: 0.8rem 0 0;
   color: $error;
-  font-size: 1.6rem;
-  line-height: 1.9rem;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.2rem;
 }

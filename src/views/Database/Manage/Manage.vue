@@ -19,25 +19,26 @@
               variant="dropdown"
               v-model="category"
               :optionsDisplay="categories"
+              searchInside="categories"
             ></k-input>
           </div>
           <div class="filter">
             <k-input
               type="select"
               label="Filter by Indicator"
-              variant="dropdown"
               v-model="indicator"
               :optionsDisplay="indicators"
+              searchInside='indicators'
+              @search='(val) => fetchIndicators({ name: val })'
             ></k-input>
           </div>
           <div class="filter">
             <k-input
               type="select"
               label="Filter by Country"
-              variant="dropdown"
               v-model="country"
               :optionsDisplay="countries"
-              filterInside
+              searchInside="countries"
             ></k-input>
           </div>
           <div class="button">

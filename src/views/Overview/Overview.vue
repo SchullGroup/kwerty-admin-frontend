@@ -141,8 +141,8 @@
               </k-input>
             </div>
           </header>
-          <div class="active-users__content">
-            <line-wrapper :labels="lineLabels" :datasets="lineDatasets"></line-wrapper>
+          <div class="active-users__content" v-if="lineDatasets.length">
+            <line-wrapper :labels="[]" :datasets="lineData.datasets"></line-wrapper>
           </div>
         </section>
       </section>

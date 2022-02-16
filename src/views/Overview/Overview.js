@@ -6,6 +6,7 @@ import LineWrapper from '../../components/Charts/LineWrapper.vue';
 import OverviewTableRow from './TableRow.vue';
 import ProfileMixin from '@/mixins/Profile';
 import avatar from '@/assets/avatar.svg';
+import { getActiveUsers } from '@/api/dashboard';
 
 export default {
   name: 'DashboardHome',
@@ -44,24 +45,25 @@ export default {
       'M18.896.44a2.91 2.91 0 0 1 2.91 2.909v1.94h-1.94v11.637a2.91 2.91 0 0 1-2.91 2.91H3.38a2.91 2.91 0 0 1-2.91-2.91v-1.94h15.518v1.94a.97.97 0 0 0 .856.963l.113.007a.97.97 0 0 0 .963-.857l.007-.113V2.379H5.32a.97.97 0 0 0-.963.856l-.007.114v9.698h-1.94V3.349A2.91 2.91 0 0 1 5.32.439h13.577Z', // eslint-disable-line
     doughnutLabels: ['Agriculture', 'Finance', 'Population', 'Technology', 'Health'],
     doughnutDatasets: [],
-    lineLabels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    lineLabels: [],
     lineDatasets: [
-      {
-        data: [6000, 7500, 19000, 15000, 20500, 18000, 20000],
-        borderColor: 'rgb(90,11,117)',
-        pointBackgroundColor: 'rgba(90,11,117,1)',
-        pointHoverBackgroundColor: 'rgba(90,11,117,1)',
-        pointBorderColor: 'rgba(90,11,117,0)',
-        pointRadius: 1,
-        pointHitRadius: 64,
-        borderWidth: 2,
-      },
+      // {
+      //   data: [6000, 7500, 19000, 15000, 20500, 18000, 20000],
+      //   borderColor: 'rgb(90,11,117)',
+      //   pointBackgroundColor: 'rgba(90,11,117,1)',
+      //   pointHoverBackgroundColor: 'rgba(90,11,117,1)',
+      //   pointBorderColor: 'rgba(90,11,117,0)',
+      //   pointRadius: 1,
+      //   pointHitRadius: 64,
+      //   borderWidth: 2,
+      // },
     ],
   }),
   async mounted() {
     await this.getProfile();
     await this.getRecentActivities();
     await this.getDashBoardAnalytics();
+    await this.fetchActiveUsers();
   },
   watch: {
     overviewDuration() {
@@ -71,6 +73,9 @@ export default {
       if (!val) {
         setTimeout(this.setShow, 0);
       }
+    },
+    activeUserPeriod() {
+      this.fetchActiveUsers();
     },
   },
   computed: {
@@ -94,6 +99,26 @@ export default {
         ],
       };
     },
+    lineData() {
+      const { lineDatasets } = this;
+      const lineData = lineDatasets.map((item) => ({ x: item.dateTrunc, y: item.count }));
+      lineData.sort((a, b) => new Date(a.x) - new Date(b.x));
+      return {
+        datasets: [
+          {
+            data: lineData,
+            borderColor: 'rgb(90,11,117)',
+            pointBackgroundColor: 'rgba(90,11,117,1)',
+            pointHoverBackgroundColor: 'rgba(90,11,117,1)',
+            pointBorderColor: 'rgba(90,11,117,0)',
+            pointRadius: 1,
+            pointHitRadius: 64,
+            borderWidth: 2,
+            tension: 0.3,
+          },
+        ],
+      };
+    },
   },
   methods: {
     ...mapActions({
@@ -102,6 +127,18 @@ export default {
     }),
     setShow() {
       this.showChart = true;
+    },
+    async fetchActiveUsers() {
+      const { activeUserPeriod } = this;
+      try {
+        const response = await getActiveUsers({ duration: activeUserPeriod });
+        console.log(response.data.message);
+        if (response.status === 200) {
+          this.lineDatasets = response.data.data;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
     async getRecentActivities() {
       const { id } = this.Profile;
