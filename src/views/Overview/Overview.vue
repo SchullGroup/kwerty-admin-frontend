@@ -141,8 +141,12 @@
               </k-input>
             </div>
           </header>
-          <div class="active-users__content" v-if="lineDatasets.length">
-            <line-wrapper :labels="[]" :datasets="lineData.datasets"></line-wrapper>
+          <div class="active-users__content" v-if="lineDatasets.length && showLineChart === true">
+            <line-wrapper
+              :labels="[]"
+              :datasets="lineData.datasets"
+              :isHours="activeUserPeriod === '24 hours'? true : false"
+            ></line-wrapper>
           </div>
         </section>
       </section>

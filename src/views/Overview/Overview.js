@@ -22,6 +22,7 @@ export default {
     isLoading: false,
     isLoadingChart: true,
     activities: null,
+    isHours: false,
     totalSearches: '',
     totalClicked: '',
     chartDataset: [],
@@ -29,6 +30,7 @@ export default {
     topUser: {},
     accounts: '',
     showChart: true,
+    showLineChart: true,
     dummyImage: avatar,
     overviewDuration: '7 days',
     activeUserPeriod: '7 days',
@@ -46,18 +48,7 @@ export default {
     doughnutLabels: ['Agriculture', 'Finance', 'Population', 'Technology', 'Health'],
     doughnutDatasets: [],
     lineLabels: [],
-    lineDatasets: [
-      // {
-      //   data: [6000, 7500, 19000, 15000, 20500, 18000, 20000],
-      //   borderColor: 'rgb(90,11,117)',
-      //   pointBackgroundColor: 'rgba(90,11,117,1)',
-      //   pointHoverBackgroundColor: 'rgba(90,11,117,1)',
-      //   pointBorderColor: 'rgba(90,11,117,0)',
-      //   pointRadius: 1,
-      //   pointHitRadius: 64,
-      //   borderWidth: 2,
-      // },
-    ],
+    lineDatasets: [],
   }),
   async mounted() {
     await this.getProfile();
@@ -74,9 +65,19 @@ export default {
         setTimeout(this.setShow, 0);
       }
     },
+    showLineChart(val) {
+      if (!val) {
+        setTimeout(this.setLineShow, 0);
+      }
+    },
     activeUserPeriod() {
       this.fetchActiveUsers();
     },
+    // isHours(val) {
+    //   if (val === true) {
+    //     this.showLineChart = false;
+    //   }
+    // },
   },
   computed: {
     ...mapGetters({
@@ -128,6 +129,9 @@ export default {
     setShow() {
       this.showChart = true;
     },
+    setLineShow() {
+      this.showLineChart = true;
+    },
     async fetchActiveUsers() {
       const { activeUserPeriod } = this;
       try {
@@ -135,6 +139,7 @@ export default {
         console.log(response.data.message);
         if (response.status === 200) {
           this.lineDatasets = response.data.data;
+          this.showLineChart = false;
         }
       } catch (error) {
         console.log(error);
