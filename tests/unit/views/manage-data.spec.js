@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import ManageData from '@/views/Database/Manage/Manage.vue';
+import ManageSingleData from '@/views/Database/Manage/SingleData.vue';
 import { localVue, successStore as store } from '../../utils/local-vue';
 
 const $route = {
@@ -7,6 +8,31 @@ const $route = {
     active: 'published',
   },
 };
+const data = {
+  indicatorName: 'some name',
+  category: 'economy',
+  country: 'poland',
+};
+
+// eslint-disable-next-line no-unused-vars
+const mockData = [
+  {
+    point: 'year',
+    value: '2000',
+  },
+  {
+    point: 'year',
+    value: '2000',
+  },
+  {
+    point: 'year',
+    value: '2000',
+  },
+  {
+    point: 'year',
+    value: '2000',
+  },
+];
 
 describe('ManageData View', () => {
   it('should mount', async () => {
@@ -45,13 +71,22 @@ describe('ManageData View', () => {
     });
     const mockThis = {
       getData: jest.fn(),
+      fetchSingleData: jest.fn(),
     };
     ManageData.watch.search.call(mockThis);
     ManageData.watch.country.call(mockThis);
     ManageData.watch.category.call(mockThis);
+    ManageData.watch.indicator.call(mockThis);
     expect(wrapper.vm.getData());
     expect(wrapper.vm.fetchSingleData({ pageId: '234tgbvbh7' }));
+    expect(wrapper.vm.fetchSingleData({ pageId: '234tgbvbh7' }));
     expect(wrapper.vm.changePage());
+    expect(wrapper.vm.actOnData({ action: 'act' }));
+    expect(wrapper.vm.actOnData({ action: 'act' }));
+    expect(wrapper.vm.actOnData({ action: 'act' }));
+    expect(wrapper.vm.updateSingleData());
+    expect(wrapper.vm.updateSingleData());
+    // expect(wrapper.vm.updateSingleData());
   });
 
   it('should close modal', () => {
@@ -86,14 +121,41 @@ describe('ManageData View', () => {
         published: 'Publish',
       },
       selected: 1,
+      paginationData: {
+        currentPage: 'value',
+      },
     };
     expect(ManageData.computed.requiredMessage.call(mockThis)).toMatch('Publish 1 data set');
     mockThis.selected = 2;
     expect(ManageData.computed.requiredMessage.call(mockThis)).toMatch('Publish 2 data sets');
+    // expect(ManageData.computed.set.call(mockThis)).toBeTruthy();
   });
 
   it('should do nothing if active query is invalid', () => {
-    $route.query.active = 'something';
-    expect(ManageData.mounted.call({ $route, getData: jest.fn() })).toBeFalsy();
+    const mockThis = {
+      $route: {
+        query: {
+          active: 'something',
+        },
+      },
+      getData: jest.fn(),
+    };
+    // $route.query.active = 'something';
+    expect(ManageData.mounted.call(mockThis));
+  });
+});
+
+describe('single data', () => {
+  it('mounts the component', () => {
+    const wrapper = shallowMount(ManageSingleData, {
+      propsData: {
+        data,
+      },
+    });
+    expect(wrapper.vm.$options.name).toMatch('SingleData');
+    // expect(wrapper.vm.addNewField(mockData));
+    // expect(wrapper.vm.removeItem(mockData));
+    // expect(wrapper.vm.editData(mockData));
+    // ManageSingleData.watch.singleData.call(mockThis);
   });
 });

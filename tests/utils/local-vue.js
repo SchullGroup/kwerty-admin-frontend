@@ -207,8 +207,19 @@ const successStore = new Vuex.Store({
         // eslint-disable-next-line no-undef
         fetchDataById: jest
           .fn()
-          .mockResolvedValueOnce({ message: 'database fetched successfully' })
-          .mockRejectedValueOnce({ message: { error: 'error occured' } }),
+          .mockRejectedValueOnce({ message: { error: 'error occured' } })
+          .mockResolvedValueOnce({ message: { error: '' } })
+          .mockResolvedValueOnce({ message: 'database fetched successfully' }),
+        performDataAction: jest
+          .fn()
+          .mockRejectedValueOnce({ message: { error: 'error occured' } })
+          .mockResolvedValueOnce({ message: { error: '' } })
+          .mockResolvedValueOnce({ message: 'database action performed' }),
+        updateData: jest
+          .fn()
+          .mockResolvedValueOnce({ message: { error: '' } })
+          .mockResolvedValueOnce({ message: { error: 'error occured' } })
+          .mockResolvedValueOnce({ message: 'dataset updated successfully' }),
       },
       getters: {
         getDatabase: jest.fn().mockResolvedValue([
@@ -248,14 +259,29 @@ const successStore = new Vuex.Store({
       actions: {
         getRecentAdminActivities: jest
           .fn()
-          .mockResolvedValueOnce({ error: '' })
-          .mockResolvedValueOnce({ message: 'fectched succesfully' }),
+          .mockRejectedValueOnce({ message: 'error occured' })
+          .mockResolvedValueOnce({ message: 'fectched succesfully' })
+          .mockResolvedValueOnce({ error: '' }),
         getAnalytics: jest
+          .fn()
+          .mockResolvedValueOnce({ message: '' })
+          .mockResolvedValueOnce({ message: 'fectched succesfully' })
+          .mockResolvedValueOnce({ error: 'error occured' }),
+        getActiveUsers: jest
           .fn()
           .mockResolvedValueOnce({ error: '' })
           .mockResolvedValueOnce({ message: 'fectched succesfully' }),
       },
-      getters: {},
+      getters: {
+        getRecentActivities: jest.fn().mockResolvedValueOnce([
+          {
+            activity: 'logged in',
+            name: 'test name',
+            createdAt: 'someDate',
+            status: 'success',
+          },
+        ]),
+      },
     },
   },
 });
