@@ -12,6 +12,7 @@
           label="Filter by Category"
           v-model="category"
           :optionsDisplay="optionsCategories"
+          searchInside='categories'
         ></k-input>
         <k-input
           type="select"

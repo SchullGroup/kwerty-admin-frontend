@@ -45,7 +45,7 @@ const { getActivities, exportActivities } = actions;
 const commit = jest.fn();
 const dispatch = jest.fn();
 
-const body = { type: 'admin' };
+// const body = { type: 'admin' };
 
 describe('activity actions', () => {
   it('Fetched all admin activities', async () => {

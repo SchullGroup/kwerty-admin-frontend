@@ -199,7 +199,6 @@ export default {
             tags,
           },
         });
-        console.log(response);
         if (!response.error) {
           this.$toast.show({ message: response.data.message });
         } else {
@@ -209,14 +208,13 @@ export default {
         this.fetchSingleData({ pageId: id });
         this.getData({});
       } catch (error) {
-        console.log(error);
+        this.$toast.show({ message: error });
       }
     },
     async fetchSingleData({ pageId }) {
       this.isFetching = true;
       try {
         const singleData = await this.fetchDataById(pageId);
-        // console.log(singleData);
         if (!singleData.error) {
           this.singleViewData = singleData;
           this.dataTags = singleData.tags ? singleData.tags.split(',') : [];
