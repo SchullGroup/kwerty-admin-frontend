@@ -78,10 +78,7 @@
     "name": "Bhutan"
   },
   {
-    "name": "Bolivia (Plurinational State of)"
-  },
-  {
-    "name": "Bonaire, Sint Eustatius and Saba"
+    "name": "Bolivia"
   },
   {
     "name": "Bosnia and Herzegovina"
@@ -99,16 +96,10 @@
     "name": "British Indian Ocean Territory"
   },
   {
-    "name": "United States Minor Outlying Islands"
+    "name": "British Virgin Islands"
   },
   {
-    "name": "Virgin Islands (British)"
-  },
-  {
-    "name": "Virgin Islands (U.S.)"
-  },
-  {
-    "name": "Brunei Darussalam"
+    "name": "Brunei"
   },
   {
     "name": "Bulgaria"
@@ -129,7 +120,10 @@
     "name": "Canada"
   },
   {
-    "name": "Cabo Verde"
+    "name": "Cape Verde"
+  },
+  {
+    "name": "Caribbean Netherlands"
   },
   {
     "name": "Cayman Islands"
@@ -159,12 +153,6 @@
     "name": "Comoros"
   },
   {
-    "name": "Congo"
-  },
-  {
-    "name": "Congo (Democratic Republic of the)"
-  },
-  {
     "name": "Cook Islands"
   },
   {
@@ -183,7 +171,7 @@
     "name": "Cyprus"
   },
   {
-    "name": "Czech Republic"
+    "name": "Czechia"
   },
   {
     "name": "Denmark"
@@ -196,6 +184,9 @@
   },
   {
     "name": "Dominican Republic"
+  },
+  {
+    "name": "DR Congo"
   },
   {
     "name": "Ecuador"
@@ -216,10 +207,13 @@
     "name": "Estonia"
   },
   {
+    "name": "Eswatini"
+  },
+  {
     "name": "Ethiopia"
   },
   {
-    "name": "Falkland Islands (Malvinas)"
+    "name": "Falkland Islands"
   },
   {
     "name": "Faroe Islands"
@@ -240,7 +234,7 @@
     "name": "French Polynesia"
   },
   {
-    "name": "French Southern Territories"
+    "name": "French Southern and Antarctic Lands"
   },
   {
     "name": "Gabon"
@@ -297,16 +291,13 @@
     "name": "Heard Island and McDonald Islands"
   },
   {
-    "name": "Vatican City"
-  },
-  {
     "name": "Honduras"
   },
   {
-    "name": "Hungary"
+    "name": "Hong Kong"
   },
   {
-    "name": "Hong Kong"
+    "name": "Hungary"
   },
   {
     "name": "Iceland"
@@ -318,10 +309,7 @@
     "name": "Indonesia"
   },
   {
-    "name": "Ivory Coast"
-  },
-  {
-    "name": "Iran (Islamic Republic of)"
+    "name": "Iran"
   },
   {
     "name": "Iraq"
@@ -337,6 +325,9 @@
   },
   {
     "name": "Italy"
+  },
+  {
+    "name": "Ivory Coast"
   },
   {
     "name": "Jamaica"
@@ -360,13 +351,16 @@
     "name": "Kiribati"
   },
   {
+    "name": "Kosovo"
+  },
+  {
     "name": "Kuwait"
   },
   {
     "name": "Kyrgyzstan"
   },
   {
-    "name": "Lao People's Democratic Republic"
+    "name": "Laos"
   },
   {
     "name": "Latvia"
@@ -393,10 +387,7 @@
     "name": "Luxembourg"
   },
   {
-    "name": "Macao"
-  },
-  {
-    "name": "North Macedonia"
+    "name": "Macau"
   },
   {
     "name": "Madagascar"
@@ -435,10 +426,10 @@
     "name": "Mexico"
   },
   {
-    "name": "Micronesia (Federated States of)"
+    "name": "Micronesia"
   },
   {
-    "name": "Moldova (Republic of)"
+    "name": "Moldova"
   },
   {
     "name": "Monaco"
@@ -495,7 +486,10 @@
     "name": "Norfolk Island"
   },
   {
-    "name": "Korea (Democratic People's Republic of)"
+    "name": "North Korea"
+  },
+  {
+    "name": "North Macedonia"
   },
   {
     "name": "Northern Mariana Islands"
@@ -513,7 +507,7 @@
     "name": "Palau"
   },
   {
-    "name": "Palestine, State of"
+    "name": "Palestine"
   },
   {
     "name": "Panama"
@@ -531,7 +525,7 @@
     "name": "Philippines"
   },
   {
-    "name": "Pitcairn"
+    "name": "Pitcairn Islands"
   },
   {
     "name": "Poland"
@@ -546,19 +540,19 @@
     "name": "Qatar"
   },
   {
-    "name": "Republic of Kosovo"
-  },
-  {
-    "name": "Réunion"
+    "name": "Republic of the Congo"
   },
   {
     "name": "Romania"
   },
   {
-    "name": "Russian Federation"
+    "name": "Russia"
   },
   {
     "name": "Rwanda"
+  },
+  {
+    "name": "Réunion"
   },
   {
     "name": "Saint Barthélemy"
@@ -573,7 +567,7 @@
     "name": "Saint Lucia"
   },
   {
-    "name": "Saint Martin (French part)"
+    "name": "Saint Martin"
   },
   {
     "name": "Saint Pierre and Miquelon"
@@ -586,9 +580,6 @@
   },
   {
     "name": "San Marino"
-  },
-  {
-    "name": "Sao Tome and Principe"
   },
   {
     "name": "Saudi Arabia"
@@ -609,7 +600,7 @@
     "name": "Singapore"
   },
   {
-    "name": "Sint Maarten (Dutch part)"
+    "name": "Sint Maarten"
   },
   {
     "name": "Slovakia"
@@ -627,10 +618,13 @@
     "name": "South Africa"
   },
   {
-    "name": "South Georgia and the South Sandwich Islands"
+    "name": "South Georgia"
   },
   {
-    "name": "Korea (Republic of)"
+    "name": "South Korea"
+  },
+  {
+    "name": "South Sudan"
   },
   {
     "name": "Spain"
@@ -642,16 +636,10 @@
     "name": "Sudan"
   },
   {
-    "name": "South Sudan"
-  },
-  {
     "name": "Suriname"
   },
   {
     "name": "Svalbard and Jan Mayen"
-  },
-  {
-    "name": "Swaziland"
   },
   {
     "name": "Sweden"
@@ -660,16 +648,19 @@
     "name": "Switzerland"
   },
   {
-    "name": "Syrian Arab Republic"
+    "name": "Syria"
   },
   {
-    "name": "Taiwan Province of China"
+    "name": "São Tomé and Príncipe"
+  },
+  {
+    "name": "Taiwan"
   },
   {
     "name": "Tajikistan"
   },
   {
-    "name": "Tanzania, United Republic of"
+    "name": "Tanzania"
   },
   {
     "name": "Thailand"
@@ -714,10 +705,16 @@
     "name": "United Arab Emirates"
   },
   {
-    "name": "United Kingdom of Great Britain and Northern Ireland"
+    "name": "United Kingdom"
   },
   {
-    "name": "United States of America"
+    "name": "United States"
+  },
+  {
+    "name": "United States Minor Outlying Islands"
+  },
+  {
+    "name": "United States Virgin Islands"
   },
   {
     "name": "Uruguay"
@@ -729,7 +726,10 @@
     "name": "Vanuatu"
   },
   {
-    "name": "Venezuela (Bolivarian Republic of)"
+    "name": "Vatican City"
+  },
+  {
+    "name": "Venezuela"
   },
   {
     "name": "Vietnam"
