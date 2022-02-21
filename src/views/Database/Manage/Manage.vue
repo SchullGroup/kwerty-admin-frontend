@@ -28,8 +28,8 @@
               label="Filter by Indicator"
               v-model="indicator"
               :optionsDisplay="indicators"
-              searchInside='indicators'
-              @search='(val) => fetchIndicators({ name: val })'
+              searchInside="indicators"
+              @search="(val) => fetchIndicators({ name: val })"
             ></k-input>
           </div>
           <div class="filter">
@@ -99,20 +99,28 @@
 
         <!-- BUTTONS WHEN NON DELETED DATA IS SELECTED -->
         <div class="header__controls">
-          <k-button v-if="!isEditing" variant="primary" @click="isEditing = true">
-            Edit
-          </k-button>
+          <k-button v-if="!isEditing" variant="primary" @click="isEditing = true"> Edit </k-button>
           <k-button v-if="isEditing === true" variant="primary" @click="updateSingleData">
             Save & Continue
           </k-button>
-          <k-button v-if="!isEditing" variant="secondary" @click="isEditing = false">
+          <k-button
+            v-if="!isEditing"
+            variant="secondary"
+            @click="
+              selectedRows.push(singleViewData.id);
+              actOnData('publish');recordClicked();
+            "
+          >
             Publish
           </k-button>
           <k-button
             v-if="!isEditing"
             variant="secondary"
             negative="negative"
-            @click="confirmAction('delete')"
+            @click="
+              selectedRows.push(singleViewData.id);
+              confirmAction('delete');
+            "
           >
             Delete
           </k-button>
@@ -156,7 +164,7 @@
         :data="singleViewData"
         :nameOfIndicator="currentNameOfIndicator"
         :dataTags="dataTags"
-        @syncSingleData="(val) => singleViewData = {...val}"
+        @syncSingleData="(val) => (singleViewData = { ...val })"
       />
       <!-- DATA TABLE     -->
       <section class="content__body" v-else>
@@ -276,7 +284,7 @@
             >
             <k-button
               variant="primary"
-              @click="actOnData('restore_delete')"
+              @click="actOnData('unpublish')"
               :disabled="!isSame"
               v-if="activeModal === 'restore'"
               :loading="isActing"

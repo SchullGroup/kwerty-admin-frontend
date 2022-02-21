@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import Overview from '@/views/Overview/Overview.vue';
-import OverviewTable from '@/views/Overview/TableRow.vue';
+// import OverviewTable from '@/views/Overview/TableRow.vue';
 import { localVue, successStore as store } from '../../utils/local-vue';
 
 // const $route = {
@@ -54,10 +54,10 @@ const mockThis = {
     formatDate: jest.fn(),
   },
 };
-const activity = {
-  action: 'som action',
-};
-const fields = ['CreatedAt', 'Title', 'Status'];
+// const activity = {
+//   action: 'som action',
+// };
+// const fields = ['CreatedAt', 'Title', 'Status'];
 
 describe('Admin dashboard View', () => {
   it('should mount', async () => {
@@ -87,15 +87,15 @@ describe('Admin dashboard View', () => {
   });
 });
 
-describe('table row component', () => {
-  it('mounts the component', () => {
-    const wrapper = shallowMount(OverviewTable, {
-      propsData: {
-        activity,
-        fields,
-      },
-    });
-    expect(wrapper.vm.$options.name).toMatch('OverviewTableRow');
-    OverviewTable.filters.formatDate.call(mockThis);
-  });
-});
+// describe('table row component', () => {
+//   it('mounts the component', () => {
+//     const wrapper = shallowMount(OverviewTable, {
+//       propsData: {
+//         activity,
+//         fields,
+//       },
+//     });
+//     expect(wrapper.vm.$options.name).toMatch('OverviewTableRow');
+//     OverviewTable.filters.formatDate.call(mockThis);
+//   });
+// });

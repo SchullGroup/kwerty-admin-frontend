@@ -156,6 +156,26 @@ const successStore = new Vuex.Store({
       namespaced: true,
     },
     indicators: {
+      actions: {
+        addIndicator: jest
+          .fn()
+          .mockResolvedValueOnce({ message: { error: '' } })
+          .mockResolvedValueOnce({ message: 'indicator successfully added' })
+          .mockRejectedValueOnce({ message: { error: 'error occurred' } }),
+        updateIndicator: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'indicator successfully updated' })
+          .mockResolvedValueOnce({ message: { error: 'error occurred' } })
+          .mockRejectedValueOnce({ message: { error: 'error occurred' } }),
+        getIndicators: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'indicator successfully fetched' })
+          .mockResolvedValueOnce({ message: 'error occurred' }),
+        deleteIndicator: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'indicator successfully deleted' })
+          .mockRejectedValueOnce({ message: 'error occurred' }),
+      },
       getters: {
         getIndicators: jest.fn().mockResolvedValue([
           {
@@ -171,26 +191,6 @@ const successStore = new Vuex.Store({
             lastModified: 'some-date',
           },
         ]),
-      },
-      actions: {
-        addIndicator: jest
-          .fn()
-          .mockResolvedValueOnce({ message: 'indicator successfully added' })
-          .mockResolvedValueOnce({ message: { error: 'error occurred' } })
-          .mockRejectedValueOnce({ message: { error: 'error occurred' } }),
-        updateIndicator: jest
-          .fn()
-          .mockResolvedValueOnce({ message: 'indicator successfully updated' })
-          .mockResolvedValueOnce({ message: { error: 'error occurred' } })
-          .mockRejectedValueOnce({ message: { error: 'error occurred' } }),
-        getIndicators: jest
-          .fn()
-          .mockResolvedValueOnce({ message: 'indicator successfully fetched' })
-          .mockResolvedValueOnce({ message: 'error occurred' }),
-        deleteIndicator: jest
-          .fn()
-          .mockResolvedValueOnce({ message: 'indicator successfully deleted' })
-          .mockRejectedValueOnce({ message: 'error occurred' }),
       },
       mutations: {
         SET_INDICATORS: jest.fn(),

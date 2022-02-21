@@ -68,6 +68,7 @@ export default {
     currentNameOfIndicator: '',
     isActing: false,
     dataTags: [],
+    recorded: false,
   }),
   async mounted() {
     const { active } = this.$route.query;

@@ -56,7 +56,7 @@ export default {
       Trade: 'Trade',
     },
     optionsFrequency: {
-      '': 'All',
+      '': 'All Frequency',
       quarterly: 'Quarterly',
       monthly: 'Monthly',
       yearly: 'Yearly',
@@ -139,7 +139,7 @@ export default {
       this.isLoading = true;
       try {
         const fetchedIndicators = await this.getIndicators({
-          page, options: search || frequency || category,
+          page, search, frequency, category,
         });
         if (!fetchedIndicators.error) {
           this.pagination.page = Number(fetchedIndicators.currentPage);
@@ -205,6 +205,7 @@ export default {
     action(id) {
       const currentIndicator = this.indicators.find((indicator) => indicator.id === id);
       this.indicator = currentIndicator;
+      this.tags = this.indicator.tags ? this.indicator.tags.split(',') : [];
       this.editIndicatorModal = true;
     },
     resetForm() {
