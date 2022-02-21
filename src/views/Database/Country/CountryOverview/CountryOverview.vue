@@ -22,14 +22,14 @@
       <div class="chart__content item">
         <p class="title">Total Visits (all time)</p>
         <div class="chart-total-summary">
-          <p class="total">400.3K</p>
+          <p class="total">{{ totalVisit | formatSearchVal }}</p>
           <div class="total-activity-container">
             <p class="total-activity">
-              32.12K
+              {{ totalRequestSent | formatSearchVal }}
               <span>requests sent</span>
             </p>
             <p class="total-activity">
-              234.01K
+              {{ totalChartClicked | formatSearchVal }}
               <span>chart clicks</span>
             </p>
           </div>
@@ -37,16 +37,26 @@
         <p class="description">Total Visits Per Country</p>
         <div class="chart__content-wrapper">
           <div class="chart__item">
-            <doughnut-wrapper
-              :labels="doughnutLabels"
-              :datasets="doughnutDatasets"
-            ></doughnut-wrapper>
+            <div v-if="isLoadingChart" class="outer-pie round">
+              <div class="radar"></div>
+              <div class="inner-pie round"></div>
+            </div>
+            <div class="empty-state" v-else-if="totalVisitsPerCountry.length === 0">
+              <p>There has been no visit per country in the last {{ duration }}</p>
+            </div>
+            <div v-else>
+              <doughnut-wrapper
+                v-if="totalVisitsPerCountry.length && showChart === true && !isLoadingChart"
+                :labels="chartData.labels"
+                :datasets="chartData.datasets"
+              ></doughnut-wrapper>
+            </div>
           </div>
           <div class="chart__labels">
-            <div class="label" v-for="(label, i) in doughnutLabels" :key="label">
+            <div class="label" v-for="(label, i) in chartData.labels" :key="label">
               <div
                 class="color"
-                :style="{ background: doughnutDatasets[0].backgroundColor[i] }"
+                :style="{ background: chartData.datasets[0].backgroundColor[i] }"
               ></div>
               <div class="value">{{ label }}</div>
             </div>
@@ -59,8 +69,21 @@
           <p>Country</p>
           <p>No of Searches</p>
         </div>
-        <ul class="countries-not-found--table">
-          <li>
+        <div v-if="isLoading === true" class="loading-state">
+          <ul>
+            <li v-for="(country, index) in countriesNotFound" :key="index">
+              <div>
+              </div>
+              <div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div v-else-if="countriesNotFound.length ===0 && isLoading" class="not-found-empty-state">
+          <p>There has been no search for non existing countries in the last {{ duration }}</p>
+        </div>
+        <ul v-else class="countries-not-found--table">
+          <li v-for="(country, index) in countriesNotFound" :key="index">
             <span class="country">
               <span class="arrow">
                 <svg
@@ -74,153 +97,9 @@
                   <path :d="path" />
                 </svg>
               </span>
-              South Africa</span
+              {{ country.name }}</span
             >
-            <span class="value">342</span>
-          </li>
-          <li>
-            <span class="country">
-              <span class="arrow">
-                <svg
-                  :class="[status === 'down' ? 'svgUp' : 'svgDown']"
-                  width="8"
-                  height="6"
-                  viewBox="0 0 8 6"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path :d="path" />
-                </svg>
-              </span>
-              South Africa</span
-            >
-            <span class="value">342</span>
-          </li>
-          <li>
-            <span class="country">
-              <span class="arrow">
-                <svg
-                  :class="[status === 'down' ? 'svgUp' : 'svgDown']"
-                  width="8"
-                  height="6"
-                  viewBox="0 0 8 6"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path :d="path" />
-                </svg>
-              </span>
-              South Africa</span
-            >
-            <span class="value">342</span>
-          </li>
-          <li>
-            <span class="country">
-              <span class="arrow">
-                <svg
-                  :class="[status === 'down' ? 'svgUp' : 'svgDown']"
-                  width="8"
-                  height="6"
-                  viewBox="0 0 8 6"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path :d="path" />
-                </svg>
-              </span>
-              South Africa</span
-            >
-            <span class="value">342</span>
-          </li>
-          <li>
-            <span class="country">
-              <span class="arrow">
-                <svg
-                  :class="[status === 'down' ? 'svgUp' : 'svgDown']"
-                  width="8"
-                  height="6"
-                  viewBox="0 0 8 6"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path :d="path" />
-                </svg>
-              </span>
-              South Africa</span
-            >
-            <span class="value">342</span>
-          </li>
-          <li>
-            <span class="country">
-              <span class="arrow">
-                <svg
-                  :class="[status === 'down' ? 'svgUp' : 'svgDown']"
-                  width="8"
-                  height="6"
-                  viewBox="0 0 8 6"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path :d="path" />
-                </svg>
-              </span>
-              South Africa</span
-            >
-            <span class="value">342</span>
-          </li>
-          <li>
-            <span class="country">
-              <span class="arrow">
-                <svg
-                  :class="[status === 'down' ? 'svgUp' : 'svgDown']"
-                  width="8"
-                  height="6"
-                  viewBox="0 0 8 6"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path :d="path" />
-                </svg>
-              </span>
-              South Africa</span
-            >
-            <span class="value">342</span>
-          </li>
-          <li>
-            <span class="country">
-              <span class="arrow">
-                <svg
-                  :class="[status === 'down' ? 'svgUp' : 'svgDown']"
-                  width="8"
-                  height="6"
-                  viewBox="0 0 8 6"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path :d="path" />
-                </svg>
-              </span>
-              South Africa</span
-            >
-            <span class="value">342</span>
-          </li>
-          <li>
-            <span class="country">
-              <span class="arrow">
-                <svg
-                  :class="[status === 'down' ? 'svgUp' : 'svgDown']"
-                  width="8"
-                  height="6"
-                  viewBox="0 0 8 6"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path :d="path" />
-                </svg>
-              </span>
-              South Africa</span
-            >
-            <span class="value">342</span>
+            <span class="value">{{ country.count }}</span>
           </li>
         </ul>
       </div>
@@ -234,23 +113,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-for="user in topUsers" :key="user.id">
               <td>
                 <div class="profile">
-                  <img src="@/assets/lady.jpg" alt="" />
+                  <img :src="user.imageUrl || avatar" alt="" />
                 </div>
-                Sam Toku
+                <span>
+                  {{ user.fullName }}
+                </span>
               </td>
-              <td>oolajumoke@kwerty.finance</td>
-            </tr>
-            <tr>
               <td>
-                <div class="profile">
-                  <img src="@/assets/lady.jpg" alt="" />
-                </div>
-                Sam Toku
+                <span>
+                  {{ user.email }}
+                </span>
               </td>
-              <td>oolajumoke@kwerty.finance</td>
             </tr>
           </tbody>
         </table>

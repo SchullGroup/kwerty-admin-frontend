@@ -1,7 +1,19 @@
 import { instance } from '../config';
 
-export function getIndicators({ page = 1, options = '' }) {
-  return instance.get(`/indicator?search=${options}&page=${page}&limit=20`);
+export function getIndicators({
+  page = 1, search, category, frequency,
+}) {
+  // const url = `/indicator?search=${search}&page=${page}&limit=20`;
+  const query = new URLSearchParams();
+  if (category) {
+    query.append('category', category);
+  }
+  if (frequency) {
+    query.append('frequency', frequency);
+  }
+  return instance.get(
+    `/indicator/?search=${search}&${query.toString()}&page=${page}&limit=20`,
+  );
 }
 
 export function addIndicator({ indicator }) {
@@ -16,6 +28,10 @@ export function updateIndicator({ id, indicator }) {
   return instance.put(`/indicator/${id}`, indicator);
 }
 
-export const getIndicatorsList = () => instance.get('/indicator');
+export function getIndicatorsList() {
+  return instance.get('/indicator');
+}
 
-export const searchIndicators = ({ name }) => instance.get(`/indicator?search=${name}`);
+export function searchIndicators({ name }) {
+  return instance.get(`/indicator?search=${name}`);
+}
