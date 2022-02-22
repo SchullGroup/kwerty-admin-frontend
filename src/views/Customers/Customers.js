@@ -1,4 +1,7 @@
 import { mapActions, mapGetters } from 'vuex';
+import formatISO from 'date-fns/formatISO';
+import { saveAs } from 'file-saver';
+
 import {
   KDashboardLayout,
   KButton,
@@ -27,7 +30,9 @@ export default {
     startDate: '',
     endDate: '',
     title: '',
+    fileType: 'csv',
     status: '',
+    page: 1,
     pagination: {
       page: 1,
       totalItems: 9,
@@ -40,7 +45,6 @@ export default {
       joined: 'Joined',
       userLastSeen: 'Last seen',
     },
-    fileType: 'csv',
     fileTypes: {
       csv: 'CSV',
       pdf: 'PDF',
@@ -63,14 +67,15 @@ export default {
     ...mapActions({
       getAllCustomers: 'customers/getAllCustomers',
       changeCustomerStatus: 'customers/changeCustomerStatus',
+      exportCustomers: 'customers/exportCustomers',
     }),
     async fetchAllCustomers() {
-      const { search } = this;
+      const { search, page } = this;
       this.isLoading = true;
       try {
-        const response = await this.getAllCustomers({ search });
+        const response = await this.getAllCustomers({ page, search });
         if (!response.error) {
-          this.pagination.page = response.currentPage;
+          this.pagination.page = Number(response.currentPage);
           this.pagination.totalItems = response.total;
           this.pagination.totalPages = response.totalPages;
         } else {
@@ -94,7 +99,37 @@ export default {
         this.$toast.show({ message: error });
       }
     },
-    downloadUsers() {},
+    async downloadCustomers() {
+      const {
+        startDate,
+        endDate,
+        fileType,
+        title,
+      } = this;
+      const startdate = formatISO(new Date(startDate));
+      const enddate = formatISO(new Date(endDate));
+      console.log(startdate);
+      console.log(enddate);
+      this.isLoading = true;
+      try {
+        const downloaded = await this.exportCustomers({
+          startDate: startdate,
+          endDate: enddate,
+          fileType,
+          title,
+        });
+        if (downloaded.error) {
+          throw Error(downloaded.error);
+        }
+        const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
+        saveAs(blob, `${title}.csv`);
+        this.$toast.show({ message: `Exported ${title}.csv` });
+        this.isLoading = false;
+        this.modalOpen = false;
+      } catch (error) {
+        this.$toast.show({ message: error });
+      }
+    },
     prevPage() {
       this.page -= 1;
     },

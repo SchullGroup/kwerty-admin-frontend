@@ -33,9 +33,9 @@
    </div>
    <!-- EXPORT MODAL -->
     <k-modal @close='modalOpen = false' :open='modalOpen'>
-      <k-card variant='in-modal' heading='Export User List'>
+      <k-card variant='in-modal' heading='Export Activity'>
         <form class='form__items'>
-          <k-input label='Title' name='title' v-model='title'></k-input>
+          <k-input label='Title' name='title' v-model=title></k-input>
           <k-input
             label='File Type'
             name='file-type'
@@ -49,7 +49,7 @@
           </div>
           <div class='modal-controls'>
             <k-button variant='link' @click='modalOpen = false'>Cancel</k-button>
-            <k-button variant='secondary' @click='downloadUsers'>Download File</k-button>
+            <k-button variant='secondary' @click='downloadCustomers'>Download File</k-button>
           </div>
         </form>
       </k-card>

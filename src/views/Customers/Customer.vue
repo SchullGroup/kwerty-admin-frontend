@@ -40,17 +40,44 @@
       >
       </k-table>
     </div>
+    <!-- EXPORT MODAL -->
+    <k-modal @close="modalOpen = false" :open="modalOpen">
+      <k-card variant="in-modal" heading="Export User List">
+        <form class="form__items">
+          <k-input label="Title" name="title" v-model="title"></k-input>
+          <k-input
+            label="File Type"
+            name="file-type"
+            type="select"
+            v-model="fileType"
+            :optionsDisplay="fileTypes"
+          ></k-input>
+          <div class="input-row">
+            <k-input label="Start Date" name="start-date" type="date" v-model="startDate"></k-input>
+            <k-input label="End Date" name="end-date" type="date" v-model="endDate"></k-input>
+          </div>
+          <div class="modal-controls">
+            <k-button variant="link" @click="modalOpen = false">Cancel</k-button>
+            <k-button variant="secondary" @click="downloadCsv">Download File</k-button>
+          </div>
+        </form>
+      </k-card>
+    </k-modal>
   </k-dashboard-layout>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
+import downloadCsv from '@/mixins/export';
 // eslint-disable-next-line vue/max-len
 import {
   KDashboardLayout,
-  KInput, KButton,
+  KInput,
+  KButton,
   KPagination,
   KTable,
+  KCard,
+  KModal,
 } from '@/components';
 
 export default {
@@ -61,11 +88,15 @@ export default {
     KInput,
     KPagination,
     KTable,
+    KCard,
+    KModal,
   },
+  mixins: [downloadCsv],
   data: () => ({
     isLoading: false,
     search: '',
     duration: 'All Time',
+    modalOpen: false,
     optionsDurations: {
       '': 'All Time',
       '24hours': 'Last 24 hours',
@@ -74,6 +105,10 @@ export default {
       '3months': 'Last 3 months',
       '6months': 'Last 6 months',
       '12months': 'Last year',
+    },
+    fileTypes: {
+      csv: 'CSV',
+      pdf: 'PDF',
     },
     name: '',
     customerData: [],
