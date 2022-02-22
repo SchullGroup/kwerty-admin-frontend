@@ -92,8 +92,10 @@ describe('ManageData View', () => {
     expect(ManageData.computed.requiredMessage.call(mockThis)).toMatch('Publish 2 data sets');
   });
 
-  it('should do nothing if active query is invalid', () => {
+  it('should default to all if active query is invalid', () => {
+    const mockThis = { $route, getData: jest.fn(), activeTab: 'published' };
     $route.query.active = 'something';
-    expect(ManageData.mounted.call({ $route, getData: jest.fn() })).toBeFalsy();
+    ManageData.mounted.call(mockThis);
+    expect(mockThis.activeTab).toMatch('all');
   });
 });

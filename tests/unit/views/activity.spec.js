@@ -1,6 +1,5 @@
 import Vuex from 'vuex';
 import { shallowMount } from '@vue/test-utils';
-import Vuex from 'vuex';
 import ActivityHome from '@/views/Activity/Activity';
 import TableRow from '@/views/Activity/TableRow.vue';
 import { localVue, successStore as store } from '../../utils/local-vue';
