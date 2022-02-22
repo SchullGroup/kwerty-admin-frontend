@@ -22,7 +22,7 @@
         <k-checkbox :name="data[field]" :value="data['id']" v-model="innerValue" />
       </span>
       <span class="image" v-if="(field === 'name' || field === 'fullName') && customers === true">
-        <img class="image-item" :src="data.imageUrl" alt="pic" />
+        <img class="image-item" :src="data.imageUrl || avatar" alt="image" />
       </span>
       <span class="flag" v-if="field === 'country'">
         <img :src="`/countries/${data[field].toLowerCase()}.svg`" alt="" />
@@ -50,6 +50,7 @@
 <script>
 import formatters from '@/utils/formatters';
 import KCheckbox from '../Checkbox/Checkbox';
+import avatar from '@/assets/avatar.svg';
 
 export default {
   name: 'TableRow',
@@ -58,6 +59,7 @@ export default {
     innerValue: [],
     rowId: null,
     text: 'Disable',
+    avatar,
   }),
   props: {
     data: {

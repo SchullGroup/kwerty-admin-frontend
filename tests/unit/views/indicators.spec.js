@@ -12,6 +12,7 @@ const mockThis = {
   modelDeleteText: 'some text',
   requiredMessage: 'some text',
   fetchIndicators: jest.fn(),
+  id: '25tccg9876e56',
   indicators: [
     {
       id: 'zx4656787tb43er8',
@@ -26,6 +27,26 @@ const mockThis = {
   ],
   editIndicatorModal: false,
   showModal: false,
+};
+
+// const indicator = {
+//   tags: 'money, finance',
+// };
+
+const mockIndicators = {
+  id: 'zx4656787tb43er8',
+  indicators: [
+    {
+      id: 'zx4656787tb43er8',
+      name: 'soem name',
+      tags: 'money, finance',
+    },
+    {
+      id: '2345tfxcvbjko765edc',
+      name: 'soem name',
+      tags: 'money, finance',
+    },
+  ],
 };
 
 let wrapper;
@@ -44,14 +65,15 @@ describe('Database indicators page', () => {
       val: 'val',
     });
     Indicators.watch.page.call(mockThis);
-    wrapper.setData({
-      indicator: {
-        tags: 'money, finance, health',
-      },
-    });
+    // wrapper.setData({
+    //   indicator: {
+    //     tags: 'money, finance, health',
+    //   },
+    // });
+    // Indicators.methods.action.call(mockIndicator);
+    expect(Indicators.methods.action.call(mockIndicators, 'zx4656787tb43er8'));
     expect(Indicators.computed.isSame.call(mockThis));
     expect(Indicators.computed.requiredMessage.call(mockThis));
-    Indicators.methods.action.call(mockThis);
     expect(wrapper.vm.$options.name).toMatch('Indicators');
   });
   it('expected to run methods', async () => {

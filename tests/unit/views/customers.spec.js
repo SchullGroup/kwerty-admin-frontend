@@ -9,6 +9,11 @@ const $route = {
   },
 };
 
+const mockThis = {
+  formatISO: jest.fn(),
+  saveAs: jest.fn(),
+};
+
 describe('Customer Component', () => {
   it('should mount the customers page', async () => {
     const wrapper = shallowMount(Customers, {
@@ -20,14 +25,20 @@ describe('Customer Component', () => {
     expect(wrapper.vm.nextPage());
     expect(wrapper.vm.firstPage());
     expect(wrapper.vm.lastPage());
-    expect(wrapper.vm.downloadUsers());
     expect(wrapper.vm.fetchAllCustomers());
     expect(wrapper.vm.fetchAllCustomers());
     expect(wrapper.vm.changeUserStatus());
     expect(wrapper.vm.changeUserStatus());
+    // expect(wrapper.vm.downloadCustomers());
+    // expect(wrapper.vm.downloadCustomers());
+    Customers.methods.downloadCustomers.call(new Date(mockThis));
+    Customers.methods.downloadCustomers.call(new Date(mockThis));
+    Customers.methods.downloadCustomers.call(new Date(mockThis));
   });
   it('should mount the single customer page', async () => {
     const wrapper = shallowMount(Customer, {
+      store,
+      localVue,
       mocks: {
         $route,
       },
@@ -37,5 +48,8 @@ describe('Customer Component', () => {
     expect(wrapper.vm.nextPage());
     expect(wrapper.vm.firstPage());
     expect(wrapper.vm.lastPage());
+    expect(wrapper.vm.getSingleUserActivities());
+    expect(wrapper.vm.getSingleUserActivities());
+    expect(wrapper.vm.downloadCsv());
   });
 });
