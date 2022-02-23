@@ -29,10 +29,6 @@ const mockThis = {
   showModal: false,
 };
 
-// const indicator = {
-//   tags: 'money, finance',
-// };
-
 const mockIndicators = {
   id: 'zx4656787tb43er8',
   indicators: [
@@ -49,28 +45,24 @@ const mockIndicators = {
   ],
 };
 
+const totalPages = 20;
+
 let wrapper;
 describe('Database indicators page', () => {
   beforeEach(async () => {
     wrapper = shallowMount(Indicators, {
       store,
       localVue,
+      propsData: {
+        totalPages,
+      },
     });
   });
   it('renders the indicators page', async () => {
     Indicators.watch.search.call(mockThis);
     Indicators.watch.frequency.call(mockThis);
     Indicators.watch.category.call(mockThis);
-    wrapper.setData({
-      val: 'val',
-    });
-    Indicators.watch.page.call(mockThis);
-    // wrapper.setData({
-    //   indicator: {
-    //     tags: 'money, finance, health',
-    //   },
-    // });
-    // Indicators.methods.action.call(mockIndicator);
+    Indicators.watch.page.call({ mockThis, val: '' });
     expect(Indicators.methods.action.call(mockIndicators, 'zx4656787tb43er8'));
     expect(Indicators.computed.isSame.call(mockThis));
     expect(Indicators.computed.requiredMessage.call(mockThis));

@@ -14,11 +14,11 @@ export function singleCustomerActivities(nameOrEmail) {
 
 export function exportCustomers(
   {
-    title, fileType, startDate, endDate,
+    title, fileType, startDate, endDate, id,
   },
 ) {
   return instance.get(
     // eslint-disable-next-line vue/max-len
-    `/customer/export?startDate=${startDate}&endDate=${endDate}&file_type=${fileType}&title=${title}`,
+    `/customer/export?startDate=${startDate}&endDate=${endDate}&file_type=${fileType}&title=${title}&id=${id}`,
   );
 }

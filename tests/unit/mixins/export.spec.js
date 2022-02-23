@@ -7,11 +7,16 @@ describe('export mixin', () => {
       endDate: '',
       fileType: '',
       title: '',
-      // saveAs: jest.fn(),
-      // formatISO: jest.fn(),
-      exportCustomers: jest.fn(),
+      modalOpen: false,
+      saveAs: jest.fn(),
+      formatISO: jest.fn(),
+      exportCustomers: jest
+        .fn()
+        .mockResolvedValueOnce({ message: 'customers exported' })
+        .mockRejectedValueOnce({ error: 'error occured' }),
     };
 
     DownloadMixin.methods.downloadCsv.call(mockThis);
+    DownloadMixin.methods.reset.call(mockThis);
   });
 });
