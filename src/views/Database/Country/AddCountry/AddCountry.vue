@@ -25,7 +25,7 @@
     <section class='country__body'>
       <div class='country--profile'>
         <div class='country--profile-image'>
-          <div class='select-country'>
+          <div class='select-country' v-if='!isEditView'>
             <k-input
               v-model='country'
               :optionsDisplay='countriesOptions'
@@ -52,7 +52,7 @@
               type='file'
               @change='uploadCountryImage($event)'
             />
-            {{ url === '' ? 'Add Photo' : 'Change Photo' }}
+            {{ !isEditView ? 'Add Photo' : 'Change Photo' }}
           </k-button>
         </div>
         <div class='country--profile-content'>
