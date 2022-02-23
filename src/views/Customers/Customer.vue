@@ -57,7 +57,7 @@
             <k-input label="End Date" name="end-date" type="date" v-model="endDate"></k-input>
           </div>
           <div class="modal-controls">
-            <k-button variant="link" @click="modalOpen = false">Cancel</k-button>
+            <k-button variant="link" @click="reset">Cancel</k-button>
             <k-button variant="secondary" @click="downloadCsv">Download File</k-button>
           </div>
         </form>

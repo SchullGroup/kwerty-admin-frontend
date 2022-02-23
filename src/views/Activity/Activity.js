@@ -149,10 +149,17 @@ export default {
         saveAs(blob, `${title}.csv`);
         this.$toast.show({ message: `Exported ${title}.csv` });
         this.isLoading = false;
-        this.modalOpen = false;
+        this.reset();
       } catch (error) {
         this.$toast.show({ message: error });
       }
+    },
+    reset() {
+      this.startDate = '';
+      this.endDate = '';
+      this.fileType = '';
+      this.title = '';
+      this.modalOpen = false;
     },
     setType() {
       const { type } = this.$route.params;

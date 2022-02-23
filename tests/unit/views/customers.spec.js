@@ -8,10 +8,8 @@ const $route = {
     name: 'some name',
   },
 };
-
 const mockThis = {
-  formatISO: jest.fn(),
-  saveAs: jest.fn(),
+  fetchAllCustomers: jest.fn(),
 };
 
 describe('Customer Component', () => {
@@ -20,6 +18,7 @@ describe('Customer Component', () => {
       store,
       localVue,
     });
+    Customers.watch.search.call(mockThis);
     expect(wrapper.vm.$options.name).toMatch('Customers');
     expect(wrapper.vm.prevPage());
     expect(wrapper.vm.nextPage());
@@ -29,11 +28,7 @@ describe('Customer Component', () => {
     expect(wrapper.vm.fetchAllCustomers());
     expect(wrapper.vm.changeUserStatus());
     expect(wrapper.vm.changeUserStatus());
-    // expect(wrapper.vm.downloadCustomers());
-    // expect(wrapper.vm.downloadCustomers());
-    Customers.methods.downloadCustomers.call(new Date(mockThis));
-    Customers.methods.downloadCustomers.call(new Date(mockThis));
-    Customers.methods.downloadCustomers.call(new Date(mockThis));
+    expect(wrapper.vm.changeUserStatus());
   });
   it('should mount the single customer page', async () => {
     const wrapper = shallowMount(Customer, {

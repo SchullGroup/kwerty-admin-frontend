@@ -1,6 +1,5 @@
 import { mapActions, mapGetters } from 'vuex';
-import formatISO from 'date-fns/formatISO';
-import { saveAs } from 'file-saver';
+import downloadCsv from '@/mixins/export';
 
 import {
   KDashboardLayout,
@@ -23,14 +22,11 @@ export default {
     KModal,
     KCard,
   },
+  mixins: [downloadCsv],
   data: () => ({
     isLoading: false,
     search: '',
     modalOpen: false,
-    startDate: '',
-    endDate: '',
-    title: '',
-    fileType: 'csv',
     status: '',
     page: 1,
     pagination: {
@@ -95,37 +91,6 @@ export default {
         } else {
           throw Error(response.error);
         }
-      } catch (error) {
-        this.$toast.show({ message: error });
-      }
-    },
-    async downloadCustomers() {
-      const {
-        startDate,
-        endDate,
-        fileType,
-        title,
-      } = this;
-      const startdate = formatISO(new Date(startDate));
-      const enddate = formatISO(new Date(endDate));
-      console.log(startdate);
-      console.log(enddate);
-      this.isLoading = true;
-      try {
-        const downloaded = await this.exportCustomers({
-          startDate: startdate,
-          endDate: enddate,
-          fileType,
-          title,
-        });
-        if (downloaded.error) {
-          throw Error(downloaded.error);
-        }
-        const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
-        saveAs(blob, `${title}.csv`);
-        this.$toast.show({ message: `Exported ${title}.csv` });
-        this.isLoading = false;
-        this.modalOpen = false;
       } catch (error) {
         this.$toast.show({ message: error });
       }
