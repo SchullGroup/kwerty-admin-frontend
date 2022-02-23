@@ -116,7 +116,7 @@
             </tbody>
           </table>
         </section>
-        <template v-if="mostActiveUser.length === 0">
+        <template v-if="mostActiveUser.length === 0 && !isLoading">
           <p>There is no active user in the last{{ overviewDuration }}</p>
         </template>
         <section v-else class="active-customer">
@@ -126,7 +126,17 @@
             <p class="active-customer__name text-center">{{ topUser.fullName }}</p>
             <p class="active-customer__mail text-center">{{ topUser.email }}</p>
           </div>
-          <button class="active-customer__button">View Profile</button>
+          <button
+            class="active-customer__button"
+            @click="
+              $router.push({
+                name: 'SingleCustomer',
+                query: { email: topUser.email, name: topUser.fullName },
+              })
+            "
+          >
+            View Profile
+          </button>
         </section>
 
         <section class="active-users">
