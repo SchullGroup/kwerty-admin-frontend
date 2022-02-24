@@ -189,14 +189,25 @@ export default {
             .split('\n')
             .map((row) => row.split(','));
           const tableHeaders = result.shift();
+          tableHeaders.shift();
+          tableHeaders.pop();
           const newResult = [];
+          result.map((item) => item.pop());
+          result.map((item) => item.shift());
           result.forEach((r, i) => {
-            const dateIndex = r.length - 1 && r.length - 6;
+            const dateIndex = r.length - 1;
             const formattedDate = formatters.formatDate(r[dateIndex]);
             newResult.push(result[i].splice(dateIndex, 1, formattedDate));
           });
+          result.forEach((r, i) => {
+            const dateIndex = r.length - 5;
+            const formattedDate = formatters.formatDate(r[dateIndex]);
+            newResult.push(result[i].splice(dateIndex, 1, formattedDate));
+          });
+          console.log(result);
           const options = { tableHeaders, tableBodyData: result, title };
           const final = pdfTemplate(options);
+          console.log(final);
           const htmlBlob = new Blob([final], { type: 'text/plain' });
           const htmlFile = new File([htmlBlob], { type: 'text/plain' });
           const formData = new FormData();
