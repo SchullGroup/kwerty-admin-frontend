@@ -89,7 +89,9 @@
           </div>
           <div class="modal-controls">
             <k-button variant="link" @click="reset">Cancel</k-button>
-            <k-button variant="secondary" @click="downloadActivities">Download File</k-button>
+            <k-button variant="secondary" :loading="isDownLoading" @click="downloadActivities"
+              >Download File</k-button
+            >
           </div>
         </form>
       </k-card>

@@ -25,6 +25,7 @@ export default {
   mixins: [downloadCsv],
   data: () => ({
     isLoading: false,
+    isDownloading: false,
     search: '',
     modalOpen: false,
     status: '',
@@ -69,7 +70,7 @@ export default {
       const { search, page } = this;
       this.isLoading = true;
       try {
-        const response = await this.getAllCustomers({ page, search });
+        const response = await this.getAllCustomers({ page, nameOrEmail: search });
         if (!response.error) {
           this.pagination.page = Number(response.currentPage);
           this.pagination.totalItems = response.total;

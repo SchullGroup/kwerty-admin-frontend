@@ -44,7 +44,7 @@
           :data="data"
           :fields="fields"
           @clickAction="$emit('clickAction', data.id)"
-          @view="$emit('view', data.email, data.fullName)"
+          @view="$emit('view', data.id, data.fullName)"
           @changeStatus="
             $emit('changeStatus', {
               status: data.status === 'enabled' ? 'disabled' : 'enabled',
