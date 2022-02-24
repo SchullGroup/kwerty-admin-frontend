@@ -116,7 +116,7 @@
             </tbody>
           </table>
         </section>
-        <template v-if="mostActiveUser.length === 0 && !isLoading">
+        <template v-if="mostActiveUser.length === 0">
           <p>There is no active user in the last{{ overviewDuration }}</p>
         </template>
         <section v-else class="active-customer">

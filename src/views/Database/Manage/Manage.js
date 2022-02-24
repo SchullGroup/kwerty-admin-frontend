@@ -14,6 +14,8 @@ import SingleData from './SingleData.vue';
 import countries from '@/utils/countries';
 import { updateData } from '@/api/database';
 
+countries[''] = 'All Countries';
+
 export default {
   name: 'ManageData',
   components: {

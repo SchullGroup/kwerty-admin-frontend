@@ -32,7 +32,7 @@
       </span>
     </td>
     <td class="view-activity" v-if="customers === true && customerOption === true">
-      <button class="view-activity__btn" @click="$emit('view', data.email)">View Activity</button>
+      <button class="view-activity__btn" @click="$emit('view', data.id)">View Activity</button>
     </td>
     <td class="button" v-if="customers === true && customerOption === true">
       <button
