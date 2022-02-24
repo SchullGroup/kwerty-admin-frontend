@@ -14,8 +14,12 @@ table, thead, tbody{
   border-collapse: collapse;
   width: 100%;
 }
-h3{
- font-size: 16px;
+
+thead {
+ border-bottom: 1px solid #D9D9D9;
+}
+h3 {
+ font-size: 24px;
  text-transform: capitalize;
  font-weight: 500;
 }
@@ -24,11 +28,12 @@ th {
  text-transform: capitalize;
  text-align: left;
  padding-right: 10px;
+ height: 50px;
 }
 td {
  text-transform: capitalize;
- font-size: 12px;
- height: 50px;
+ font-size: 10px;
+ height: 40px;
  padding-right: 10px;
 }
 
@@ -61,6 +66,7 @@ export default function pdfTemplate(options) {
      <thead>
        ${header}
      </thead>
+     <div class="line"></div>
      <tbody class="table__body">
        ${tableBody}
      </tbody>
