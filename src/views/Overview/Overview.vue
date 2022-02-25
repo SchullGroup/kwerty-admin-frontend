@@ -131,7 +131,7 @@
             @click="
               $router.push({
                 name: 'SingleCustomer',
-                query: { email: topUser.email, name: topUser.fullName },
+                query: { id: topUser.id, name: topUser.fullName },
               })
             "
           >

@@ -139,21 +139,29 @@ export default {
   watch: {
     duration() {
       const { id } = this.$route.query;
-      this.getSingleUserActivities(id);
+      const { page } = this;
+      this.getSingleUserActivities(id, page);
+    },
+    page(value) {
+      const { id } = this.$route.query;
+      if (value) {
+        this.getSingleUserActivities(id, value);
+      }
     },
   },
   mounted() {
     const { id } = this.$route.query;
+    const { page } = this;
     this.name = this.$route.query.name;
-    this.getSingleUserActivities(id);
+    this.getSingleUserActivities(id, page);
   },
   methods: {
     ...mapActions({
       singleCustomerActivities: 'customers/singleCustomerActivities',
       exportCustomers: 'customers/exportCustomers',
     }),
-    async getSingleUserActivities(id) {
-      const { duration, page } = this;
+    async getSingleUserActivities(id, page = 1) {
+      const { duration } = this;
       try {
         const response = await this.singleCustomerActivities({ id, duration, page });
         if (!response.error) {
