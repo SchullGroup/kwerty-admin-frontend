@@ -74,7 +74,7 @@
             searchInside='indicators'
             type='select'
             @input='addIndicator'
-            @search='(searchValue) => searchDatasets({searchValue})'
+            @search='(searchValue) => debounce(searchDatasets, 500)({searchValue})'
           ></k-input>
           <ul class='summary--indicators-items'>
             <li v-for='(item, index) in indicatorsShownList' :key='index' class='name'>
@@ -104,7 +104,7 @@
             searchInside='indicators'
             type='select'
             @input='addTopChart'
-            @search='(searchValue) => searchDatasets({searchValue})'
+            @search='(searchValue) => debounce(searchDatasets, 500)({searchValue})'
           ></k-input>
           <ul class='summary--indicators-items'>
             <li v-for='(item, index) in chartsShownList' :key='index' class='name'>

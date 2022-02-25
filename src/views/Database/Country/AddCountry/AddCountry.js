@@ -134,26 +134,26 @@ export default {
       this.resources.push([name, url]);
       this.$toast.show({ message: 'Resource Uploaded' });
     },
-    async searchDatasets({ searchValue, country }) {
+    async searchDatasets({ searchValue }) {
       try {
+        const value = searchValue ? searchValue.trim() : '';
         let params;
-        if ((searchValue && searchValue.length && searchValue.length >= 3) || country) {
-          const paramsWithSearchValue = {
-            country: this.dashboard.name,
-            search: searchValue,
+        if ((value && value.length >= 3)) {
+          params = {
+            country: this.country,
+            search: value,
             category: 'economy',
           };
-          params = country ? { country } : paramsWithSearchValue;
         } else {
         // if no search value get datasets for this country
-          params = { country };
+          params = { country: this.country };
         }
         // fetch and populate dataset list for indicator dropdowns
         const response = await getAllCountryData(params);
         this.datasetList = response
           .data
           .data
-          .dataset.filter((item) => item.country === this.dashboard.name);
+          .dataset.filter((item) => item.country.toLowerCase() === this.country.toLowerCase());
       } catch (e) {
         console.error(e.message);
       }
