@@ -4,6 +4,7 @@ import {
   editOtherAdmin,
   deleteOtherAdmin,
   getOtherAdmin,
+  exportAdmins,
 } from '@/api';
 
 jest.mock('@/config', () => ({
@@ -42,5 +43,9 @@ describe('admin api', () => {
   it('delete other admin', async () => {
     const message = await deleteOtherAdmin({ token, id: 'something' });
     expect(message).toMatch('deleted');
+  });
+  it('exports admins', async () => {
+    const admins = await exportAdmins();
+    expect(admins).toBe(true);
   });
 });

@@ -1,6 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
 import ManageData from '@/views/Database/Manage/Manage.vue';
-import ManageSingleData from '@/views/Database/Manage/SingleData.vue';
 import { localVue, successStore as store } from '../../utils/local-vue';
 
 const $route = {
@@ -8,31 +7,6 @@ const $route = {
     active: 'published',
   },
 };
-const data = {
-  indicatorName: 'some name',
-  category: 'economy',
-  country: 'poland',
-};
-
-// eslint-disable-next-line no-unused-vars
-const mockData = [
-  {
-    point: 'year',
-    value: '2000',
-  },
-  {
-    point: 'year',
-    value: '2000',
-  },
-  {
-    point: 'year',
-    value: '2000',
-  },
-  {
-    point: 'year',
-    value: '2000',
-  },
-];
 
 describe('ManageData View', () => {
   it('should mount', async () => {
@@ -142,20 +116,5 @@ describe('ManageData View', () => {
     };
     // $route.query.active = 'something';
     expect(ManageData.mounted.call(mockThis));
-  });
-});
-
-describe('single data', () => {
-  it('mounts the component', () => {
-    const wrapper = shallowMount(ManageSingleData, {
-      propsData: {
-        data,
-      },
-    });
-    expect(wrapper.vm.$options.name).toMatch('SingleData');
-    // expect(wrapper.vm.addNewField(mockData));
-    // expect(wrapper.vm.removeItem(mockData));
-    // expect(wrapper.vm.editData(mockData));
-    // ManageSingleData.watch.singleData.call(mockThis);
   });
 });

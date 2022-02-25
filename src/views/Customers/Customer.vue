@@ -40,17 +40,50 @@
       >
       </k-table>
     </div>
+    <!-- EXPORT MODAL -->
+    <k-modal @close="modalOpen = false" :open="modalOpen">
+      <k-card variant="in-modal" heading="Export User List">
+        <form class="form__items">
+          <k-input label="Title" name="title" v-model="title"></k-input>
+          <k-input
+            label="File Type"
+            name="file-type"
+            type="select"
+            v-model="fileType"
+            :optionsDisplay="fileTypes"
+          ></k-input>
+          <div class="input-row">
+            <k-input label="Start Date" name="start-date" type="date" v-model="startDate"></k-input>
+            <k-input label="End Date" name="end-date" type="date" v-model="endDate"></k-input>
+          </div>
+          <div class="modal-controls">
+            <k-button variant="link" @click="reset">Cancel</k-button>
+            <k-button variant="secondary" :loading="isDownloading" @click="downloadCsv"
+              >Download File</k-button
+            >
+          </div>
+        </form>
+      </k-card>
+    </k-modal>
   </k-dashboard-layout>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-// eslint-disable-next-line vue/max-len
+import formatISO from 'date-fns/formatISO';
+import { saveAs } from 'file-saver';
+import pdfTemplate from '../Activity/pdfTemplate';
+import { downloadDataset } from '../../api/upload';
+import formatters from '../../utils/formatters';
+
 import {
   KDashboardLayout,
-  KInput, KButton,
+  KInput,
+  KButton,
   KPagination,
   KTable,
+  KCard,
+  KModal,
 } from '@/components';
 
 export default {
@@ -61,11 +94,20 @@ export default {
     KInput,
     KPagination,
     KTable,
+    KCard,
+    KModal,
   },
+  // mixins: [downloadCsv],
   data: () => ({
+    startDate: '',
+    endDate: '',
+    fileType: '',
+    title: '',
     isLoading: false,
+    isDownloading: false,
     search: '',
-    duration: 'All Time',
+    duration: '7 days',
+    modalOpen: false,
     optionsDurations: {
       '': 'All Time',
       '24hours': 'Last 24 hours',
@@ -74,6 +116,10 @@ export default {
       '3months': 'Last 3 months',
       '6months': 'Last 6 months',
       '12months': 'Last year',
+    },
+    fileTypes: {
+      csv: 'CSV',
+      pdf: 'PDF',
     },
     name: '',
     customerData: [],
@@ -90,20 +136,36 @@ export default {
       userLastSeen: 'Timestamp',
     },
   }),
+  watch: {
+    duration() {
+      const { id } = this.$route.query;
+      const { page } = this;
+      this.getSingleUserActivities(id, page);
+    },
+    page(value) {
+      const { id } = this.$route.query;
+      if (value) {
+        this.getSingleUserActivities(id, value);
+      }
+    },
+  },
   mounted() {
-    const { email } = this.$route.query;
+    const { id } = this.$route.query;
+    const { page } = this;
     this.name = this.$route.query.name;
-    this.getSingleUserActivities(email);
+    this.getSingleUserActivities(id, page);
   },
   methods: {
     ...mapActions({
       singleCustomerActivities: 'customers/singleCustomerActivities',
+      exportCustomers: 'customers/exportCustomers',
     }),
-    async getSingleUserActivities(email) {
+    async getSingleUserActivities(id, page = 1) {
+      const { duration } = this;
       try {
-        const response = await this.singleCustomerActivities(email);
+        const response = await this.singleCustomerActivities({ id, duration, page });
         if (!response.error) {
-          this.pagination.page = response.currentPage;
+          this.pagination.page = Number(response.currentPage);
           this.pagination.totalItems = response.total;
           this.pagination.totalPages = response.totalPages;
           this.customerData = response.customer;
@@ -111,6 +173,74 @@ export default {
       } catch (error) {
         this.$toast.show({ message: error });
       }
+    },
+    async downloadCsv() {
+      const {
+        startDate, endDate, fileType, title,
+      } = this;
+      const { id } = this.$route.query;
+      const startdate = formatISO(new Date(startDate));
+      const enddate = formatISO(new Date(endDate));
+      this.isDownloading = true;
+      try {
+        const downloaded = await this.exportCustomers({
+          startDate: startdate,
+          endDate: enddate,
+          fileType: fileType === 'pdf' ? 'csv' : 'csv',
+          title,
+          id,
+        });
+        if (fileType === 'pdf') {
+          // eslint-disable-next-line no-useless-escape
+          const result = downloaded
+            .replaceAll('"', '')
+            .split('\n')
+            .map((row) => row.split(','));
+          const tableHeaders = result.shift();
+          tableHeaders.shift();
+          tableHeaders.pop();
+          const newResult = [];
+          result.map((item) => item.pop());
+          result.map((item) => item.shift());
+          result.forEach((r, i) => {
+            const dateIndex = r.length - 1;
+            const formattedDate = formatters.formatDate(r[dateIndex]);
+            newResult.push(result[i].splice(dateIndex, 1, formattedDate));
+          });
+          result.forEach((r, i) => {
+            const dateIndex = r.length - 5;
+            const formattedDate = formatters.formatDate(r[dateIndex]);
+            newResult.push(result[i].splice(dateIndex, 1, formattedDate));
+          });
+          console.log(result);
+          const options = { tableHeaders, tableBodyData: result, title };
+          const final = pdfTemplate(options);
+          console.log(final);
+          const htmlBlob = new Blob([final], { type: 'text/plain' });
+          const htmlFile = new File([htmlBlob], { type: 'text/plain' });
+          const formData = new FormData();
+          formData.append('file', htmlFile);
+          const response = await downloadDataset({ data: formData, type: 'pdf' });
+          const responseBlob = new Blob([response.data], { type: 'application/pdf' });
+          const fileName = `${title}.pdf`;
+          saveAs(responseBlob, fileName);
+        } else {
+          const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
+          saveAs(blob, `${title}.csv`);
+          this.$toast.show({ message: `Exported ${title}.csv` });
+        }
+        this.isDownloading = false;
+        this.reset();
+      } catch (error) {
+        this.$toast.show({ message: error });
+      }
+    },
+    reset() {
+      this.startDate = '';
+      this.endDate = '';
+      this.fileType = '';
+      this.title = '';
+      this.modalOpen = false;
     },
     prevPage() {
       this.page -= 1;

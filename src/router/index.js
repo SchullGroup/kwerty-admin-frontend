@@ -11,7 +11,6 @@ import Indicators from '../views/Database/Indicators/Indicators.vue';
 import Country from '../views/Database/Country/CountryOverview/CountryOverview.vue';
 import ManageCountry from '../views/Database/Country/ManageCountry/ManageCountry.vue';
 import AddCountry from '../views/Database/Country/AddCountry/AddCountry.vue';
-import ViewSingleCountry from '../views/Database/Country/ViewSingleCountry/ViewSingleCountry.vue';
 import ManageData from '../views/Database/Manage/Manage.vue';
 import UploadData from '../views/Database/Manage/Upload/Upload.vue';
 import Customers from '../views/Customers/Customers.vue';
@@ -80,24 +79,24 @@ export const routes = [
     component: Indicators,
   },
   {
-    path: '/database/Country',
+    path: '/database/country',
     name: 'CountryOverview',
     component: Country,
   },
   {
-    path: '/database/countries',
+    path: '/database/country/all',
     name: 'ManageCountry',
     component: ManageCountry,
   },
   {
-    path: '/database/addcountry',
+    path: '/database/country/add',
     name: 'AddCountry',
     component: AddCountry,
   },
   {
-    path: '/database/country/id',
+    path: '/database/country/:id',
     name: 'ViewSingleCountry',
-    component: ViewSingleCountry,
+    component: AddCountry,
   },
   {
     path: '/database',

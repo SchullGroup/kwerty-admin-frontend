@@ -2,12 +2,14 @@ import {
   login,
   forgotPassword,
   resetPassword,
+  getProfile,
 } from '@/api/auth';
 
 jest.mock('@/config', () => ({
   instance: {
     post: jest.fn().mockResolvedValue(true),
     patch: jest.fn().mockResolvedValue(true),
+    get: jest.fn().mockResolvedValue(true),
   },
 }));
 
@@ -28,6 +30,10 @@ describe('auth api', () => {
   });
   it('resets user password', async () => {
     const reset = await resetPassword({ user, token });
+    expect(reset).toBe(true);
+  });
+  it('gets user profile', async () => {
+    const reset = await getProfile({ id: '234erx5678yh', token });
     expect(reset).toBe(true);
   });
 });

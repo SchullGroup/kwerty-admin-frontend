@@ -249,7 +249,6 @@ export default {
 
 .single-data__table {
   max-height: 75vh;
-  overflow: hidden;
   border: 1px solid #f2f2f2;
   margin-top: 4rem;
   &:hover {

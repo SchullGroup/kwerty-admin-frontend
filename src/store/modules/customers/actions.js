@@ -1,4 +1,6 @@
-import { getAllCustomers, changeCustomerStatus, singleCustomerActivities } from '@/api';
+import {
+  getAllCustomers, changeCustomerStatus, singleCustomerActivities, exportCustomers,
+} from '@/api';
 import errorHandler from '@/utils/error-handler';
 
 export default {
@@ -18,6 +20,12 @@ export default {
   singleCustomerActivities: ({ commit }, body) => singleCustomerActivities(body)
     .then(({ data: { data } }) => {
       commit('SET_SINGLE_CUSTOMER_ACTIVITIES', data.customer);
+      return data;
+    })
+    .catch((response) => errorHandler(response, true)),
+  exportCustomers: ({ dispatch }, body) => exportCustomers(body)
+    .then(({ data }) => {
+      dispatch('getAllCustomers', {});
       return data;
     })
     .catch((response) => errorHandler(response, true)),

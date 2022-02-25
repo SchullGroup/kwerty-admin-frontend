@@ -1,6 +1,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import formatISO from 'date-fns/formatISO';
 import { saveAs } from 'file-saver';
+import formatters from '../../utils/formatters';
 
 import {
   KDashboardLayout,
@@ -11,6 +12,8 @@ import {
   KCard,
 } from '@/components';
 import ActivityTableRow from './TableRow.vue';
+import pdfTemplate from './pdfTemplate';
+import { downloadDataset } from '../../api/upload';
 
 export default {
   name: 'ActivityHome',
@@ -29,6 +32,7 @@ export default {
     page: 1,
     maxItemsOnPage: 20,
     isLoading: false,
+    isDownLoading: false,
     search: '',
     paginationData: {
       page: 1,
@@ -133,26 +137,53 @@ export default {
       } = this;
       const startdate = formatISO(new Date(startDate));
       const enddate = formatISO(new Date(endDate));
-      this.isLoading = true;
+      this.isDownLoading = true;
       try {
         const downloaded = await this.exportActivities({
           type,
           startdate,
           enddate,
-          fileType,
+          fileType: fileType === 'pdf' ? 'csv' : 'csv',
           title,
         });
-        if (downloaded.error) {
-          throw Error(downloaded.error);
+        if (fileType === 'pdf') {
+          // eslint-disable-next-line no-useless-escape
+          const result = downloaded.replaceAll('\"', '')
+            .split('\n').map((row) => row.split(','));
+          const tableHeaders = result.shift();
+          const newResult = [];
+          result.forEach((r, i) => {
+            const dateIndex = r.length - 1;
+            const formattedDate = formatters.formatDate(r[dateIndex]);
+            newResult.push(result[i].splice(dateIndex, 1, formattedDate));
+          });
+          const options = { tableHeaders, tableBodyData: result, title };
+          const final = pdfTemplate(options);
+          const htmlBlob = new Blob([final], { type: 'text/plain' });
+          const htmlFile = new File([htmlBlob], { type: 'text/plain' });
+          const formData = new FormData();
+          formData.append('file', htmlFile);
+          const response = await downloadDataset({ data: formData, type: 'pdf' });
+          const responseBlob = new Blob([response.data], { type: 'application/pdf' });
+          const fileName = `${title}.pdf`;
+          saveAs(responseBlob, fileName);
+        } else {
+          const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
+          saveAs(blob, `${title}.csv`);
+          this.$toast.show({ message: `Exported ${title}.csv` });
         }
-        const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
-        saveAs(blob, `${title}.csv`);
-        this.$toast.show({ message: `Exported ${title}.csv` });
-        this.isLoading = false;
-        this.modalOpen = false;
+        this.isDownLoading = false;
+        this.reset();
       } catch (error) {
         this.$toast.show({ message: error });
       }
+    },
+    reset() {
+      this.startDate = '';
+      this.endDate = '';
+      this.fileType = '';
+      this.title = '';
+      this.modalOpen = false;
     },
     setType() {
       const { type } = this.$route.params;

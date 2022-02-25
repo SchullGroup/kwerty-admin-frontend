@@ -40,7 +40,7 @@
               </div>
               <div v-else class="search__summary__body__chart">
                 <doughnut-wrapper
-                  v-if="chartDataset.length && showChart === true && !isLoadingChart"
+                  v-if="chartDataset.length && showChart && !isLoadingChart"
                   :labels="chartData.labels"
                   :datasets="chartData.datasets"
                 ></doughnut-wrapper>
@@ -116,15 +116,27 @@
             </tbody>
           </table>
         </section>
-
-        <section class="active-customer">
+        <template v-if="mostActiveUser.length === 0">
+          <p>There is no active user in the last{{ overviewDuration }}</p>
+        </template>
+        <section v-else class="active-customer">
           <h2>Most Active Customer</h2>
           <img :src="topUser.imageUrl || dummyImage" alt="" />
           <div class="active-customer__details">
             <p class="active-customer__name text-center">{{ topUser.fullName }}</p>
             <p class="active-customer__mail text-center">{{ topUser.email }}</p>
           </div>
-          <button class="active-customer__button">View Profile</button>
+          <button
+            class="active-customer__button"
+            @click="
+              $router.push({
+                name: 'SingleCustomer',
+                query: { id: topUser.id, name: topUser.fullName },
+              })
+            "
+          >
+            View Profile
+          </button>
         </section>
 
         <section class="active-users">
@@ -142,10 +154,14 @@
             </div>
           </header>
           <div class="active-users__content" v-if="lineDatasets.length && showLineChart === true">
+            <div v-if="lineDatasets.length === 0">
+              <h1>There has been no user activities in the last {{ activeUserPeriod }}</h1>
+            </div>
             <line-wrapper
+              v-else
               :labels="[]"
               :datasets="lineData.datasets"
-              :isHours="activeUserPeriod === '24 hours'? true : false"
+              :isHours="activeUserPeriod === '24 hours' ? true : false"
             ></line-wrapper>
           </div>
         </section>

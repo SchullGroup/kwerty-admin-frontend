@@ -73,11 +73,6 @@ export default {
     activeUserPeriod() {
       this.fetchActiveUsers();
     },
-    // isHours(val) {
-    //   if (val === true) {
-    //     this.showLineChart = false;
-    //   }
-    // },
   },
   computed: {
     ...mapGetters({
@@ -85,8 +80,8 @@ export default {
       recentActivities: 'dashboard/getRecentActivities',
     }),
     userName() {
-      const { firstName } = this.Profile;
-      return `${firstName}`;
+      const { firstName, lastName } = this.Profile;
+      return `${firstName} ${lastName}`;
     },
     chartData() {
       const { chartDataset } = this;
@@ -160,23 +155,24 @@ export default {
     },
     async getDashBoardAnalytics() {
       const { overviewDuration } = this;
-      this.isLoadingChart = true;
       try {
         const response = await this.getAnalytics({ duration: overviewDuration });
         if (!response.error) {
           this.totalSearches = response.data.searchTotal.count;
           this.totalClicked = response.data.totalClickedSearch.percentage;
           this.accounts = response.data.userAccountTotal[0].count;
+          this.isLoadingChart = true;
           this.chartDataset = response.data.totalSearchPerCategory;
+          this.isLoadingChart = false;
           this.showChart = false;
           this.mostActiveUser = response.data.mostActiveUser;
           this.topUser = this.mostActiveUser.find((user) => user.rank === '1');
         } else {
           throw Error(response.error);
         }
-        this.isLoadingChart = false;
       } catch (error) {
         console.log(error);
+      } finally {
         this.isLoadingChart = false;
       }
     },

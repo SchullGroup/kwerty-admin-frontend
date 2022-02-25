@@ -1,4 +1,6 @@
 import { mapActions, mapGetters } from 'vuex';
+import downloadCsv from '@/mixins/export';
+
 import {
   KDashboardLayout,
   KButton,
@@ -20,14 +22,14 @@ export default {
     KModal,
     KCard,
   },
+  mixins: [downloadCsv],
   data: () => ({
     isLoading: false,
+    isDownloading: false,
     search: '',
     modalOpen: false,
-    startDate: '',
-    endDate: '',
-    title: '',
     status: '',
+    page: 1,
     pagination: {
       page: 1,
       totalItems: 9,
@@ -40,7 +42,6 @@ export default {
       joined: 'Joined',
       userLastSeen: 'Last seen',
     },
-    fileType: 'csv',
     fileTypes: {
       csv: 'CSV',
       pdf: 'PDF',
@@ -63,14 +64,15 @@ export default {
     ...mapActions({
       getAllCustomers: 'customers/getAllCustomers',
       changeCustomerStatus: 'customers/changeCustomerStatus',
+      exportCustomers: 'customers/exportCustomers',
     }),
     async fetchAllCustomers() {
-      const { search } = this;
+      const { search, page } = this;
       this.isLoading = true;
       try {
-        const response = await this.getAllCustomers({ search });
+        const response = await this.getAllCustomers({ page, nameOrEmail: search });
         if (!response.error) {
-          this.pagination.page = response.currentPage;
+          this.pagination.page = Number(response.currentPage);
           this.pagination.totalItems = response.total;
           this.pagination.totalPages = response.totalPages;
         } else {
@@ -94,7 +96,6 @@ export default {
         this.$toast.show({ message: error });
       }
     },
-    downloadUsers() {},
     prevPage() {
       this.page -= 1;
     },

@@ -1,9 +1,15 @@
 import getters from '@/store/modules/auth/getters';
 
-const { getUser, getToken } = getters;
+const { getUser, getToken, getProfile } = getters;
 
 const state = {
   user: {
+    id: 1,
+    name: 'John Doe',
+    email: 'test@test.com',
+    isVerified: true,
+  },
+  profile: {
     id: 1,
     name: 'John Doe',
     email: 'test@test.com',
@@ -19,5 +25,8 @@ describe('Auth getters', () => {
 
   it('getToken', () => {
     expect(getToken(state)).toEqual(state.token);
+  });
+  it('getProfile', () => {
+    expect(getProfile(state)).toEqual(state.profile);
   });
 });
