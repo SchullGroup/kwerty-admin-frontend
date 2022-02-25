@@ -28,6 +28,26 @@ const mockData = [
   },
 ];
 
+// eslint-disable-next-line no-unused-vars
+const mockData = [
+  {
+    point: 'year',
+    value: '2000',
+  },
+  {
+    point: 'year',
+    value: '2000',
+  },
+  {
+    point: 'year',
+    value: '2000',
+  },
+  {
+    point: 'year',
+    value: '2000',
+  },
+];
+
 describe('ManageData View', () => {
   it('should mount', async () => {
     const wrapper = shallowMount(ManageData, {
