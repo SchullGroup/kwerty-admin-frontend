@@ -7,10 +7,9 @@
   background-color: $white;
   top: 0rem;
   z-index: 3000;
-  margin-top: -10rem;
+  margin-top: -8rem;
   padding: 7rem 0 2rem 0;
   box-sizing: border-box;
-  // height: 18rem;
   &--right {
     display: grid;
     grid-template-columns: max(36.5rem) max-content;
@@ -35,6 +34,7 @@
   flex-wrap: wrap;
   grid-gap: 3.6rem;
   .country-card {
+    width: 100%;
     max-width: 36.5rem;
     height: 22.1rem;
     border: 0.1rem solid $grey;

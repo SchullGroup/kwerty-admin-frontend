@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="wrapper">
-      <p class="title"> <slot/></p>
+      <p class="title">{{ message }}</p>
       <div class="content">
         <p class="item" v-for="(t, i) in tags" :key="t + i">
           {{ t }}
           <span @click="removeTag(i)" class="close"
-            ><img src="@/assets/deleteIcon.svg" alt=""
+            ><img src="https://one-percent-bucket-1.s3.us-west-2.amazonaws.com/kwertyassets/deleteIcon.svg" alt=""
           /></span>
         </p>
         <input type="text" v-model="tag" @keyup="handleKey" />
@@ -20,7 +20,7 @@ export default {
   name: 'Inputtag',
   data() {
     return {
-      msg: 'Tags',
+      message: 'Tags',
       tag: '',
     };
   },
@@ -31,9 +31,6 @@ export default {
     tags: {
       type: Array,
       default: () => [],
-    },
-    message: {
-      type: String,
     },
   },
   methods: {

@@ -4,8 +4,8 @@ import {
   KButton,
   KPagination,
 } from '@/components';
-import doughnutColors from '../../../utils/doughnut-colors';
-import DoughnutWrapper from '../../../components/Charts/DoughnutWrapper.vue';
+import doughnutColors from '../../../../utils/doughnut-colors';
+import DoughnutWrapper from '../../../../components/Charts/DoughnutWrapper.vue';
 
 export default {
   name: 'ManageCountry',

@@ -1,5 +1,5 @@
-import { shallowMount } from '@vue/test-utils';
 import Vuex from 'vuex';
+import { shallowMount } from '@vue/test-utils';
 import ActivityHome from '@/views/Activity/Activity';
 import TableRow from '@/views/Activity/TableRow.vue';
 import { localVue, successStore as store } from '../../utils/local-vue';
@@ -9,6 +9,9 @@ localVue.use(Vuex);
 const $route = {
   params: {
     type: 'user',
+  },
+  query: {
+    userName: 'name',
   },
 };
 const $router = {

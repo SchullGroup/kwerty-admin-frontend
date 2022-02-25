@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import Toast from '@/plugins/toast';
@@ -198,14 +199,27 @@ const successStore = new Vuex.Store({
     },
     database: {
       actions: {
+        // eslint-disable-next-line no-undef
         fetchDatabase: jest
           .fn()
           .mockResolvedValueOnce({ message: 'database fetched successfully' })
           .mockRejectedValueOnce({ message: { error: 'error occured' } }),
+        // eslint-disable-next-line no-undef
         fetchDataById: jest
           .fn()
-          .mockResolvedValueOnce({ message: 'database fetched successfully' })
-          .mockRejectedValueOnce({ message: { error: 'error occured' } }),
+          .mockRejectedValueOnce({ message: { error: 'error occured' } })
+          .mockResolvedValueOnce({ message: { error: '' } })
+          .mockResolvedValueOnce({ message: 'database fetched successfully' }),
+        performDataAction: jest
+          .fn()
+          .mockRejectedValueOnce({ message: { error: 'error occured' } })
+          .mockResolvedValueOnce({ message: { error: '' } })
+          .mockResolvedValueOnce({ message: 'database action performed' }),
+        updateData: jest
+          .fn()
+          .mockResolvedValueOnce({ message: { error: '' } })
+          .mockResolvedValueOnce({ message: { error: 'error occured' } })
+          .mockResolvedValueOnce({ message: 'dataset updated successfully' }),
       },
       getters: {
         getDatabase: jest.fn().mockResolvedValue([
@@ -219,6 +233,55 @@ const successStore = new Vuex.Store({
         SET_DATABASE: jest.fn(),
       },
       namespaced: true,
+    },
+    customers: {
+      actions: {
+        getAllCustomers: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'customers fetched successfully' })
+          .mockRejectedValueOnce({ message: { error: 'error occured' } }),
+        changeCustomerStatus: jest
+          .fn()
+          .mockResolvedValueOnce({ message: 'customer status updated' })
+          .mockRejectedValueOnce({ message: { error: 'error occured' } }),
+      },
+      getters: {
+        getCustomers: jest.fn().mockRejectedValue([
+          {
+            name: 'sam john',
+            email: 'some@gmail.com',
+          },
+        ]),
+      },
+      namespaced: true,
+    },
+    dashboard: {
+      actions: {
+        getRecentAdminActivities: jest
+          .fn()
+          .mockRejectedValueOnce({ message: 'error occured' })
+          .mockResolvedValueOnce({ message: 'fectched succesfully' })
+          .mockResolvedValueOnce({ error: '' }),
+        getAnalytics: jest
+          .fn()
+          .mockResolvedValueOnce({ message: '' })
+          .mockResolvedValueOnce({ message: 'fectched succesfully' })
+          .mockResolvedValueOnce({ error: 'error occured' }),
+        getActiveUsers: jest
+          .fn()
+          .mockResolvedValueOnce({ error: '' })
+          .mockResolvedValueOnce({ message: 'fectched succesfully' }),
+      },
+      getters: {
+        getRecentActivities: jest.fn().mockResolvedValueOnce([
+          {
+            activity: 'logged in',
+            name: 'test name',
+            createdAt: 'someDate',
+            status: 'success',
+          },
+        ]),
+      },
     },
   },
 });

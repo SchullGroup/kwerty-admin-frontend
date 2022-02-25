@@ -10,8 +10,9 @@
           type="select"
           variant="dropdown"
           label="Filter by Category"
-          v-model="categories"
+          v-model="category"
           :optionsDisplay="optionsCategories"
+          searchInside='categories'
         ></k-input>
         <k-input
           type="select"

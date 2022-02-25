@@ -1,5 +1,5 @@
 <template>
-  <line-chart :chart-data='chartData'></line-chart>
+  <line-chart :chart-data='chartData' :isHours="isHours"></line-chart>
 </template>
 
 <script>
@@ -16,6 +16,10 @@ export default {
     },
     datasets: {
       type: Array,
+    },
+    isHours: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

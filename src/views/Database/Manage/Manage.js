@@ -1,4 +1,5 @@
 import { mapActions, mapGetters } from 'vuex';
+import indicatorList from '@/mixins/IndicatorList';
 import {
   KDashboardLayout,
   KInput,
@@ -11,6 +12,7 @@ import {
 import BackIcon from './BackIcon.vue';
 import SingleData from './SingleData.vue';
 import countries from '@/utils/countries';
+import { updateData } from '@/api/database';
 
 export default {
   name: 'ManageData',
@@ -25,36 +27,13 @@ export default {
     BackIcon,
     SingleData,
   },
+  mixins: [indicatorList],
   data: () => ({
     activeTab: 'all',
     category: '',
-    indicator: 'all',
+    indicator: '',
     country: '',
     isEditing: false,
-    categories: {
-      '': 'All Categories',
-      agriculture: 'Agriculture',
-      economy: 'Economy',
-      finance: 'Finance',
-      health: 'Health',
-      labour: 'Labour',
-      monetary: 'Monetary',
-      population: 'Population',
-      tax: 'Tax',
-      trade: 'Trade',
-    },
-    indicators: {
-      all: 'All Indicators',
-      'Central Budget': 'Central Budget',
-      'Current Account': 'Current Account',
-      'Primary Income': 'Primary Income',
-      'Secondary Income': 'Secondary Income',
-      'Capital Account': 'Capital Account',
-      'Financial Account': 'Financial Account',
-      'Current Account to GDP': 'Current Account to GDP',
-      'Official Reserve Assets': 'Official Reserve Assets',
-      'Public Finance Sector Revenue': 'Public Finance Sector Revenue',
-    },
     countries,
     tableFields: ['nameOfIndicator', 'country', 'startYear', 'endYear', 'lastModified'],
     tableFieldsDisplay: {
@@ -88,7 +67,40 @@ export default {
     search: '',
     currentNameOfIndicator: '',
     isActing: false,
+    dataTags: [],
   }),
+  async mounted() {
+    const { active } = this.$route.query;
+    const valid = ['all', 'published', 'unpublished', 'draft'];
+    if (!active || valid.indexOf(active) === -1) {
+      this.activeTab = 'all';
+    } else {
+      this.activeTab = active;
+    }
+    this.getData({});
+    this.getIndicators();
+  },
+  watch: {
+    activeTab() {
+      this.resetSelectedRows();
+      this.getData();
+    },
+    currentPage(val) {
+      this.getData({ page: val });
+    },
+    search() {
+      this.getData();
+    },
+    country() {
+      this.getData();
+    },
+    category() {
+      this.getData();
+    },
+    indicator() {
+      this.getData();
+    },
+  },
   computed: {
     ...mapGetters({
       allData: 'database/getDatabase',
@@ -142,13 +154,18 @@ export default {
     async getData(params) {
       let reqParams = { ...params }; // eslint-disable-line
       const {
-        activeTab, search, country, category,
+        activeTab, search, country, category, indicator,
       } = this;
       reqParams[activeTab] = activeTab === 'all' ? '' : 'yes';
       reqParams.search = search;
       this.isFetching = true;
       try {
-        const paginationData = await this.fetchDatabase({ ...reqParams, country, category });
+        const paginationData = await this.fetchDatabase({
+          ...reqParams,
+          country,
+          category,
+          indicator,
+        });
         if (!paginationData.error) {
           this.paginationData = paginationData;
           this.paginationData.currentPage = Number(paginationData.currentPage);
@@ -161,13 +178,46 @@ export default {
         this.isFetching = false;
       }
     },
+    async updateSingleData() {
+      const { singleViewData, dataTags } = this;
+      const {
+        id, data, metric, country, notes, source, link,
+      } = singleViewData;
+      const tags = dataTags ? dataTags.join(',') : '';
+      try {
+        const response = await updateData({
+          id,
+          payload: {
+            ...{
+              data,
+              metric,
+              country,
+              notes,
+              source,
+              link,
+            },
+            tags,
+          },
+        });
+        if (!response.error) {
+          this.$toast.show({ message: response.data.message });
+        } else {
+          throw Error(response.error);
+        }
+        this.isEditing = false;
+        this.fetchSingleData({ pageId: id });
+        this.getData({});
+      } catch (error) {
+        this.$toast.show({ message: error });
+      }
+    },
     async fetchSingleData({ pageId }) {
       this.isFetching = true;
       try {
         const singleData = await this.fetchDataById(pageId);
-        console.log(singleData);
         if (!singleData.error) {
           this.singleViewData = singleData;
+          this.dataTags = singleData.tags ? singleData.tags.split(',') : [];
         } else {
           throw Error(singleData.error);
         }
@@ -194,33 +244,5 @@ export default {
         this.isActing = false;
       }
     },
-  },
-  watch: {
-    activeTab() {
-      this.resetSelectedRows();
-      this.getData();
-    },
-    currentPage(val) {
-      this.getData({ page: val });
-    },
-    search() {
-      this.getData();
-    },
-    country() {
-      this.getData();
-    },
-    category() {
-      this.getData();
-    },
-  },
-  mounted() {
-    const { active } = this.$route.query;
-    const valid = ['all', 'published', 'unpublished', 'draft'];
-    if (!active || valid.indexOf(active) === -1) {
-      this.activeTab = 'all';
-    } else {
-      this.activeTab = active;
-    }
-    this.getData({});
   },
 };

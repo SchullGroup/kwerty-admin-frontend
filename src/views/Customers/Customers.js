@@ -46,6 +46,11 @@ export default {
       pdf: 'PDF',
     },
   }),
+  watch: {
+    search() {
+      this.fetchAllCustomers();
+    },
+  },
   mounted() {
     this.fetchAllCustomers();
   },
@@ -60,9 +65,10 @@ export default {
       changeCustomerStatus: 'customers/changeCustomerStatus',
     }),
     async fetchAllCustomers() {
+      const { search } = this;
       this.isLoading = true;
       try {
-        const response = await this.getAllCustomers();
+        const response = await this.getAllCustomers({ search });
         if (!response.error) {
           this.pagination.page = response.currentPage;
           this.pagination.totalItems = response.total;

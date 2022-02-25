@@ -40,12 +40,12 @@ export default {
       totalItems: 0,
       totalPages: 1,
     },
-    categories: 'All Categories',
+    category: '',
     modalCategories: 'Economy',
     modalFrequency: 'Yearly',
-    frequency: 'All',
+    frequency: '',
     optionsCategories: {
-      all: 'All Categories',
+      '': 'All Categories',
       Agriculture: 'Agriculture',
       Economy: 'Economy',
       Finance: 'Finance',
@@ -56,6 +56,7 @@ export default {
       Trade: 'Trade',
     },
     optionsFrequency: {
+      '': 'All',
       quarterly: 'Quarterly',
       monthly: 'Monthly',
       yearly: 'Yearly',
@@ -79,6 +80,12 @@ export default {
       }
     },
     search() {
+      this.fetchIndicators();
+    },
+    frequency() {
+      this.fetchIndicators();
+    },
+    category() {
       this.fetchIndicators();
     },
   },
@@ -128,10 +135,12 @@ export default {
       }
     },
     async fetchIndicators(page = 1) {
-      const { search } = this;
+      const { search, frequency, category } = this;
       this.isLoading = true;
       try {
-        const fetchedIndicators = await this.getIndicators({ page, search });
+        const fetchedIndicators = await this.getIndicators({
+          page, options: search || frequency || category,
+        });
         if (!fetchedIndicators.error) {
           this.pagination.page = Number(fetchedIndicators.currentPage);
           this.pagination.totalPages = fetchedIndicators.totalPages;

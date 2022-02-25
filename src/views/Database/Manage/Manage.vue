@@ -19,25 +19,26 @@
               variant="dropdown"
               v-model="category"
               :optionsDisplay="categories"
+              searchInside="categories"
             ></k-input>
           </div>
           <div class="filter">
             <k-input
               type="select"
               label="Filter by Indicator"
-              variant="dropdown"
               v-model="indicator"
               :optionsDisplay="indicators"
+              searchInside='indicators'
+              @search='(val) => fetchIndicators({ name: val })'
             ></k-input>
           </div>
           <div class="filter">
             <k-input
               type="select"
               label="Filter by Country"
-              variant="dropdown"
               v-model="country"
               :optionsDisplay="countries"
-              filterInside
+              searchInside="countries"
             ></k-input>
           </div>
           <div class="button">
@@ -98,9 +99,12 @@
 
         <!-- BUTTONS WHEN NON DELETED DATA IS SELECTED -->
         <div class="header__controls">
-          <k-button variant="primary" @click="isEditing = true">{{
-            isEditing === true ? 'Save and Continue' : 'Edit'
-          }}</k-button>
+          <k-button v-if="!isEditing" variant="primary" @click="isEditing = true">
+            Edit
+          </k-button>
+          <k-button v-if="isEditing === true" variant="primary" @click="updateSingleData">
+            Save & Continue
+          </k-button>
           <k-button v-if="!isEditing" variant="secondary" @click="isEditing = false">
             Publish
           </k-button>
@@ -151,6 +155,8 @@
         :isEditing="isEditing"
         :data="singleViewData"
         :nameOfIndicator="currentNameOfIndicator"
+        :dataTags="dataTags"
+        @syncSingleData="(val) => singleViewData = {...val}"
       />
       <!-- DATA TABLE     -->
       <section class="content__body" v-else>

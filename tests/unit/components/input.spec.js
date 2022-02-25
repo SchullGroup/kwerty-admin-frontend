@@ -15,7 +15,7 @@ describe('Input Component', () => {
       },
     });
     mockEventObject = {
-      target: { classList: { contains: () => true }, tagName: 'OPTION' },
+      target: { classList: { contains: () => true }, tagName: 'OPTION', dataset: { value: 'hi' } },
     };
     mockProps = {
       code: 'Backspace',
@@ -29,11 +29,13 @@ describe('Input Component', () => {
       overrideType: null,
       $refs: {
         list: {
-          children: ['option1', 'option2'],
           addEventListener: jest.fn(),
           parentElement: {
             getBoundingClientRect: jest.fn().mockReturnValue({ top: 200 }),
           },
+        },
+        itemList: {
+          children: ['option1', 'option2'],
         },
       },
     };
@@ -102,12 +104,14 @@ describe('Input Component', () => {
   it('should close options and click element below', async () => {
     const target = {
       parentElement: { querySelector: jest.fn().mockImplementation((v) => v) },
+      closest: jest.fn().mockReturnValue({ focus: jest.fn() }),
+      click: jest.fn(),
     };
     Object.defineProperty(window.document, 'elementFromPoint', {
       writable: true,
       value: jest
         .fn()
-        .mockReturnValueOnce({ click: jest.fn() })
+        .mockReturnValueOnce({ click: jest.fn(), ...target })
         .mockReturnValueOnce(target.parentElement)
         .mockReturnValueOnce('svg')
         .mockReturnValueOnce('.input__icon')
@@ -165,6 +169,9 @@ describe('Input Component', () => {
 
     mockThis.filter = '';
     KInput.computed.filteredOptions.call(mockThis);
+
+    mockThis.filterInside = false;
+    KInput.computed.filteredOptions.call(mockThis);
   });
 
   it('should format date', () => {
@@ -175,5 +182,33 @@ describe('Input Component', () => {
 
     mockThis.date = 'not date';
     KInput.computed.formattedDate.call(mockThis);
+  });
+
+  it('updates position on update', () => {
+    const localMockThis = {
+      variant: 'select',
+      $refs: {
+        list: {
+          style: {},
+          classList: { contains: jest.fn(), add: jest.fn() },
+          addEventListener: jest.fn(),
+          parentElement: {
+            getBoundingClientRect: jest.fn().mockReturnValue({ top: 200 }),
+          },
+        },
+        itemList: {
+          children: { length: 10 },
+        },
+      },
+    };
+    KInput.updated.call(localMockThis);
+  });
+  it('focus inside search input when available', () => {
+    const localThis = {
+      $refs: { search: { focus: jest.fn() } },
+      searchInside: true,
+      isSelectOpen: true,
+    };
+    KInput.methods.focusInsideSearch.call(localThis);
   });
 });

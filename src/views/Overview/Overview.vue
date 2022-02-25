@@ -22,29 +22,34 @@
           <header class="header"><h2>Total Searches</h2></header>
           <div class="search__summary">
             <section class="search__summary__head">
-              <div class="search__summary__head__total">1.35m</div>
+              <div class="search__summary__head__total">{{ totalSearches | formatSearchVal }}</div>
               <div class="search__summary__head__other-details see-more">
-                <div class="value">23.12%</div>
+                <div class="value">{{ totalClicked }}%</div>
                 <div class="additional">clicked to see more</div>
               </div>
               <div class="search__summary__head__other-details new-account">
-                <div class="value">11,428</div>
+                <div class="value">{{ accounts }}</div>
                 <div class="additional">created a new account</div>
               </div>
             </section>
             <section class="search__summary__body">
               <header class="search__summary__body__heading">Total Search Per Category</header>
-              <div class="search__summary__body__chart">
+              <div v-if="isLoadingChart" class="outer-pie round">
+                <div class="radar"></div>
+                <div class="inner-pie round"></div>
+              </div>
+              <div v-else class="search__summary__body__chart">
                 <doughnut-wrapper
-                  :labels="doughnutLabels"
-                  :datasets="doughnutDatasets"
+                  v-if="chartDataset.length && showChart === true && !isLoadingChart"
+                  :labels="chartData.labels"
+                  :datasets="chartData.datasets"
                 ></doughnut-wrapper>
               </div>
               <div class="search__summary__body__labels">
-                <div class="label" v-for="(label, i) in doughnutLabels" :key="label">
+                <div class="label" v-for="(label, i) in chartData.labels" :key="label">
                   <div
                     class="color"
-                    :style="{ background: doughnutDatasets[0].backgroundColor[i] }"
+                    :style="{ background: chartData.datasets[0].backgroundColor[i] }"
                   ></div>
                   <div class="value">{{ label }}</div>
                 </div>
@@ -56,9 +61,14 @@
         <section class="recents">
           <header class="header">
             <h2>Your Recent Activity</h2>
-            <router-link :to="{ name: 'Activities', params: { type: 'admin' } }" class="link"
-              >View All</router-link
+            <button
+              @click="
+                $router.push({ name: 'Activities', params: { type: 'admin' }, query: { userName } })
+              "
+              class="link"
             >
+              View All
+            </button>
           </header>
           <table class="recent-activity">
             <thead>
@@ -69,7 +79,32 @@
               </tr>
             </thead>
             <tbody>
-              <div v-if="!activities" class="no-activity text-center">
+              <!-- loading state start-->
+              <template v-if="isLoading">
+                <tr v-for="i in Array(7).keys()" :key="i">
+                  <td
+                    v-for="field in displayFields"
+                    :key="i + field"
+                    :class="field"
+                    :id="field"
+                    style="height: 20px"
+                  >
+                    <div class="suspense w-70"></div>
+                  </td>
+                </tr>
+              </template>
+              <!-- loading state end -->
+              <template v-else>
+                <overview-table-row
+                  v-for="activity in recentActivities"
+                  :key="activity.activity + activity.createdAt"
+                  :activity="activity"
+                  :fields="displayFields"
+                >
+                </overview-table-row>
+              </template>
+              <!-- EMPTY STATE START -->
+              <div v-if="!recentActivities" class="no-activity text-center">
                 <div class="icon">
                   <svg width="22" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path :d="svgPath" fill="#666" />
@@ -77,25 +112,17 @@
                 </div>
                 <p>There has been no recent activity in the last 7 days.</p>
               </div>
-              <template v-else>
-                <overview-table-row
-                  v-for="activity in activities"
-                  :key="activity.action + activity.timestamp"
-                  :activity="activity"
-                  :fields="displayFields"
-                >
-                </overview-table-row>
-              </template>
+              <!-- EMPTY STATE END -->
             </tbody>
           </table>
         </section>
 
         <section class="active-customer">
           <h2>Most Active Customer</h2>
-          <img src="@/assets/active-customer.png" alt="" />
+          <img :src="topUser.imageUrl || dummyImage" alt="" />
           <div class="active-customer__details">
-            <p class="active-customer__name text-center">Oluwadare Ikenna</p>
-            <p class="active-customer__mail text-center">oluwaikenna@gmail.com</p>
+            <p class="active-customer__name text-center">{{ topUser.fullName }}</p>
+            <p class="active-customer__mail text-center">{{ topUser.email }}</p>
           </div>
           <button class="active-customer__button">View Profile</button>
         </section>
@@ -114,8 +141,12 @@
               </k-input>
             </div>
           </header>
-          <div class="active-users__content">
-            <line-wrapper :labels="lineLabels" :datasets="lineDatasets"></line-wrapper>
+          <div class="active-users__content" v-if="lineDatasets.length && showLineChart === true">
+            <line-wrapper
+              :labels="[]"
+              :datasets="lineData.datasets"
+              :isHours="activeUserPeriod === '24 hours'? true : false"
+            ></line-wrapper>
           </div>
         </section>
       </section>
