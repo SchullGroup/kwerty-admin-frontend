@@ -25,7 +25,7 @@
     <section class='country__body'>
       <div class='country--profile'>
         <div class='country--profile-image'>
-          <div class='select-country'>
+          <div class='select-country' v-if='!isEditView'>
             <k-input
               v-model='country'
               :optionsDisplay='countriesOptions'
@@ -52,7 +52,7 @@
               type='file'
               @change='uploadCountryImage($event)'
             />
-            {{ url === '' ? 'Add Photo' : 'Change Photo' }}
+            {{ !isEditView ? 'Add Photo' : 'Change Photo' }}
           </k-button>
         </div>
         <div class='country--profile-content'>
@@ -74,7 +74,7 @@
             searchInside='indicators'
             type='select'
             @input='addIndicator'
-            @search='(searchValue) => searchDatasets({searchValue})'
+            @search='(searchValue) => debounce(searchDatasets, 500)({searchValue})'
           ></k-input>
           <ul class='summary--indicators-items'>
             <li v-for='(item, index) in indicatorsShownList' :key='index' class='name'>
@@ -104,7 +104,7 @@
             searchInside='indicators'
             type='select'
             @input='addTopChart'
-            @search='(searchValue) => searchDatasets({searchValue})'
+            @search='(searchValue) => debounce(searchDatasets, 500)({searchValue})'
           ></k-input>
           <ul class='summary--indicators-items'>
             <li v-for='(item, index) in chartsShownList' :key='index' class='name'>
