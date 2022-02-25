@@ -73,11 +73,6 @@ export default {
     activeUserPeriod() {
       this.fetchActiveUsers();
     },
-    // isHours(val) {
-    //   if (val === true) {
-    //     this.showLineChart = false;
-    //   }
-    // },
   },
   computed: {
     ...mapGetters({
@@ -85,8 +80,8 @@ export default {
       recentActivities: 'dashboard/getRecentActivities',
     }),
     userName() {
-      const { firstName } = this.Profile;
-      return `${firstName}`;
+      const { firstName, lastName } = this.Profile;
+      return `${firstName} ${lastName}`;
     },
     chartData() {
       const { chartDataset } = this;
