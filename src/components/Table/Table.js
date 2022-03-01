@@ -39,6 +39,8 @@ export default {
   },
   data: () => ({
     selected: [],
+    sortField: '',
+    direction: 'asc',
   }),
   model: {
     event: 'change',
@@ -49,6 +51,31 @@ export default {
     },
     value(val) {
       this.selected = val;
+    },
+  },
+  computed: {
+    sorted() {
+      const { sortField, datalist, direction } = this;
+      if (!sortField) {
+        return datalist;
+      }
+      const newDatalist = [...datalist];
+      newDatalist.sort(this[direction](sortField));
+      return newDatalist;
+    },
+  },
+  methods: {
+    setSortField(fieldname) {
+      if (fieldname === this.sortField) {
+        this.direction = this.direction === 'asc' ? 'desc' : 'asc';
+      }
+      this.sortField = fieldname;
+    },
+    asc(sortField) {
+      return (a, b) => a[sortField].toString().localeCompare(b[sortField].toString());
+    },
+    desc(sortField) {
+      return (a, b) => b[sortField].toString().localeCompare(a[sortField].toString());
     },
   },
 };

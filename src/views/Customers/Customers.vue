@@ -19,7 +19,12 @@
       </div>
     </header>
     <div class="table__container">
+      <div v-if="search.length !== 0 && customers.length === 0" class="empty__state">
+        <img src="@/assets/empty.svg" alt="">
+        <p>No Customer found</p>
+      </div>
       <k-table
+        v-else
         :fields="tableFields"
         :fields-display="tableFieldsDisplay"
         :datalist="customers"
@@ -33,7 +38,7 @@
     </div>
     <!-- EXPORT MODAL -->
     <k-modal @close="modalOpen = false" :open="modalOpen">
-      <k-card variant="in-modal" heading="Export Activity">
+      <k-card variant="in-modal" heading="Export User List">
         <form class="form__items">
           <k-input label="Title" name="title" v-model="title"></k-input>
           <k-input

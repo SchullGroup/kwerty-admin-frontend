@@ -31,9 +31,18 @@
       </caption>
       <thead class="activity__data__header">
         <tr>
-          <th v-for="field in displayFields" :key="field" :class="field" :id="field">
+          <th
+            v-for="field in displayFields"
+            :key="field"
+            :class="field"
+            :id="field"
+            @click="setSortField(field)"
+          >
             <span class="value">{{ field === 'createdAt' ? 'Timestamp' : field }}</span>
-            <span class="caret"></span>
+            <span
+              class="caret"
+              :class="[{ asc: field === sortField && direction === 'asc' }]"
+            ></span>
           </th>
         </tr>
       </thead>
@@ -53,7 +62,7 @@
         </template>
         <template v-else>
           <activity-table-row
-            v-for="activity in activities"
+            v-for="activity in sorted"
             :key="activity.createdAt"
             :activity="activity"
             :fields="displayFields"

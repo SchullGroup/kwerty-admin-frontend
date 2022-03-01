@@ -40,7 +40,6 @@ export default {
     },
     duration: '7 days',
     optionsDisplay: {
-      alltime: 'All time',
       '24 hours': 'Last 24 hours',
       '7 days': 'Last 7 days',
       '30 days': 'Last 30 days',

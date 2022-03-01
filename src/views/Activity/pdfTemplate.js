@@ -28,13 +28,16 @@ th {
  text-transform: capitalize;
  text-align: left;
  padding-right: 10px;
- height: 50px;
 }
 td {
- text-transform: capitalize;
- font-size: 10px;
- height: 40px;
- padding-right: 10px;
+  text-transform: capitalize;
+  font-size: 10px;
+  height: 40px;
+  padding-right: 10px;
+}
+th,
+td {
+  width: 20%;
 }
 
 </style>`;

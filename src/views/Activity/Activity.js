@@ -27,6 +27,8 @@ export default {
     KDashboardLayout,
   },
   data: () => ({
+    sortField: '',
+    direction: 'asc',
     downloadData: [],
     type: null,
     page: 1,
@@ -52,7 +54,7 @@ export default {
       '12months': 'Last year',
     },
     modalOpen: false,
-    fileType: 'csv',
+    fileType: '',
     startDate: '',
     endDate: '',
     title: '',
@@ -98,6 +100,17 @@ export default {
     },
     activities() {
       return this.type === 'admin' ? this.adminActivities : this.userActivities;
+    },
+    sorted() {
+      const {
+        sortField, direction, activities,
+      } = this;
+      if (!sortField) {
+        return activities;
+      }
+      const newActivityData = [...activities];
+      newActivityData.sort(this[direction](sortField));
+      return newActivityData;
     },
   },
   methods: {
@@ -146,52 +159,66 @@ export default {
           fileType: fileType === 'pdf' ? 'csv' : 'csv',
           title,
         });
-        if (fileType === 'pdf') {
-          // eslint-disable-next-line no-useless-escape
-          const result = downloaded.replaceAll('\"', '')
-            .split('\n').map((row) => row.split(','));
-          const tableHeaders = result.shift();
-          const newResult = [];
-          result.forEach((r, i) => {
-            const dateIndex = r.length - 1;
-            const formattedDate = formatters.formatDate(r[dateIndex]);
-            newResult.push(result[i].splice(dateIndex, 1, formattedDate));
-          });
-          const options = { tableHeaders, tableBodyData: result, title };
-          const final = pdfTemplate(options);
-          const htmlBlob = new Blob([final], { type: 'text/plain' });
-          const htmlFile = new File([htmlBlob], { type: 'text/plain' });
-          const formData = new FormData();
-          formData.append('file', htmlFile);
-          const response = await downloadDataset({ data: formData, type: 'pdf' });
-          const responseBlob = new Blob([response.data], { type: 'application/pdf' });
-          const fileName = `${title}.pdf`;
-          saveAs(responseBlob, fileName);
-        } else {
-          const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
-          saveAs(blob, `${title}.csv`);
-          this.$toast.show({ message: `Exported ${title}.csv` });
+        if (!downloaded.includes('error')) {
+          if (fileType === 'pdf') {
+            // eslint-disable-next-line no-useless-escape
+            const result = downloaded.replaceAll('\"', '')
+              .split('\n').map((row) => row.split(','));
+            const tableHeaders = result.shift();
+            const newResult = [];
+            result.forEach((r, i) => {
+              const dateIndex = r.length - 1;
+              const formattedDate = formatters.formatDate(r[dateIndex]);
+              newResult.push(result[i].splice(dateIndex, 1, formattedDate));
+            });
+            const options = { tableHeaders, tableBodyData: result, title };
+            const final = pdfTemplate(options);
+            const htmlBlob = new Blob([final], { type: 'text/plain' });
+            const htmlFile = new File([htmlBlob], { type: 'text/plain' });
+            const formData = new FormData();
+            formData.append('file', htmlFile);
+            const response = await downloadDataset({ data: formData, type: 'pdf' });
+            const responseBlob = new Blob([response.data], { type: 'application/pdf' });
+            const fileName = `${title}.pdf`;
+            saveAs(responseBlob, fileName);
+          } else {
+            const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
+            saveAs(blob, `${title}.csv`);
+            this.$toast.show({ message: `Exported ${title}.csv` });
+          }
+        } else if (downloaded.includes('error')) {
+          this.$toast.show({ message: 'No data for date range' });
         }
-        this.isDownLoading = false;
         this.reset();
       } catch (error) {
         this.$toast.show({ message: error });
       }
     },
     reset() {
+      this.isDownLoading = false;
       this.startDate = '';
       this.endDate = '';
       this.fileType = '';
       this.title = '';
       this.modalOpen = false;
     },
+    setSortField(fieldname) {
+      // console.log(this.sorted);
+      if (fieldname === this.sortField) {
+        this.direction = this.direction === 'asc' ? 'desc' : 'asc';
+      }
+      this.sortField = fieldname;
+    },
+    asc(sortField) {
+      return (a, b) => a[sortField].toString().localeCompare(b[sortField].toString());
+    },
+    desc(sortField) {
+      return (a, b) => b[sortField].toString().localeCompare(a[sortField].toString());
+    },
     setType() {
       const { type } = this.$route.params;
       this.type = type === 'admin' ? 'admin' : 'user';
       if (!this.$route.query.userName) this.fetchActivities();
-    },
-    modelAdminName() {
-      this.$route.query.userName = this.search;
     },
     nextPage() {
       this.page += 1;

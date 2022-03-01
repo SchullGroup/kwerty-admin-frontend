@@ -66,6 +66,9 @@
       border-top-color: $black;
       margin-top: 0.4rem;
     }
+    &.active {
+      background: rgba($black, 0.05)
+    }
   }
   th .timestamp {
     text-align: right;
@@ -110,4 +113,10 @@
       }
     }
   }
+}
+
+
+.asc {
+  transform: rotateZ(180deg);
+  margin-bottom: 0.75rem;
 }

@@ -31,7 +31,15 @@
       </div>
     </header>
     <div class="table__content">
+      <div
+        v-if="duration.length !== '' && customerData.length === 0 && !isLoading"
+        class="empty__state"
+      >
+        <img src="@/assets/empty.svg" alt="" />
+        <p>No User Activities found for the last {{ duration }}</p>
+      </div>
       <k-table
+        v-else
         :fields="tableFields"
         :fields-display="tableFieldsDisplay"
         :datalist="customerData"
@@ -109,7 +117,6 @@ export default {
     duration: '7 days',
     modalOpen: false,
     optionsDurations: {
-      '': 'All Time',
       '24hours': 'Last 24 hours',
       '7days': 'Last 7 days',
       '30days': 'Last 30 days',
@@ -162,6 +169,7 @@ export default {
     }),
     async getSingleUserActivities(id, page = 1) {
       const { duration } = this;
+      this.isLoading = true;
       try {
         const response = await this.singleCustomerActivities({ id, duration, page });
         if (!response.error) {
@@ -173,6 +181,7 @@ export default {
       } catch (error) {
         this.$toast.show({ message: error });
       }
+      this.isLoading = false;
     },
     async downloadCsv() {
       const {
@@ -281,5 +290,13 @@ export default {
   display: grid;
   grid-template-columns: max-content 16.5rem max-content;
   grid-column-gap: 1.6rem;
+}
+.empty__state {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

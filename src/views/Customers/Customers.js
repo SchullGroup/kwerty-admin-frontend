@@ -51,6 +51,9 @@ export default {
     search() {
       this.fetchAllCustomers();
     },
+    page(val) {
+      this.fetchAllCustomers(val);
+    },
   },
   mounted() {
     this.fetchAllCustomers();
@@ -66,8 +69,8 @@ export default {
       changeCustomerStatus: 'customers/changeCustomerStatus',
       exportCustomers: 'customers/exportCustomers',
     }),
-    async fetchAllCustomers() {
-      const { search, page } = this;
+    async fetchAllCustomers(page = 1) {
+      const { search } = this;
       this.isLoading = true;
       try {
         const response = await this.getAllCustomers({ page, nameOrEmail: search });
