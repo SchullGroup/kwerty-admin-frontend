@@ -116,27 +116,32 @@
             </tbody>
           </table>
         </section>
-        <template v-if="mostActiveUser.length === 0">
-          <p>There is no active user in the last{{ overviewDuration }}</p>
-        </template>
-        <section v-else class="active-customer">
-          <h2>Most Active Customer</h2>
-          <img :src="topUser.imageUrl || dummyImage" alt="" />
-          <div class="active-customer__details">
-            <p class="active-customer__name text-center">{{ topUser.fullName }}</p>
-            <p class="active-customer__mail text-center">{{ topUser.email }}</p>
+
+        <section class="active-customer">
+          <!-- <template v-if="mostActiveUser.length === 0 && isLoadingUser !== true">
+            <div class="loading">
+              <span></span>
+            </div>
+          </template> -->
+          <div class="active-customer-content">
+            <h2>Most Active Customer</h2>
+            <img :src="topUser.imageUrl || dummyImage" alt="" />
+            <div class="active-customer-content__details">
+              <p class="active-customer-content__name text-center">{{ topUser.fullName }}</p>
+              <p class="active-customer-content__mail text-center">{{ topUser.email }}</p>
+            </div>
+            <button
+              class="active-customer-content__button"
+              @click="
+                $router.push({
+                  name: 'SingleCustomer',
+                  query: { id: topUser.id, name: topUser.fullName },
+                })
+              "
+            >
+              View Profile
+            </button>
           </div>
-          <button
-            class="active-customer__button"
-            @click="
-              $router.push({
-                name: 'SingleCustomer',
-                query: { id: topUser.id, name: topUser.fullName },
-              })
-            "
-          >
-            View Profile
-          </button>
         </section>
 
         <section class="active-users">

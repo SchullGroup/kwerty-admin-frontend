@@ -33,10 +33,22 @@ const mockDownload = {
   formatISO: jest.fn(),
   saveAs: jest.fn(),
   type: 'admin',
-  startdate: '',
-  enddate: '',
+  startDate: 'Tue Feb 22 2022 15:30:22 GMT+0000 (Greenwich Mean Time)',
+  endDate: 'Tue Feb 22 2022 15:30:22 GMT+0000 (Greenwich Mean Time)',
   fileType: 'pdf',
   title: 'Title of pdf',
+  fieldname: 'createdAt',
+  sortField: 'someField',
+  direction: 'asc',
+  reset: jest.fn(),
+  exportActivities: jest
+    .fn()
+    .mockResolvedValueOnce([
+      'name', 'activity', 'imageUrl', 'status',
+    ])
+    .mockResolvedValueOnce([
+      'error',
+    ]),
 };
 
 describe('Activity Component', () => {
@@ -85,6 +97,9 @@ describe('Activity Component', () => {
     ActivityHome.methods.downloadActivities.call(mockDownload);
     ActivityHome.methods.downloadActivities.call(mockDownload);
     ActivityHome.methods.downloadActivities.call(mockDownload);
+    ActivityHome.methods.setSortField.call(mockDownload);
+    ActivityHome.methods.asc.call(mockDownload);
+    ActivityHome.methods.desc.call(mockDownload);
     expect(wrapper.vm.reset());
   });
   it('should fromat the date', () => {

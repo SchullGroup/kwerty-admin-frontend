@@ -148,6 +148,7 @@ export default {
         fileType,
         title,
       } = this;
+      console.log(startDate);
       const startdate = formatISO(new Date(startDate));
       const enddate = formatISO(new Date(endDate));
       this.isDownLoading = true;

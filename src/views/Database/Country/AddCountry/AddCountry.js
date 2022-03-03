@@ -129,10 +129,16 @@ export default {
     },
     async uploadResource(e) {
       this.isUploadingResource = true;
-      const { url, name } = await this.uploadFile(e);
-      this.isUploadingResource = false;
-      this.resources.push([name, url]);
-      this.$toast.show({ message: 'Resource Uploaded' });
+      try {
+        const { url, name } = await this.uploadFile(e);
+        this.isUploadingResource = false;
+        this.resources.push([name, url]);
+        this.$toast.show({ message: 'Resource Uploaded' });
+      } catch (error) {
+        this.$toast.show({ message: 'Invalid file type' });
+      } finally {
+        this.isUploadingResource = false;
+      }
     },
     async searchDatasets({ searchValue }) {
       try {

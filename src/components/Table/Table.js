@@ -41,6 +41,10 @@ export default {
     selected: [],
     sortField: '',
     direction: 'asc',
+    // order: {
+    //   asc: () => {
+    //   }
+    // }
   }),
   model: {
     event: 'change',

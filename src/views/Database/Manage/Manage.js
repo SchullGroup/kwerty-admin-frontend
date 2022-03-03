@@ -81,7 +81,7 @@ export default {
       this.activeTab = active;
     }
     this.getData({});
-    this.getIndicators();
+    this.getIndicatorsList();
   },
   watch: {
     activeTab() {

@@ -244,49 +244,53 @@
     }
   }
   .active-customer {
-    display: flex;
-    flex-flow: column nowrap;
-    padding: 2.4rem 0;
-    border-color: $primary-purple;
     background: $darker-purple;
-    color: $grey-light;
-
-    h2 {
-      padding: 0 2.4rem;
-    }
-
-    &__details {
-      margin: 2.4rem auto;
-    }
-
-    &__name {
-      margin: 0 0 0.8rem;
-      font-weight: 600;
-      font-size: 1.6rem;
-      line-height: 1.9rem;
-    }
-
-    &__button {
-      background: none;
-      height: 64px;
-      width: max-content;
+    position: relative;
+    &-content{
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 3.2rem;
-      margin: auto;
-      color: inherit;
-      border: 1px solid $grey;
-      border-radius: 0.8rem;
-      transition: background-color 100ms ease-out;
-
-      &:hover {
-        background: $primary-purple;
-        border-color: transparent;
+      flex-flow: column nowrap;
+      border-color: $primary-purple;
+      color: $grey-light;
+      img {
+        width: 100%;
       }
-
-      &:active {
-        background: $dark-purple;
+      h2 {
+        padding: 0 2.4rem;
+      }
+  
+      &__details {
+        margin: 2.4rem auto;
+      }
+  
+      &__name {
+        margin: 0 0 0.8rem;
+        font-weight: 600;
+        font-size: 1.6rem;
+        line-height: 1.9rem;
+      }
+  
+      &__button {
+        background: none;
+        height: 64px;
+        width: max-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 3.2rem;
+        margin: auto;
+        color: inherit;
+        border: 1px solid $grey;
+        border-radius: 0.8rem;
+        transition: background-color 100ms ease-out;
+  
+        &:hover {
+          background: $primary-purple;
+          border-color: transparent;
+        }
+  
+        &:active {
+          background: $dark-purple;
+        }
       }
     }
   }
@@ -351,4 +355,8 @@
   to {
     transform: rotateZ(360deg);
   }
+}
+
+.suspense{
+  margin-left: 2.4rem;
 }
