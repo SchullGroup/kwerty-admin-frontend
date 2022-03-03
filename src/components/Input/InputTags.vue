@@ -6,7 +6,7 @@
         <p class="item" v-for="(t, i) in tags" :key="t + i">
           {{ t }}
           <span @click="removeTag(i)" class="close"
-            ><img src="https://one-percent-bucket-1.s3.us-west-2.amazonaws.com/kwertyassets/deleteIcon.svg" alt=""
+            ><img src="@/assets/deleteIcon.svg" alt=""
           /></span>
         </p>
         <input type="text" v-model="tag" @keyup="handleKey" />
