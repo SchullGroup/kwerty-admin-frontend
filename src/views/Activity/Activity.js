@@ -203,7 +203,6 @@ export default {
       this.modalOpen = false;
     },
     setSortField(fieldname) {
-      // console.log(this.sorted);
       if (fieldname === this.sortField) {
         this.direction = this.direction === 'asc' ? 'desc' : 'asc';
       }
