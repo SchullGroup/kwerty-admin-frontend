@@ -130,7 +130,7 @@
               v-model="newIndicator.frequency"
               :optionsDisplay="optionsFrequency"
             ></k-input>
-            <k-input
+            <!-- <k-input
               label="Country"
               type="select"
               v-model="newIndicator.country"
@@ -152,7 +152,7 @@
               :optionsDisplay="dateRange"
               v-model="newIndicator.endYear"
               searchInside="EndDate"
-            ></k-input>
+            ></k-input> -->
             <k-input-tag v-model="tags"></k-input-tag>
             <div class="btn-wrapper">
               <k-button variant="link" @click="resetForm">Cancel</k-button>
