@@ -143,7 +143,7 @@ export default {
           throw Error(createdIndicator.error);
         }
         this.isCreating = false;
-        this.resetForm();
+        this.resetNewIndicatorForm();
       } catch (error) {
         this.$toast.show({ message: error });
         this.isCreating = false;
@@ -245,6 +245,18 @@ export default {
       this.indicator = currentIndicator;
       this.tags = this.indicator.tags ? this.indicator.tags.split(',') : [];
       this.editIndicatorModal = true;
+    },
+    resetNewIndicatorForm() {
+      const { page } = this;
+      this.newIndicator.name = '';
+      this.newIndicator.category = '';
+      this.newIndicator.frequency = '';
+      this.newIndicator.country = '';
+      this.newIndicator.startYear = '';
+      this.newIndicator.endYear = '';
+      this.tags = [];
+      this.showModal = false;
+      this.fetchIndicators(page);
     },
     resetForm() {
       const { page } = this;
