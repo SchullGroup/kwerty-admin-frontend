@@ -19,9 +19,12 @@
       <div class="form__grid">
         <k-input
           label="Country"
+          type="select"
           placeholder="Country"
           :disabled="!isEditing"
           v-model="data.country"
+          :optionsDisplay="countries"
+          searchInside="countries"
         />
         <k-input label="Metric" placeholder="Metric" :disabled="!isEditing" v-model="data.metric" />
       </div>
@@ -128,6 +131,9 @@
 
 <script>
 import { KInput, KInputTag } from '@/components';
+import countries from '@/utils/countries';
+
+countries[''] = 'All Countries';
 
 export default {
   name: 'SingleData',
@@ -159,6 +165,7 @@ export default {
   data: () => ({
     message: 'Type in related keywords',
     singleData: {},
+    countries,
     newData: {
       period: '',
       value: '',
