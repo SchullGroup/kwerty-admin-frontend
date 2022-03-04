@@ -37,11 +37,10 @@ export default {
             const result = downloaded.replaceAll('\"', '')
               .split('\n').map((row) => row.split(','));
             const tableHeaders = result.shift();
-            const newResult = [];
             result.forEach((r, i) => {
               const dateIndex = r.length - 3;
               const formattedDate = formatters.formatDate(r[dateIndex]);
-              newResult.push(result[i].splice(dateIndex, 1, formattedDate));
+              result[i].splice(dateIndex, 1, formattedDate);
             });
             const options = { tableHeaders, tableBodyData: result, title };
             const final = pdfTemplate(options);
