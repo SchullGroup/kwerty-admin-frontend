@@ -74,7 +74,7 @@ export default function pdfTemplate(options) {
        ${tableBody}
      </tbody>
    </table>`;
-    const result = `
+    return `
      ${head}
      <body>
       <div class="container">
@@ -83,7 +83,6 @@ export default function pdfTemplate(options) {
       </div>
      </body>
  `;
-    return result;
   } catch (e) {
     console.log(e);
   }
