@@ -275,10 +275,6 @@ export default {
     box-sizing: border-box;
     width: 100%;
   }
-  thead {
-    position: relative;
-    z-index: 10;
-  }
 
   td,
   th {
@@ -367,6 +363,7 @@ export default {
     background-color: $grey-light;
     position: sticky;
     top: 0;
+    z-index: 10;
   }
 }
 
