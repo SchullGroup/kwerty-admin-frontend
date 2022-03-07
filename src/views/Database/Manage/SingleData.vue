@@ -386,14 +386,12 @@ export default {
   border-radius: 0.8rem;
   // padding: 1rem 3rem;
   font-size: 20px;
-  box-sizing: border-box;
   .content {
     display: flex;
     flex-flow: wrap;
     grid-gap: 2rem;
     margin-bottom: 1.6rem;
     .tag-input {
-      font-size: 20px;
       white-space: nowrap;
       width: auto;
       height: 3.6rem;
@@ -401,11 +399,8 @@ export default {
       background: $grey-light;
       border-radius: 0.8rem;
       font-weight: 500;
-      font-size: 1.4rem;
-      line-height: 1.6rem;
       color: $black;
       border: none;
-      font-weight: 500;
       font-size: 1.4rem;
       line-height: 1.2rem;
       margin-bottom: 1.6rem;
