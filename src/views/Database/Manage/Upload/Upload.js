@@ -2,10 +2,7 @@ import { read, utils } from 'xlsx';
 import vue2Dropzone from 'vue2-dropzone';
 import { mapActions } from 'vuex';
 import {
-  KDashboardLayout,
-  KButton,
-  KInput,
-  KModal,
+  KButton, KDashboardLayout, KInput, KModal,
 } from '@/components';
 
 export default {
@@ -30,7 +27,19 @@ export default {
     },
     filename: '',
     fileData: [],
-    fileFields: [],
+    fileFields: [
+      'Country',
+      'Indicator',
+      'Source',
+      'Link',
+      'Currency Code',
+      'Unit',
+      'Category',
+      'Frequency',
+      'Country Code',
+      "Indicator's Definition",
+      'Note',
+    ],
     htmlFile: null,
     dataIsUploading: false,
   }),
@@ -52,11 +61,20 @@ export default {
         const data = await file.arrayBuffer();
         const res = read(data);
         const sheetData = utils.sheet_to_json(Object.values(res.Sheets)[0]);
+        console.log(sheetData);
         this.fileData = sheetData;
-        this.fileFields = new Set();
-        Object.keys(sheetData[0]).forEach((k) => {
-          this.fileFields.add(k);
+        // this.fileFields = new Set();
+        const remainingFields = [];
+        sheetData.forEach((line) => {
+          Object.keys(line).forEach((k) => {
+            if (!this.fileFields.includes(k) && !remainingFields.includes(k)) {
+              remainingFields.push(k);
+            }
+          });
         });
+        // this.fileFields = Array.from(this.fileFields);
+        remainingFields.sort((a, b) => String(a).localeCompare(String(b)));
+        this.fileFields = this.fileFields.concat(remainingFields);
       } catch (e) {
         this.$toast.show({ message: e });
       } finally {
