@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
   if (!isAuthView && !isAuthenticated) next({ name: 'Login' });
   else {
     const { id } = store.getters['auth/getUser'];
-    getProfile({ id, token });
+    if (!isAuthView) getProfile({ id, token });
     next();
   }
 });
