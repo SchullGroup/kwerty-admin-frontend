@@ -10,7 +10,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghfghbkyfcghyegehhe',
@@ -18,7 +18,7 @@ export default {
       country: 'Norway',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date(2021, 2, 7).toDateString(),
     },
     {
       id: 'fghdjkyfjhyegehhe',
@@ -26,7 +26,7 @@ export default {
       country: 'Norway',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghertfcghyegehhe',
@@ -34,7 +34,7 @@ export default {
       country: 'Italy',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fgxcvyfcghyegehhe',
@@ -42,7 +42,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcghyegehhe',
@@ -50,7 +50,7 @@ export default {
       country: 'Norway',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcghtryhhe',
@@ -58,7 +58,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcgghjehhe',
@@ -66,7 +66,7 @@ export default {
       country: 'Italy',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfctyuigehhe',
@@ -74,7 +74,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcgrtyugehhe',
@@ -82,7 +82,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfghjyegehhe',
@@ -90,7 +90,7 @@ export default {
       country: 'Norway',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcghtfghhe',
@@ -98,7 +98,7 @@ export default {
       country: 'Italy',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcgfghgehhe',
@@ -106,7 +106,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcghjigehhe',
@@ -114,7 +114,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcghyegehhe',
@@ -122,7 +122,7 @@ export default {
       country: 'Norway',
       startYear: '1985',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcghtyukhhe',
@@ -130,7 +130,7 @@ export default {
       country: 'Italy',
       startYear: '1985',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcfghgehhe',
@@ -138,7 +138,7 @@ export default {
       country: 'Poland',
       startYear: '1985',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 'fghdjkyfcgfcvbehhe',
@@ -146,7 +146,7 @@ export default {
       country: 'Poland',
       startYear: '1985',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
   ],
   published: [
@@ -156,7 +156,7 @@ export default {
       country: 'Norway',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 19,
@@ -164,7 +164,7 @@ export default {
       country: 'Norway',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 20,
@@ -172,7 +172,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 21,
@@ -180,7 +180,7 @@ export default {
       country: 'Italy',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 22,
@@ -188,7 +188,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 23,
@@ -196,7 +196,7 @@ export default {
       country: 'Italy',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 24,
@@ -204,7 +204,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 25,
@@ -212,7 +212,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 26,
@@ -220,7 +220,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 27,
@@ -228,7 +228,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
   ],
   drafts: [
@@ -238,7 +238,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 29,
@@ -246,7 +246,7 @@ export default {
       country: 'Italy',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 30,
@@ -254,7 +254,7 @@ export default {
       country: 'Norway',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 31,
@@ -262,7 +262,7 @@ export default {
       country: 'Italy',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 33,
@@ -270,7 +270,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 34,
@@ -278,7 +278,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 35,
@@ -286,7 +286,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 36,
@@ -294,7 +294,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
   ],
   deleted: [
@@ -304,7 +304,7 @@ export default {
       country: 'Poland',
       startYear: '1986',
       endYear: '2020',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
 
   ],
@@ -315,7 +315,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 39,
@@ -323,7 +323,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 40,
@@ -331,7 +331,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 41,
@@ -339,7 +339,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 42,
@@ -347,7 +347,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 43,
@@ -355,7 +355,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 44,
@@ -363,7 +363,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 45,
@@ -371,7 +371,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 46,
@@ -379,7 +379,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 47,
@@ -387,7 +387,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 48,
@@ -395,7 +395,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 49,
@@ -403,7 +403,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 50,
@@ -411,7 +411,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 51,
@@ -419,7 +419,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 52,
@@ -427,7 +427,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 53,
@@ -435,7 +435,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 54,
@@ -443,7 +443,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 55,
@@ -451,7 +451,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 56,
@@ -459,7 +459,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
     {
       id: 57,
@@ -467,7 +467,7 @@ export default {
       category: 'Economy',
       frequency: 'Yearly',
       available: '20',
-      lastModified: '4:32 PM, 22-02-2021',
+      lastModified: new Date().toDateString(),
     },
   ],
   single: {
@@ -477,7 +477,7 @@ export default {
     country: 'Poland',
     startYear: '1986',
     endYear: '2020',
-    lastModified: '4:32 PM, 22-02-2021',
+    lastModified: new Date().toDateString(),
     metric: 'United States Dollar',
     frequency: 'Yearly',
     source: 'World Bank',
@@ -524,7 +524,7 @@ export default {
       name: 'Jason Fried',
       email: 'jason.fried@gmail.com',
       joined: '18-02-2021',
-      lastSeen: '4:32 PM, 22-02-2021',
+      lastSeen: new Date().toDateString(),
       imgUrl: img1,
       status: 'active',
     },
@@ -533,7 +533,7 @@ export default {
       name: 'Jason Fried',
       email: 'jason.fried@gmail.com',
       joined: '18-02-2021',
-      lastSeen: '4:32 PM, 22-02-2021',
+      lastSeen: new Date().toDateString(),
       imgUrl: img2,
       status: 'active',
     },
@@ -542,7 +542,7 @@ export default {
       name: 'Jason Fried',
       email: 'jason.fried@gmail.com',
       joined: '18-02-2021',
-      lastSeen: '4:32 PM, 22-02-2021',
+      lastSeen: new Date().toDateString(),
       imgUrl: img3,
       status: 'active',
     },
@@ -551,7 +551,7 @@ export default {
       name: 'Jason Fried',
       email: 'jason.fried@gmail.com',
       joined: '18-02-2021',
-      lastSeen: '4:32 PM, 22-02-2021',
+      lastSeen: new Date().toDateString(),
       imgUrl: img1,
       status: 'active',
     },
@@ -560,7 +560,7 @@ export default {
       name: 'Jason Fried',
       email: 'jason.fried@gmail.com',
       joined: '18-02-2021',
-      lastSeen: '4:32 PM, 22-02-2021',
+      lastSeen: new Date().toDateString(),
       imgUrl: img2,
       status: 'disabled',
     },
@@ -569,7 +569,7 @@ export default {
       name: 'Jason Fried',
       email: 'jason.fried@gmail.com',
       joined: '18-02-2021',
-      lastSeen: '4:32 PM, 22-02-2021',
+      lastSeen: new Date().toDateString(),
       imgUrl: img3,
       status: 'disabled',
     },
@@ -578,7 +578,7 @@ export default {
       name: 'Jason Fried',
       email: 'jason.fried@gmail.com',
       joined: '18-02-2021',
-      lastSeen: '4:32 PM, 22-02-2021',
+      lastSeen: new Date().toDateString(),
       imgUrl: img1,
       status: 'active',
     },
@@ -587,7 +587,7 @@ export default {
       name: 'Jason Fried',
       email: 'jason.fried@gmail.com',
       joined: '18-02-2021',
-      lastSeen: '4:32 PM, 22-02-2021',
+      lastSeen: new Date().toDateString(),
       imgUrl: img1,
       status: 'active',
     },

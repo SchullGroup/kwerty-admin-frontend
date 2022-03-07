@@ -6,7 +6,7 @@
         <p class="item" v-for="(t, i) in tags" :key="t + i">
           {{ t }}
           <span @click="removeTag(i)" class="close"
-            ><img src="https://one-percent-bucket-1.s3.us-west-2.amazonaws.com/kwertyassets/deleteIcon.svg" alt=""
+            ><img src="@/assets/deleteIcon.svg" alt=""
           /></span>
         </p>
         <input type="text" v-model="tag" @keyup="handleKey" />
@@ -66,7 +66,6 @@ export default {
   border-radius: 0.8rem;
   padding: 1rem 3rem;
   font-size: 20px;
-  box-sizing: border-box;
 }
 .content {
   display: flex;
@@ -114,7 +113,6 @@ export default {
   transition: opacity 200ms ease, transform 200ms cubic-bezier(0.25, 0.75, 0.8, 1.25);
 }
 input {
-  font-size: 20px;
   white-space: nowrap;
   width: 10rem;
   height: 3.6rem;

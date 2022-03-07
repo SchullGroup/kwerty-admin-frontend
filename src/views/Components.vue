@@ -3,6 +3,17 @@
     <div class='container'>
       <h2>Components</h2>
       <h2>primary button</h2>
+      <section class='table'>
+        <h2>Table</h2>
+        <div class='selected'>selected: {{ selected.length }}</div>
+        <div>{{ selected }}</div>
+        <k-table
+          v-model='selected'
+          :datalist='allTableData'
+          :fields='tableFields'
+          :fields-display='tableFieldsDisplay'
+        ></k-table>
+      </section>
       <div class="content">
         <k-button>Primary Button</k-button>
         <k-button>Primary button hover</k-button>
@@ -119,7 +130,7 @@
       <div class='modal'>
         <h2>Modal</h2>
         <k-button @click='modalOpen = true'>Open Modal</k-button>
-        <k-modal :open='modalOpen'>
+        <!-- <k-modal :open='modalOpen'>
           <k-card heading='Add Role' variant='in-modal'>
             <k-input v-model='roleTitle' label='Title'></k-input>
             <br />
@@ -129,7 +140,7 @@
               <k-button variant='link' @click='modalOpen = false'>Close</k-button>
             </div>
           </k-card>
-        </k-modal>
+        </k-modal> -->
       </div>
       <k-pagination
         :forTable='true'
@@ -141,18 +152,6 @@
         @goToNext='nextPage'
         @goToPrev='prevPage'
       ></k-pagination>
-
-      <section class='table'>
-        <h2>Table</h2>
-        <div class='selected'>selected: {{ selected.length }}</div>
-        <div>{{ selected }}</div>
-        <k-table
-          v-model='selected'
-          :datalist='allTableData'
-          :fields='tableFields'
-          :fields-display='tableFieldsDisplay'
-        ></k-table>
-      </section>
       <section>
         <k-input-tag v-model='tags'></k-input-tag>
       </section>
@@ -168,7 +167,7 @@ import {
   KIcons,
   KInput,
   KInputTag,
-  KModal,
+  // KModal,
   KPagination,
   KTable,
 } from '@/components';
@@ -177,7 +176,7 @@ import database from '@/utils/dummy-database';
 export default {
   name: 'Components',
   components: {
-    KModal,
+    // KModal,
     KButton,
     // KCheckbox,
     KCard,

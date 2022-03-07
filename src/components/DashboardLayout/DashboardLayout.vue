@@ -26,7 +26,7 @@
         </ul>
       </nav>
       <div class="user">
-        <div class="user__avatar">
+        <div class="user__avatar" @click="$router.push({ name: 'Settings' })">
           <img src="@/assets/avatar.png" :alt="profile.firstName">
         </div>
         <div class="user__details">

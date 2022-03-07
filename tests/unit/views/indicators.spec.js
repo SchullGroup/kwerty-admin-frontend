@@ -81,8 +81,6 @@ describe('Database indicators page', () => {
   });
   it('expected to run other methods', async () => {
     expect(wrapper.vm.resetForm());
-    expect(wrapper.vm.closeAddIndicators(mockThis));
-    expect(wrapper.vm.closeEditIndicators(mockThis));
     expect(wrapper.vm.prevPage({ page: 1 }));
     expect(wrapper.vm.nextPage({ page: 1 }));
     expect(wrapper.vm.firstPage());

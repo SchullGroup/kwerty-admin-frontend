@@ -40,7 +40,6 @@ export default {
     },
     duration: '7 days',
     optionsDisplay: {
-      alltime: 'All time',
       '24 hours': 'Last 24 hours',
       '7 days': 'Last 7 days',
       '30 days': 'Last 30 days',
@@ -96,7 +95,6 @@ export default {
           this.countriesNotFound = response.data.data.countriesNotFound;
           this.isLoading = false;
           this.topUsers = response.data.data.topUsers;
-          // this.$toast.show({ message: response.data.message });
         } else {
           throw Error(response.error);
         }

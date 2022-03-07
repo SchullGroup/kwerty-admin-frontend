@@ -27,9 +27,9 @@
               type="select"
               label="Filter by Indicator"
               v-model="indicator"
-              :optionsDisplay="indicators"
+              :optionsDisplay="indicatorsFromState"
               searchInside="indicators"
-              @search="(val) => fetchIndicators({ name: val })"
+              @search="(val) => fetchIndicatorsList({ name: val })"
             ></k-input>
           </div>
           <div class="filter">

@@ -2,15 +2,18 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
   created() {
-    this.getIndicators();
+    this.getIndicatorsList();
   },
   computed: {
-    ...mapGetters({ indicators: 'indicators/asOptions', categories: 'indicators/categoryOptions' }),
+    ...mapGetters({
+      indicatorsFromState: 'indicators/asOptions',
+      categories: 'indicators/categoryOptions',
+    }),
   },
   methods: {
     ...mapActions({
-      getIndicators: 'indicators/getInitialIndicators',
-      fetchIndicators: 'indicators/fetchIndicatorsWith',
+      getIndicatorsList: 'indicators/getInitialIndicators',
+      fetchIndicatorsList: 'indicators/fetchIndicatorsWith',
     }),
   },
 };

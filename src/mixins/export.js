@@ -31,33 +31,36 @@ export default {
           fileType: fileType === 'pdf' ? 'csv' : 'csv',
           title,
         });
-        if (fileType === 'pdf') {
-          // eslint-disable-next-line no-useless-escape
-          const result = downloaded.replaceAll('\"', '')
-            .split('\n').map((row) => row.split(','));
-          const tableHeaders = result.shift();
-          const newResult = [];
-          result.forEach((r, i) => {
-            const dateIndex = r.length - 3;
-            const formattedDate = formatters.formatDate(r[dateIndex]);
-            newResult.push(result[i].splice(dateIndex, 1, formattedDate));
-          });
-          const options = { tableHeaders, tableBodyData: result, title };
-          const final = pdfTemplate(options);
-          const htmlBlob = new Blob([final], { type: 'text/plain' });
-          const htmlFile = new File([htmlBlob], { type: 'text/plain' });
-          const formData = new FormData();
-          formData.append('file', htmlFile);
-          const response = await downloadDataset({ data: formData, type: 'pdf' });
-          const responseBlob = new Blob([response.data], { type: 'application/pdf' });
-          const fileName = `${title}.pdf`;
-          saveAs(responseBlob, fileName);
-          this.isDownLoading = false;
-        } else {
-          const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
-          saveAs(blob, `${title}.csv`);
-          this.$toast.show({ message: `Exported ${title}.csv` });
-          this.isDownloading = false;
+        if (!downloaded.error) {
+          if (fileType === 'pdf') {
+            // eslint-disable-next-line no-useless-escape
+            const result = downloaded.replaceAll('\"', '')
+              .split('\n').map((row) => row.split(','));
+            const tableHeaders = result.shift();
+            result.forEach((r, i) => {
+              const dateIndex = r.length - 3;
+              const formattedDate = formatters.formatDate(r[dateIndex]);
+              result[i].splice(dateIndex, 1, formattedDate);
+            });
+            const options = { tableHeaders, tableBodyData: result, title };
+            const final = pdfTemplate(options);
+            const htmlBlob = new Blob([final], { type: 'text/plain' });
+            const htmlFile = new File([htmlBlob], { type: 'text/plain' });
+            const formData = new FormData();
+            formData.append('file', htmlFile);
+            const response = await downloadDataset({ data: formData, type: 'pdf' });
+            const responseBlob = new Blob([response.data], { type: 'application/pdf' });
+            const fileName = `${title}.pdf`;
+            saveAs(responseBlob, fileName);
+            this.isDownLoading = false;
+          } else {
+            const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
+            saveAs(blob, `${title}.csv`);
+            this.$toast.show({ message: `Exported ${title}.csv` });
+            this.isDownloading = false;
+          }
+        } else if (downloaded.error === 'Customer not found') {
+          this.$toast.show({ message: 'Customer not found within the specified date range' });
         }
         this.reset();
       } catch (error) {

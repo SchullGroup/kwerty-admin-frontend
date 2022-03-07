@@ -13,9 +13,17 @@
           },
         ]"
       >
-        <th v-for="field in fields" :key="field" :class="field" :id="field">
+        <th
+          v-for="field in fields"
+          :key="field"
+          :class="field"
+          :id="field"
+          @click="setSortField(field)"
+        >
           <span class="value">{{ fieldsDisplay ? fieldsDisplay[field] : field }}</span>
-          <span class="caret"></span>
+          <span class="caret"
+          :class="[{asc: field === sortField && direction === 'asc' }]">
+          </span>
         </th>
         <template v-if="customers">
           <th class="view-activity"></th>
@@ -39,7 +47,7 @@
       </template>
       <template v-else>
         <table-row
-          v-for="data in datalist"
+          v-for="data in sorted"
           :key="data.createdAt || data.userLastSeen"
           :data="data"
           :fields="fields"

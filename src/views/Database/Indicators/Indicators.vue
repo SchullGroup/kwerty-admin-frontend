@@ -11,8 +11,8 @@
           variant="dropdown"
           label="Filter by Category"
           v-model="category"
-          :optionsDisplay="optionsCategories"
-          searchInside='categories'
+          :optionsDisplay="categories"
+          searchInside="categories"
         ></k-input>
         <k-input
           type="select"
@@ -20,8 +20,9 @@
           label="Filter by Frequency"
           v-model="frequency"
           :optionsDisplay="optionsFrequency"
+          :disabled="search || category !== '' ? true : false"
         ></k-input>
-        <k-button @click="showModal = true">Add new Indicator</k-button>
+        <k-button @click="showModal = true;getYears()">Add new Indicator</k-button>
       </div>
       <k-button
         class="delete-btn"
@@ -38,7 +39,8 @@
         heading="Are you sure you want to delete this indicator?"
         variant="in-modal"
         longer
-        wrap-heading>
+        wrap-heading
+      >
         <p>
           If you delete this indicator, all data stored underneath this indicator will be <br />
           permanently deleted.
@@ -66,7 +68,7 @@
         :fields-display="tableFieldsDisplay"
         :datalist="indicators"
         :loading="isLoading"
-        @clickAction=action
+        @clickAction="action"
       >
       </k-table>
       <!-- EDIT INDICATOR MODAL -->
@@ -92,8 +94,8 @@
               <p>Tags</p>
             </k-input-tag>
             <div class="btn-wrapper">
-              <k-button variant="link" @click="closeEditIndicators">Cancel</k-button>
-              <k-button @click="editIndicator" :loading="isLoading" submit
+              <k-button variant="link" @click="resetForm">Cancel</k-button>
+              <k-button @click="editIndicator" :loading="isEditing" submit
                 >Save & Continue
               </k-button>
             </div>
@@ -128,10 +130,33 @@
               v-model="newIndicator.frequency"
               :optionsDisplay="optionsFrequency"
             ></k-input>
+            <k-input
+              label="Country"
+              type="select"
+              v-model="newIndicator.country"
+              :optionsDisplay="countries"
+              searchInside="Countries"
+            ></k-input>
+            <k-input
+              label="Start Date"
+              name="start-date"
+              type="select"
+              v-model="newIndicator.startYear"
+              :optionsDisplay="dateRange"
+              searchInside="StartDate"
+            ></k-input>
+            <k-input
+              label="End Date"
+              name="end-date"
+              type="select"
+              :optionsDisplay="dateRange"
+              v-model="newIndicator.endYear"
+              searchInside="EndDate"
+            ></k-input>
             <k-input-tag v-model="tags"></k-input-tag>
             <div class="btn-wrapper">
-              <k-button variant="link" @click="closeAddIndicators">Cancel</k-button>
-              <k-button @click="createIndicator" :loading="isLoading" submit
+              <k-button variant="link" @click="resetNewIndicatorForm">Cancel</k-button>
+              <k-button @click="createIndicator" :loading="isCreating" submit
                 >Save & Continue
               </k-button>
             </div>

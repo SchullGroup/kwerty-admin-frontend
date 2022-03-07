@@ -24,9 +24,33 @@ const mockThis = {
   setType: jest.fn(),
   fetchActivities: jest.fn(),
   formatISO: jest.fn(),
+  saveAs: jest.fn(),
   $route,
   page: 1,
 };
+
+const mockDownload = {
+  formatISO: jest.fn(),
+  saveAs: jest.fn(),
+  type: 'admin',
+  startDate: 'Tue Feb 22 2022 15:30:22 GMT+0000 (Greenwich Mean Time)',
+  endDate: 'Tue Feb 22 2022 15:30:22 GMT+0000 (Greenwich Mean Time)',
+  fileType: 'pdf',
+  title: 'Title of pdf',
+  fieldname: 'createdAt',
+  sortField: 'someField',
+  direction: 'asc',
+  reset: jest.fn(),
+  exportActivities: jest
+    .fn()
+    .mockResolvedValueOnce([
+      'name', 'activity', 'imageUrl', 'status',
+    ])
+    .mockResolvedValueOnce([
+      'error',
+    ]),
+};
+
 describe('Activity Component', () => {
   it('should mount with correct values', async () => {
     const wrapper = shallowMount(ActivityHome, {
@@ -55,17 +79,28 @@ describe('Activity Component', () => {
     });
     expect(wrapper.vm.fetchActivities());
     expect(wrapper.vm.fetchActivities());
-    wrapper.setData({
-      startdate: mockThis.formatISO(new Date()),
-      enddate: mockThis.formatISO(new Date()),
-    });
-    expect(wrapper.vm.downloadActivities());
-    expect(wrapper.vm.downloadActivities());
     expect(wrapper.vm.setType());
     expect(wrapper.vm.prevPage());
     expect(wrapper.vm.nextPage());
     expect(wrapper.vm.firstPage());
     expect(wrapper.vm.lastPage());
+  });
+  it('should run download methods', async () => {
+    const wrapper = shallowMount(ActivityHome, {
+      store,
+      localVue,
+      mocks: {
+        $router,
+        $route,
+      },
+    });
+    ActivityHome.methods.downloadActivities.call(mockDownload);
+    ActivityHome.methods.downloadActivities.call(mockDownload);
+    ActivityHome.methods.downloadActivities.call(mockDownload);
+    ActivityHome.methods.setSortField.call(mockDownload);
+    ActivityHome.methods.asc.call(mockDownload);
+    ActivityHome.methods.desc.call(mockDownload);
+    expect(wrapper.vm.reset());
   });
   it('should fromat the date', () => {
     expect(TableRow.methods.initials('Ammiel Yawson')).toMatch('AY');

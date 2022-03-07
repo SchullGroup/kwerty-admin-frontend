@@ -9,6 +9,8 @@ import {
   KCard,
   KInputTag,
 } from '@/components';
+import indicatorList from '@/mixins/IndicatorList';
+import countries from '@/utils/countries';
 
 export default {
   name: 'Indicators',
@@ -22,18 +24,23 @@ export default {
     KCard,
     KInputTag,
   },
+  mixins: [indicatorList],
   data: () => ({
     isLoading: false,
+    isCreating: false,
+    showModal: false,
+    showDeleteModal: false,
+    editIndicatorModal: false,
+    isEditing: false,
+    empty: false,
+    countries,
+    dateRange: {},
     tags: [],
     newIndicator: {},
     indicator: {},
     search: '',
-    showModal: false,
-    showDeleteModal: false,
-    editIndicatorModal: false,
     selectedRows: [],
     itemsOnPage: 20,
-    empty: false,
     page: 1,
     pagination: {
       page: 1,
@@ -80,17 +87,21 @@ export default {
       }
     },
     search() {
-      this.fetchIndicators();
+      const { page } = this;
+      this.fetchIndicators(page);
     },
     frequency() {
-      this.fetchIndicators();
+      const { page } = this;
+      this.fetchIndicators(page);
     },
     category() {
-      this.fetchIndicators();
+      const { page } = this;
+      this.fetchIndicators(page);
     },
   },
   mounted() {
-    this.fetchIndicators();
+    const { page } = this;
+    this.fetchIndicators(page);
   },
   computed: {
     ...mapGetters({
@@ -120,33 +131,52 @@ export default {
     }),
     async createIndicator() {
       const { newIndicator } = this;
-      const tags = this.tags.join(',');
-      this.isLoading = true;
+      const tags = this.tags.length !== 0 ? this.tags.join(',') : '';
+      this.isCreating = true;
       try {
-        const createdIndicator = await this.addIndicator({ indicator: { ...newIndicator, tags } });
-        if (createdIndicator.error) {
+        const createdIndicator = tags !== ''
+          ? await this.addIndicator({ indicator: { ...newIndicator, tags } })
+          : await this.addIndicator({ indicator: { ...newIndicator } });
+        if (!createdIndicator.error) {
+          this.$toast.show({ message: createdIndicator });
+        } else {
           throw Error(createdIndicator.error);
         }
-        this.$toast.show({ message: createdIndicator });
-        this.isLoading = false;
-        this.resetForm();
+        this.isCreating = false;
+        this.resetNewIndicatorForm();
       } catch (error) {
         this.$toast.show({ message: error });
+        this.isCreating = false;
       }
+    },
+    getYears() {
+      const start = 1950;
+      const current = new Date().getFullYear();
+      const increment = 1;
+      const range = [];
+      for (let i = start; i <= current; i += increment) {
+        range.push(i);
+      }
+      this.dateRange = range.reduce((accumulated, currentYear) => {
+        const newAccum = { ...accumulated };
+        newAccum[currentYear] = parseInt(currentYear, 10);
+        return newAccum;
+      }, {});
     },
     async fetchIndicators(page = 1) {
       const { search, frequency, category } = this;
       this.isLoading = true;
       try {
-        const fetchedIndicators = await this.getIndicators({
-          page, search, frequency, category,
-        });
-        if (!fetchedIndicators.error) {
-          this.pagination.page = Number(fetchedIndicators.currentPage);
-          this.pagination.totalPages = fetchedIndicators.totalPages;
-          this.pagination.totalItems = Number(fetchedIndicators.total);
-        } else {
-          throw Error(fetchedIndicators.error);
+        const response = search && category
+          ? await this.getIndicators({ name: search, category, page })
+          : await this.getIndicators({
+            search: search || category || frequency,
+            page,
+          });
+        if (!response.error) {
+          this.pagination.page = Number(response.currentPage);
+          this.pagination.totalPages = response.totalPages;
+          this.pagination.totalItems = Number(response.total);
         }
         this.isLoading = false;
       } catch (error) {
@@ -154,7 +184,7 @@ export default {
       }
     },
     async removeIndicator() {
-      const { selectedRows } = this;
+      const { selectedRows, page } = this;
       this.isLoading = true;
       try {
         const indicatorRemoved = await this.deleteIndicator({ ids: [...selectedRows] });
@@ -163,8 +193,9 @@ export default {
         }
         this.$toast.show({ message: indicatorRemoved });
         this.showDeleteModal = false;
-        this.selected = '';
-        this.fetchIndicators();
+        this.selectedRows = [];
+        this.search = '';
+        this.fetchIndicators(page);
       } catch (error) {
         this.$toast.show({ massage: error });
       }
@@ -172,34 +203,41 @@ export default {
     async editIndicator() {
       const {
         indicator: {
-          id,
-          name,
-          category,
-          frequency,
+          id, name, category, frequency,
         },
       } = this;
-      const tags = this.tags.join(',');
-      this.isLoading = true;
+      const tags = this.tags.length !== 0 ? this.tags.join(',') : '';
+      this.isEditing = true;
       try {
         const editedIndicator = await this.updateIndicator(
-          {
-            indicator: {
-              name,
-              category,
-              frequency,
-              tags,
+          tags !== ''
+            ? {
+              indicator: {
+                name,
+                category,
+                frequency,
+                tags,
+              },
+              id,
+            }
+            : {
+              indicator: {
+                name,
+                category,
+                frequency,
+              },
+              id,
             },
-            id,
-          },
         );
         if (editedIndicator.error) {
           throw Error(editedIndicator.error);
         }
         this.$toast.show({ message: editedIndicator });
-        this.isLoading = false;
+        this.isEditing = false;
         this.resetForm();
       } catch (error) {
         this.$toast.show({ message: error });
+        this.isEditing = false;
       }
     },
     action(id) {
@@ -208,21 +246,27 @@ export default {
       this.tags = this.indicator.tags ? this.indicator.tags.split(',') : [];
       this.editIndicatorModal = true;
     },
+    resetNewIndicatorForm() {
+      const { page } = this;
+      this.newIndicator.name = '';
+      this.newIndicator.category = '';
+      this.newIndicator.frequency = '';
+      this.newIndicator.country = '';
+      this.newIndicator.startYear = '';
+      this.newIndicator.endYear = '';
+      this.tags = [];
+      this.showModal = false;
+      this.fetchIndicators(page);
+    },
     resetForm() {
+      const { page } = this;
       this.indicator.name = '';
       this.indicator.category = '';
       this.indicator.frequency = '';
       this.tags = [];
       this.showModal = false;
       this.editIndicatorModal = false;
-    },
-    closeAddIndicators() {
-      this.showModal = false;
-      this.fetchIndicators();
-    },
-    closeEditIndicators() {
-      this.editIndicatorModal = false;
-      this.fetchIndicators();
+      this.fetchIndicators(page);
     },
     prevPage() {
       this.page -= 1;

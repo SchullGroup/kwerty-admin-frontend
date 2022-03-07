@@ -112,3 +112,7 @@
   display: grid;
   place-content: center;
 }
+.asc {
+  transform: rotateZ(180deg);
+  margin-bottom: 0.75rem;
+}

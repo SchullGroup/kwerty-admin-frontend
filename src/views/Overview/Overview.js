@@ -20,6 +20,7 @@ export default {
   mixins: [ProfileMixin],
   data: () => ({
     isLoading: false,
+    isLoadingUser: false,
     isLoadingChart: true,
     activities: null,
     isHours: false,
@@ -155,6 +156,7 @@ export default {
     },
     async getDashBoardAnalytics() {
       const { overviewDuration } = this;
+      this.isLoadingUser = true;
       try {
         const response = await this.getAnalytics({ duration: overviewDuration });
         if (!response.error) {
@@ -166,6 +168,7 @@ export default {
           this.isLoadingChart = false;
           this.showChart = false;
           this.mostActiveUser = response.data.mostActiveUser;
+          this.isLoadingUser = false;
           this.topUser = this.mostActiveUser.find((user) => user.rank === '1');
         } else {
           throw Error(response.error);
