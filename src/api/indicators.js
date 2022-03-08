@@ -29,3 +29,14 @@ export function getIndicatorsList() {
 export function searchIndicators({ name }) {
   return instance.get(`/indicator?search=${name}`);
 }
+
+export const getIndicatorsInCategory = ({ category }) => instance.get(
+  `/indicator/filter?category=${category}`,
+);
+
+export const searchIndicatorsInCategory = ({ name, category }) => {
+  const query = new URLSearchParams();
+  query.append('name', name);
+  query.append('category', category);
+  return instance.get(`/indicator?${query.toString()}`);
+};

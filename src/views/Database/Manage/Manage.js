@@ -14,8 +14,6 @@ import SingleData from './SingleData.vue';
 import countries from '@/utils/countries';
 import { updateData } from '@/api/database';
 
-countries[''] = 'All Countries';
-
 export default {
   name: 'ManageData',
   components: {
@@ -81,7 +79,7 @@ export default {
       this.activeTab = active;
     }
     this.getData({});
-    this.getIndicatorsList();
+    // this.getIndicatorsList();
   },
   watch: {
     activeTab() {
@@ -92,7 +90,7 @@ export default {
       this.getData({ page: val });
     },
     search() {
-      this.getData();
+      this.debounce(this.getData, 500)();
     },
     country() {
       this.getData();

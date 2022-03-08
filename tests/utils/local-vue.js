@@ -192,6 +192,12 @@ const successStore = new Vuex.Store({
             lastModified: 'some-date',
           },
         ]),
+        asOptions: jest.fn().mockReturnValue(jest.fn().mockReturnValue({
+          'Official Reserve Assets': 'Official Reserve Assets',
+        })),
+        categoriesAsOptions: jest.fn().mockReturnValue({
+          economy: 'Economy',
+        }),
       },
       mutations: {
         SET_INDICATORS: jest.fn(),

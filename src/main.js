@@ -7,7 +7,7 @@ import { instance } from './config';
 import { getProfile } from './api';
 
 Vue.config.productionTip = false;
-Vue.prototype.debounce = (func, delay) => function debounced(...args) {
+Vue.prototype.debounce = (func, delay = 500) => function debounced(...args) {
   const context = this;
   // set on global to maintain a single pointer
   clearTimeout(window.debounce);
@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
   if (!isAuthView && !isAuthenticated) next({ name: 'Login' });
   else {
     const { id } = store.getters['auth/getUser'];
-    getProfile({ id, token });
+    if (!isAuthView) getProfile({ id, token });
     next();
   }
 });

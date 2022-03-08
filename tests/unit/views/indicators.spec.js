@@ -27,6 +27,7 @@ const mockThis = {
   ],
   editIndicatorModal: false,
   showModal: false,
+  debounce: jest.fn(() => () => {}),
 };
 
 const mockIndicators = {

@@ -80,7 +80,7 @@ export default {
       }
     },
     search() {
-      this.fetchActivities();
+      this.debounce(this.fetchActivities, 500)();
     },
     duration() {
       this.fetchActivities();
