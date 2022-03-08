@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import Vuex from 'vuex';
 import { shallowMount } from '@vue/test-utils';
 import ActivityHome from '@/views/Activity/Activity';
@@ -27,6 +28,16 @@ const mockThis = {
   saveAs: jest.fn(),
   $route,
   page: 1,
+  sortField: 'createdAt',
+  direction: 'asc',
+  asc: jest.fn(),
+  activities: [
+    {
+      name: '',
+      actvivity: 'logged in',
+      createdAt: 'some date',
+    },
+  ],
 };
 
 const mockDownload = {
@@ -38,17 +49,13 @@ const mockDownload = {
   fileType: 'pdf',
   title: 'Title of pdf',
   fieldname: 'createdAt',
-  sortField: 'someField',
+  sortField: 'createdAt',
   direction: 'asc',
-  reset: jest.fn(),
   exportActivities: jest
     .fn()
-    .mockResolvedValueOnce([
-      'name', 'activity', 'imageUrl', 'status',
-    ])
-    .mockResolvedValueOnce([
-      'error',
-    ]),
+    .mockResolvedValueOnce('name', 'activity', 'imageUrl', 'status', '2022-02-07T15:11:00.736Z')
+    .mockResolvedValueOnce(['error']),
+  reset: jest.fn(),
 };
 
 describe('Activity Component', () => {
@@ -73,6 +80,7 @@ describe('Activity Component', () => {
     await ActivityHome.watch.$route.call(mockThis, []);
     expect(ActivityHome.computed.pageTitle.call(mockThis)).toMatch('Activity');
     expect(ActivityHome.computed.activities.call(mockThis));
+    expect(ActivityHome.computed.sorted.call(mockThis));
     expect(wrapper.vm.$options.name).toMatch('ActivityHome');
     wrapper.setData({
       type: 'admin',
