@@ -95,7 +95,6 @@ export default {
           this.countriesNotFound = response.data.data.countriesNotFound;
           this.isLoading = false;
           this.topUsers = response.data.data.topUsers;
-          // this.$toast.show({ message: response.data.message });
         } else {
           throw Error(response.error);
         }
