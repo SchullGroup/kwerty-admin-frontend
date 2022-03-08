@@ -1,5 +1,6 @@
 export default {
   indicators: [],
+  loadedList: [],
   list: [],
   categories: [
     'agriculture',

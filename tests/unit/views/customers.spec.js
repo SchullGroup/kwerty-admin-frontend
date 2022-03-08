@@ -10,6 +10,7 @@ const $route = {
 };
 const mockThis = {
   fetchAllCustomers: jest.fn(),
+  debounce: jest.fn(() => () => {}),
 };
 
 describe('Customer Component', () => {

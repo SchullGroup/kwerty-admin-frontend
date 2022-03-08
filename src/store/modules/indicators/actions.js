@@ -1,6 +1,6 @@
 import {
   addIndicator, getIndicators, deleteIndicator, updateIndicator,
-  getIndicatorsList, searchIndicators,
+  getIndicatorsList, searchIndicators, searchIndicatorsInCategory, getIndicatorsInCategory,
 } from '@/api';
 import errorHandler from '@/utils/error-handler';
 
@@ -40,12 +40,22 @@ export default {
       return data;
     })
     .catch((response) => errorHandler(response)),
-  fetchIndicatorsWith: ({ commit }, body) => searchIndicators(body)
-    .then(({ data: { data } }) => {
-      commit('ADD_INDICATORS', data.indicator);
-      commit('ADD_CATEGORIES', data.indicator);
+  fetchIndicatorsWith: ({ commit }, body) => {
+    const { category, name } = body;
+    let service = searchIndicators;
+    if (name && category) {
+      service = searchIndicatorsInCategory;
+    } else if (category) {
+      service = getIndicatorsInCategory;
+    }
 
-      return data;
-    })
-    .catch((response) => errorHandler(response)),
+    return service(body)
+      .then(({ data: { data } }) => {
+        commit('ADD_INDICATORS', data.indicator || data);
+        commit('ADD_CATEGORIES', data.indicator || data);
+
+        return data;
+      })
+      .catch((response) => errorHandler(response));
+  },
 };

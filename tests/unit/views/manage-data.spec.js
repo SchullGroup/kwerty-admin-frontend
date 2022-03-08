@@ -46,6 +46,7 @@ describe('ManageData View', () => {
     const mockThis = {
       getData: jest.fn(),
       fetchSingleData: jest.fn(),
+      debounce: jest.fn(() => () => {}),
     };
     ManageData.watch.search.call(mockThis);
     ManageData.watch.country.call(mockThis);

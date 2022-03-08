@@ -7,7 +7,7 @@ import { instance } from './config';
 import { getProfile } from './api';
 
 Vue.config.productionTip = false;
-Vue.prototype.debounce = (func, delay) => function debounced(...args) {
+Vue.prototype.debounce = (func, delay = 500) => function debounced(...args) {
   const context = this;
   // set on global to maintain a single pointer
   clearTimeout(window.debounce);

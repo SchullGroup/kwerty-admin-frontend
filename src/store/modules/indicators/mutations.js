@@ -11,8 +11,10 @@ export default {
   ADD_INDICATORS: (state, payload) => {
     const uniqueList = new Set([...payload.map((ind) => ind.name), ...state.list]);
     const list = Array.from(uniqueList);
+
     list.sort((a, b) => a > b);
     state.list = list;
+    state.loadedList = [...payload, ...state.loadedList];
   },
   ADD_CATEGORIES: (state, payload) => {
     const uniqueList = new Set([...payload.map((ind) => ind.category), ...state.categories]);
