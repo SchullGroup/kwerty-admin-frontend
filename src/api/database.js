@@ -1,4 +1,5 @@
 import { instance } from '../config';
+import cleanEmpty from '../utils/cleanEmpty';
 
 export function uploadData(formData) {
   return instance.post('dataset', formData);
@@ -18,7 +19,8 @@ export function getAllCountryData(params) {
 }
 
 export function updateData({ id, payload }) {
-  return instance.put(`dataset/${id}`, payload);
+  const cleanPayload = cleanEmpty(payload);
+  return instance.put(`dataset/${id}`, cleanPayload);
 }
 export function getSingleData({ id }) {
   return instance.get(`dataset/${id}`);
