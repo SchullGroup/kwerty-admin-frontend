@@ -242,7 +242,7 @@ export default {
     },
     action(id) {
       const currentIndicator = this.indicators.find((indicator) => indicator.id === id);
-      this.indicator = currentIndicator;
+      this.indicator = { ...currentIndicator };
       this.tags = this.indicator.tags ? this.indicator.tags.split(',') : [];
       this.editIndicatorModal = true;
     },
