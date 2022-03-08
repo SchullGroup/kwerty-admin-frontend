@@ -20,6 +20,7 @@
               v-model="category"
               :optionsDisplay="categories"
               searchInside="categories"
+              @search="(val) => debounce(fetchIndicators, 500)({ name: val })"
             ></k-input>
           </div>
           <div class="filter">
@@ -27,9 +28,9 @@
               type="select"
               label="Filter by Indicator"
               v-model="indicator"
-              :optionsDisplay="indicatorsFromState"
+              :optionsDisplay="indicatorOptions"
               searchInside="indicators"
-              @search="(val) => fetchIndicatorsList({ name: val })"
+              @search="(val) => debounce(fetchIndicators, 500)({ name: val })"
             ></k-input>
           </div>
           <div class="filter">

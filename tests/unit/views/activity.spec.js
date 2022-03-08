@@ -1,5 +1,5 @@
 import Vuex from 'vuex';
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, config } from '@vue/test-utils';
 import ActivityHome from '@/views/Activity/Activity';
 import TableRow from '@/views/Activity/TableRow.vue';
 import { localVue, successStore as store } from '../../utils/local-vue';
@@ -27,6 +27,7 @@ const mockThis = {
   saveAs: jest.fn(),
   $route,
   page: 1,
+  debounce: jest.fn(() => () => {}),
 };
 
 const mockDownload = {
@@ -53,6 +54,7 @@ const mockDownload = {
 
 describe('Activity Component', () => {
   it('should mount with correct values', async () => {
+    localVue.prototype.debounce = jest.fn();
     const wrapper = shallowMount(ActivityHome, {
       store,
       localVue,

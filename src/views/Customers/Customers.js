@@ -49,7 +49,7 @@ export default {
   }),
   watch: {
     search() {
-      this.fetchAllCustomers();
+      this.debounce(this.fetchAllCustomers, 500)();
     },
     page(val) {
       this.fetchAllCustomers(val);

@@ -88,7 +88,7 @@ export default {
     },
     search() {
       const { page } = this;
-      this.fetchIndicators(page);
+      this.debounce(this.fetchIndicators, 500)(page);
     },
     frequency() {
       const { page } = this;
