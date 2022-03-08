@@ -48,7 +48,7 @@ export default {
     initials(name) {
       if (name === 'Untitled User') return '?';
       let value = '';
-      name.split(' ').forEach((n) => {
+      name.trim().split(' ').forEach((n) => {
         value += n[0];
       });
       return value.toUpperCase();
