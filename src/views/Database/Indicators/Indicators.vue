@@ -72,7 +72,7 @@
       >
       </k-table>
       <!-- EDIT INDICATOR MODAL -->
-      <k-modal v-if="editIndicatorModal" :open="editIndicatorModal">
+      <k-modal v-if="editIndicatorModal" :open="editIndicatorModal" @close='resetForm'>
         <k-card heading="Edit Indicator" variant="in-modal">
           <div class="form__items">
             <k-input label="Name of Indicator" v-model="indicator.name"></k-input>
@@ -112,7 +112,7 @@
         <p>There are currently no indicators</p>
       </div>
       <!-- ADD INDICATOR MODAL -->
-      <k-modal v-if="showModal" :open="showModal">
+      <k-modal v-if="showModal" :open="showModal" @close='resetNewIndicatorForm'>
         <k-card heading="Add New Indicator" variant="in-modal">
           <div class="form__items">
             <k-input label="Name of Indicator" v-model="newIndicator.name"></k-input>
