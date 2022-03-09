@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 import Vuex from 'vuex';
-import { shallowMount, config } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import ActivityHome from '@/views/Activity/Activity';
 import TableRow from '@/views/Activity/TableRow.vue';
 import { localVue, successStore as store } from '../../utils/local-vue';
@@ -38,7 +38,7 @@ const mockThis = {
       createdAt: 'some date',
     },
   ],
-  debounce: jest.fn(() => () => {}),
+  debounce: jest.fn(() => jest.fn()),
 };
 
 const mockDownload = {

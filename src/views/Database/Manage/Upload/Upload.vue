@@ -46,6 +46,9 @@
         <div v-if="activeTab === 'REVIEW'">
           <div class="review__content">
             <table border>
+            <caption class="hide-text">
+              Preview Table
+            </caption>
               <thead>
                 <tr>
                   <th v-for="(field, i) in formattedFields" :key='i'  :id="field">
@@ -91,7 +94,7 @@
             v-else
           >
             <section class="upload-area">
-              <input type="file" id="file-input" />
+              <input type="file" id="file-input" accept="text/csv" />
               <label for="file-input">
                 <k-button variant="tertiary">Choose a file</k-button>
               </label>
