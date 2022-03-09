@@ -46,6 +46,9 @@
         <div v-if="activeTab === 'REVIEW'">
           <div class="review__content">
             <table border>
+            <caption class="hide-text">
+              Preview Table
+            </caption>
               <thead>
                 <tr>
                   <th v-for="(field, i) in formattedFields" :key='i'  :id="field">
