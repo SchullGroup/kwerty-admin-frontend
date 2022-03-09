@@ -19,6 +19,7 @@ const mockThis = {
       id: '234e5r6tyufv678',
     },
   },
+  debounce: jest.fn(() => () => {}),
 };
 
 jest.mock('@/api/upload', () => ({

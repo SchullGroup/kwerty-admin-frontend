@@ -35,24 +35,27 @@ export default {
     async search(val) {
       if (!val) await this.fetchDashboards({ page: 1 });
       else {
-        try {
-          this.isFetching = true;
-          const response = await searchDashboards({ search: val });
-          const {
-            total,
-            dashboard,
-            totalPages,
-          } = response.data.data;
-          this.dashboardList = dashboard;
-          this.pagination = {
-            totalItems: total,
-            totalPages,
-          };
-        } catch (e) {
-          this.$toast.show({ message: e.message });
-        } finally {
-          this.isFetching = false;
-        }
+        const searchDeb = this.debounce(async () => {
+          try {
+            this.isFetching = true;
+            const response = await searchDashboards({ search: val });
+            const {
+              total,
+              dashboard,
+              totalPages,
+            } = response.data.data;
+            this.dashboardList = dashboard;
+            this.pagination = {
+              totalItems: total,
+              totalPages,
+            };
+          } catch (e) {
+            this.$toast.show({ message: e.message });
+          } finally {
+            this.isFetching = false;
+          }
+        });
+        searchDeb();
       }
     },
   },

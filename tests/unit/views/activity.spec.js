@@ -38,6 +38,7 @@ const mockThis = {
       createdAt: 'some date',
     },
   ],
+  debounce: jest.fn(() => () => {}),
 };
 
 const mockDownload = {
@@ -60,6 +61,7 @@ const mockDownload = {
 
 describe('Activity Component', () => {
   it('should mount with correct values', async () => {
+    localVue.prototype.debounce = jest.fn();
     const wrapper = shallowMount(ActivityHome, {
       store,
       localVue,
