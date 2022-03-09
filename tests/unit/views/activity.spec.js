@@ -38,7 +38,7 @@ const mockThis = {
       createdAt: 'some date',
     },
   ],
-  debounce: jest.fn(() => () => {}),
+  debounce: jest.fn(() => jest.fn()),
 };
 
 const mockDownload = {
