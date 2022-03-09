@@ -2,12 +2,11 @@
   <div class="settings__content">
     <h1>Profile</h1>
     <div class="settings__section">
-      <h3>Update profile picture</h3>
+      <h3>Profile picture</h3>
       <div class="profile">
         <div class="profile__media">
           <img src="@/assets/avatar.png" alt="Profile picture" />
         </div>
-        <k-button variant="tertiary">Change avatar</k-button>
       </div>
     </div>
     <div class="settings__section">

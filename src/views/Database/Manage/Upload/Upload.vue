@@ -91,7 +91,7 @@
             v-else
           >
             <section class="upload-area">
-              <input type="file" id="file-input" />
+              <input type="file" id="file-input" accept="text/csv" />
               <label for="file-input">
                 <k-button variant="tertiary">Choose a file</k-button>
               </label>

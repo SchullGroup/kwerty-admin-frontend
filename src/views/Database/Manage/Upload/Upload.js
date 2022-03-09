@@ -25,6 +25,7 @@ export default {
     activeTab: 'UPLOAD CSV',
     dropzoneOptions: {
       url: '/',
+      acceptedFiles: ['text/csv'],
     },
     filename: '',
     fileData: [],
@@ -63,6 +64,11 @@ export default {
     },
     async addFile(file) {
       try {
+        if (!file.name.endsWith('.csv')) {
+          this.fileData = [];
+          return;
+        }
+
         this.filename = file.name;
         const data = await file.arrayBuffer();
         const res = read(data);
