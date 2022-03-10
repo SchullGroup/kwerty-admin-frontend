@@ -88,7 +88,7 @@ export default {
         const passwordSent = await this.resetPassword({ token });
         this.$toast.show({ message: passwordSent });
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: error.message });
       } finally {
         this.isLoading = false;
       }
@@ -100,13 +100,18 @@ export default {
       });
     },
   },
-  created() {
+  async created() {
     try {
-      this.fetchAdmin({});
-      this.fetchRoles({});
-      this.fetchRolesDetails({ page: 1 });
+      const resp = await Promise.all([
+        this.fetchAdmin({}),
+        this.fetchRoles({}),
+        this.fetchRolesDetails({ page: 1 }),
+      ]);
+      resp.forEach((r) => {
+        if ('error' in r) throw Error(r.error);
+      });
     } catch (e) {
-      this.$toast.show({ message: e });
+      this.$toast.show({ message: e.message });
     }
   },
 };

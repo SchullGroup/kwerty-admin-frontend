@@ -2,6 +2,7 @@ import { getAllCountryData } from '@/api';
 import { KDashboardLayout, KButton, KInput } from '@/components';
 import Upload from '@/mixins/Upload';
 import countries from '@/utils/countries';
+import errorHandler from '@/utils/error-handler';
 import { addCountryDashboard, getDashboard, updateCountryDashboard } from '@/api/country';
 
 delete countries[''];
@@ -179,8 +180,7 @@ export default {
         }
         this.$toast.show({ message: response.data.message });
       } catch (e) {
-        const message = e.response ? e.response.data.message : e.message;
-        this.$toast.show({ message });
+        this.$toast.show({ message: errorHandler(e).error });
       } finally {
         this.saving = false;
       }

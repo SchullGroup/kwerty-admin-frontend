@@ -114,7 +114,7 @@ export default {
         const blob = new Blob([data.data], { type: 'text/plain;charset=UTF-8' });
         saveAs(blob, 'Kwerty Administrators.csv');
       } catch (e) {
-        this.$toast.show({ message: e });
+        this.$toast.show({ message: e.message });
       }
     },
     handleEditAdmin(id) {
@@ -124,7 +124,7 @@ export default {
         const roleId = this.roles.find((r) => r.name === currentAdmin.roleName).id;
         this.currentAdmin = { ...currentAdmin, roleId };
       } catch (e) {
-        this.$toast.show({ message: e });
+        this.$toast.show({ message: e.message });
       }
       return this.currentAdmin;
     },
@@ -134,7 +134,7 @@ export default {
         if (response.error) throw Error(response.error);
         this.$toast.show({ message: response });
       } catch (e) {
-        this.$toast.show({ message: e });
+        this.$toast.show({ message: e.message });
       }
     },
   },

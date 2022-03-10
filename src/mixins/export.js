@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver';
 import pdfTemplate from '../views/Activity/pdfTemplate';
 import { downloadDataset } from '../api/upload';
 import formatters from '../utils/formatters';
+import errorHandler from '../utils/error-handler';
 
 export default {
   data: () => ({
@@ -34,8 +35,10 @@ export default {
         if (!downloaded.error) {
           if (fileType === 'pdf') {
             // eslint-disable-next-line no-useless-escape
-            const result = downloaded.replaceAll('\"', '')
-              .split('\n').map((row) => row.split(','));
+            const result = downloaded
+              .replaceAll('"', '')
+              .split('\n')
+              .map((row) => row.split(','));
             const tableHeaders = result.shift();
             result.forEach((r, i) => {
               const dateIndex = r.length - 3;
@@ -64,7 +67,7 @@ export default {
         }
         this.reset();
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: errorHandler(error).error });
       }
     },
     reset() {
