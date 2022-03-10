@@ -48,7 +48,7 @@ export default {
         const blob = new Blob([data.data], { type: 'text/plain;charset=UTF-8' });
         saveAs(blob, 'Kwerty Roles.csv');
       } catch (e) {
-        this.$toast.show({ message: e });
+        this.$toast.show({ message: e.message });
       }
     },
     async deleteItem(id) {
@@ -56,7 +56,7 @@ export default {
         await this.deleteRole({ id });
         this.$toast.show({ message: 'Role deleted successfully' });
       } catch (e) {
-        this.$toast.show({ message: e });
+        this.$toast.show({ message: e.message });
       }
     },
   },

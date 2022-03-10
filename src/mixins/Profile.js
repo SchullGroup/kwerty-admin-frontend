@@ -1,4 +1,5 @@
 import { mapActions, mapGetters } from 'vuex';
+import errorHandler from '@/utils/error-handler';
 
 export default {
   computed: {
@@ -16,7 +17,7 @@ export default {
         const { id, token } = this.user;
         await this.fetchprofile({ id, token });
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: errorHandler(error).error });
       } finally {
         this.isLoading = false;
       }

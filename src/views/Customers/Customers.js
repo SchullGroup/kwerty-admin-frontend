@@ -32,8 +32,8 @@ export default {
     page: 1,
     pagination: {
       page: 1,
-      totalItems: 9,
-      totalPages: 4,
+      totalItems: NaN,
+      totalPages: NaN,
     },
     tableFields: ['fullName', 'email', 'joined', 'userLastSeen'],
     tableFieldsDisplay: {
@@ -83,7 +83,7 @@ export default {
         }
         this.isLoading = false;
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: error.message });
         this.isLoading = false;
       }
     },
@@ -96,7 +96,7 @@ export default {
           throw Error(response.error);
         }
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: error.message });
       }
     },
     prevPage() {

@@ -56,7 +56,7 @@ export default {
         this.$toast.show({ message: response });
         this.$emit('close');
       } catch (e) {
-        this.$toast.show({ message: e });
+        this.$toast.show({ message: e.message });
       } finally {
         this.sending = false;
       }

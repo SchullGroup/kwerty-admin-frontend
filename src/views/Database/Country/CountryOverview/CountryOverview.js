@@ -4,8 +4,9 @@ import {
   KButton,
   KPagination,
 } from '@/components';
-import doughnutColors from '../../../../utils/doughnut-colors';
-import DoughnutWrapper from '../../../../components/Charts/DoughnutWrapper.vue';
+import doughnutColors from '@/utils/doughnut-colors';
+import errorHandler from '@/utils/error-handler';
+import DoughnutWrapper from '@/components/Charts/DoughnutWrapper.vue';
 import { getCountryAnalytics } from '@/api/country';
 import avatar from '@/assets/avatar.svg';
 
@@ -100,7 +101,7 @@ export default {
         }
         this.isLoadingChart = false;
       } catch (error) {
-        console.log(error);
+        this.$toast.show({ message: errorHandler(error).error });
         this.isLoadingChart = false;
       }
     },

@@ -11,8 +11,9 @@ import {
 } from '@/components';
 import BackIcon from './BackIcon.vue';
 import SingleData from './SingleData.vue';
-import countries from '@/utils/countries';
 import { updateData } from '@/api/database';
+import countries from '@/utils/countries';
+import errorHandler from '@/utils/error-handler';
 
 export default {
   name: 'ManageData',
@@ -174,7 +175,7 @@ export default {
           throw Error(paginationData.error);
         }
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: errorHandler(error).error });
       } finally {
         this.isFetching = false;
       }
@@ -209,7 +210,7 @@ export default {
         this.fetchSingleData({ pageId: id });
         this.getData({});
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: errorHandler(error).error });
       }
     },
     async fetchSingleData({ pageId }) {
@@ -223,7 +224,7 @@ export default {
           throw Error(singleData.error);
         }
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: errorHandler(error).error });
       } finally {
         this.isFetching = false;
       }
@@ -240,7 +241,7 @@ export default {
           throw Error(actionDone.error);
         }
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: errorHandler(error).error });
       } finally {
         this.isActing = false;
       }

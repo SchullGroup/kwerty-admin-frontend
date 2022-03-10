@@ -145,7 +145,7 @@ export default {
         this.isCreating = false;
         this.resetNewIndicatorForm();
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: error.message });
         this.isCreating = false;
       }
     },
@@ -180,7 +180,7 @@ export default {
         }
         this.isLoading = false;
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: error.message });
       }
     },
     async removeIndicator() {
@@ -197,7 +197,7 @@ export default {
         this.search = '';
         this.fetchIndicators(page);
       } catch (error) {
-        this.$toast.show({ massage: error });
+        this.$toast.show({ massage: error.message });
       }
     },
     async editIndicator() {
@@ -236,7 +236,7 @@ export default {
         this.isEditing = false;
         this.resetForm();
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: error.message });
         this.isEditing = false;
       }
     },

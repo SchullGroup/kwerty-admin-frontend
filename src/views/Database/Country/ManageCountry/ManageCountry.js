@@ -6,6 +6,7 @@ import {
 } from '@/components';
 import { getAllDashboards, deleteDashboard, searchDashboards } from '@/api/country';
 import stringHelpers from '@/utils/string-helpers';
+import errorHandler from '@/utils/error-handler';
 
 export default {
   name: 'ManageCountry',
@@ -50,7 +51,7 @@ export default {
               totalPages,
             };
           } catch (e) {
-            this.$toast.show({ message: e.message });
+            this.$toast.show({ message: errorHandler(e).error });
           } finally {
             this.isFetching = false;
           }
@@ -87,7 +88,7 @@ export default {
           totalPages,
         };
       } catch (e) {
-        this.$toast.show({ message: e.message });
+        this.$toast.show({ message: errorHandler(e).error });
       } finally {
         this.isFetching = false;
       }

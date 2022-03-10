@@ -1,7 +1,8 @@
 import { mapActions, mapGetters } from 'vuex';
 import formatISO from 'date-fns/formatISO';
 import { saveAs } from 'file-saver';
-import formatters from '../../utils/formatters';
+import formatters from '@/utils/formatters';
+import errorHandler from '@/utils/error-handler';
 
 import {
   KDashboardLayout,
@@ -137,7 +138,7 @@ export default {
         }
         this.isLoading = false;
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: errorHandler(error).error });
       }
     },
     async downloadActivities() {
@@ -190,7 +191,7 @@ export default {
         }
         this.reset();
       } catch (error) {
-        this.$toast.show({ message: error });
+        this.$toast.show({ message: errorHandler(error).error });
       }
     },
     reset() {

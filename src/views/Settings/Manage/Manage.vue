@@ -71,7 +71,7 @@ export default {
       try {
         await this.fetchAdmins({ page: num });
       } catch (e) {
-        this.$toast.show({ message: e });
+        this.$toast.show({ message: e.message });
       } finally {
         this.isLoading = false;
       }

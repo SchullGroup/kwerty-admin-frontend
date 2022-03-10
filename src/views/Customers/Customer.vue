@@ -133,8 +133,8 @@ export default {
     page: 1,
     pagination: {
       page: 1,
-      totalItems: 9,
-      totalPages: 4,
+      totalItems: NaN,
+      totalPages: NaN,
     },
     tableFields: ['fullName', 'actions', 'userLastSeen'],
     tableFieldsDisplay: {
