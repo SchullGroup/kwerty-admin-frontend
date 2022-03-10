@@ -3,8 +3,7 @@
     <transition-group
       name="list"
       tag="div"
-      class="toast"
-      v-if="notifications.length">
+      class="toast">
       <template v-for="{ message, id } in notifications">
         <div
           :class="[

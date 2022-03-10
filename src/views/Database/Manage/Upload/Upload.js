@@ -5,6 +5,7 @@ import { mapActions } from 'vuex';
 import {
   KButton, KDashboardLayout, KInput, KModal,
 } from '@/components';
+import errorHandler from '@/utils/error-handler';
 
 export default {
   name: 'Upload',
@@ -86,7 +87,7 @@ export default {
           .localeCompare(new Date(b).toLocaleDateString()));
         this.fileFields = this.fileFields.concat(remainingFields);
       } catch (e) {
-        this.$toast.show({ message: e });
+        this.$toast.show({ message: errorHandler(e) });
       } finally {
         this.htmlFile = file;
       }
@@ -115,7 +116,7 @@ export default {
           throw Error(isUploaded.error);
         }
       } catch (e) {
-        this.$toast.show({ message: e });
+        this.$toast.show({ message: errorHandler(e).error });
       } finally {
         this.dataIsUploading = false;
         this.isUploading = false;

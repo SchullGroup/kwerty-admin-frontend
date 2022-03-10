@@ -111,7 +111,7 @@ export default {
           this.$emit('close');
         }
       } catch (e) {
-        this.$toast.show({ message: e });
+        this.$toast.show({ message: e.message });
       } finally {
         this.isLoading = false;
       }

@@ -28,7 +28,6 @@ describe('Toast Component', () => {
   it('Initializes with the right data', () => {
     expect(wrapper.vm.notifications).toEqual([]);
     expect(wrapper.vm.endList).toBe(false);
-    expect(wrapper.find('.toast').exists()).toBe(false);
   });
   it('it renders when data is passed', async () => {
     await wrapper.setData({
