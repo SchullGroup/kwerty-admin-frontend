@@ -5,15 +5,17 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test": "vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit --runInBand --detectOpenHandles --forceExit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.24.0",
     "canvas": "^2.8.0",
     "chart.js": "^2.9.4",
+    "compression": "^1.7.4",
     "core-js": "^3.6.5",
     "date-fns": "^2.27.0",
+    "express": "^4.17.3",
     "file-saver": "^2.0.5",
     "v-calendar": "^2.3.4",
     "vue": "^2.6.11",
