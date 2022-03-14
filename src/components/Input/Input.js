@@ -84,9 +84,18 @@ export default {
     }
   },
   updated() {
-    if (this.$refs.list && this.$refs.itemList) {
-      const { list, itemList } = this.$refs;
-      const pos = list.parentElement.getBoundingClientRect();
+    const forDropdown = this.$refs.list && this.$refs.itemList;
+    const forDate = this.$refs.date;
+    if (forDropdown || forDate) {
+      let pos; let list; let itemList; let date;
+      if (forDate) {
+        pos = this.$refs.date.parentElement.getBoundingClientRect();
+        date = this.$refs.date;
+      } else {
+        list = this.$refs.list;
+        itemList = this.$refs.itemList;
+        pos = list.parentElement.getBoundingClientRect();
+      }
       const fromTop = pos.top + 76;
       const screenH = window.innerHeight;
       /*
@@ -94,11 +103,16 @@ export default {
        * unless (number of item > 10),
        * then height is (10 x 48 + 32)
        * */
-      let numberOfChildren = itemList.children.length > 9 ? 9 : itemList.children.length;
-      if (this.searchInside) {
-        numberOfChildren = itemList.children.length > 7 ? 7 : itemList.children.length;
+      let numberOfChildren; let heightFromChildren;
+      if (forDropdown) {
+        numberOfChildren = itemList.children.length > 9 ? 9 : itemList.children.length;
+        if (this.searchInside) {
+          numberOfChildren = itemList.children.length > 7 ? 7 : itemList.children.length;
+        }
+        heightFromChildren = numberOfChildren * 48 + (this.searchInside ? 96.25 : 32);
+      } else {
+        heightFromChildren = 282;
       }
-      const heightFromChildren = numberOfChildren * 48 + (this.searchInside ? 96.25 : 32);
 
       // if height is longer than screen height,  set height to 95% of screen height
       const listLongerThanScreen = heightFromChildren < screenH;
@@ -106,22 +120,27 @@ export default {
 
       // check if options list overflows
       const overflow = screenH - (fromTop + height);
-      if (fromTop + height < screenH) list.style.top = '76px';
+      let item;
+      if (forDropdown) { item = list; } else { item = date; }
+
+      if (fromTop + height < screenH) item.style.top = '76px';
 
       // shift up if overflows
       if (overflow < 0) {
-        list.style.top = `${overflow + 64}px`;
+        item.style.top = `${overflow + 64}px`;
       }
 
       // make list scrollable when option list contains more than 10 items
-      if (
-        this.searchInside
-        && itemList.children.length > 7
-        && !list.classList.contains('scrollable')
-      ) {
-        list.classList.add('scrollable');
-      } else if (itemList.children.length > 9 && !list.classList.contains('scrollable')) {
-        list.classList.add('scrollable');
+      if (forDropdown) {
+        if (
+          this.searchInside
+          && itemList.children.length > 7
+          && !list.classList.contains('scrollable')
+        ) {
+          list.classList.add('scrollable');
+        } else if (itemList.children.length > 9 && !list.classList.contains('scrollable')) {
+          list.classList.add('scrollable');
+        }
       }
     }
   },
