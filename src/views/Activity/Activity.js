@@ -181,6 +181,7 @@ export default {
             const responseBlob = new Blob([response.data], { type: 'application/pdf' });
             const fileName = `${title}.pdf`;
             saveAs(responseBlob, fileName);
+            this.$toast.show({ message: `Exported ${fileName}` });
           } else {
             const blob = new Blob([downloaded], { type: 'text/plain;charset=UTF-8' });
             saveAs(blob, `${title}.csv`);
