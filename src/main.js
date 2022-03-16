@@ -20,7 +20,7 @@ router.beforeEach((to, from, next) => {
   const token = store.getters['auth/getToken'];
   const isAuthenticated = !!token;
   const isAuthView = to.meta.authView;
-  if (!isAuthView && !isAuthenticated) next({ name: 'Login' });
+  if (!isAuthView && !isAuthenticated) router.push({ name: 'Login' });
   else {
     const { id } = store.getters['auth/getUser'];
     if (!isAuthView) getProfile({ id, token });
