@@ -117,9 +117,9 @@ export default {
     removeItem(index, from) {
       from.splice(index, 1);
     },
-    removeResource(index) {
+    removeResource(thisName) {
       const { resources } = this;
-      this.resources = resources.filter((item, i) => i !== index);
+      this.resources = resources.filter(([name]) => name !== thisName);
     },
     async uploadCountryImage(e) {
       this.isUploadingImage = true;
