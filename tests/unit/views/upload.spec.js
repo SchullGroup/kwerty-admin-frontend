@@ -6,7 +6,7 @@ const $router = {
   push: jest.fn(),
 };
 const file = {
-  name: 'Hello',
+  name: 'poland monthly.csv',
   arrayBuffer: jest
     .fn()
     .mockResolvedValueOnce([{ id: 1 }])

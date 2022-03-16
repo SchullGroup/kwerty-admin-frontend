@@ -69,6 +69,8 @@
         :datalist="indicators"
         :loading="isLoading"
         @clickAction="action"
+        @selectAll="(set) => set ? selectedRows = indicators.map((d) => d.id) : selectedRows = []"
+        selectAll
       >
       </k-table>
       <!-- EDIT INDICATOR MODAL -->

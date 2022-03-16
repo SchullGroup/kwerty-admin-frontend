@@ -27,7 +27,13 @@
       <span class="flag" v-if="field === 'country'">
         <img :src="`/countries/${data[field].toLowerCase()}.svg`" alt="" />
       </span>
-      <span @click="$emit('clickAction')">
+      <span @click="$emit('clickAction')"
+            :class='{
+              mark: showStatus && (i === 0),
+              published: data.isPublished,
+              unpublished: !data.isPublished,
+              deleted: data.isDeleted,
+            }'>
         {{ data[field] | formatField(field) }}
       </span>
     </td>
@@ -79,48 +85,40 @@ export default {
       type: Boolean,
       default: false,
     },
+    showStatus: {
+      type: Boolean,
+      default: false,
+    },
   },
   watch: {
-    innerValue() {
-      this.checkAndAdd(this.value);
+    innerValue: {
+      deep: true,
+      handler(val) {
+        this.checkAndAdd(val);
+      },
     },
     value(val) {
-      if (!val.length) {
+      if (!val) {
         this.innerValue = [];
+      } else {
+        this.checkAndAdd(this.innerValue, true);
       }
-      this.checkAndAdd(val);
     },
   },
   methods: {
-    checkAndAdd(value) {
-      const { innerValue: iValue } = this;
-      const index = value.indexOf(this.data.id);
+    checkAndAdd(innerValue, fromOutside = false) {
+      if (!this.value) return;
+      const index = this.value.indexOf(this.data.id);
       const found = index !== -1;
       const notFound = index === -1;
-      // if inner value is not set
-      // but it appears inside v-model value
-      // remove it and update v-model value
-      if (!iValue.length && found) {
-        const newValue = [...this.value];
-        newValue.splice(index, 1);
-        this.$emit('input', newValue);
-      }
-      // if inner value is set
-      // and not inside v-model value
-      // append innerValue and update v-model
-      if (iValue.length && notFound) {
-        this.$emit('input', [...this.value, ...iValue]);
+      if (!fromOutside) {
+        if (innerValue.length && notFound) { this.value.push(this.data.id); }
+        if (!innerValue.length && found) { this.value.splice(index, 1); }
+      } else {
+        if (innerValue.length && notFound) { this.innerValue = []; }
+        if (!innerValue.length && found) { this.innerValue = [this.data.id]; }
       }
     },
-    // image(name) {
-    //   if (name === 'Untitled User') return '?';
-
-    //   let value = '';
-    //   name.split(' ').forEach((n) => {
-    //     value += n[0];
-    //   });
-    //   return value.toUpperCase();
-    // },
   },
   filters: {
     formatField(value, field) {
@@ -318,5 +316,30 @@ export default {
   color: $black;
   border: 0.1rem solid $grey;
   border-radius: 0.4rem;
+}
+.mark {
+  position: relative;
+  margin-left: 1rem;
+  &:before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: black;
+    position: absolute;
+    top: 10px;
+    left: -7px;
+    border-radius: 50%;
+  }
+  &.published:before {
+    background: #2cb24c;
+    //background: $primary-purple;
+  }
+  &.unpublished:before {
+    background: #e6bf1a;
+    //background: grey;
+  }
+  &.deleted:before {
+    background: $error;
+  }
 }
 </style>
