@@ -32,7 +32,7 @@ export default {
     checkedValue(val) {
       if (!val.length) {
         this.innerValue = false;
-        return;
+        // return;
       }
       this.checkValue(val, true);
     },
