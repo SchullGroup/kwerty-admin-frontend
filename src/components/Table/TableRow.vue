@@ -319,15 +319,15 @@ export default {
 }
 .mark {
   position: relative;
-  margin-left: 1rem;
+  margin-left: 1.2rem;
   &:before {
     content: '';
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     background: black;
     position: absolute;
     top: 10px;
-    left: -7px;
+    left: -8px;
     border-radius: 50%;
   }
   &.published:before {
