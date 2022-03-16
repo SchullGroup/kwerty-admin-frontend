@@ -111,7 +111,7 @@ export default {
             pointRadius: 1,
             pointHitRadius: 64,
             borderWidth: 2,
-            tension: 0.3,
+            tension: 0.1,
           },
         ],
       };

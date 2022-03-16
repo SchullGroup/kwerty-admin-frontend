@@ -173,6 +173,7 @@ export default {
   }),
   mounted() {
     const { data } = this;
+    console.log('from single data', data);
     this.singleData = { ...data };
   },
   computed: {},

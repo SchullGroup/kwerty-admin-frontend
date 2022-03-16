@@ -84,6 +84,7 @@ export default {
   },
   watch: {
     activeTab() {
+      this.isSingleView = false;
       this.resetSelectedRows();
       this.getData();
     },
@@ -101,6 +102,9 @@ export default {
     },
     indicator() {
       this.getData();
+    },
+    isSingleView(val) {
+      if (!val) this.singleViewData = {};
     },
   },
   computed: {
@@ -146,6 +150,11 @@ export default {
     },
     changePage(pageId) {
       if (typeof pageId === 'string') {
+        const data = this.allData.find((d) => d.id === pageId);
+        if (data) {
+          const { isPublished, isDeleted } = data;
+          this.singleViewData = { isPublished, isDeleted } || {};
+        }
         this.fetchSingleData({ pageId });
       } else {
         this.currentNameOfIndicator = '';
@@ -237,6 +246,7 @@ export default {
           this.$toast.show({ message: actionDone });
           this.closeModal();
           this.getData();
+          this.resetSelectedRows();
         } else {
           throw Error(actionDone.error);
         }

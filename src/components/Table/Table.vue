@@ -14,14 +14,26 @@
         ]"
       >
         <th
-          v-for="field in fields"
+          v-for="(field, i) in fields"
           :key="field"
           :class="field"
           :id="field"
-          @click="setSortField(field)"
         >
-          <span class="value">{{ fieldsDisplay ? fieldsDisplay[field] : field }}</span>
-          <span class="caret"
+          <span class="value" style='display: flex; align-items: center; cursor: pointer;'>
+            <span v-if='selectAll && i === 0 && sorted.length && !loading'>
+              <k-checkbox
+                v-model='all'
+                name='yes'
+                value='yes'
+                :fill='value.length && value.length !== sorted.length ? "fill" : ""'
+              ></k-checkbox>
+            </span>
+            <span
+              @click="setSortField(field)" style='display:flex; align-items:center;cursor:pointer;'>
+              {{ fieldsDisplay ? fieldsDisplay[field] : field }}
+            </span>
+          </span>
+          <span class="caret" @click="setSortField(field)"
           :class="[{asc: field === sortField && direction === 'asc' }]">
           </span>
         </th>
@@ -48,7 +60,7 @@
       <template v-else>
         <table-row
           v-for="data in sorted"
-          :key="data.createdAt || data.userLastSeen"
+          :key="data.id || data.createdAt || data.userLastSeen"
           :data="data"
           :fields="fields"
           @clickAction="$emit('clickAction', data.id)"
@@ -63,6 +75,7 @@
           :customers="customers"
           :customerOption="customerOption"
           changeStatus
+          :showStatus='showStatus'
         >
         </table-row>
       </template>

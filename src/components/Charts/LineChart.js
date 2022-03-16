@@ -62,6 +62,7 @@ export default {
         legend: {
           display: false,
         },
+        // tension
       };
     },
   },

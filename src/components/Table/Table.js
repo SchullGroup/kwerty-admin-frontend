@@ -1,8 +1,10 @@
 import TableRow from './TableRow.vue';
+import KCheckbox from '../Checkbox/Checkbox';
 
 export default {
   name: 'KTable',
   components: {
+    KCheckbox,
     TableRow,
   },
   props: {
@@ -33,14 +35,23 @@ export default {
       type: Boolean,
       default: false,
     },
+    selectAll: {
+      type: Boolean,
+      default: false,
+    },
     changeStatus: {
       type: null,
+    },
+    showStatus: {
+      type: Boolean,
+      default: false,
     },
   },
   data: () => ({
     selected: [],
     sortField: '',
     direction: 'asc',
+    all: [],
     // order: {
     //   asc: () => {
     //   }
@@ -55,6 +66,16 @@ export default {
     },
     value(val) {
       this.selected = val;
+      if (!val.length && this.all.length) {
+        this.all = [];
+      }
+    },
+    all: {
+      deep: true,
+      handler(val) {
+        const has = val.includes('yes');
+        this.$emit('selectAll', has);
+      },
     },
   },
   computed: {
