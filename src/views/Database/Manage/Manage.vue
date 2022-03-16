@@ -57,7 +57,7 @@
           <div class="header__controls" v-if="activeTab !== 'deleted'">
             <k-button
               variant="secondary"
-              :disabled="activeTab !== 'draft'"
+              :disabled="activeTab !== 'draft' && activeTab !== 'all'"
               @click="confirmAction('publish')"
             >
               Publish All
