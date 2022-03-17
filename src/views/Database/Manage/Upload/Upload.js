@@ -1,4 +1,3 @@
-import { read, utils } from 'xlsx';
 import format from 'date-fns/format';
 import vue2Dropzone from 'vue2-dropzone';
 import { mapActions } from 'vuex';
@@ -6,6 +5,7 @@ import {
   KButton, KDashboardLayout, KInput, KModal,
 } from '@/components';
 import errorHandler from '@/utils/error-handler';
+import parseCsv from '@/utils/parseCsv';
 
 export default {
   name: 'Upload',
@@ -71,21 +71,15 @@ export default {
         }
 
         this.filename = file.name;
-        const data = await file.arrayBuffer();
-        const res = read(data);
-        const sheetData = utils.sheet_to_json(Object.values(res.Sheets)[0]);
-        this.fileData = sheetData;
-        const remainingFields = [];
-        sheetData.forEach((line) => {
-          Object.keys(line).forEach((k) => {
-            if (!this.fileFields.includes(k) && !remainingFields.includes(k)) {
-              remainingFields.push(k);
-            }
-          });
-        });
-        remainingFields.sort((a, b) => (new Date(a).toLocaleDateString())
-          .localeCompare(new Date(b).toLocaleDateString()));
-        this.fileFields = this.fileFields.concat(remainingFields);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const data = e.target.result;
+          const table = parseCsv(data, ',', '\n');
+          const [headers, ...body] = table;
+          this.fileFields = headers;
+          this.fileData = body;
+        };
+        reader.readAsText(file);
       } catch (e) {
         this.$toast.show({ message: errorHandler(e) });
       } finally {
