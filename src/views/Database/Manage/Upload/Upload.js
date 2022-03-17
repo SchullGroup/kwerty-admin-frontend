@@ -1,4 +1,3 @@
-import format from 'date-fns/format';
 import vue2Dropzone from 'vue2-dropzone';
 import { mapActions } from 'vuex';
 import {
@@ -30,27 +29,10 @@ export default {
     },
     filename: '',
     fileData: [],
-    fileFields: [
-      'Country',
-      'Indicator',
-      'Source',
-      'Link',
-      'Currency Code',
-      'Unit',
-      'Category',
-      'Frequency',
-      'Country Code',
-      "Indicator's Definition",
-      'Note',
-    ],
+    fileFields: [],
     htmlFile: null,
     dataIsUploading: false,
   }),
-  computed: {
-    formattedFields() {
-      return this.fileFields.map((val) => this.getDateDisplay(val));
-    },
-  },
   methods: {
     ...mapActions({
       uploadCSV: 'database/uploadCSV',
@@ -63,6 +45,13 @@ export default {
         },
       });
     },
+    loadEventListener(e) {
+      const data = e.target.result;
+      const table = parseCsv(data, ',', '\n');
+      const [headers, ...body] = table;
+      this.fileFields = headers;
+      this.fileData = body;
+    },
     async addFile(file) {
       try {
         if (!file.name.endsWith('.csv')) {
@@ -72,28 +61,12 @@ export default {
 
         this.filename = file.name;
         const reader = new FileReader();
-        reader.onload = (e) => {
-          const data = e.target.result;
-          const table = parseCsv(data, ',', '\n');
-          const [headers, ...body] = table;
-          this.fileFields = headers;
-          this.fileData = body;
-        };
+        reader.onload = this.loadEventListener;
         reader.readAsText(file);
       } catch (e) {
         this.$toast.show({ message: errorHandler(e) });
       } finally {
         this.htmlFile = file;
-      }
-    },
-    getDateDisplay(val) {
-      try {
-        const dataLoaded = this.fileData.length;
-        const isMonthly = dataLoaded && this.fileData[0].Frequency.toLowerCase() === 'monthly';
-        if (isMonthly) return format(new Date(val), 'MMM-yyyy');
-        return val;
-      } catch {
-        return val;
       }
     },
     async uploadDataToCloud() {

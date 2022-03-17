@@ -1,4 +1,4 @@
-const parseCsv = (data, fs, nl) => {
+function parseCsv(data, fs, nl) {
   const fieldSep = fs || ',';
   const newLine = nl || '\n';
   const nSep = '\x1D';
@@ -13,7 +13,7 @@ const parseCsv = (data, fs, nl) => {
   const grid = [];
   data
     .replace(/\r/g, '')
-    .replace(/\n+$/, '')
+    .replace(/\n{1,5}$/, '')
     .replace(fieldRe, (match, p1, p2) => p2.replace(/\n/g, nSep)
       .replace(/""/g, qSep)
       .replace(/,/g, cSep))
@@ -28,6 +28,6 @@ const parseCsv = (data, fs, nl) => {
       grid.push(row);
     });
   return grid;
-};
+}
 
 export default parseCsv;

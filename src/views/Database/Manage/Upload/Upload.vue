@@ -51,7 +51,7 @@
             </caption>
               <thead>
                 <tr>
-                  <th v-for="(field, i) in formattedFields" :key='i'  :id="field">
+                  <th v-for="(field, i) in fileFields" :key='i'  :id="field">
                     {{ field }}
                   </th>
                 </tr>
