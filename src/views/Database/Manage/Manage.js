@@ -154,6 +154,7 @@ export default {
         if (data) {
           const { isPublished, isDeleted } = data;
           this.singleViewData = { isPublished, isDeleted } || {};
+          this.selectedRows = [];
         }
         this.fetchSingleData({ pageId });
       } else {
