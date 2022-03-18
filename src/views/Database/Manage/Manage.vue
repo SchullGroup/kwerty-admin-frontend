@@ -305,18 +305,14 @@
               @click="actOnData('restore_delete')"
               :disabled="!isSame"
               v-if="activeModal === 'restore'"
-              :loading="isActing"
-              >Restore to Drafts</k-button
-            >
+              :loading="isActing">Restore to Drafts</k-button>
             <k-button
               variant="primary"
-              @click="actOnData('hard_delete')"
+              @click="actOnData('delete')"
               :disabled="!isSame"
               negative
               v-if="activeModal === 'clear your bin'"
-              :loading="isActing"
-              >Permanently Delete</k-button
-            >
+              :loading="isActing">Permanently Delete</k-button>
           </div>
         </div>
       </k-card>
