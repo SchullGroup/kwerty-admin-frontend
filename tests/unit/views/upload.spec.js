@@ -5,12 +5,14 @@ import { localVue, successStore as store } from '../../utils/local-vue';
 const $router = {
   push: jest.fn(),
 };
-const file = {
-  name: 'poland monthly.csv',
-  arrayBuffer: jest
-    .fn()
-    .mockResolvedValueOnce([{ id: 1 }])
-    .mockRejectedValueOnce('Error occurred'),
+const file = new File(
+  ['country,indicator\npoland,official reserve asset'],
+  'poland.csv',
+);
+const mockE = {
+  target: {
+    result: 'country,indicator\npoland,official reserve asset',
+  },
 };
 
 jest.mock('xlsx', () => ({
@@ -44,6 +46,7 @@ describe('manage upload file View', () => {
     expect(wrapper.vm.goToTab());
     expect(wrapper.vm.addFile(file));
     expect(wrapper.vm.addFile(file));
+    expect(wrapper.vm.loadEventListener(mockE));
   });
   it('should upload data to cloud', () => {
     expect(wrapper.vm.uploadDataToCloud());
