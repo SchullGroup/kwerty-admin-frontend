@@ -13,6 +13,7 @@
           v-model="category"
           :optionsDisplay="categories"
           searchInside="categories"
+          @search="(val) => debounce(fetchIndicatorsWith, 500)({ name: val })"
         ></k-input>
         <k-input
           type="select"
