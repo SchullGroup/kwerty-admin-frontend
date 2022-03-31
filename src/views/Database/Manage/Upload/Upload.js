@@ -1,11 +1,10 @@
-import { read, utils } from 'xlsx';
-import format from 'date-fns/format';
 import vue2Dropzone from 'vue2-dropzone';
 import { mapActions } from 'vuex';
 import {
   KButton, KDashboardLayout, KInput, KModal,
 } from '@/components';
 import errorHandler from '@/utils/error-handler';
+import parseCsv from '@/utils/parseCsv';
 
 export default {
   name: 'Upload',
@@ -30,27 +29,10 @@ export default {
     },
     filename: '',
     fileData: [],
-    fileFields: [
-      'Country',
-      'Indicator',
-      'Source',
-      'Link',
-      'Currency Code',
-      'Unit',
-      'Category',
-      'Frequency',
-      'Country Code',
-      "Indicator's Definition",
-      'Note',
-    ],
+    fileFields: [],
     htmlFile: null,
     dataIsUploading: false,
   }),
-  computed: {
-    formattedFields() {
-      return this.fileFields.map((val) => this.getDateDisplay(val));
-    },
-  },
   methods: {
     ...mapActions({
       uploadCSV: 'database/uploadCSV',
@@ -63,6 +45,13 @@ export default {
         },
       });
     },
+    loadEventListener(e) {
+      const data = e.target.result;
+      const table = parseCsv(data, ',', '\n');
+      const [headers, ...body] = table;
+      this.fileFields = headers;
+      this.fileData = body;
+    },
     async addFile(file) {
       try {
         if (!file.name.endsWith('.csv')) {
@@ -71,35 +60,13 @@ export default {
         }
 
         this.filename = file.name;
-        const data = await file.arrayBuffer();
-        const res = read(data);
-        const sheetData = utils.sheet_to_json(Object.values(res.Sheets)[0]);
-        this.fileData = sheetData;
-        const remainingFields = [];
-        sheetData.forEach((line) => {
-          Object.keys(line).forEach((k) => {
-            if (!this.fileFields.includes(k) && !remainingFields.includes(k)) {
-              remainingFields.push(k);
-            }
-          });
-        });
-        remainingFields.sort((a, b) => (new Date(a).toLocaleDateString())
-          .localeCompare(new Date(b).toLocaleDateString()));
-        this.fileFields = this.fileFields.concat(remainingFields);
+        const reader = new FileReader();
+        reader.onload = this.loadEventListener;
+        reader.readAsText(file);
       } catch (e) {
         this.$toast.show({ message: errorHandler(e) });
       } finally {
         this.htmlFile = file;
-      }
-    },
-    getDateDisplay(val) {
-      try {
-        const dataLoaded = this.fileData.length;
-        const isMonthly = dataLoaded && this.fileData[0].Frequency.toLowerCase() === 'monthly';
-        if (isMonthly) return format(new Date(val), 'MMM-yyyy');
-        return val;
-      } catch {
-        return val;
       }
     },
     async uploadDataToCloud() {

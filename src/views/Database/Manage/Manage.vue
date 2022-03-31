@@ -20,7 +20,7 @@
               v-model="category"
               :optionsDisplay="categories"
               searchInside="categories"
-              @search="(val) => debounce(fetchIndicators, 500)({ name: val })"
+              @search="(val) => debounce(fetchIndicatorsWith, 500)({ name: val })"
             ></k-input>
           </div>
           <div class="filter">
@@ -30,7 +30,7 @@
               v-model="indicator"
               :optionsDisplay="indicatorOptions"
               searchInside="indicators"
-              @search="(val) => debounce(fetchIndicators, 500)({ name: val })"
+              @search="(val) => debounce(fetchIndicatorsWith, 500)({ name: val })"
             ></k-input>
           </div>
           <div class="filter">
@@ -57,7 +57,7 @@
           <div class="header__controls" v-if="activeTab !== 'deleted'">
             <k-button
               variant="secondary"
-              :disabled="activeTab !== 'draft'"
+              :disabled="activeTab !== 'draft' && activeTab !== 'all'"
               @click="confirmAction('publish')"
             >
               Publish All
@@ -105,7 +105,7 @@
             Save & Continue
           </k-button>
           <k-button
-            v-if="!isEditing"
+            v-if="!isEditing && !singleViewData.isPublished"
             variant="secondary"
             @click="
               selectedRows.push(singleViewData.id);
@@ -115,9 +115,20 @@
             Publish
           </k-button>
           <k-button
+            v-else-if="!isEditing && singleViewData.isPublished"
+            variant="secondary"
+            @click="
+              selectedRows.push(singleViewData.id);
+              actOnData('unpublish');recordClicked();
+            "
+          >
+            Unpublish
+          </k-button>
+          <k-button
             v-if="!isEditing"
             variant="secondary"
             negative="negative"
+            :disabled='singleViewData.isDeleted'
             @click="
               selectedRows.push(singleViewData.id);
               confirmAction('delete');
@@ -143,18 +154,21 @@
             @click="activeTab = 'published'"
           >
             Published
+            <span class="mark published"></span>
           </li>
           <li
             :class="['content__menu__item', { active: activeTab === 'draft' }]"
             @click="activeTab = 'draft'"
           >
             Drafts
+            <span class="mark unpublished"></span>
           </li>
           <li
             :class="['content__menu__item', { active: activeTab === 'deleted' }]"
             @click="activeTab = 'deleted'"
           >
             Deleted
+            <span class="mark deleted"></span>
           </li>
         </ul>
       </aside>
@@ -192,6 +206,9 @@
           @clickAction="changePage"
           v-model="selectedRows"
           :manageData="true"
+          @selectAll="(set) => set ? selectedRows = allData.map((d) => d.id) : selectedRows = []"
+          selectAll
+          :showStatus='activeTab === "all"'
         ></k-table>
       </section>
     </section>
@@ -289,18 +306,14 @@
               @click="actOnData('restore_delete')"
               :disabled="!isSame"
               v-if="activeModal === 'restore'"
-              :loading="isActing"
-              >Restore to Drafts</k-button
-            >
+              :loading="isActing">Restore to Drafts</k-button>
             <k-button
               variant="primary"
-              @click="actOnData('hard_delete')"
+              @click="actOnData('delete')"
               :disabled="!isSame"
               negative
               v-if="activeModal === 'clear your bin'"
-              :loading="isActing"
-              >Permanently Delete</k-button
-            >
+              :loading="isActing">Permanently Delete</k-button>
           </div>
         </div>
       </k-card>

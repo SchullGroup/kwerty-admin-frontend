@@ -207,3 +207,19 @@
   display: grid;
   place-content: center;
 }
+
+.mark {
+  margin-left: 0.4rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  &.published {
+    background: #2cb24c;
+  }
+  &.unpublished {
+    background: #e6bf1a;
+  }
+  &.deleted {
+    background: $error;
+  }
+}

@@ -13,6 +13,7 @@
           v-model="category"
           :optionsDisplay="categories"
           searchInside="categories"
+          @search="(val) => debounce(fetchIndicatorsWith, 500)({ name: val })"
         ></k-input>
         <k-input
           type="select"
@@ -69,6 +70,8 @@
         :datalist="indicators"
         :loading="isLoading"
         @clickAction="action"
+        @selectAll="(set) => set ? selectedRows = indicators.map((d) => d.id) : selectedRows = []"
+        selectAll
       >
       </k-table>
       <!-- EDIT INDICATOR MODAL -->

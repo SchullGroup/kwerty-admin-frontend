@@ -81,7 +81,10 @@ export default {
         if (cat === 'dataset') return 'data';
         return cat;
       };
-      const permissionLabel = `${this.capitalize(this.snakeCase(permission))} ${getLabel(label)}`;
+      const isDatasetHardDelete = label === 'dataset' && permission === 'delete';
+      const permissionLabel = isDatasetHardDelete
+        ? `Hard ${this.snakeCase(permission)} ${getLabel(label)}`
+        : `${this.capitalize(this.snakeCase(permission))} ${getLabel(label)}`;
       return { value: permission, label: permissionLabel };
     },
     async handleSubmit() {
@@ -120,7 +123,7 @@ export default {
   computed: {
     permissionLabels() {
       const allPermissions = {
-        dataset: ['create', 'update', 'delete', 'publish', 'view', 'unpublish', 'soft_delete'],
+        dataset: ['create', 'update', 'publish', 'unpublish', 'view', 'soft_delete', 'delete'],
         indicator: ['create', 'update', 'delete', 'view'],
         role: ['create', 'update', 'delete', 'view'],
         admin: ['create', 'update', 'delete', 'view'],

@@ -127,7 +127,8 @@
                 id="file-upload"
                 accept="application/pdf, image/jpg, image/png, image/jpeg, .doc,.docx,
                 application/msword,
-                application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                text/csv, .csv"
                 name="picture"
                 type="file"
                 @change="uploadResource($event)"

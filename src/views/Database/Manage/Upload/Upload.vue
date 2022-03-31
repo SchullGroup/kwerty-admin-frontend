@@ -51,17 +51,14 @@
             </caption>
               <thead>
                 <tr>
-                  <th v-for="(field, i) in formattedFields" :key='i'  :id="field">
+                  <th v-for="(field, i) in fileFields" :key='i'  :id="field">
                     {{ field }}
                   </th>
                 </tr>
               </thead>
               <tr v-for="row in fileData" :key="Object.values(row).join('-')">
-                <td
-                  v-for="(colKey, i) in fileFields"
-                  :key="i"
-                >
-                  {{ row[colKey] }}
+                <td v-for="(col, i) in row" :key="i">
+                  {{ col }}
                 </td>
               </tr>
             </table>
