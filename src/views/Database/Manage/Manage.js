@@ -36,10 +36,12 @@ export default {
     country: '',
     isEditing: false,
     countries,
-    tableFields: ['nameOfIndicator', 'country', 'startYear', 'endYear', 'lastModified'],
+    tableFields: ['nameOfIndicator',
+      'country', 'frequency', 'startYear', 'endYear', 'lastModified'],
     tableFieldsDisplay: {
       nameOfIndicator: 'Name of Indicator',
       country: 'Country',
+      frequency: 'Frequency',
       startYear: 'Start Year',
       endYear: 'End Year',
       lastModified: 'Last Modified',

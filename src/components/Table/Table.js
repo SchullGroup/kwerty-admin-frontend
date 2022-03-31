@@ -36,6 +36,10 @@ export default {
     changeStatus: {
       type: null,
     },
+    manageData: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: () => ({
     selected: [],

@@ -10,6 +10,7 @@
           {
             'table__header-customers': customers && customerOption,
             'table__header-customers-option': customers && !customerOption,
+            'table__header-manageData': manageData
           },
         ]"
       >
@@ -62,6 +63,7 @@
           v-model="selected"
           :customers="customers"
           :customerOption="customerOption"
+          :manageData="manageData"
           changeStatus
         >
         </table-row>

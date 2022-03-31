@@ -191,6 +191,7 @@
           :datalist="allData"
           @clickAction="changePage"
           v-model="selectedRows"
+          :manageData="true"
         ></k-table>
       </section>
     </section>
@@ -285,7 +286,7 @@
             >
             <k-button
               variant="primary"
-              @click="actOnData('unpublish')"
+              @click="actOnData('restore_delete')"
               :disabled="!isSame"
               v-if="activeModal === 'restore'"
               :loading="isActing"
