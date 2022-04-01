@@ -46,7 +46,7 @@
     </thead>
     <tbody class="table__data__body">
       <template v-if="loading">
-        <tr v-for="i in 20" :key="i">
+        <tr v-for="i in 20" :key="i" :class="{'table__row-manage-data': manageData}">
           <td
             v-for="field in fields"
             :key="i + field"
