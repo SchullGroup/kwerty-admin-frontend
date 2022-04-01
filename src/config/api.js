@@ -27,7 +27,7 @@ instance.interceptors.response.use(
   async (error) => {
     if (window.location.pathname !== '/login') {
       if (error.response.status === 401) {
-        await localStorage.clear();
+        localStorage.clear();
         setTimeout(() => {
           window.location.replace('/login');
         }, 1000);
