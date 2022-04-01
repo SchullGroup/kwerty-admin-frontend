@@ -42,6 +42,14 @@
       justify-content: center;
     }
   }
+  .table__header-manageData {
+    display: grid;
+    grid: 4.8rem / 40rem repeat(5, 1fr);
+    align-items: center;
+    .frequency {
+      padding-left: 3rem;
+    }
+  }
   td,
   th {
     width: 98%;
@@ -67,7 +75,7 @@
       margin-top: 0.4rem;
     }
     &.active {
-      background: rgba($black, 0.05)
+      background: rgba($black, 0.05);
     }
   }
   th .timestamp {
@@ -112,9 +120,25 @@
         color: $error;
       }
     }
+
+    .table__row-manage-data {
+      display: grid;
+      grid: 4.8rem / minmax(auto, 40rem) repeat(5, 1fr);
+      align-items: center;
+      .lastModified > * {
+        margin-left: auto;
+      }
+    }
+    .table__loading-indicators-table {
+      display: grid;
+      grid: 4.8rem / minmax(auto, 40rem) repeat(4, 1fr);
+      align-items: center;
+      .updatedAt > * {
+        margin-left: auto;
+      }
+    }
   }
 }
-
 
 .asc {
   transform: rotateZ(180deg);
