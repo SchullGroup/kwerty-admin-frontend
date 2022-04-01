@@ -5,6 +5,7 @@
       {
         'table__row-customers': customers && customerOption,
         'table__row-customers-option': customers && !customerOption,
+        'table__row-manage-data': manageData,
       },
     ]"
   >
@@ -42,9 +43,7 @@
     </td>
     <td class="button" v-if="customers === true && customerOption === true">
       <button
-        @click="
-          $emit('changeStatus')
-        "
+        @click="$emit('changeStatus')"
         :class="[[data.status === 'enabled' ? 'disable' : 'enable']]"
       >
         {{ data.status === 'enabled' ? 'Disable' : 'Enable' }}
@@ -82,6 +81,10 @@ export default {
       default: false,
     },
     customerOption: {
+      type: Boolean,
+      default: false,
+    },
+    manageData: {
       type: Boolean,
       default: false,
     },
@@ -179,6 +182,11 @@ export default {
         justify-content: center;
       }
     }
+    &-manage-data {
+        display: grid;
+        grid: 4.8rem / minmax(auto, 40rem) repeat(5, 1fr);
+        align-items: center;
+    }
   }
   .view-activity__btn {
     border: none;
@@ -218,6 +226,10 @@ export default {
   .available {
     text-align: center;
     justify-content: center;
+  }
+  .frequency {
+    text-transform: capitalize;
+    text-align: center;
   }
 
   &__body {

@@ -205,6 +205,7 @@
           :datalist="allData"
           @clickAction="changePage"
           v-model="selectedRows"
+          :manageData="true"
           @selectAll="(set) => set ? selectedRows = allData.map((d) => d.id) : selectedRows = []"
           selectAll
           :showStatus='activeTab === "all"'

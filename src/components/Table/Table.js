@@ -42,6 +42,10 @@ export default {
     changeStatus: {
       type: null,
     },
+    manageData: {
+      type: Boolean,
+      default: false,
+    },
     showStatus: {
       type: Boolean,
       default: false,
