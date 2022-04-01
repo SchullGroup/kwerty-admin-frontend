@@ -46,6 +46,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    indicatorsTable: {
+      type: Boolean,
+      default: false,
+    },
     showStatus: {
       type: Boolean,
       default: false,

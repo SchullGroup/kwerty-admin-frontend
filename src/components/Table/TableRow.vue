@@ -92,6 +92,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    indicatorsTable: {
+      type: Boolean,
+      default: false,
+    },
   },
   watch: {
     innerValue: {
@@ -186,6 +190,10 @@ export default {
         display: grid;
         grid: 4.8rem / minmax(auto, 40rem) repeat(5, 1fr);
         align-items: center;
+         .frequency {
+          text-transform: capitalize;
+          text-align: center;
+        }
     }
   }
   .view-activity__btn {
@@ -229,7 +237,7 @@ export default {
   }
   .frequency {
     text-transform: capitalize;
-    text-align: center;
+    // text-align: center;
   }
 
   &__body {
