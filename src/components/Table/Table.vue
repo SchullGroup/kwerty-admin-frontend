@@ -10,7 +10,7 @@
           {
             'table__header-customers': customers && customerOption,
             'table__header-customers-option': customers && !customerOption,
-            'table__header-manageData': manageData
+            'table__header-manageData': manageData,
           },
         ]"
       >
@@ -46,7 +46,9 @@
     </thead>
     <tbody class="table__data__body">
       <template v-if="loading">
-        <tr v-for="i in 20" :key="i" :class="{'table__row-manage-data': manageData}">
+        <tr v-for="i in 20" :key="i" :class="{'table__row-manage-data': manageData,
+        'table__loading-indicators-table': indicatorsTable,
+        }">
           <td
             v-for="field in fields"
             :key="i + field"
