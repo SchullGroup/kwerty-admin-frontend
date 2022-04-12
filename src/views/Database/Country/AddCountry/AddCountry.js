@@ -122,11 +122,17 @@ export default {
       this.resources = resources.filter(([name]) => name !== thisName);
     },
     async uploadCountryImage(e) {
-      this.isUploadingImage = true;
-      const { url } = await this.uploadFile(e);
-      this.isUploadingImage = false;
-      this.dashboard.imageUrl = url;
-      this.$toast.show({ message: 'Image Uploaded' });
+      try {
+        this.isUploadingImage = true;
+        const { url } = await this.uploadFile(e);
+        this.isUploadingImage = false;
+        this.dashboard.imageUrl = url;
+        this.$toast.show({ message: 'Image Uploaded' });
+      } catch {
+        this.$toast.show({ message: "Couldn't upload image" });
+      } finally {
+        this.isUploadingImage = false;
+      }
     },
     async uploadResource(e) {
       this.isUploadingResource = true;

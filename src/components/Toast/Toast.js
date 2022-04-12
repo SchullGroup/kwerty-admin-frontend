@@ -36,7 +36,7 @@ export default {
       });
       setTimeout(() => {
         this.removeToast(id);
-      }, 3000);
+      }, 5000);
     },
   },
 };
