@@ -36,6 +36,18 @@ export default {
     isLoading: false,
     page: 1,
   }),
+  async created() {
+    try {
+      const resp = await Promise.all([
+        this.fetchAdmins({}),
+      ]);
+      resp.forEach((r) => {
+        if ('error' in r) throw Error(r.error);
+      });
+    } catch (e) {
+      this.$toast.show({ message: e.message });
+    }
+  },
   mounted() {
     if (!this.pagination) return;
     this.page = this.pagination.currentPage;

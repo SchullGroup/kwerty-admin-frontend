@@ -28,10 +28,25 @@ export default {
       roles: 'roles/getAllDetails',
     }),
   },
+  async created() {
+    try {
+      const resp = await Promise.all([
+        this.fetchRoles({}),
+        this.fetchRolesDetails({ page: 1 }),
+      ]);
+      resp.forEach((r) => {
+        if ('error' in r) throw Error(r.error);
+      });
+    } catch (e) {
+      this.$toast.show({ message: e.message });
+    }
+  },
   methods: {
     ...stringHelpers,
     ...mapActions({
       deleteRole: 'roles/deleteRole',
+      fetchRoles: 'roles/fetchAll',
+      fetchRolesDetails: 'roles/fetchDetails',
     }),
     addItem() {
       this.role = null;
