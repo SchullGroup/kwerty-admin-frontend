@@ -14,7 +14,7 @@
             <k-checkbox
               v-model='permissions[category]'
               :label='label'
-              :name='label.replaceAll(" ")'
+              :name='label.replaceAll(" ", "-")'
               :value='value'
             ></k-checkbox>
           </div>
@@ -56,6 +56,7 @@ export default {
       role: [],
       admin: [],
       activity: [],
+      dashboard: [],
     },
   }),
   methods: {
@@ -71,7 +72,7 @@ export default {
       this.formValue = { name, description };
       const rolePerm = JSON.parse(permissions);
       Object.keys(this.permissions).forEach((category) => {
-        this.permissions[category] = rolePerm[category];
+        this.permissions[category] = rolePerm[category] || [];
       });
       this.id = id;
     },
@@ -128,6 +129,7 @@ export default {
         role: ['create', 'update', 'delete', 'view'],
         admin: ['create', 'update', 'delete', 'view'],
         activity: ['view_user', 'view_admin'],
+        dashboard: ['create', 'update', 'delete', 'view'],
       };
       return Object.entries(allPermissions).reduce((prepared, [category, permissions]) => {
         const permissionLabels = permissions.map((p) => this.permissionToLabel(p, category));

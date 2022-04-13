@@ -100,20 +100,6 @@ export default {
       });
     },
   },
-  async created() {
-    try {
-      const resp = await Promise.all([
-        this.fetchAdmin({}),
-        this.fetchRoles({}),
-        this.fetchRolesDetails({ page: 1 }),
-      ]);
-      resp.forEach((r) => {
-        if ('error' in r) throw Error(r.error);
-      });
-    } catch (e) {
-      this.$toast.show({ message: e.message });
-    }
-  },
 };
 </script>
 <style lang="scss" scoped src="./Settings.scss"></style>
