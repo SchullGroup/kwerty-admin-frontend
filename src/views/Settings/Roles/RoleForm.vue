@@ -9,7 +9,9 @@
           :key='category'
           class='permissions__group'
         >
-          <p class='permissions__group__name'>{{ category }}</p>
+          <p class='permissions__group__name'>
+            {{ category === 'dashboard' ? 'country dashboard' : category }}
+          </p>
           <div v-for='{value, label} in activePermissions' :key='label' class='check'>
             <k-checkbox
               v-model='permissions[category]'
