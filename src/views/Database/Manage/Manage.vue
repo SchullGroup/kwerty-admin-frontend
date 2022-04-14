@@ -208,7 +208,7 @@
           :manageData="true"
           @selectAll="(set) => set ? selectedRows = allData.map((d) => d.id) : selectedRows = []"
           selectAll
-          :showStatus='activeTab === "all"'
+          showStatus
         ></k-table>
       </section>
     </section>
