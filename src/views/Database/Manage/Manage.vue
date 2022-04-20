@@ -109,7 +109,7 @@
             variant="secondary"
             @click="
               selectedRows.push(singleViewData.id);
-              actOnData('publish');recordClicked();
+              confirmAction('publish');
             "
           >
             Publish
@@ -119,7 +119,7 @@
             variant="secondary"
             @click="
               selectedRows.push(singleViewData.id);
-              actOnData('unpublish');recordClicked();
+              confirmAction('unpublish');
             "
           >
             Unpublish

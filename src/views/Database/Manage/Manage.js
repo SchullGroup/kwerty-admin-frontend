@@ -249,6 +249,7 @@ export default {
           this.$toast.show({ message: actionDone });
           this.closeModal();
           this.getData();
+          if (this.singleViewData?.id) this.fetchSingleData({ pageId: this.singleViewData?.id });
           this.resetSelectedRows();
         } else {
           throw Error(actionDone.error);

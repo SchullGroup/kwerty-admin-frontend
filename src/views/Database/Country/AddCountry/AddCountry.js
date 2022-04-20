@@ -156,10 +156,11 @@ export default {
             country: this.country,
             search: value,
             category: 'economy',
+            limit: 50,
           };
         } else {
         // if no search value get datasets for this country
-          params = { country: this.country };
+          params = { country: this.country, limit: 50 };
         }
         // fetch and populate dataset list for indicator dropdowns
         const response = await getAllCountryData(params);
