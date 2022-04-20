@@ -12,6 +12,7 @@ module.exports = {
     '!coverage/**',
     '!**/config/**',
     '!**/views/Components.vue',
+    '!**/dist/**',
     '!server.js',
   ],
 };
