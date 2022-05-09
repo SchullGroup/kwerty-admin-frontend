@@ -2,6 +2,8 @@ const compression = require('compression');
 const express = require('express');
 
 const app = express();
+app.disable('x-powered-by');
+
 const path = `${__dirname}/dist/`;
 const port = process.env.PORT || 6784;
 
