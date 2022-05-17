@@ -5,7 +5,7 @@
       <k-pagination
         :page="page"
         :maxItemsOnPage="itemsOnPage"
-        :totalPages='pagination.totalPages'
+        :totalPages="pagination.totalPages"
         :totalItems="pagination.total"
         @goToNext="nextPage"
         @goToPrev="prevPage"
@@ -14,7 +14,7 @@
       ></k-pagination>
     </div>
     <div class="settings__section settings__section--with-line">
-      <k-admins :loading='isLoading'></k-admins>
+      <k-admins :loading="isLoading"></k-admins>
     </div>
   </div>
 </template>
@@ -38,9 +38,7 @@ export default {
   }),
   async created() {
     try {
-      const resp = await Promise.all([
-        this.fetchAdmins({}),
-      ]);
+      const resp = await Promise.all([this.fetchAdmins({}), this.fetchRoles({})]);
       resp.forEach((r) => {
         if ('error' in r) throw Error(r.error);
       });
@@ -61,13 +59,17 @@ export default {
   methods: {
     ...mapActions({
       fetchAdmins: 'admin/fetchAll',
+      fetchRoles: 'roles/fetchAll',
     }),
     prevPage() {
       const { page } = this;
       this.page = page !== 1 ? page - 1 : page;
     },
     nextPage() {
-      const { page, pagination: { totalPages } } = this;
+      const {
+        page,
+        pagination: { totalPages },
+      } = this;
       this.page = page !== totalPages ? page + 1 : page;
     },
     firstPage() {
