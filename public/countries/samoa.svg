@@ -1,9 +1,1 @@
-<svg width="61" height="30" viewBox="0 0 61 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M60.333 0H0.333008V30H60.333V0Z" fill="#CE1126"/>
-<path d="M30.333 0H0.333008V15H30.333V0Z" fill="#002B7F"/>
-<path d="M15.3332 0.625L16.3637 3.79444L13.6665 1.83611H16.9998L14.3026 3.79444L15.3332 0.625Z" fill="white"/>
-<path d="M10.7496 4.375L11.7801 7.54722L9.08569 5.58889H12.419L9.72458 7.54722L10.7496 4.375Z" fill="white"/>
-<path d="M20.0219 3.75L20.9886 6.72222L18.458 4.88333H21.583L19.0525 6.72222L20.0219 3.75Z" fill="white"/>
-<path d="M17.6247 7.60278L18.2691 9.58334L16.583 8.35834H18.6663L16.9802 9.58334L17.6247 7.60278Z" fill="white"/>
-<path d="M15.3328 10.411L16.619 14.3749L13.2495 11.9249H17.4162L14.0467 14.3749L15.3328 10.411Z" fill="white"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2880" height="1440"><defs><path id="a" d="M0 0l.309.951L-.5.363h1l-.809.588z"/></defs><path fill="#ce1126" d="M0 0h2880v1440H0z"/><path fill="#002b7f" d="M0 0h1440v720H0z"/><g fill="#fff"><use xlink:href="#a" transform="matrix(160 0 0 160 720 30)"/><use xlink:href="#a" transform="matrix(160 0 0 160 500 210)"/><use xlink:href="#a" transform="matrix(150 0 0 150 945 180)"/><use xlink:href="#a" transform="matrix(100 0 0 100 830 364.894)"/><use xlink:href="#a" transform="matrix(200 0 0 200 720 499.789)"/></g></svg>
